@@ -1,0 +1,170 @@
+\begin{thebibliography}{10}
+
+\bibitem{2}
+S.~K Aggarwal~et al.
+\newblock Electricity price forecasting in deregulated markets a review and
+  evaluation.
+\newblock {\em National Institute of Technology}.
+
+\bibitem{5}
+Baris Aksanli~et al.
+\newblock Utilizing green energy prediction to schedule mixed batch and service
+  jobs in data centers.
+\newblock {\em Computer Science and Engeneering Department, University of
+  California, San Diego}.
+
+\bibitem{EnergyPriceForecasting}
+Hemmati Amjady, Nima.~Meisam.
+\newblock Energy price forecasting.
+\newblock {\em IEE power and energy magazine}, 2006.
+
+\bibitem{buckland2002ai}
+M.~Buckland.
+\newblock {\em AI techniques for game programming}.
+\newblock Course Technology, 2002.
+
+\bibitem{3}
+D.~W Bunn.
+\newblock Forecasting loads and prices in competitive power markets.
+\newblock {\em Invited Paper}, 1999.
+
+\bibitem{20}
+business.com.
+\newblock Finanskrisen saetter elforbrug i bakgear.
+
+\bibitem{1}
+JPS Catalao.
+\newblock Short-term electricity prices forecasting in a competitive market: A
+  neural network approach.
+\newblock {\em Electric Power Systems Research}, 2007.
+
+\bibitem{chen2004load}
+Bo-Juen Chen, Ming-Wei Chang, et~al.
+\newblock Load forecasting using support vector machines: A study on eunite
+  competition 2001.
+\newblock {\em Power Systems, IEEE Transactions on}, 19(4):1821--1830, 2004.
+
+\bibitem{ARIMA}
+Francisco. Conejo~Anotiono Contreas, Javier. Nogales~J.
+\newblock Arima models to predict next-day electricity prices.
+\newblock {\em IEE TRANSACTIONS ON POWER SYSTEMS, VOL. 18, NO. 3}, 2003.
+
+\bibitem{6}
+DEA.
+\newblock Danish energy authority report, 2012.
+
+\bibitem{18}
+Pedro Domingos.
+\newblock A few useful things to know about machine learning.
+\newblock {\em Commnucations of the acm}, 2012.
+
+\bibitem{22}
+Jesper Grode~et al.
+\newblock Intelligent electricity broker.
+\newblock {\em ICEAS 2012}, 2012.
+
+\bibitem{13}
+M.~T Hagan~et al.
+\newblock Training feedforward networks with the marquardt algorithm.
+\newblock {\em IEEE TRANSACTIONS ON NEURAL NETWORKS, VOL. 5 , NO. 6}, 1994.
+
+\bibitem{19}
+Ching-Lai Hor~et al.
+\newblock Analyzing the impact of weather variables on monthly electricity
+  demand.
+\newblock {\em IEE TRANSACTIONS ON POWER SYSTEMS, VOL. 20, NO. 4}, 2005.
+
+\bibitem{pjmForecast}
+Senjyu. Naomitsu~Urasaki Mandal, Paras.~Tomonobu.
+\newblock A novel approach to forecast electricity price for pjm using neural
+  network and similar days method.
+\newblock {\em IEE TRANSACTIONS ON POWER SYSTEMS, VOL. 22, NO. 4}, 2007.
+
+\bibitem{4}
+Maurizio Motta~et al.
+\newblock Measure-correlate-predic methods: Case studies and software
+  implementation.
+\newblock {\em EMD Internation A/S (EMD)}.
+
+\bibitem{windPowerDanishLiberalized}
+Poul~Erik Munksgaard, Jesper.~Morthorst.
+\newblock Wind power in the danish liberalized power market - policy measures,
+  price impact and investor incentives.
+\newblock {\em Energy Policy 36, 3940-3947}, 2008.
+
+\bibitem{17}
+S~Nissen.
+\newblock Large scale reinforcement learning using q-sarsa and cascading neural
+  networks, 2007.
+
+\bibitem{21}
+Javier Nogales, J. Francisco.~Contreras.
+\newblock Forecasting next-day electricity prices by time series models.
+\newblock {\em IEE TRANSACTIONS ON POWER SYSTEMS, VOL. 17, NO. 2}, 2002.
+
+\bibitem{9}
+P~Pujol.
+\newblock The solution of nonlinear inverse problems and the
+  levenberg-marquardt method.
+\newblock {\em University of Memphis, Department of Earth Sciences}, 2007.
+
+\bibitem{7}
+A~Ranganathan.
+\newblock The levenberg-marquardt algorithm 8th, 2004.
+
+\bibitem{15}
+M.~Riedmiller and H~Braun.
+\newblock A direct adaptive method for faster backpropagation learning: The
+  rprop algorithm.
+\newblock {\em University of Karlsruhe.Institut for logic, complexity and
+  deduction systems}.
+
+\bibitem{rojas1996neural}
+R.~Rojas.
+\newblock {\em Neural networks: a systematic introduction}.
+\newblock Springer, 1996.
+
+\bibitem{singhal2011electricity}
+Deepak Singhal and KS~Swarup.
+\newblock Electricity price forecasting using artificial neural networks.
+\newblock {\em International Journal of Electrical Power \& Energy Systems},
+  33(3):550--555, 2011.
+
+\bibitem{10}
+T~Strutz.
+\newblock Data fitting and uncertainty: A practical introduction to weighted
+  least squares and beyond.
+\newblock {\em Vieweg+Teubner Verlag}, 2011.
+
+\bibitem{stockForecasting}
+Jian-Zhou Wang~et al.
+\newblock Forecasting stock indices with back propagation neural network.
+\newblock {\em Expert Systems with Applications 38}, 2011.
+
+\bibitem{14}
+wiki.
+\newblock Backpropagation.
+
+\bibitem{inductiveBias}
+wiki.
+\newblock Inductive bias.
+
+\bibitem{16}
+wiki.
+\newblock Machine learning.
+
+\bibitem{meanSquaredError}
+wiki.
+\newblock Mean squared error.
+
+\bibitem{8}
+wiki.
+\newblock Resilient backpropagation.
+
+\bibitem{xie2006new}
+Wen Xie, Lean Yu, Shanying Xu, and Shouyang Wang.
+\newblock A new method for crude oil price forecasting based on support vector
+  machines.
+\newblock {\em Computational Science--ICCS 2006}, pages 444--451, 2006.
+
+\end{thebibliography}

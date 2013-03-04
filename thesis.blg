@@ -1,0 +1,57 @@
+This is BibTeX, Version 0.99dThe top-level auxiliary file: thesis.aux
+White space in argument---line 15 of file thesis.aux
+ : \citation{FIND
+ :                REF}
+I'm skipping whatever remains of this command
+White space in argument---line 22 of file thesis.aux
+ : \citation{FIND
+ :                REF}
+I'm skipping whatever remains of this command
+White space in argument---line 97 of file thesis.aux
+ : \citation{FIND
+ :                A SOURCE}
+I'm skipping whatever remains of this command
+The style file: plain.bst
+Database file #1: refs.bib
+Warning--entry type for "6" isn't style-file defined
+--line 36 of file refs.bib
+Warning--entry type for "7" isn't style-file defined
+--line 43 of file refs.bib
+Warning--entry type for "8" isn't style-file defined
+--line 50 of file refs.bib
+Warning--entry type for "14" isn't style-file defined
+--line 88 of file refs.bib
+Warning--entry type for "16" isn't style-file defined
+--line 102 of file refs.bib
+Warning--entry type for "17" isn't style-file defined
+--line 109 of file refs.bib
+Warning--entry type for "20" isn't style-file defined
+--line 131 of file refs.bib
+Warning--entry type for "inductiveBias" isn't style-file defined
+--line 202 of file refs.bib
+I was expecting a `,' or a `}'---line 210 of file refs.bib
+ : 
+ : @online{meanSquaredError,
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--entry type for "meanSquaredError" isn't style-file defined
+--line 210 of file refs.bib
+I was expecting a `,' or a `}'---line 217 of file refs.bib
+ : 
+ : @article{singhal2011electricity,
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--I didn't find a database entry for ""
+Too many commas in name 1 of "Mandal, Paras. Tomonobu, Senjyu. Naomitsu, Urasaki" for entry pjmForecast
+while executing---line 1049 of file plain.bst
+Too many commas in name 1 of "Contreas, Javier. Nogales J., Francisco. Conejo, Anotiono" for entry ARIMA
+while executing---line 1049 of file plain.bst
+Warning--empty year in 2
+Warning--empty year in 5
+Too many commas in name 1 of "Contreas, Javier. Nogales J., Francisco. Conejo, Anotiono" for entry ARIMA
+while executing---line 1090 of file plain.bst
+Too many commas in name 1 of "Mandal, Paras. Tomonobu, Senjyu. Naomitsu, Urasaki" for entry pjmForecast
+while executing---line 1090 of file plain.bst
+Warning--empty year in 4
+Warning--empty year in 15
+(There were 9 error messages)
