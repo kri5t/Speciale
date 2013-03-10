@@ -58,6 +58,11 @@ Pedro Domingos.
 \newblock A few useful things to know about machine learning.
 \newblock {\em Commnucations of the acm}, 2012.
 
+\bibitem{AirDensityInForecast}
+Zeno Farkas.
+\newblock Considering air density in wind power production.
+\newblock 2011.
+
 \bibitem{22}
 Jesper Grode~et al.
 \newblock Intelligent electricity broker.
@@ -73,6 +78,12 @@ Ching-Lai Hor~et al.
 \newblock Analyzing the impact of weather variables on monthly electricity
   demand.
 \newblock {\em IEE TRANSACTIONS ON POWER SYSTEMS, VOL. 20, NO. 4}, 2005.
+
+\bibitem{WindPowerGenerationUsingANN}
+E.~Mabel, M. Carolin.~Fernandez.
+\newblock Analysis of wind power generation and prediction using ann: A case
+  study.
+\newblock {\em Renewable Energy 33, 986-992}, 2008.
 
 \bibitem{pjmForecast}
 Senjyu. Naomitsu~Urasaki Mandal, Paras.~Tomonobu.

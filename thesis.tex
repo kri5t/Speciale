@@ -32,7 +32,7 @@
 \pagestyle{empty} 
 \pagenumbering{roman} 
 \vspace*{\fill}\noindent{\rule{\linewidth}{1mm}\\[4ex]
-{\Huge\sf Decision support for forecasting green energy prices using a Back propagation Neural Network based on weather and historical data}\\[2ex]
+{\Huge\sf A Neural Network Approach: Combining Green Energy Production and Electricity Price Forecasts to Support Green Decision Making}\\[2ex]
 {\huge\sf Brian Bak Laursen, 20071275}\\[2ex]
 {\huge\sf Kristan Barret, 20073457}\\[2ex]
 \noindent\rule{\linewidth}{1mm}\\[4ex]
@@ -94,13 +94,12 @@ Price forecasting that takes these characteristics into consideration can be mod
 \\[0.5cm] 
 When dealing with prediction of green energy prices it is necessary to look at the weather in more detail. In this thesis we will be focusing on energy that originates from windmills. 
 
-Wind energy prediction can be divided into two areas \cite{5}: 1) time-series analysis of power data and 2) wind speed prediction and conversion to power. What needs to be utilized in wind energy prediction is wind speed and wind direction which of course has a big influence on how much energy a wind turbine generate. The algorithm used in \cite{5} produces weighted nearest-neighbor (NN) tables to generate wind power curves based on available wind speed and direction from an online weather-data source. The weighted approach allows the algorithm to adapt to seasonal changes by weighting newest results highest, and the power curves makes it possible to use the algorithm on different wind farms.
+Wind energy prediction can be divided into two areas \cite{5}: 1) time-series analysis of power data and 2) wind speed prediction and conversion to power. What needs to be utilized in wind energy prediction is wind speed and wind direction which of course has a big influence on how much energy a wind turbine generate. The algorithm used in \cite{5} produces weighted nearest-neighbor (NN) tables to generate wind power curves based on available wind speed and direction from an online weather-data source. The weighted approach allows the algorithm to adapt to seasonal changes by weighting newest results highest, and the power curves makes it possible to use the algorithm on different wind farms. Another approach to analysis and prediction of wind power generation is presented in \cite{WindPowerGenerationUsingANN} where an Artificial Neural Network is used to predict the price based on weather data such as wind speed, relative humidity and for how many hours the windmill is generating power. 
 \\[0.5cm]
-We will base our work on neural networks and the resilient backpropagation (RPROP) algorithm used to train the network. It is faster than its predecessor Backpropagation \cite{8,15}.  The RPROP algorithm is a learning algorithm that uses weights to analyze the input dataset and to configure further learning \cite{17}. It is commonly used on the feedforward architecture and is the most used and implemented algorithm \cite{14,17}.
+We will base our work on neural networks and the resilient backpropagation (RPROP) algorithm used to train the network in order to predict electricity prices and wind power generation. It is faster than its predecessor Backpropagation \cite{8,15}.  The RPROP algorithm is a learning algorithm that uses weights to analyze the input dataset and to configure further learning \cite{17}. It is commonly used on the feedforward architecture and is the most used and implemented algorithm \cite{14,17}.
 
 \section{The Method}
-The prediction algorithm will be based on historical data which potentially
-could be an infinite dataset. The more historical data included in the algorithm the more data needs to be processed. We need to investigate how much of this data is necessary for precise prediction and perhaps make tradeoffs to ensure performance for decision support.
+The prediction algorithm will be based on historical data which potentially could be a very large dataset. The more historical data included in the algorithm the more data needs to be processed. We need to investigate how much of this data is necessary for precise prediction and perhaps make tradeoffs to ensure performance for decision support.
 \\[0.5cm] 
 Based on the dataset that is available and the nonlinear nature of price forecasting and energy price prediction we want a system that is able to develop and learn from the past. Artificial Neural Networks can be categorized as Machine Learning \cite{18} and are networks that imitate the behaviour of the human brain \cite{1}. This gives us the power to be able to forecast energy prices based on how the prices have evolved in the past and therefore we chose to use neural networks to base our model upon. Our decision is based on the nature of neural networks and how it is used in machine learning. It is often used in non-linear statistical analysis \cite{16} and has been used to predict the prices of brown energy \cite{2}\cite{3}. We have chosen to use a multi-layered feed forward architecture since this is one of the most used and widely implemented in open-source frameworks \cite{17}.
 
@@ -125,7 +124,7 @@ Many learning algorithms exist and they are all based on combinations of three c
 \label{fig:threeComponents}
 \end{figure}
 \\[0.5cm] 
-Machine learning cant rely on data alone. Every learner must make assumptions beyond the data that is given to generalize beyond it \cite{18}. It is not possible to map the real world uniformly to all possible mathematical functions. For example we could have a lot of knowledge about what makes two examples similar and thereby making an assumption that they are both of the same type. We can't say with 100 percent certainty. 
+Machine learning cannot rely on data alone. Every learner must make assumptions beyond the data that is given to generalize beyond it \cite{18}. It is not possible to map the real world uniformly to all possible mathematical functions. For example we could have a lot of knowledge about what makes two examples similar and thereby making an assumption that they are both of the same type. We can't say with 100 percent certainty. 
 \\[0.5cm]
 It can be the case that the system is not at all able to deliver a correct answer. This could result in the system guessing to the best of its ability or simply randoming an answer. This problem is called overfitting \cite{18}. Overfitting can be divided into bias and variance, where bias is when the learner consistently learns the same wrong thing over and over again. Variance is the learners tendency to learn random things and ignoring the possibility of a more correct answer. See figure ~\ref{fig:biasandvariance} for an example with dart throwing.
 \begin{figure}[h!]
@@ -143,13 +142,17 @@ results. It is a curve fitting algorithm mostly used on nonlinear problems with
 a lot of unknowns[Need citation]. The algorithm can be used with neural networks
 and information approximation\cite{8} and it can be used in combination with the
 backpropagation algorithm to be used on a feedforward architecture of the neural network\cite{13}.
-\section{Green energy prediction}
+
+\section{Green Energy Production}
+\subsection{Prediction}
+\input{sections/PowerGenerationPrediction/analysisOfPowerGenerationPRediction.tex}
 The vitality of the forecasts are also seen when it comes to
 placement of wind farms. Before investing billions of dollars in a new wind farm it is of utmost importance to put it in the best possible location in relation to wind statistics, e.g. force of the wind and how often the winds change in power and direction at the position. In \cite{4} they use MCP to predict wind statistics based on large amount of geographical-, weather- and historical data so that the farms can be placed best possible. This knowledge can in some way be transferred to our specific purpose but because we are dealing with decision making in real time we cant use as heavy algorithms that do calculations for several weeks and months before giving a result. We must deliver the most accurate estimate without delaying the traders work.
 There is also a big difference in using billions of dollars on windmills. The companies have to be 100 percent certain that they can produce energy where you put them. When doing decision support we only aid the trader in his daily work by giving him a real time estimate for the next hour or perhaps the next week - he/she still needs to take the final decision based on her/his experience and knowledge. In addition, we can also assume that the wind mills are placed in a the best possible location where we only need to predict the energy production based on the current weather.
 \\[0.5cm]
 Another source of green energy is solar panels. Solar
 prediction algorithms are very accurate when the weather conditions are steady but in changing weather a large error margin is seen. To predict power output from a solar farm the time-series prediction algorithms and Estimated Weighted Moving Average (EWMA) models can be used \cite{5}.
+
 \section{Electricity Prices}
 \subsection{Prediction}
 \input{sections/ARIMA/ArimaPrediction.tex}

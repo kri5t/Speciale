@@ -1,0 +1,29 @@
+The identification of rich wind resources have become important together with the increasing focus on green energy \cite{WindPowerGenerationUsingANN}. It is important to analyse and predict the wind power generation at a certain location before placing actual windmills. 
+Wind speed, relative humidity and generation hours of the windmills are used as input for a Artificial Neural Network in \cite{WindPowerGenerationUsingANN}. It can come as no surprise that the meteorological factors like wind speed and air density have a huge impact on the wind power generation. Figure~\ref{fig:energyGeneration} shows how the monthly energy generation increases with the monthly average wind speed. 
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.8\linewidth,natwidth=898,natheight=587]{billeder/EnergyGenerationVsWindSpeed.png}
+\caption{The influence of wind speed on the energy generation \cite{WindPowerGenerationUsingANN}}
+\label{fig:energyGeneration}
+\end{figure} 
+
+The more "heavy" the air, the more energy is received by the windmill turbine. The humidity increases as as air density increases and because wind energy is proportional to air density the prediction algorithm needs humidity as input because it also accounts for temperature and pressure \cite{AirDensityInForecast}. Moist air is lighter than dry air because water molecules are less dense than the molecules in dry air such as oxygen and nitrogen. This basically means that the more air molecules like oxygen and nitrogen the more wind energy.
+
+The last parameter in their prediction algorithm is generation hours which is the period in which the turbines produce power. The number of hours are influenced by f.x mechanical breakdowns, scheduled maintenance and low wind speeds. It is clear the the more generation hours the more energy is produced as seen in figure ~\ref{fig:energyGenerationFromHours}. The generation hours are hard to predict but can be calculated from past years up-time together with the expectations of the company delivering the windmills.  
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.8\linewidth,natwidth=898,natheight=587]{billeder/GenerationHourVSGeneration.png}
+\caption{The influence of generation hours on energy production \cite{WindPowerGenerationUsingANN}}
+\label{fig:energyGenerationFromHours}
+\end{figure} 
+
+The Artificial Neural Network trains 3-year dataset containing the mentioned input parameters. The input parameters are during the training compared to the output variable which is the wind energy output of the turbine. See figure~\ref{fig:annArchitecture} for the architecture.
+\\[0.5cm]
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.7\linewidth,natwidth=898,natheight=587]{billeder/ANNwindSpeedPrediction.png}
+\caption{Artificial Neural Network architecture from \cite{WindPowerGenerationUsingANN}}
+\label{fig:annArchitecture}
+\end{figure}
