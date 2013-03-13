@@ -94,7 +94,7 @@ Price forecasting that takes these characteristics into consideration can be mod
 \\[0.5cm] 
 When dealing with prediction of green energy prices it is necessary to look at the weather in more detail. In this thesis we will be focusing on energy that originates from windmills. 
 
-Wind energy prediction can be divided into two areas \cite{5}: 1) time-series analysis of power data and 2) wind speed prediction and conversion to power. What needs to be utilized in wind energy prediction is wind speed and wind direction which of course has a big influence on how much energy a wind turbine generate. The algorithm used in \cite{5} produces weighted nearest-neighbor (NN) tables to generate wind power curves based on available wind speed and direction from an online weather-data source. The weighted approach allows the algorithm to adapt to seasonal changes by weighting newest results highest, and the power curves makes it possible to use the algorithm on different wind farms. Another approach to analysis and prediction of wind power generation is presented in \cite{WindPowerGenerationUsingANN} where an Artificial Neural Network is used to predict the price based on weather data such as wind speed, relative humidity and for how many hours the windmill is generating power. 
+Wind energy prediction can be divided into two areas \cite{5}: 1) time-series analysis of power data and 2) wind speed prediction and conversion to power. What needs to be utilized in wind energy prediction is wind speed and wind direction which of course has a big influence on how much energy a wind turbine generate. The algorithm used in \cite{5} produces weighted nearest-neighbor (NN) tables to generate wind power curves based on available wind speed and direction from an online weather-data source. The weighted approach allows the algorithm to adapt to seasonal changes by weighting newest results highest, and the power curves makes it possible to use the algorithm on different wind farms. Another approach to analysis and prediction of wind power generation is presented in \cite{WindPowerGenerationUsingANN} where an Artificial Neural Network is used to predict the production based on weather data such as wind speed, relative humidity and for how many hours the windmill is generating power. 
 \\[0.5cm]
 We will base our work on neural networks and the resilient backpropagation (RPROP) algorithm used to train the network in order to predict electricity prices and wind power generation. It is faster than its predecessor Backpropagation \cite{8,15}.  The RPROP algorithm is a learning algorithm that uses weights to analyze the input dataset and to configure further learning \cite{17}. It is commonly used on the feedforward architecture and is the most used and implemented algorithm \cite{14,17}.
 
@@ -152,6 +152,8 @@ There is also a big difference in using billions of dollars on windmills. The co
 \\[0.5cm]
 Another source of green energy is solar panels. Solar
 prediction algorithms are very accurate when the weather conditions are steady but in changing weather a large error margin is seen. To predict power output from a solar farm the time-series prediction algorithms and Estimated Weighted Moving Average (EWMA) models can be used \cite{5}.
+
+\subsection{Applications}
 
 \section{Electricity Prices}
 \subsection{Prediction}
