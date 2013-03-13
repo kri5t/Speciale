@@ -214,7 +214,8 @@ pip-log.txt
 #Mr Developer
 .mr.developer.cfg
 
-####
-IGNORE PDF
-####
+
+# IGNORE LATEX FILES NOT UP FOR GIT CONTROL
 *.pdf
+*.toc
+*.synctex

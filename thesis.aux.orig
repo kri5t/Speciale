@@ -1,0 +1,251 @@
+\relax 
+\select@language{american}
+\@writefile{toc}{\select@language{american}}
+\@writefile{lof}{\select@language{american}}
+\@writefile{lot}{\select@language{american}}
+\@writefile{toc}{\contentsline {chapter}{Abstract}{iii}}
+\@writefile{toc}{\contentsline {chapter}{Resum\'e}{v}}
+\@writefile{toc}{\contentsline {chapter}{Acknowledgments}{vii}}
+\citation{windPowerDanishLiberalized}
+\citation{6}
+\citation{windPowerDanishLiberalized}
+\citation{pjmForecast}
+\citation{21}
+\citation{21}
+\citation{FIND REF}
+\citation{windPowerDanishLiberalized}
+\citation{windPowerDanishLiberalized}
+\citation{windPowerDanishLiberalized}
+\citation{21}
+\citation{FIND REF}
+\citation{21}
+\citation{21}
+\citation{21}
+\@writefile{toc}{\contentsline {chapter}{\numberline {1}Introduction}{3}}
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{ch:intro}{{1}{3}}
+\@writefile{toc}{\contentsline {section}{\numberline {1.1}The Problem}{3}}
+\citation{1}
+\citation{1}
+\citation{2}
+\citation{3}
+\citation{5}
+\citation{WindPowerGenerationUsingANN}
+\citation{8}
+\citation{15}
+\citation{17}
+\citation{14}
+\citation{17}
+\citation{18}
+\citation{1}
+\citation{16}
+\citation{2}
+\citation{3}
+\citation{17}
+\@writefile{toc}{\contentsline {section}{\numberline {1.2}The Method}{5}}
+\citation{2}
+\@writefile{toc}{\contentsline {section}{\numberline {1.3}The hypothesis}{6}}
+\citation{18}
+\citation{18}
+\citation{18}
+\citation{18}
+\citation{18}
+\citation{18}
+\citation{18}
+\citation{18}
+\@writefile{toc}{\contentsline {chapter}{\numberline {2}Related Work}{7}}
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{ch:related work}{{2}{7}}
+\@writefile{toc}{\contentsline {section}{\numberline {2.1}Machine Learning}{7}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.1}{\ignorespaces The three components of learning algorithms \cite  {18}\relax }}{7}}
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{fig:threeComponents}{{2.1}{7}}
+\citation{18}
+\citation{7}
+\citation{9}
+\citation{10}
+\citation{8}
+\citation{8}
+\citation{13}
+\citation{WindPowerGenerationUsingANN}
+\citation{WindPowerGenerationUsingANN}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.2}{\ignorespaces Example of bias and variance in a dart throw \cite  {18}\relax }}{8}}
+\newlabel{fig:biasandvariance}{{2.2}{8}}
+\citation{WindPowerGenerationUsingANN}
+\citation{WindPowerGenerationUsingANN}
+\citation{AirDensityInForecast}
+\citation{WindPowerGenerationUsingANN}
+\citation{WindPowerGenerationUsingANN}
+\citation{WindPowerGenerationUsingANN}
+\citation{WindPowerGenerationUsingANN}
+\citation{5}
+\citation{4}
+\citation{5}
+\@writefile{toc}{\contentsline {section}{\numberline {2.2}Green Energy Production}{9}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.1}Prediction}{9}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.3}{\ignorespaces The influence of wind speed on the energy generation \cite  {WindPowerGenerationUsingANN}\relax }}{9}}
+\newlabel{fig:energyGeneration}{{2.3}{9}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.4}{\ignorespaces The influence of generation hours on energy production \cite  {WindPowerGenerationUsingANN}\relax }}{10}}
+\newlabel{fig:energyGenerationFromHours}{{2.4}{10}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.5}{\ignorespaces Artificial Neural Network architecture from \cite  {WindPowerGenerationUsingANN}\relax }}{10}}
+\newlabel{fig:annArchitecture}{{2.5}{10}}
+\citation{5}
+\citation{5}
+\citation{EnergyPriceForecasting}
+\citation{ARIMA}
+\citation{ARIMA}
+\citation{1}
+\citation{1}
+\citation{1}
+\citation{1}
+\citation{stockForecasting}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.2}Applications}{11}}
+\@writefile{toc}{\contentsline {section}{\numberline {2.3}Electricity Prices}{11}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.1}Prediction}{11}}
+\citation{stockForecasting}
+\citation{pjmForecast}
+\citation{pjmForecast}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.6}{\ignorespaces Comparison between Neural Network and ARIMA in terms of error \cite  {1}\relax }}{12}}
+\newlabel{fig:ArimaVSNN}{{2.6}{12}}
+\citation{pjmForecast}
+\citation{pjmForecast}
+\citation{pjmForecast}
+\citation{18}
+\citation{singhal2011electricity}
+\citation{singhal2011electricity}
+<<<<<<< HEAD
+\citation{amjady2006day}
+\@writefile{lot}{\contentsline {table}{\numberline {2.1}{\ignorespaces Results of forecasting from \cite  {pjmForecast}.\relax }}{13}}
+\newlabel{table:sdmresult}{{2.1}{13}}
+\citation{xie2006new}
+\citation{chen2004load}
+\citation{22}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.7}{\ignorespaces The steps taken to create a Support Vector Machine\relax }}{15}}
+\newlabel{fig:phasesOfSVM}{{2.7}{15}}
+=======
+\@writefile{lot}{\contentsline {table}{\numberline {2.1}{\ignorespaces Results of forecasting from \cite  {pjmForecast}.\relax }}{12}}
+\newlabel{table:sdmresult}{{2.1}{12}}
+\citation{amjady2006day}
+\citation{xie2006new}
+\citation{chen2004load}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.7}{\ignorespaces The steps taken to create a Support Vector Machine\relax }}{14}}
+\newlabel{fig:phasesOfSVM}{{2.7}{14}}
+\citation{22}
+>>>>>>> origin/master
+\citation{19}
+\citation{19}
+\citation{20}
+\citation{19}
+\citation{19}
+\citation{19}
+\citation{19}
+\citation{19}
+\citation{19}
+\citation{19}
+\citation{19}
+<<<<<<< HEAD
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.2}Applications}{16}}
+\@writefile{toc}{\contentsline {section}{\numberline {2.4}Electricity Demand Prediction}{16}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.8}{\ignorespaces Shows ANN compared to B\&J and SE \cite  {19} \relax }}{16}}
+\newlabel{fig:anncomparison}{{2.8}{16}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.9}{\ignorespaces Function of monthly CET as a function from 1970 to 1995 \cite  {19}\relax }}{17}}
+\newlabel{fig:CET}{{2.9}{17}}
+=======
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.2}Applications}{15}}
+\@writefile{toc}{\contentsline {section}{\numberline {2.4}Electricity Demand Prediction}{15}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.8}{\ignorespaces Shows ANN compared to B\&J and SE \cite  {19} \relax }}{16}}
+\newlabel{fig:anncomparison}{{2.8}{16}}
+>>>>>>> origin/master
+\citation{19}
+\citation{19}
+\citation{19}
+\citation{19}
+<<<<<<< HEAD
+=======
+\@writefile{lof}{\contentsline {figure}{\numberline {2.9}{\ignorespaces Function of monthly CET as a function from 1970 to 1995 \cite  {19}\relax }}{17}}
+\newlabel{fig:CET}{{2.9}{17}}
+>>>>>>> origin/master
+\@writefile{lof}{\contentsline {figure}{\numberline {2.10}{\ignorespaces The actual values and the predicted demand in a comparison \cite  {19}\relax }}{18}}
+\newlabel{fig:predicteddemand}{{2.10}{18}}
+\citation{buckland2002ai}
+\citation{rojas1996neural}
+\citation{stockForecasting}
+\citation{stockForecasting}
+\citation{21}
+\@writefile{toc}{\contentsline {chapter}{\numberline {3}Neural Network}{19}}
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{ch:neural network}{{3}{19}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces A simple neural network with 3 layers. \cite  {stockForecasting}\relax }}{19}}
+\newlabel{fig:weight_of_layers}{{3.1}{19}}
+\citation{buckland2002ai}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces How the weight is calculated from one layer to the next\relax }}{20}}
+\newlabel{fig:weight_of_layers}{{3.2}{20}}
+\citation{rojas1996neural}
+\@writefile{toc}{\contentsline {section}{\numberline {3.1}Unsupervised learning}{21}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.2}Supervised learning}{21}}
+\citation{rojas1996neural}
+\citation{inductiveBias}
+\citation{meanSquaredError}
+\@writefile{lot}{\contentsline {table}{\numberline {3.1}{\ignorespaces This training set is very simple yet it illustrates a training set for a supervised learning algorithm very well.\relax }}{22}}
+\newlabel{table:nonlin}{{3.1}{22}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.3}{\ignorespaces \relax }}{22}}
+\newlabel{fig:activationFunctions}{{3.3}{22}}
+\citation{buckland2002ai}
+\citation{buckland2002ai}
+\citation{buckland2002ai}
+\citation{buckland2002ai}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.4}{\ignorespaces \relax }}{23}}
+\newlabel{fig:activationFunctionsWithBias}{{3.4}{23}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.5}{\ignorespaces At the global minimum \cite  [P. 318]{buckland2002ai}\relax }}{23}}
+\newlabel{fig:test1}{{3.5}{23}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.6}{\ignorespaces Stuck in a local minimum \cite  [P. 318]{buckland2002ai}\relax }}{23}}
+\newlabel{fig:localMinimum}{{3.6}{23}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.3}Problems to be avoided}{23}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.7}{\ignorespaces A. The plot graph of the input B. The generalized function C. An over-fit function\relax }}{24}}
+\newlabel{fig:overfitting}{{3.7}{24}}
+\bibstyle{plain}
+\bibdata{refs}
+\@writefile{toc}{\contentsline {chapter}{\numberline {4}Conclusion}{25}}
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{ch:conclusion}{{4}{25}}
+\@writefile{toc}{\contentsline {chapter}{Primary Bibliography}{25}}
+\bibcite{2}{1}
+\bibcite{5}{2}
+\bibcite{EnergyPriceForecasting}{3}
+\bibcite{amjady2006day}{4}
+\bibcite{buckland2002ai}{5}
+\bibcite{3}{6}
+\bibcite{20}{7}
+\bibcite{1}{8}
+\bibcite{chen2004load}{9}
+\bibcite{ARIMA}{10}
+\bibcite{6}{11}
+\bibcite{18}{12}
+\bibcite{AirDensityInForecast}{13}
+\bibcite{22}{14}
+\bibcite{13}{15}
+\bibcite{19}{16}
+\bibcite{WindPowerGenerationUsingANN}{17}
+\bibcite{pjmForecast}{18}
+\bibcite{4}{19}
+\bibcite{windPowerDanishLiberalized}{20}
+\bibcite{17}{21}
+\bibcite{21}{22}
+\bibcite{9}{23}
+\bibcite{7}{24}
+\bibcite{15}{25}
+\bibcite{rojas1996neural}{26}
+\bibcite{singhal2011electricity}{27}
+\bibcite{10}{28}
+\bibcite{stockForecasting}{29}
+\bibcite{14}{30}
+\bibcite{inductiveBias}{31}
+\bibcite{16}{32}
+\bibcite{meanSquaredError}{33}
+\bibcite{8}{34}
+\bibcite{xie2006new}{35}
+\@writefile{toc}{\contentsline {chapter}{Secondary Bibliography}{29}}
