@@ -32,7 +32,7 @@
 \pagestyle{empty} 
 \pagenumbering{roman} 
 \vspace*{\fill}\noindent{\rule{\linewidth}{1mm}\\[4ex]
-{\Huge\sf A Neural Network Approach: Combining Green Energy Production and Electricity Price Forecasts to Support Green Decision Making}\\[2ex]
+{\Huge\sf An Artificial Neural Network Approach: Combining Green Energy Production and Electricity Price Forecasts to Support Green Decision Making}\\[2ex]
 {\huge\sf Brian Bak Laursen, 20071275}\\[2ex]
 {\huge\sf Kristan Barret, 20073457}\\[2ex]
 \noindent\rule{\linewidth}{1mm}\\[4ex]
@@ -90,23 +90,23 @@ Demand has a huge influence on the electricity price. No demand, no electricity 
 \item Calendar effect (weekend, holidays)
 \item Multiple seasonality
 \end{itemize}
-Price forecasting that takes these characteristics into consideration can be modelled with a neural network that embodies crucial information about any decision making \cite{1}. The forecast will be based on a neural network that uses highly interconnected processing units for the different parts of the calculation. This approach models in some way how the human brain itself solves a specific task \cite{1}\cite{2}. One unit for temperature, one for wind speed, one for electricity demand, etc,.\cite{3} 
+Price forecasting that takes these characteristics into consideration can be modelled with an Artificial Neural Network that embodies crucial information about any decision making \cite{1}. The forecast will be based on an Artificial Neural Network that uses highly interconnected processing units for the different parts of the calculation. This approach models in some way how the human brain itself solves a specific task \cite{1}\cite{2}. One unit for temperature, one for wind speed, one for electricity demand, etc,.\cite{3} 
 \\[0.5cm] 
 When dealing with prediction of green energy prices it is necessary to look at the weather in more detail. In this thesis we will be focusing on energy that originates from windmills. 
 
-Wind energy prediction can be divided into two areas \cite{5}: 1) time-series analysis of power data and 2) wind speed prediction and conversion to power. What needs to be utilized in wind energy prediction is wind speed and wind direction which of course has a big influence on how much energy a wind turbine generate. The algorithm used in \cite{5} produces weighted nearest-neighbor (NN) tables to generate wind power curves based on available wind speed and direction from an online weather-data source. The weighted approach allows the algorithm to adapt to seasonal changes by weighting newest results highest, and the power curves makes it possible to use the algorithm on different wind farms. Another approach to analysis and prediction of wind power generation is presented in \cite{WindPowerGenerationUsingANN} where an Artificial Neural Network is used to predict the production based on weather data such as wind speed, relative humidity and for how many hours the windmill is generating power. 
+Wind energy prediction can be divided into two areas \cite{5}: 1) time-series analysis of power data and 2) wind speed prediction and conversion to power. What needs to be utilized in wind energy prediction is wind speed and wind direction which of course has a big influence on how much energy a wind turbine generate. An approach to analysis and prediction of wind power generation is presented in \cite{WindPowerGenerationUsingANN} where an Artificial Neural Network is used to predict the production. The prediction is based on weather data such as wind speed, relative humidity but also for how many hours the windmill is generating power. 
 \\[0.5cm]
-We will base our work on neural networks and the resilient backpropagation (RPROP) algorithm used to train the network in order to predict electricity prices and wind power generation. It is faster than its predecessor Backpropagation \cite{8,15}.  The RPROP algorithm is a learning algorithm that uses weights to analyze the input dataset and to configure further learning \cite{17}. It is commonly used on the feedforward architecture and is the most used and implemented algorithm \cite{14,17}.
+We will base our work on Artificial Neural Networks and the resilient backpropagation (RPROP) algorithm used to train the network in order to predict electricity prices and wind power generation. It is faster than its predecessor Backpropagation \cite{8,15}.  The RPROP algorithm is a learning algorithm that uses weights to analyze the input dataset and to configure further learning \cite{17}. It is commonly used on the feedforward architecture and is the most used and implemented algorithm \cite{14,17}.
 
 \section{The Method}
 The prediction algorithm will be based on historical data which potentially could be a very large dataset. The more historical data included in the algorithm the more data needs to be processed. We need to investigate how much of this data is necessary for precise prediction and perhaps make tradeoffs to ensure performance for decision support.
 \\[0.5cm] 
-Based on the dataset that is available and the nonlinear nature of price forecasting and energy price prediction we want a system that is able to develop and learn from the past. Artificial Neural Networks can be categorized as Machine Learning \cite{18} and are networks that imitate the behaviour of the human brain \cite{1}. This gives us the power to be able to forecast energy prices based on how the prices have evolved in the past and therefore we chose to use neural networks to base our model upon. Our decision is based on the nature of neural networks and how it is used in machine learning. It is often used in non-linear statistical analysis \cite{16} and has been used to predict the prices of brown energy \cite{2}\cite{3}. We have chosen to use a multi-layered feed forward architecture since this is one of the most used and widely implemented in open-source frameworks \cite{17}.
+Based on the dataset that is available and the nonlinear nature of price forecasting and energy price prediction we want a system that is able to develop and learn from the past. Artificial Neural Networks can be categorized as Machine Learning \cite{18} and are networks that imitate the behaviour of the human brain \cite{1}. This gives us the power to be able to forecast energy prices based on how the prices have evolved in the past and therefore we chose to use Artificial Neural Networks to base our model upon. Our decision is based on the nature of Artificial Neural Networks and how it is used in machine learning. It is often used in non-linear statistical analysis \cite{16} and has been used to predict the prices of brown energy \cite{2}\cite{3}. We have chosen to use a multi-layered feed forward architecture since this is one of the most used and widely implemented in open-source frameworks \cite{17}.
 
 \section{The hypothesis}
-In this dissertation we take our outset in the growing need for predicting green energy prices. It is our intent to show that we can predict green energy prices by gathering weather data from online sources and combine it with historical price development data in a prediction algorithm based on a Back Propagation Neural Network. In our concrete case the prediction itself is to be used as decision support by energy traders in their attempt to beat the electricity market. We will be focusing on 1) building a Back Propagation Neural Network that is able to predict prices; 2) creating a web service for real-time fetching of the predicted prices. 
+In this dissertation we take our outset in the growing need for predicting green energy prices. It is our intent to show that we can predict green energy prices by gathering weather data from online sources and combine it with historical price development data in a prediction algorithm based on a Back Propagation Artificial Neural Network. In our concrete case the prediction itself is to be used as decision support by energy traders in their attempt to beat the electricity market. We will be focusing on 1) building a Back Propagation Artificial Neural Network that is able to predict prices; 2) creating a web service for real-time fetching of the predicted prices. 
 \\[0.5cm] 
-The goal of the thesis is to investigate whether or not Back Propagation Neural Networks(BPNN) are a proper way to predict energy prices. The BPNN shall as a minimum be able to predict energy prices based on historical data like in \cite{2} and weather data. Based on this minimum requirement we will explore if 1) the prediction algorithm can come "some percentage" close to real-world data (the percentage needs to be defined!!); 2) the algorithm can be expanded to also include prediction of green energy prices; 3) real-time fetching of prices.
+The goal of the thesis is to investigate whether or not Back Propagation Artificial Neural Networks(BPNN) are a proper way to predict energy prices. The BPNN shall as a minimum be able to predict energy prices based on historical data like in \cite{2} and weather data. Based on this minimum requirement we will explore if 1) the prediction algorithm can come "some percentage" close to real-world data (the percentage needs to be defined!!); 2) the algorithm can be expanded to also include prediction of green energy prices; 3) real-time fetching of prices.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -116,7 +116,7 @@ The goal of the thesis is to investigate whether or not Back Propagation Neural 
 \section{Machine Learning}
 Machine learning algorithms can figure out how to perform tasks by generalizing and where the goal is to generalize beyond the examples of a training set \cite{18}. The programs using the algorithm learn from data and as more data becomes available, more complex problems can be handled. Systems such as web search, spam filters and stock trading uses this approach.
 \\[0.5cm]
-Many learning algorithms exist and they are all based on combinations of three components \cite{18}; 1) the \textbf{representation} component makes an attempt to discover how to represent the input during training of the algorithm. What kind of information expressed in the data decides what representation algorithm to use; 2) the \textbf{evaluation} component has the objective of distinguishing between the best and the worst output from the representation component and let the next component decide which choice is the best; 3) finally, the \textbf{optimization} component needs to search for the highest scoring output from the evaluation and then deliver it as a result. A greedy search could be an example of such a search (see figure ~\ref{fig:threeComponents}).
+Many learning algorithms exist and they are all based on combinations of three components \cite{18}; 1) the \textbf{representation} component makes an attempt to discover how to represent the input during training of the algorithm. What kind of information expressed in the data decides what representation algorithm to use; 2) the \textbf{evaluation} component has the objective of distinguishing between the best and the worst output from the representation component and let the next component decide which choice is the best. Basically it attempts to map the output to a specific value so that the next component can analyze it; 3) finally, the \textbf{optimization} component needs to search for the highest scoring output from the evaluation and then deliver it as a result. A greedy search could be an example of such a search (see figure ~\ref{fig:threeComponents}).
 \begin{figure}[h!]
 \centering
 \includegraphics[width=0.6\linewidth,natwidth=898,natheight=587]{billeder/Table1-TheComponentsOfLearningAlgorithms.png}
@@ -124,9 +124,9 @@ Many learning algorithms exist and they are all based on combinations of three c
 \label{fig:threeComponents}
 \end{figure}
 \\[0.5cm] 
-Machine learning cannot rely on data alone. Every learner must make assumptions beyond the data that is given to generalize beyond it \cite{18}. It is not possible to map the real world uniformly to all possible mathematical functions. For example we could have a lot of knowledge about what makes two examples similar and thereby making an assumption that they are both of the same type. We can't say with 100 percent certainty. 
+Machine learning cannot rely on data alone. Every learner must make assumptions beyond the data that is given to generalize beyond it \cite{18} because it is not possible to map the real world uniformly to a possible mathematical function. When meteorologists try to model the weather they make assumptions based on historical datasets that are similar to the current weather conditions. If enough historical occurrences resulted in the same weather condition the meteorologists must make the assumption that it can be classified as what have been seen before. The same is applicable when predicting electricity prices. We examine historical data and locate situations that are similar to the current and if enough examples with the same result is found it can be assumed that they are of the same type.
 \\[0.5cm]
-It can be the case that the system is not at all able to deliver a correct answer. This could result in the system guessing to the best of its ability or simply randoming an answer. This problem is called overfitting \cite{18}. Overfitting can be divided into bias and variance, where bias is when the learner consistently learns the same wrong thing over and over again. Variance is the learners tendency to learn random things and ignoring the possibility of a more correct answer. See figure ~\ref{fig:biasandvariance} for an example with dart throwing.
+It can be the case that the system is not at all able to deliver a correct answer. This could result in the system guessing to the best of its ability or simply randoming an answer. This problem is called overfitting \cite{18}. Overfitting can be divided into bias and variance, where bias is when the learner consistently learns the same wrong thing over and over again. Variance is the learner's tendency to learn random things and ignoring the possibility of a more correct answer. See figure ~\ref{fig:biasandvariance} for an example with dart throwing.
 \begin{figure}[h!]
 \centering
 \includegraphics[width=0.5\linewidth,natwidth=898,natheight=587]{billeder/biasVSvariance.png}
@@ -135,25 +135,24 @@ It can be the case that the system is not at all able to deliver a correct answe
 \end{figure}
 
 Machine learning is not only about the technical stuff but it also relies a great deal on intuition, creativity and  black art \cite{18}. 
-\newline A way to achieve machine learning is by using a Neural Network. One way to model a neural network is to base it on the
+\newline A way to achieve machine learning is by using a Artificial Neural Network. One way to model an ANN is to base it on the
 Levenberg-Marquardt algorithm \cite{7,9,10}. It is a least squares algorithm that,
 opposed to Backpropagation algorithm\cite{8}, is very fast at calculating the
 results. It is a curve fitting algorithm mostly used on nonlinear problems with
-a lot of unknowns[Need citation]. The algorithm can be used with neural networks
-and information approximation\cite{8} and it can be used in combination with the
-backpropagation algorithm to be used on a feedforward architecture of the neural network\cite{13}.
+a lot of unknowns[Need citation]. The algorithm can be used with Artificial Neural Networks and information approximation\cite{8} and it can be used in combination with the backpropagation algorithm to be used on a feedforward architecture of the neural network\cite{13}.
 
 \section{Green Energy Production}
 \subsection{Prediction}
 \input{sections/PowerGenerationPrediction/analysisOfPowerGenerationPRediction.tex}
-The vitality of the forecasts are also seen when it comes to
-placement of wind farms. Before investing billions of dollars in a new wind farm it is of utmost importance to put it in the best possible location in relation to wind statistics, e.g. force of the wind and how often the winds change in power and direction at the position. In \cite{4} they use MCP to predict wind statistics based on large amount of geographical-, weather- and historical data so that the farms can be placed best possible. This knowledge can in some way be transferred to our specific purpose but because we are dealing with decision making in real time we cant use as heavy algorithms that do calculations for several weeks and months before giving a result. We must deliver the most accurate estimate without delaying the traders work.
-There is also a big difference in using billions of dollars on windmills. The companies have to be 100 percent certain that they can produce energy where you put them. When doing decision support we only aid the trader in his daily work by giving him a real time estimate for the next hour or perhaps the next week - he/she still needs to take the final decision based on her/his experience and knowledge. In addition, we can also assume that the wind mills are placed in a the best possible location where we only need to predict the energy production based on the current weather.
+The vitality of the forecasts is seen when it comes to
+placement of wind farms. Before investing billions of dollars in a new wind farm it is of utmost importance to put it in the best possible location in relation to wind statistics, e.g. force of the wind and how often the winds change in power and direction at the position. In \cite{4} they use MCP to predict wind statistics based on large amount of geographical-, weather- and historical data so that the farms can be placed best possible. This knowledge can in some way be transferred to our specific purpose but because we are dealing with decision making in real time we cannot use as heavy algorithms that do calculations for several weeks and months before giving a result. We must deliver the most accurate estimate without delaying the trader's work.
+There is also a big difference in using billions of dollars on windmills. The companies have to be 100 percent certain that they can produce energy where you put them. When doing decision support we only aid the trader in his daily work by giving him a real time estimate for the next hour or perhaps the next week - they still need to take the final decision based on their experience and knowledge. In addition, we can also assume that the wind mills are placed in a the best possible location where we only need to predict the energy production based on the current weather.
 \\[0.5cm]
 Another source of green energy is solar panels. Solar
 prediction algorithms are very accurate when the weather conditions are steady but in changing weather a large error margin is seen. To predict power output from a solar farm the time-series prediction algorithms and Estimated Weighted Moving Average (EWMA) models can be used \cite{5}.
 
 \subsection{Applications}
+\input{sections/ScheduleJobsInDataCenters/scheduledJobs.tex}
 
 \section{Electricity Prices}
 \subsection{Prediction}
@@ -171,7 +170,7 @@ Prediction algorithms are not only used by electricity traders but can also be a
 \section{Electricity Demand Prediction}
 Weather conditions have a huge impact on the electricity industry in terms of network infrastructure and electricity consumption. In \cite{19} they describe a multiple regression model that accurately predicts the monthly electricity demand based on weather and sociocultural conditions. The monthly electricity demand from this model shows a clear cyclic pattern which reflects the temperature changes during the year \cite{19}. Besides weather conditions, social and economic factors also affect the monthly demand, e.g. the demand was decreased in Denmark during the financial crisis in 2009 \cite{20}. 
 \\[0.5cm]
-Parametric multiple regression is preferred in \cite{19} as opposed to a Neural Network used in this thesis. From a statistical error indices point of view the Artificial Neural Network (ANN) is a valid choice for prediction (see figure ~\ref{fig:anncomparison}) in comparison with a plain socioeconomic model (SE) and a Box and Jenkins model (B\&J). The argument for multiple regression is the simplicity in adjusting input values for each analysis of electricity demand in the prediction model and in the end they show similar results to ANN. 
+Parametric multiple regression is preferred in \cite{19} as opposed to an Artificial Neural Network used in this thesis. From a statistical error indices point of view the Artificial Neural Network (ANN) is a valid choice for prediction (see figure ~\ref{fig:anncomparison}) in comparison with a plain socioeconomic model (SE) and a Box and Jenkins model (B\&J). The argument for multiple regression is the simplicity in adjusting input values for each analysis of electricity demand in the prediction model and in the end they show similar results to ANN. 
 \begin{figure}[h!]
 \centering
 \includegraphics[width=0.8\linewidth,natwidth=898,natheight=587]{billeder/StatisticalErrorOfNeuralNetworksAndRegression.png}
@@ -215,7 +214,7 @@ The calculation model can also include socio-economic factors. Specifically the 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\chapter{Neural Network}
+\chapter{Artificial Neural Network}
 \label{ch:neural network}
 
 \input{sections/NeuralNetworkSection/NeuralNetworkSection.tex}
