@@ -218,4 +218,6 @@ pip-log.txt
 # IGNORE LATEX FILES NOT UP FOR GIT CONTROL
 *.pdf
 *.toc
+*.synctex.gz
 *.synctex
+*.aux
