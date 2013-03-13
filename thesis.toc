@@ -12,12 +12,12 @@
 \contentsline {subsection}{\numberline {2.2.1}Prediction}{9}
 \contentsline {section}{\numberline {2.3}Electricity Prices}{11}
 \contentsline {subsection}{\numberline {2.3.1}Prediction}{11}
-\contentsline {subsection}{\numberline {2.3.2}Applications}{14}
+\contentsline {subsection}{\numberline {2.3.2}Applications}{15}
 \contentsline {section}{\numberline {2.4}Electricity Demand Prediction}{15}
 \contentsline {chapter}{\numberline {3}Neural Network}{19}
 \contentsline {section}{\numberline {3.1}Unsupervised learning}{21}
 \contentsline {section}{\numberline {3.2}Supervised learning}{21}
-\contentsline {section}{\numberline {3.3}Problems to be avoided}{22}
+\contentsline {section}{\numberline {3.3}Problems to be avoided}{23}
 \contentsline {chapter}{\numberline {4}Conclusion}{25}
 \contentsline {chapter}{Primary Bibliography}{25}
 \contentsline {chapter}{Secondary Bibliography}{29}
