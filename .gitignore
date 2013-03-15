@@ -221,3 +221,6 @@ pip-log.txt
 *.synctex.gz
 *.synctex
 *.aux
+*.bbl
+
+*.blg
