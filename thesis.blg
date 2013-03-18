@@ -24,15 +24,15 @@ Warning--entry type for "17" isn't style-file defined
 Warning--entry type for "20" isn't style-file defined
 --line 131 of file refs.bib
 Warning--entry type for "inductiveBias" isn't style-file defined
---line 216 of file refs.bib
-I was expecting a `,' or a `}'---line 224 of file refs.bib
+--line 223 of file refs.bib
+I was expecting a `,' or a `}'---line 231 of file refs.bib
  : 
  : @online{meanSquaredError,
 (Error may have been on previous line)
 I'm skipping whatever remains of this entry
 Warning--entry type for "meanSquaredError" isn't style-file defined
---line 224 of file refs.bib
-I was expecting a `,' or a `}'---line 231 of file refs.bib
+--line 231 of file refs.bib
+I was expecting a `,' or a `}'---line 238 of file refs.bib
  : 
  : @article{singhal2011electricity,
 (Error may have been on previous line)
@@ -41,8 +41,12 @@ Too many commas in name 1 of "Mandal, Paras. Tomonobu, Senjyu. Naomitsu, Urasaki
 while executing---line 1049 of file plain.bst
 Too many commas in name 1 of "Contreas, Javier. Nogales J., Francisco. Conejo, Anotiono" for entry ARIMA
 while executing---line 1049 of file plain.bst
+Too many commas in name 1 of "Atoyan, Hasmik. Robert, Jean-Marc. Duquet, Jean-Remi" for entry UncertainInformation
+while executing---line 1049 of file plain.bst
 Warning--empty year in 2
 Warning--empty year in 5
+Too many commas in name 1 of "Atoyan, Hasmik. Robert, Jean-Marc. Duquet, Jean-Remi" for entry UncertainInformation
+while executing---line 1090 of file plain.bst
 Too many commas in name 1 of "Contreas, Javier. Nogales J., Francisco. Conejo, Anotiono" for entry ARIMA
 while executing---line 1090 of file plain.bst
 Warning--empty journal in AirDensityInForecast
@@ -50,4 +54,4 @@ Too many commas in name 1 of "Mandal, Paras. Tomonobu, Senjyu. Naomitsu, Urasaki
 while executing---line 1090 of file plain.bst
 Warning--empty year in 4
 Warning--empty year in 15
-(There were 8 error messages)
+(There were 10 error messages)

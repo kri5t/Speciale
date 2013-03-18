@@ -24,6 +24,12 @@ Nima Amjady.
   neural network.
 \newblock {\em Power Systems, IEEE Transactions on}, 21(2):887--896, 2006.
 
+\bibitem{UncertainInformation}
+Jean-Marc. Duquet Jean-Remi Atoyan, Hasmik.~Robert.
+\newblock Presentation of uncertain information in user interfaces to support
+  decision making in complex military systems.
+\newblock {\em IHM}, 2008.
+
 \bibitem{buckland2002ai}
 M.~Buckland.
 \newblock {\em AI techniques for game programming}.
@@ -140,6 +146,12 @@ M.~Riedmiller and H~Braun.
 R.~Rojas.
 \newblock {\em Neural networks: a systematic introduction}.
 \newblock Springer, 1996.
+
+\bibitem{shim2002past}
+JP~Shim, Merrill Warkentin, James~F Courtney, Daniel~J Power, Ramesh Sharda,
+  and Christer Carlsson.
+\newblock Past, present, and future of decision support technology.
+\newblock {\em Decision support systems}, 33(2):111--126, 2002.
 
 \bibitem{singhal2011electricity}
 Deepak Singhal and KS~Swarup.
