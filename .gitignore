@@ -222,5 +222,6 @@ pip-log.txt
 *.synctex
 *.aux
 *.bbl
-
+*.fls
 *.blg
+*.fdb_latexmk
