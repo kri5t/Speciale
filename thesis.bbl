@@ -85,6 +85,13 @@ Ching-Lai Hor~et al.
   demand.
 \newblock {\em IEE TRANSACTIONS ON POWER SYSTEMS, VOL. 20, NO. 4}, 2005.
 
+\bibitem{groupLearningDS}
+An-Pin Li, Jung-Bin.~Chen.
+\newblock Refined group learning based on xcs and neural network in intelligent
+  financial decision support system.
+\newblock {\em Conference on Intelligent Systems Design and Applications},
+  2006.
+
 \bibitem{WindPowerGenerationUsingANN}
 E.~Mabel, M. Carolin.~Fernandez.
 \newblock Analysis of wind power generation and prediction using ann: A case
@@ -92,7 +99,7 @@ E.~Mabel, M. Carolin.~Fernandez.
 \newblock {\em Renewable Energy 33, 986-992}, 2008.
 
 \bibitem{pjmForecast}
-Senjyu. Naomitsu~Urasaki Mandal, Paras.~Tomonobu.
+Senjyu. Naomitsu-Urasaki Mandal, Paras.~Tomonobu.
 \newblock A novel approach to forecast electricity price for pjm using neural
   network and similar days method.
 \newblock {\em IEE TRANSACTIONS ON POWER SYSTEMS, VOL. 22, NO. 4}, 2007.

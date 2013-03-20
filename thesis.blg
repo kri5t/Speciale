@@ -24,24 +24,24 @@ Warning--entry type for "17" isn't style-file defined
 Warning--entry type for "20" isn't style-file defined
 --line 131 of file refs.bib
 Warning--entry type for "inductiveBias" isn't style-file defined
---line 223 of file refs.bib
-I was expecting a `,' or a `}'---line 231 of file refs.bib
+--line 237 of file refs.bib
+I was expecting a `,' or a `}'---line 245 of file refs.bib
  : 
  : @online{meanSquaredError,
 (Error may have been on previous line)
 I'm skipping whatever remains of this entry
 Warning--entry type for "meanSquaredError" isn't style-file defined
---line 231 of file refs.bib
-I was expecting a `,' or a `}'---line 238 of file refs.bib
+--line 245 of file refs.bib
+I was expecting a `,' or a `}'---line 252 of file refs.bib
  : 
  : @article{singhal2011electricity,
 (Error may have been on previous line)
 I'm skipping whatever remains of this entry
 Too many commas in name 1 of "Mandal, Paras. Tomonobu, Senjyu. Naomitsu, Urasaki" for entry pjmForecast
 while executing---line 1049 of file plain.bst
-Too many commas in name 1 of "Contreas, Javier. Nogales J., Francisco. Conejo, Anotiono" for entry ARIMA
-while executing---line 1049 of file plain.bst
 Too many commas in name 1 of "Atoyan, Hasmik. Robert, Jean-Marc. Duquet, Jean-Remi" for entry UncertainInformation
+while executing---line 1049 of file plain.bst
+Too many commas in name 1 of "Contreas, Javier. Nogales J., Francisco. Conejo, Anotiono" for entry ARIMA
 while executing---line 1049 of file plain.bst
 Warning--empty year in 2
 Warning--empty year in 5
