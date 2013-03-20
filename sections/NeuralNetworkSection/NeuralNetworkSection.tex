@@ -77,7 +77,7 @@ When we are trying to fit our algorithm and make it recognize patterns we will e
   \centering
   \includegraphics[width=.4\linewidth]{billeder/globalMinimum.png}
   \captionof{figure}{At the global minimum \cite[P. 318]{buckland2002ai}}
-  \label{fig:test1}
+  \label{fig:globalMinimum}
 \end{minipage}%
 \begin{minipage}{.5\textwidth}
   \centering
@@ -97,4 +97,6 @@ Another pitfall when working with neural networks is over fitting the algorithm.
 \label{fig:overfitting}
 \end{figure}
 This can be avoided by some simple techniques. First of all we want to reduced the neurons as much as possible as long as it does not interfere with our performance of the system. This is a trial and error problem and has to be tweaked along with evolving your neural network. We can add noise to avoid this problem. By adding noise(random data values) we prevent the algorithm from fitting the function to closely to the given data. Thus giving us a more generalized function where it hopefully will be able to fit new data presented to it better. Early stopping is another method to avoid over-fitting. This is only doable with large datasets where you can split it into two equal datasets. The first will work as a training set and the second will work as a validation set. We will keep training the dataset and checking with the validation set until the difference between those two start to increase.
+
+\subsection{Summary}
 
