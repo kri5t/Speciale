@@ -74,60 +74,23 @@
 \chapter{Introduction}
 \label{ch:intro}
 \section{The Problem}
-Renewable energy has become increasingly important. Energy suppliers make it possible for their customers to choose between and brown energy. Companies and persons promote themselves with green profiles to get a certain kind of image and it has become a choice of the individual company or home to be green. This is only one part of the picture, because the increased attention on green energy is influencing the market forces behind the scenes where acquisition of energy begins \cite{windPowerDanishLiberalized}. Various trading companies buy electricity on the deregulated energy market and since the amount of renewable energy in this market is increasing and will do for the years to come\cite{6, windPowerDanishLiberalized} the traders need to consider it carefully when buying and selling. The most essential task and basis for any decision making in the power market is to forecast the electricity prices \cite{pjmForecast}.
-\\[0.5cm]
-The electricity market consists of two instruments in order to facilitate trading between producers and consumers of energy: the pool which works as an online marketplace, and a framework to make physical contracts between both sides possible \cite{21}. The producers can make their electricity available and the consumers can bid correspondingly. An auction is made every hour to decide the market clearing price and which bids are accepted for that hour. The consumers and producers need to predict the hourly clearing prices to make plans for which bidding strategies to use. If a trader has a precise day-ahead prediction of the prices it will be easier to maximize profit by using the best possible strategy for exactly those conditions \cite{21}. The Electricity traders will attempt to buy electricity in a low-price market and sell it when the price has come up like in
-the commodity market \cite{FIND REF}. With a precise prediction they know when to buy and when to sell. 
-
-Approximately 25\% of the total power production in Western Denmark was covered by wind power in 2008 and could therefore influence the prices on the power market \cite{windPowerDanishLiberalized}. The influence is seen in lower spot-market prices when the production of wind power is higher. Since the amount of green energy in the entire Danish liberalized market is targeted to increase to 30\% by 2025 which is almost a doubling since 2008 \cite{windPowerDanishLiberalized} the influence will only become greater. The price impact from windmills will be even greater in strong wind periods and in areas with congestions in the power transmission capacity \cite{windPowerDanishLiberalized}. The increase in renewable energy makes the ability of predicting green energy production and the corresponding market price more vital. It is not trivial to predict wind production because green energy by nature is unpredictable, e.g. wind turbines only generate energy when the wind is blowing. If the traders are able to predict wind production when doing actual price forecast it will give rise to a huge advantage in the market when deciding to buy or sell. Price forecasting itself contains many factors than wind production that need to be considered equally \cite{21}. 
-\\[0.5cm] Traders buy and sell in real-time, intra-day or day-ahead
-\cite{FIND REF}. This puts constraints on a price prediction algorithm - but what constraints depend solely on the type of trade. If the trader wishes to buy in real-time or hour-ahead the algorithm must perform and deliver a result within minutes, seconds or perhaps even milliseconds. If it is day-ahead then the time-interval can be increased. This might result in a compromise on the margin of error because fast results make less time for analysis and computation. Another fact is that the closer you get to the time of the trade the more accurate the weather predictions will be which directly impacts the price prediction algorithm using it. The ability to make both short- and long-term forecasts is very important in the deregulated competitive electricity market because it helps the trader to reduce risks in terms of under/over estimating the revenues from potential sales and this of course also makes it easier to manage risk\cite{21}.
-\\[0.5cm]
-Demand has a huge influence on the electricity price. No demand, no electricity price, but if these were the only two variables to consider, a linear regression model could be used for establishing a relationship and thereby a prediction. Other dynamic elements have an impact on the price and therefore the linear regression approach would result in the presence of serial correlation in the error \cite{21}. For example will overestimated energy prices for one year most likely lead to overestimates the next year because it does not account for all the dynamic parameters. It is necessary to carefully consider all variables and characteristics of the price that we are trying to predict in the electricity market and then use a model that handles correlated errors based on the this. The most noticeable characteristics are \cite{21}:
-\begin{itemize}
-\item High frequency;
-\item High volatility;
-\item Unusual prices in times of very high demand.
-\item Calendar effect (weekend, holidays)
-\item Multiple seasonality
-\end{itemize}
-When doing electricity price forecasting these characteristics must be taken into consideration when modelling a prediction algorithm. 
-\section{Related Work}
-This section will give an overview of concepts within the area of price and green energy prediction as well as decision support. The presented concepts will be elaborated as the thesis progress.
+\input{sections/Introduction/TheProblem.tex}
 
 \subsection{Price Prediction Systems}
-\input{sections/ForecastingStock/StockPricePrediction.tex}
-\\[0.5cm]
-A day-ahead forecasting algorithm that predicts electricity prices in the market based on Neural Network (ANN) and Similar Days Method (SDM) is described in \cite{pjmForecast}. The purpose is to give close estimates for several days to come. The estimates can be used by electricity traders in their decision making but also by transmission companies for different purposes. The companies can use it for scheduling a short-term generator outage in order to predict where it is most inexpensive. It can also be used by actual producers of energy to strategically bid into the market to increase prices. The price estimate itself plays a huge role in decision making in all of these examples.
+\input{sections/Introduction/PricePredictionSystems.tex}
 
-The combination of ANN and SDM is an attempt to simplify the ANN and make the prediction more accurate. The algorithm forecasts by using a ANN that modifies price curves obtained by averaging five similar price days corresponding to the forecast day, i.e. The ANN corrects the received output from the similar days approach \cite{pjmForecast}. In other words the technique takes into consideration the influence of the most similar days and their price development in relation to the day we wish to forecast.
-
-The ANN is trained with only 45 days from the day before the forecast and 45 days before and after the forecast day in the previous year \cite{pjmForecast}.
- 
 \subsection{Green Energy Production}
-When dealing with prediction of green energy production it is necessary to look at the weather in more detail. In this thesis we will be focusing on energy that originates from windmills. 
-
-Wind energy prediction can be divided into two areas \cite{5}: 1) time-series analysis of power data and 2) wind speed prediction and conversion to power. What needs to be utilized in wind energy prediction is wind speed and wind direction which of course has a big influence on how much energy a wind turbine generate. An approach to analysis and prediction of wind power generation is presented in \cite{WindPowerGenerationUsingANN} where an Artificial Neural Network is used to predict the production. The prediction is based on weather data such as wind speed, relative humidity but also for how many hours the windmill is generating power. 
-\\[0.5cm]
-Another source of green energy is solar panels. Solar
-prediction algorithms are very accurate when the weather conditions are steady but in changing weather a large error margin is seen. To predict power output from a solar farm the time-series prediction algorithms and Estimated Weighted Moving Average (EWMA) models can be used \cite{5}.
+\input{sections/Introduction/GreenEnergyProduction.tex}
 
 
 \subsection{Decision Support Systems}
-\input{sections/StockDSS/StockDSS.tex}
+\input{sections/Introduction/StockDSS.tex}
 
 \section{The Method}
-We will base our work on Artificial Neural Networks and the resilient backpropagation (RPROP) algorithm used to train the network in order to predict electricity prices and wind power generation. It is faster than its predecessor Backpropagation \cite{8,15}.  The RPROP algorithm is a learning algorithm that uses weights to analyze the input dataset and to configure further learning \cite{17}. It is commonly used on the feedforward architecture and is the most used and implemented algorithm \cite{14,17}.
-\\[0.5cm] 
-The prediction algorithm will be based on historical data which potentially could be a very large dataset. The more historical data included in the algorithm the more data needs to be processed. We need to investigate how much of this data is necessary for precise prediction and perhaps make tradeoffs to ensure performance for decision support.
-\\[0.5cm]
-Based on the dataset that is available and the nonlinear nature of price forecasting and energy price prediction we want a system that is able to develop and learn from the past. Artificial Neural Networks can be categorized as Machine Learning \cite{18} and are networks that imitate the behaviour of the human brain \cite{1}. This gives us the power to be able to forecast energy prices based on how the prices have evolved in the past and therefore we chose to use Artificial Neural Networks to base our model upon. Our decision is based on the nature of Artificial Neural Networks and how it is used in machine learning. It is often used in non-linear statistical analysis \cite{16} and has been used to predict the prices of brown energy \cite{2,3}. We have chosen to use a multi-layered feed forward architecture since this is one of the most used and widely implemented in open-source frameworks \cite{17}.
+\input{sections/Introduction/TheMethod.tex}
 
-\section{The hypothesis}
-In this dissertation we take our outset in the growing need for green decision making. It is our intent to forecast green energy production and electricity prices by modelling an Artificial Neural Network using the back propagation algorithm for training of the network. The dataset for training consists of historical data that is relevant to the specific task. For instance when dealing with forecasting of wind power production for a wind farm, the most influential factors are meteorological such as wind speed, wind direction and air density together with historical production development of that particular farm. The energy prices are also influenced heavily by meteorological factors but it is instead combined with historical price development.
-The goal is to investigate whether or not Back Propagation Neural Networks are a proper technology for doing prediction of green energy and electricity prices. Secondly, we are combining the two predictions in an attempt to do support green decision making for traders. By green decision making is basically meant highlighting the points in time where the price is at its lowest and at the same time contains the highest percentage of green energy within a user defined time-interval.
-\\[0.5cm]
-We will be focusing on; 1) modelling and implementing a working Back Propagation Artificial Neural Network that is capable of predicting price and energy production; 2) creating a Decision Support System (DSS) that will support green decision making.
+\section{The Hypothesis}
+\input{sections/Introduction/TheHypothesis.tex}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
