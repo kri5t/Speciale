@@ -96,6 +96,8 @@ When doing electricity price forecasting these characteristics must be taken int
 This section will give an overview of concepts within the area of price and green energy prediction as well as decision support. The presented concepts will be elaborated as the thesis progress.
 
 \subsection{Price Prediction Systems}
+A short intro to ANN.
+\\[0.5cm]
 \input{sections/ForecastingStock/StockPricePrediction.tex}
 \\[0.5cm]
 A day-ahead forecasting algorithm that predicts electricity prices in the market based on Neural Network (ANN) and Similar Days Method (SDM) is described in \cite{pjmForecast}. The purpose is to give close estimates for several days to come. The estimates can be used by electricity traders in their decision making but also by transmission companies for different purposes. The companies can use it for scheduling a short-term generator outage in order to predict where it is most inexpensive. It can also be used by actual producers of energy to strategically bid into the market to increase prices. The price estimate itself plays a huge role in decision making in all of these examples.
@@ -103,14 +105,18 @@ A day-ahead forecasting algorithm that predicts electricity prices in the market
 The combination of ANN and SDM is an attempt to simplify the ANN and make the prediction more accurate. The algorithm forecasts by using a ANN that modifies price curves obtained by averaging five similar price days corresponding to the forecast day, i.e. The ANN corrects the received output from the similar days approach \cite{pjmForecast}. In other words the technique takes into consideration the influence of the most similar days and their price development in relation to the day we wish to forecast.
 
 The ANN is trained with only 45 days from the day before the forecast and 45 days before and after the forecast day in the previous year \cite{pjmForecast}.
+\\[0.5cm]
+Prediction algorithms are not only used by electricity traders but can also be a part of various applications. In \cite{22} they introduce an intelligent electricity broker (IEB) that is integrated into Smart Grids where it; 1) provides provision of en energy storage; 2) attempts to lower the electricity bill, and 3) optimally utilizes electricity during peak and low-peak energy production periods. The prediction algorithm is used by a decision algorithm to locate points in time where it is most feasible for the owner of the smart grid to either sell stored energy or buy energy if storage is low. It helps the system to lower the total amount of energy costs to the owner and also utilize the energy in the most intelligent way.
  
 \subsection{Green Energy Production}
-When dealing with prediction of green energy production it is necessary to look at the weather in more detail. In this thesis we will be focusing on energy that originates from windmills. 
-
-Wind energy prediction can be divided into two areas \cite{5}: 1) time-series analysis of power data and 2) wind speed prediction and conversion to power. What needs to be utilized in wind energy prediction is wind speed and wind direction which of course has a big influence on how much energy a wind turbine generate. An approach to analysis and prediction of wind power generation is presented in \cite{WindPowerGenerationUsingANN} where an Artificial Neural Network is used to predict the production. The prediction is based on weather data such as wind speed, relative humidity but also for how many hours the windmill is generating power. 
+When dealing with prediction of green energy production it is necessary to look at the weather in more detail. Wind energy prediction can be divided into two areas \cite{5}: 1) time-series analysis of power data and 2) wind speed prediction and conversion to power. What needs to be utilized in wind energy prediction is wind speed and wind direction which of course has a big influence on how much energy a wind turbine generate. An approach to analysis and prediction of wind power generation is presented in \cite{WindPowerGenerationUsingANN} where an Artificial Neural Network is used to predict the production. The prediction is based on weather data such as wind speed, relative humidity but also for how many hours the windmill is generating power. 
 \\[0.5cm]
 Another source of green energy is solar panels. Solar
 prediction algorithms are very accurate when the weather conditions are steady but in changing weather a large error margin is seen. To predict power output from a solar farm the time-series prediction algorithms and Estimated Weighted Moving Average (EWMA) models can be used \cite{5}.
+\\[0.5cm]
+\input{sections/ScheduleJobsInDataCenters/scheduledJobs.tex}
+\\[0.5cm]
+In this thesis we will only be focusing on energy that originates from windmills. 
 
 \subsection{Decision Support Systems}
 
@@ -159,13 +165,23 @@ Levenberg-Marquardt algorithm \cite{7,9,10}. It is a least squares algorithm tha
 opposed to Backpropagation algorithm\cite{8}, is very fast at calculating the
 results. It is a curve fitting algorithm mostly used on nonlinear problems with
 a lot of unknowns[Need citation]. The algorithm can be used with Artificial Neural Networks and information approximation\cite{8} and it can be used in combination with the backpropagation algorithm to be used on a feedforward architecture of the neural network\cite{13}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Artificial Neural Network}
+
+\input{sections/NeuralNetworkSection/NeuralNetworkSection.tex}
+\subsection{Summary}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \section{Prediction}
-Being able to predict electricity prices, demand and green energy production is the basis for our thesis. This section will introduce and give examples of these concepts. 
+Being able to predict electricity prices and green energy production is the basis for our thesis. Demand has a huge impact on the electricity price so this is also handled here. This section will introduce and give examples of these concepts. 
 
 \subsection{Electricity Demand}
 Weather conditions have a huge impact on the electricity industry in terms of network infrastructure and electricity consumption. In \cite{19} they describe a multiple regression model that accurately predicts the monthly electricity demand based on weather and sociocultural conditions. The monthly electricity demand from this model shows a clear cyclic pattern which reflects the temperature changes during the year \cite{19}. Besides weather conditions, social and economic factors also affect the monthly demand, e.g. the demand was decreased in Denmark during the financial crisis in 2009 \cite{20}. 
 \\[0.5cm]
-Parametric multiple regression is preferred in \cite{19} as opposed to an Artificial Neural Network used in this thesis. From a statistical error indices point of view the Artificial Neural Network (ANN) is a valid choice for prediction (see figure ~\ref{fig:anncomparison}) in comparison with a plain socioeconomic model (SE) and a Box and Jenkins model (B\&J). The argument for multiple regression is the simplicity in adjusting input values for each analysis of electricity demand in the prediction model and in the end they show similar results to ANN. 
+Parametric multiple regression is preferred in \cite{19} as opposed to an Artificial Neural Network used in this thesis. From a statistical error indices point of view the Artificial Neural Network (ANN) is a valid choice for prediction (see figure ~\ref{fig:anncomparison}) in relation to the error. The argument for multiple regression is the simplicity in adjusting input values for each analysis of electricity demand in the prediction model and in the end they show similar results to ANN. 
 \begin{figure}[h!]
 \centering
 \includegraphics[width=0.8\linewidth,natwidth=898,natheight=587]{billeder/StatisticalErrorOfNeuralNetworksAndRegression.png}
@@ -225,12 +241,8 @@ There is also a big difference in using billions of dollars on windmills. The co
 
 %\section{Electricity Demand}
 
-\subsection{Applications}
-Prediction algorithms are not only used by electricity traders but can also be a part of various applications. In \cite{22} they introduce an intelligent electricity broker (IEB) that is integrated into Smart Grids where it; 1) provides provision of en energy storage; 2) attempts to lower the electricity bill, and 3) optimally utilizes electricity during peak and low-peak energy production periods. The prediction algorithm is used by a decision algorithm to locate points in time where it is most feasible for the owner of the smart grid to either sell stored energy or buy energy if storage is low. It helps the system to lower the total amount of energy costs to the owner and also utilize the energy in the most intelligent way.
-\\[0.5cm]
-\input{sections/ScheduleJobsInDataCenters/scheduledJobs.tex}
-
 \subsection{Summary}
+Something about the training sets are equal - weather- and historical data.
 
 \section{Decision support}
 \subsection{Decision Support Systems}
@@ -238,15 +250,6 @@ Prediction algorithms are not only used by electricity traders but can also be a
 \subsection{Presentation of Uncertain Information}
 \input{sections/UncertainInformationPresentation/UncertaintInfo.tex}
 \subsection{Summary}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{Artificial Neural Network}
-
-\input{sections/NeuralNetworkSection/NeuralNetworkSection.tex}
-\subsection{Summary}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
