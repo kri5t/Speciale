@@ -1,5 +1,6 @@
 Weather conditions have a huge impact on the electricity industry in terms of network infrastructure and electricity consumption. In \cite{19} they describe a multiple regression model that accurately predicts the monthly electricity demand based on weather and sociocultural conditions. The monthly electricity demand from this model shows a clear cyclic pattern which reflects the temperature changes during the year \cite{19}. Besides weather conditions, social and economic factors also affect the monthly demand, e.g. the demand was decreased in Denmark during the financial crisis in 2009 \cite{20}. 
-\\[0.5cm]
+
+\subsubsection{Parametric multiple regression}
 Parametric multiple regression is preferred in \cite{19} as opposed to an Artificial Neural Network used in this thesis. From a statistical error indices point of view the Artificial Neural Network (ANN) is a valid choice for prediction (see figure ~\ref{fig:anncomparison}) in relation to the error. The argument for multiple regression is the simplicity in adjusting input values for each analysis of electricity demand in the prediction model and in the end they show similar results to ANN. 
 \begin{figure}[h!]
 \centering
@@ -14,6 +15,8 @@ To make a demand prediction based on weather conditions a relationship between t
 \caption{Function of monthly CET as a function from 1970 to 1995 \cite{19}}
 \label{fig:CET}
 \end{figure}
+
+\subsubsection{Heating and Cooling Degree Days}
 The nonlinear relationship between temperature and load consumption is turned into a concept called degree days. They introduce two categories of days; 1) Heating Degree Days (HDD) that is used to quantify when heating is required; 2) Cooling Degree Days (CDD) which is then used to quantify the need for cooling. The days are calculated from the CET data and give a more indicative picture than the temperature-load relationship \cite{19}. A simple explanation of the calculation follows.
 \begin{center}
 $CDD=\sum\limits_{d=1}^{N_{d}}(\gamma_{d})(T_{dm}-T_{base_{C}})$
@@ -41,3 +44,9 @@ The calculation model can also include socio-economic factors. Specifically the 
 \caption{The actual values and the predicted demand in a comparison \cite{19}}
 \label{fig:predicteddemand}
 \end{figure}
+
+\subsubsection{Summary}
+The electricity demand has great influence on the energy price. It is important to identify the influences of the demand because those inevitably also will have an affect on the electricity prices. 
+
+The concept of Cooling Degree Days (CDD) and Heating Degree Days (HDD) have been described. It could be interesting to see the result on accuracy when using these simple calculations on the temperature input because it simply ignores the temperature when heating or cooling is not needed. 
+Furthermore the \^E$_{A}$ function is presented. This function gives an exact picture of the factors that directly influence the demand and the possible mappings to to our ANN as the demand part --- every parameter is an input.
