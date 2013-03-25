@@ -35,8 +35,8 @@ Temperature is the most influential factor but other weather conditions can also
 +\alpha_{4}V_{w}+\alpha_{5}M_{s}+\alpha_{6}M_{r}$ 
 \end{center} 
  
-Where $a_{n}$ are constants, ELD is humidity, $V_{w}$ is windfall, $M_{s}$ sunshine and $M_{r}$ rainfall.
-The calculation model can also include socio-economic factors. Specifically the population growth has a natural impact on the electricity demand over time. The more people the higher the demand gets. This would give rise to an additional factor in the model considering the growth. The prediction model from \cite{19} comes within 3 percentage of the actual demand when it is run on data from 1996-2003 which is fairly close (~\ref{fig:predicteddemand}).
+Where $\alpha_{n}$ are constants, ELD is humidity, $V_{w}$ is wind speed, $M_{s}$ sunshine and $M_{r}$ rainfall.
+The calculation model can also include socio-economic factors. Specifically the population growth has a natural impact on the electricity demand over time. The more people the higher the demand gets. This would give rise to an additional factor in the model considering the growth. The prediction model from \cite{19} comes within 3 percentage of the actual demand when it is run on data from 1996-2003 which is pretty close (~\ref{fig:predicteddemand}).
 \newline
 \begin{figure}[h!]
 \centering
@@ -49,4 +49,4 @@ The calculation model can also include socio-economic factors. Specifically the 
 The electricity demand has great influence on the energy price. It is important to identify the influences of the demand because those inevitably also will have an affect on the electricity prices. 
 
 The concept of Cooling Degree Days (CDD) and Heating Degree Days (HDD) have been described. It could be interesting to see the result on accuracy when using these simple calculations on the temperature input because it simply ignores the temperature when heating or cooling is not needed. 
-Furthermore the \^E$_{A}$ function is presented. This function gives an exact picture of the factors that directly influence the demand and the possible mappings to to our ANN as the demand part --- every parameter is an input.
+Furthermore the demand function (\^E$_{A}$) is presented. This function gives an exact picture of the factors that directly influence the demand and the possible mappings to our ANN as the demand part --- every parameter is an input.
