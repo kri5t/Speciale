@@ -3,16 +3,18 @@ It is not surprising that weather conditions directly impact the wind power gene
 \subsection{Input Data}
 The collected data for wind power prediction is described above. This subsection will go into further detail with these parameters and show their relationship with wind production.
 
-The relationship between hourly wind speed at Aarhus Lufthavn and hourly wind power production of DK1 is seen in figure~\ref{fig:windVsProd}. The relationship is as expected even though only one weather station is used --- the relatively small size and climate of Denmark leads to uniform weather conditions across the country SHOW IT IN PLOT!.
-
-Even though weather data from only one station is used the relationship is as expected due to the small size Denmark. The relationship is even more clear when an average of more than one station is used DO SOMETHING.  
+\subsubsection{Wind Speed}
+The relationship between hourly wind speed at Aarhus Lufthavn and hourly wind power production of DK1 is seen in figure~\ref{fig:windVsProd}. The relationship is as expected even though only one weather station is used due to the uniform climate of Denmark.
+The relationship is even more clear when an average of more than one station is used DO SOMETHING.  
 
 \begin{figure}[h!]
 \centering
 \includegraphics[width=0.99\linewidth,natwidth=898,natheight=587]{billeder/WindSpeedVsProduction.png}
-\caption{Wind speed vs Wind Production}
+\caption{Hourly wind speed vs. wind production in 2012}
 \label{fig:windVsProd}
 \end{figure}
+
+\subsubsection{Humidity}
 
 \subsection{Modelling Artificial Neural Network}
 The ANN will be trained with input the hourly parameters of wind speed, temperature, pressure and humidity and then compared to the actual production of that hour.
