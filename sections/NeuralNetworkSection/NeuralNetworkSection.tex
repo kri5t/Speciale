@@ -2,15 +2,15 @@ This section is based on information from the book AI techniques for game progra
 \\[0.5cm]
 Neural networks are models that imitate the brains behavior. They have been created as an option to model artificial intelligence and analyze machine learning. The human brain is made up of billions of neurons that are interconnected in a big grid. They communicate by firing electrical shocks through the network of neurons. The human brain is extremely complex and can calculate vast amounts of data in no time. This is why scientists and mathematicians have been trying to emulate this behavior to create artificial intelligence.
 
-\begin{figure}[h!]
+\begin{figure}[!ht]
 \centering
 \includegraphics[width=0.8\linewidth,natwidth=898,natheight=587]{billeder/ANN.png}
 \caption{A simple neural network with 3 layers. \cite{stockForecasting}}
 \label{fig:ANN}
 \end{figure}
 
-Artificial neural networks (ANN) are artificial neurons (nodes) that are connected in a network. The network consists of an arbitrary number of layers that are interconnected. The most common structure in these networks are a feed forward structure. This kind of structure has the characteristic that it only flows data from the input layer through the layers to the output layer. There are no loops in the network thus making it unable to reiterate any information. Normally all of the nodes in the input layer is connected to all of the nodes in the second layer. The same connections are done in the next layers until we hit the output layer. This will give us the sum of all the previous nodes(\begin{math}x_i\end{math}) and their weights(\begin{math}w_i\end{math})(\begin{math}\sum_{i=0}^{i=n+1} w_i x_i \end{math}) in every node in the next layer. See ~\ref{fig:weight_of_layers}.
-\begin{figure}[h!]
+Artificial neural networks (ANN) are artificial neurons (nodes) that are connected in a network. The network consists of an arbitrary number of layers that are interconnected. The most common structure in these networks are a feed forward structure. This kind of structure has the characteristic that it only flows data from the input layer through the layers to the output layer. There are no loops in the network thus making it unable to reiterate any information. Normally all of the nodes in the input layer is connected to all of the nodes in the second layer. The same connections are done in the next layers until we hit the output layer. This will give us the sum of all the previous nodes($x_i$) and their weights($w_i$)($\sum_{i=0}^{i=n+1} w_i x_i$) in every node in the next layer. See ~\ref{fig:weight_of_layers}.
+\begin{figure}[!ht]
 \centering
 \includegraphics[width=0.8\linewidth,natwidth=898,natheight=587]{billeder/weight_of_layers.png}
 \caption{How the weight is calculated from one layer to the next}
@@ -29,7 +29,7 @@ It starts out by randomly assigning weights to all of the connections between th
 
 Supervised learning can be thought of as learning with a teacher. As an example we can use the XOR table:
 
-\begin{table}[h!]
+\begin{table}[!ht]
 \centering  % used for centering table
 \begin{tabular}{c c c} % centered columns (3 columns)
 Input \#1 & Input \#2 & Output \\ [0.5ex] % inserts table 
@@ -50,7 +50,7 @@ In this dataset we have both of the inputs and we are given the expected output.
 
 In neural networks bias neurons are often added to the layers to help them learn patterns. The bias neurons are added to give the activation functions the ability to change its output even if x is zero. If we look at the graph in figure ~\ref{fig:activationFunctions} it uses the following activation function: \begin{math} \frac{1}{(1+e^{(-cx)})} \end{math} where c is the weight.
 
-\begin{figure}[h!]
+\begin{figure}[!ht]
 \centering
 \includegraphics[width=0.8\textwidth ,natwidth=410,natheight=237]{billeder/ActivationFunctions.png}
 \caption{}
@@ -59,7 +59,7 @@ In neural networks bias neurons are often added to the layers to help them learn
 
 The figure shows how the gradient of the function alters with different weight values. Even though the gradient of the function is clearly altered by the weights the function is still outputting the same result for zero thus we cannot alter the output for x equal to zero just by altering the weights. This is what we use the bias for. If we apply a bias of one to all of the neurons we will be able to shift it either to the left or the right. In figure ~\ref{fig:activationFunctionsWithBias} we see the same function as before where the weight is set to 2. The difference is that we added a bias (b) to this function: \begin{math} \frac{1}{(1+e^{(-2x+b)})} \end{math} \cite[p. 165]{rojas1996neural} \cite{inductiveBias}
 
-\begin{figure}[h!]
+\begin{figure}[!ht]
 \centering
 \includegraphics[width=0.8\textwidth ,natwidth=410,natheight=237]{billeder/ActivationFunctionsWithBias.png}
 \caption{}
@@ -90,7 +90,7 @@ When we are trying to fit our algorithm and make it recognize patterns we will e
 To avoid the backpropagation algorithm to falsely accept a local minima as the global minima we can give the algorithm momentum. This is done by adding a bit of the last error correction from the earlier layer to the next layers error correction. This way the algorithm, so to say, will scoot right by any small deviations in the error correction face.
 \newline
 Another pitfall when working with neural networks is over fitting the algorithm. This is when the algorithm instead of finding a generalized pattern in the inputs it will find an over-fit pattern that will fit exactly that input. This is better shown in figure ~\ref{fig:overfitting}.
-\begin{figure}[h!]
+\begin{figure}[!ht]
 \centering
 \includegraphics[width=0.8\linewidth,natwidth=1262,natheight=415]{billeder/overfitting.png}
 \caption{A. The plot graph of the input B. The generalized function C. An over-fit function \cite[P. 319]{buckland2002ai}}
