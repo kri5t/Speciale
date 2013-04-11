@@ -4,8 +4,7 @@ It is not surprising that weather conditions directly impact the wind power gene
 The collected data for wind power prediction is described above. This subsection will go into further detail with these parameters and show their relationship with wind production.
 
 \subsubsection{Wind Speed}
-The relationship between hourly wind speed at Aarhus Lufthavn and hourly wind power production of DK1 is seen in figure~\ref{fig:windVsProd}. The relationship is as expected even though only one weather station is used due to the uniform climate of Denmark.
-The relationship is even more clear when an average of more than one station is used DO SOMETHING.  
+The relationship between hourly wind speed and hourly wind power production of DK1 is seen in figure~\ref{fig:windVsProd}. The wind power is averaged from the 11 selected stations and the relationship is as expected. The more wind the more wind power is produced.
 
 \begin{figure}[h!]
 \centering
@@ -14,7 +13,8 @@ The relationship is even more clear when an average of more than one station is 
 \label{fig:windVsProd}
 \end{figure}
 
-\subsubsection{Humidity}
+\subsubsection{Relative Humidity}
+The dew point is a water-to-air saturation temperature. The dew point is associated with relative humidity. A high relative humidity indicates that the dew point is closer to the current air temperature. Relative humidity of 100\% indicates the dew point is equal to the current temperature and that the air is maximally saturated with water. When the dew point remains constant and temperature increases, relative humidity decreases.[1]
 
 \subsection{Modelling Artificial Neural Network}
 The ANN will be trained with input the hourly parameters of wind speed, temperature, pressure and humidity and then compared to the actual production of that hour.
