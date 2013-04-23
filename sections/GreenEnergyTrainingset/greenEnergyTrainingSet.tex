@@ -11,7 +11,7 @@ The relationship between hourly wind speed and hourly wind power production of D
 \end{figure}
 
 \subsubsection{Air Density}
-It is described in the Wind Power Production section that wind power is proportional to air density where a higher density means more power. Furthermore, air density depends directly on temperature and pressure which can be described by $Air Density=\frac{P}{(R*T)}$ where R is a gas constant. If pressure decreases so will air density and therefore it is expected that the wind power production will be less during periods with lower pressure. This can best be illustrated by finding days with same wind speed and showing that production will have a tendency to decrease when the pressure is lower. This is illustrated in Figure~\ref{fig:pressureVsProd} where all days with wind speed 13 is selected. What is noticeable from all pressure data is the low range which goes from 980 to 1030 (SHOW PLOT WITH THAT).
+It is described in the Wind Power Production section that wind power is proportional to air density where a higher density means more power. Furthermore, air density depends directly on temperature and pressure which can be described by $Air Density=\frac{P*M}{(R*T)}$ where R is a gas constant and M is the density if air. If pressure decreases so will air density and therefore it is expected that the wind power production will be less during periods with lower pressure. This can best be illustrated by finding days with same wind speed and showing that production will have a tendency to decrease when the pressure is lower. This is illustrated in Figure~\ref{fig:pressureVsProd} where all days with wind speed 13 is selected. What is noticeable from all pressure data is the low range which goes from 980 to 1030 (SHOW PLOT WITH THAT).
 The formula expresses that when the temperature decreases the air density will increase linearly e.g. the wind power production will be higher in times of low temperature. This exact relationship is seen in Figure~\ref{fig:tempVsProd}.
 \begin{figure}[h!]
 \centering
@@ -27,7 +27,14 @@ The formula expresses that when the temperature decreases the air density will i
 \label{fig:tempVsProd}
 \end{figure}
 
-SHOW figure with air density.
+The air density has been calculated for every hour in the training set and the result can be seen in Figure~\ref{fig:windProductionVsAirDensity}. The relationship is as expected and the power production increases with the air density.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.99\linewidth,natwidth=898,natheight=587]{billeder/windProductionVsAirDensity.png}
+\caption{Air Density vs. Wind Power in 2012}
+\label{fig:windProductionVsAirDensity}
+\end{figure}
 
 \subsubsection{Wind Direction}
 bla bla intro. Figure~\ref{fig:windDirVsProd} shows that western wind has a tendency to produce more energy. (need to further investigated but seems valid when looking at dk).
@@ -38,8 +45,15 @@ bla bla intro. Figure~\ref{fig:windDirVsProd} shows that western wind has a tend
 \label{fig:windDirVsProd}
 \end{figure}
 
-\subsubsection{Relative Humidity}
-The dew point is a water-to-air saturation temperature. The dew point is associated with relative humidity. A high relative humidity indicates that the dew point is closer to the current air temperature. Relative humidity of 100\% indicates the dew point is equal to the current temperature and that the air is maximally saturated with water. When the dew point remains constant and temperature increases, relative humidity decreases.[1]
+\subsubsection{Consumption}
+It is expected that the wind power available on the energy market will be low at times with low consumption, e.g if no energy is needed the wind power can't be sold.  This relationship is shown in Figure~\ref{fig:consumptionVsWindProduction}.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.99\linewidth,natwidth=898,natheight=587]{billeder/consumptionVsWindProduction.png}
+\caption{Wind Direction vs. wind production in 2012}
+\label{fig:consumptionVsWindProduction}
+\end{figure}
 
 \subsection{Modelling Artificial Neural Network}
 The ANN will be trained with input the hourly parameters of wind speed, temperature, pressure and humidity and then compared to the actual production of that hour.
