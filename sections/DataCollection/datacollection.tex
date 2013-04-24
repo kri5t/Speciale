@@ -52,3 +52,39 @@ The weather data is collected from 11 stations that cover all regions in DK1 ~\r
 We will remove data that is obscure and is related to conditions we cannot predict. 
 
 we need to discuss the fact that all production data stems from nordpoolspot. The impact is obscure values a times of very low consumption.
+
+I WILL CREATE A TABLE THAT SHOWS RELATION BETWEEN THE STATIONS IN SAME REGION AND THAT THEY ARE ALMOST EQUAL AND THEREBY SHOW THAT IS NOT NECESSARY TO INCLUDE ALL STATIONS IN ALL REGIONS. FURTHERMORE THE THERMOMETER UNCERTAINTY / DEVIATION IS A FACTOR - IF THEY ARE ONLY OFF BY ONE THEN IT CAN BE CONSIDERED AS DEVIATION (OR NOT?).
+\\[0.5cm]
+Table ~\ref{table:pearsonCoeficient} shows the correlation coefficient between factors that have been discussed earlier as having an influence on the wind production and Table ~\ref{table:pearsonCoeficient} does it for price. The Pearson Correlation Coefficient\footnote{\url{http://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient}} gives a value between -1 and +1 which indicates the strength of the linear correlation between two variables.
+
+\begin{table}[H]
+\centering  % used for centering table
+\begin{tabular}{c c} % centered columns (3 columns)
+Input factor \#1 & Pearson Correlation Coefficient \\ [0.5ex] % inserts table 
+%heading
+\hline                  % inserts single horizontal line
+Consumption & 0.61526858399 \\ % inserting body of the table
+Wind Speed & 0.93199144444 \\
+Temperature & -0.0924058954431 \\
+Wind Direction & 0.191866256937 \\ [1ex] % [1ex] adds vertical space
+\hline %inserts single line
+\end{tabular}
+\caption{Table showing Pearson correlation coefficient between various factors and the wind production.} % title of Table
+\label{table:pearsonCoeficient} % is used to refer this table in the text
+\end{table}
+
+\begin{table}[H]
+\centering  % used for centering table
+\begin{tabular}{c c} % centered columns (3 columns)
+Input factor \#1 & Pearson Correlation Coefficient \\ [0.5ex] % inserts table 
+%heading
+\hline                  % inserts single horizontal line
+Consumption & 0.281301381724 \\ % inserting body of the table
+Wind Speed & -0.271821873508 \\
+Temperature & -0.147262088023 \\
+Wind Direction & -0.161895363332 \\ [1ex] % [1ex] adds vertical space
+\hline %inserts single line
+\end{tabular}
+\caption{Table showing Pearson correlation coefficient between various factors and the price.} % title of Table
+\label{table:pearsonCoeficient} % is used to refer this table in the text
+\end{table}

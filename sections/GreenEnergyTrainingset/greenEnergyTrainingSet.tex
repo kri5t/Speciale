@@ -11,25 +11,26 @@ The relationship between hourly wind speed and hourly wind power production of D
 \end{figure}
 
 \subsubsection{Air Density}
-It is described in the Wind Power Production section that wind power is proportional to air density where a higher density means more power. Furthermore, air density depends directly on temperature and pressure which can be described by $Air Density=\frac{P*M}{(R*T)}$ where R is a gas constant and M is the density if air. If pressure decreases so will air density and therefore it is expected that the wind power production will be less during periods with lower pressure. This can best be illustrated by finding days with same wind speed and showing that production will have a tendency to decrease when the pressure is lower. This is illustrated in Figure~\ref{fig:pressureVsProd} where all days with wind speed 13 is selected. What is noticeable from all pressure data is the low range which goes from 980 to 1030 (SHOW PLOT WITH THAT).
-The formula expresses that when the temperature decreases the air density will increase linearly e.g. the wind power production will be higher in times of low temperature. This exact relationship is seen in Figure~\ref{fig:tempVsProd}.
-\begin{figure}[h!]
-\centering
-\includegraphics[width=0.99\linewidth,natwidth=898,natheight=587]{billeder/windProductionForPressure13.png}
-\caption{Pressure vs. wind production in 2012}
-\label{fig:pressureVsProd}
-\end{figure}
+It is described in the Wind Power Production section that wind energy is proportional to air density where a higher density means more power for a specific wind speed. This does not imply that a higher air density is equal to higher wind power production in general because it depends on the wind speed. Days with equal wind speed but variation in air density should show an increase in power production when the air density is highest. 
 
-\begin{figure}[h!]
+Air density depends directly on temperature and pressure which can be described by $Air Density=\frac{P*M}{(R*T)}$ where R is a gas constant and M is the density of air. The monthly pressure in Denmark has low variation compared to the temperature as shown in Figure~\ref{fig:pressureTemperatureVariance}. For this reason, the temperature will have the most influence on the air density in Denmark. The formula express that when temperature decreases the air density will increase linearly, e.g. the wind power production for a specific wind speed will be higher in times of low temperature. This exact relationship is seen in some statistics that i will do IN A FIGURE HERE1.
+The air density has been calculated for every hour in the training set and the result can be seen in Figure~\ref{fig:windProductionVsAirDensity}. The relationship is as expected and the power production increases with the air density.
+
+\begin{figure}[H]
 \centering
-\includegraphics[width=0.99\linewidth,natwidth=898,natheight=587]{billeder/windProductionForTemperature13.png}
-\caption{Temperature vs. production in 2012}
+\includegraphics[width=0.99\linewidth,natwidth=898,natheight=587]{billeder/tempVsProd.png}
+\caption{Temperature and Pressure variance for 2012}
 \label{fig:tempVsProd}
 \end{figure}
 
-The air density has been calculated for every hour in the training set and the result can be seen in Figure~\ref{fig:windProductionVsAirDensity}. The relationship is as expected and the power production increases with the air density.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.99\linewidth,natwidth=898,natheight=587]{billeder/pressureTemperatureVariance.png}
+\caption{Temperature and Pressure variance for 2012}
+\label{fig:pressureTemperatureVariance}
+\end{figure}
 
-\begin{figure}[h!]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.99\linewidth,natwidth=898,natheight=587]{billeder/windProductionVsAirDensity.png}
 \caption{Air Density vs. Wind Power in 2012}
