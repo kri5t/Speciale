@@ -3,7 +3,7 @@ Energy price prediction is a cumbersome task to handle because of the highly vol
 \subsection{Demand}
 Demand is directly connected to the energy prices which comes as no suprise since every market is driven by demand. Since demand is relative to the present time we are not able to use it directly as an input factor in the artificial neural network(ANN). We have to compute the demand and this is why we need to know what impacts the demand. As mentioned in related work we have seen a function that calculates the demand based on CDD(Cooling degree days), HDD(Heating degree days), ELD(Humidity), V$_w$ (Wind speed), M$_s$ (Sunshine), M$_r$ (Rainfall) \cite{19}. Based on these factors we will model the ANN to take these factors as inputs. This will be done as either direct input or as a seperate neural network for demand and feed that directly (as input) into the energy price ANN.
 
-\begin{figure}[!ht]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth ,natwidth=410,natheight=237]{billeder/energy_price_plots/consump_price.png}
 \caption{Demand and price plot.}
@@ -12,7 +12,7 @@ Demand is directly connected to the energy prices which comes as no suprise sinc
 
 In figure ~\ref{fig:consump_price} we see the connection between energy price and the demand. The model shows us that if the demand rises the price on the energy rises aswell. This is a common tendency in a market where there isn't endless supply. Since the price is heavily influenced by demand and demand is a relative factor the same calculations are also done by the powerplants because they need to know how much power to produce in a certain timeframe. We want to imitate this forecast and predict our own demand based on the aforementioned parameters. This is key to how accurate we will be able to predict the price. In other words: A good prediction of the demand will give us a good prediction of the price.
 
-\begin{figure}[!ht]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth ,natwidth=410,natheight=237]{billeder/energy_price_plots/consump_temp.png}
 \caption{Demand and temperature plot.}
@@ -25,7 +25,7 @@ In figure ~\ref{fig:consump_temp} we see the connection between demand and tempe
 \subsection{Price}
 We present some of the influences on the price in this section and argue why these parameters has an impact on the price. We also account for the time perspective of the price and show the non-linear nature of energy prices. Since we just talked about demand and the influence on price we will here be focusing on the other impacting factors in the prediction of energy prices.
 
-\begin{figure}[!ht]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth ,natwidth=410,natheight=237]{billeder/energy_price_plots/price_temp.png}
 \caption{Price and temperature plot.}
@@ -34,7 +34,7 @@ We present some of the influences on the price in this section and argue why the
 
 In figure ~\ref{fig:price_temp} we see how the price decreases as the temperature rises. This is due to the same factors as explained in the demand and temperature plot graph. Temperature impacts the demand which impacts the production of energy. If the demand thus the production is high then the price will automatically rise aswell.
 
-\begin{figure}[!ht]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth ,natwidth=410,natheight=237]{billeder/energy_price_plots/price_wind.png}
 \caption{Price and wind plot.}
@@ -43,7 +43,7 @@ In figure ~\ref{fig:price_temp} we see how the price decreases as the temperatur
 
 In figure ~\ref{fig:price_wind} we see how the wind impacts the price. If the wind speed increases the energy price decreases. This is because the wind power production will allow for a bigger output on the general power production. When the production is high and the demand is moderate the price will decrease to get demand up since we cannot store energy for later use. Also wind power production produces nearly "free" energy when the windmill park is up and running.
 
-\begin{figure}[!ht]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth ,natwidth=410,natheight=237]{billeder/energy_price_plots/Average_price_over_weekdays.png}
 \caption{Price dispersion over weekdays}
@@ -52,7 +52,7 @@ In figure ~\ref{fig:price_wind} we see how the wind impacts the price. If the wi
 
 Figure ~\ref{fig:price_over_weekdays} shows us how the trend of the price varies over the different days in a week. The most noticeable here is how the price is decreasing in the weekend (saturday and sunday) and are somewhat steady for the weekdays. We are looking at two options for our neural network. One is to make a prediction for whole days at a time which are good for days with incomplete information and the other is to predict the hourly price which requires specific data for the given hour. In the daily prediction proposal we will want to distinquish between weekdays and weekends. We will also have to look at seperating saturday and sunday since they show a substantial difference in price per day.
 
-\begin{figure}[!ht]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth ,natwidth=410,natheight=237]{billeder/energy_price_plots/price_per_hour.png}
 \caption{}
@@ -61,7 +61,7 @@ Figure ~\ref{fig:price_over_weekdays} shows us how the trend of the price varies
 
 In ~\ref{fig:price_per_hour} we see the average price per hour over a whole day. We see a trend where the price is highest from 08 to 10 and again from 17 to 19. This is because most people wake up in the first interval and use a lot of electricity on getting ready for the day and the second interval is when everybody gets home and cooks dinner. As mentioned before we want to experiment with an ANN that is different per hour. This will require 24 networks one for each hour in a day this is because of the high fluctuation in price over all of the hours.
 
-\begin{figure}[!ht]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth ,natwidth=410,natheight=237]{billeder/energy_price_plots/same_hour_distribution.png}
 \caption{}
@@ -70,7 +70,7 @@ In ~\ref{fig:price_per_hour} we see the average price per hour over a whole day.
 
 In the earlier figures we have shown how the input influences the price and given some reasons to why this influences the price. In figure ~\ref{fig:same_hour_distribution} we have chosen similar hours across all days of a year and we show how different the price can be for similar inputs. Even though the price is volatile we can see a trend in the graph that shows us that the price most of the time will be between 246 and 285. The hours is chosen between the limits shown in table ~\ref{table:similarHoursLimits}.
 
-\begin{table}[!ht]
+\begin{table}[H]
 \centering  % used for centering table
 \begin{tabular}{c c c c} % centered columns (3 columns)
  & \#1 Windspeed & \#2 Temperature & \#3 Demand \\ [0.5ex] % inserts table 
@@ -84,4 +84,68 @@ Low margin: & 5.88 & -3.92 & 2734.2 \\ [1ex] % [1ex] adds vertical space
 \label{table:similarHoursLimits} % is used to refer this table in the text
 \end{table}
 
+\section{Training the network}
+Training of the artificial neural network(ANN) is a complex matter and requires a lot of optimization to give us the best results. We experimented with different techniques and approaches to how an ANN is trained. The first and most simple approach was the naive method. After that we continued to do a bit of simple data classification and took a look at statistical classification and tried to apply it to our dataset.
 
+\subsection{The naive method}
+First of all we tried out the most simple method available, the naive method, since this has almost no overhead and takes no preprocessing of the data. The method is simple; you take one neuron per input and one neuron as output. You add all of the data in your training set without doing any preprocessing of data. This kind of training set is good enough for simple problems e.g. the XOR problem or likewise. When we talk about more complex real-world problems like forecasting the energy prices this method does not perform to well and gives less than satisfactory results(seen in figure REF):
+
+\begin{table}[!ht]\footnotesize
+\centering  % used for centering table
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{c c c c c} % centered columns
+ \#0 Method & \#1 Layers & \#2 Number of epochs & \#3 Dataset entries & \#4 Median Error \\ [0.5ex] % inserts table 
+%heading
+\hline                  % inserts single horizontal line
+Naive & 3-2-1 & 100 & 8522 & 1250.35  \\
+Naive & 3-3-2-1 & 100 & 8522 & 1286.97 \\ [1ex] % [1ex] adds vertical space
+\hline %inserts single line
+\end{tabular}
+}
+\caption{Results from the naive training approach.} % title of Table
+\label{table:naiveTrainingApproach} % is used to refer this table in the text
+\end{table}
+
+Since we haven't normalized any data the error is relative to the input data, but if we do some calculations on it; it shows that 1250 means 12.5\%. So we get an average error of twelve and a half percent which is a considerable deviation when doing forecasting of electricity prices. 
+
+\subsection{Simple classification}
+Since the naive method proved to be less than satisfactory in the results we got we tried some simple classifications on our data e.g. grouping them per hour, per day and taking only parts of the dataset to train on. This approach is derived from REF and REF and from our earlier models that show connections: price/day-of-week and price/hour-of-day. The experiments with only training on parts of the set is to limit the span of the year. We got the following results which proved a little better but still not good:
+
+
+\begin{table}[!ht]
+\centering  % used for centering table
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{c c c c c} % centered columns
+ \#0 Method & \#1 Layers & \#2 Number of epochs & \#3 Dataset entries & \#4 Median Error \\ [0.5ex] % inserts table 
+%heading
+\hline                  % inserts single horizontal line
+Time-Of-Day(17-18) & 3-2-1 & 100 & 344 & 1575.49 \\
+Time-Of-Day(04-05) & 3-2-1 & 100 & 361 & 1086.35 \\
+Day-Of-Week(Monday) & 3-2-1 & 100 & 1216 & 2362.1 \\
+Day-Of-Week(Sunday) & 3-2-1 & 100 & 1255 & 946.7 \\
+Limited dataset & 3-2-1 & 100 & 750 & 435.18 \\
+Limited dataset & 3-2-1 & 100 & 1500 & 498.61 \\
+\hline %inserts single line
+\end{tabular}
+}
+\caption{Results from the simple classification approach} % title of Table
+\label{table:naiveTrainingApproach} % is used to refer this table in the text
+\end{table}
+
+The simple classification of our data gives us a rather broad specktrum ranging from 15.75\% to a respectable 4.35\%. The first four entries in the table; time-of-day and day-of-week, ranges over the whole year . They range from 15.75\% to 9.46\% in some of the examples a better result than the naive, but not by much. While the limited dataset only gives us an ANN that uses 1 month(750 entries) and 2 months(1500 entries) of data to train, it gives us a way better median error. This is because we are using a dataset with similar days e.g. winter days and meanwhile a limited set of data, which is easier to predict (REF til 1 måned nu her og 1 måned sidste år). This is actually a pretty good error margin but we will test more sophisticated methods to see if it will give us better results. 
+
+\subsection{Zero-to-one normalization}
+
+\subsection{Statistical classification}
+
+\subsection{Blackbox optimization}
+
+Skriv om:
+	Naiv metode.
+	Indeling i mandag - søndag
+	Indeling per time
+	Zero-to-one normalization
+	Statistical classification
+	Blackbox optimization.
+	Hvad der fejler.
+	Mulige løsninger.
