@@ -129,7 +129,6 @@ Since we haven't normalized any data the error is relative to the input data, bu
 \subsection{Simple classification}
 Since the naive method proved to be less than satisfactory in the results we got we tried some simple classifications on our data e.g. grouping them per hour, per day and taking only parts of the dataset to train on. This approach is derived from REF and REF and from our earlier models that show connections: price/day-of-week and price/hour-of-day. The experiments with only training on parts of the set is to limit the span of the year. We got the following results which proved a little better but still not good:
 
-
 \begin{table}[!ht]
 \centering  % used for centering table
 \resizebox{\columnwidth}{!}{%
@@ -153,6 +152,24 @@ Limited dataset & 3-2-1 & 100 & 1500 & 498.61 \\
 The simple classification of our data gives us a rather broad specktrum ranging from 15.75\% to a respectable 4.35\%. The first four entries in the table; time-of-day and day-of-week, ranges over the whole year . They range from 15.75\% to 9.46\% in some of the examples a better result than the naive, but not by much. While the limited dataset only gives us an ANN that uses 1 month(750 entries) and 2 months(1500 entries) of data to train, it gives us a way better median error. This is because we are using a dataset with similar days e.g. winter days and meanwhile a limited set of data, which is easier to predict (REF til 1 maaned nu her og 1 maaned sidste aar). This is actually a pretty good error margin but we will test more sophisticated methods to see if it will give us better results. 
 
 \subsection{Zero-to-one normalization}
+For artificial neural networks to do the best work; the data should be normalized to either bipolar data(-1 to 1) or binary data(0 to 1). This ensures the best performance by the activation functions since fx. the sigmoid activation function input/output follows table ~\ref{fig:same_hour_distribution}
+
+\begin{table}[!ht]
+\centering  % used for centering table
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{c c} % centered columns
+ \#0 x & \#1 f(x) \\ [0.5ex] % inserts table 
+%heading
+\hline                  % inserts single horizontal line
+x >= 1 & 1 \\
+-1 < x < 1 & 0.5 + x * (1 - abs(x) / 2) \\
+x <= -1 & 0 \\
+\hline %inserts single line
+\end{tabular}
+}
+\caption{Results from the simple classification approach} % title of Table
+\label{table:naiveTrainingApproach} % is used to refer this table in the text
+\end{table}
 
 \subsection{Statistical classification}
 
@@ -167,3 +184,6 @@ Skriv om:
 	Blackbox optimization.
 	Hvad der fejler.
 	Mulige løsninger.
+	Trimming
+	Percentile normalization
+	Vis tingene paa side 4
