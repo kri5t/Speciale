@@ -1,3 +1,6 @@
+The purpose is to predict the total hourly wind production available on the energy market from all of western Denmark (DK1) with enough accuracy to make a green decision. It is important to note that it is the wind production available on the market and not the entire production of Western Denmark. The entire wind production would be much higher and is not all distributed through the deregulated market\ref{FIND ONE} - fx. vindstoed and private owned. This can also be seen by the correlation between consumption and wind production in Table~\ref{table:pearsonCoeficientWindProduction} and Figure~\ref{fig:consumptionVsWindProduction} which indicates that the production is moved into the market when the demand for electricity is high. It is our intention to get a close enough estimate so that it can be used as an indicator for the hourly amount of wind production in the market for the next 24 hours.
+Most others have been forecasting the wind production for specific wind farms where exact weather conditions and wind mill throughput of the site was known. We do not. This is also more critical in the other examples because it is used to place the mills or the predict how much electricity the mill can sell the next year - a large investment would be lost if placed wrong. 
+
 It is not surprising that weather conditions directly impact the wind power generation. The typical input parameters for wind power prediction are wind speed, air density, temperature and pressure \cite{WindPowerGenerationUsingANN} with the most influential factor being wind speed because it is directly converted to power in the wind turbine. The following subsections will describe the parameters relationship to wind production and how it is used in the modelled ANN.
 
 The Pearson Correlation Coefficient\footnote{\url{http://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient}} has been used to establish the linear dependency between meteorological factors, consumption and wind production. Table ~\ref{table:pearsonCoeficientWindProduction} shows this correlation coefficient. The factors have been discussed throughout the thesis as having an influence on the wind speed production to some degree. The Pearson Correlation Coefficient returns a value between -1 and +1 which indicates the strength of the linear correlation between two variables.
@@ -5,7 +8,7 @@ The Pearson Correlation Coefficient\footnote{\url{http://en.wikipedia.org/wiki/P
 \begin{table}[H]
 \centering  % used for centering table
 \begin{tabular}{c c} % centered columns (3 columns)
-Input factor \#1 & Pearson Correlation Coefficient \\ [0.5ex] % inserts table 
+Input factor & Pearson Correlation Coefficient \\ [0.5ex] % inserts table 
 %heading
 \hline                  % inserts single horizontal line
 Consumption & 0.61526858399 \\ % inserting body of the table
@@ -18,7 +21,7 @@ Wind Direction & 0.208374649781 \\ [1ex] % [1ex] adds vertical space
 \label{table:pearsonCoeficientWindProduction} % is used to refer this table in the text
 \end{table}
 
-It is obvious from Table~\ref{table:pearsonCoeficientWindProduction} that consumption and wind speed are the most influential factors. (ADD MORE LIKE DENSITY, DEW POINT, HUMIDITY, TIME OF DAY, ECT).
+It is obvious from Table~\ref{table:pearsonCoeficientWindProduction} that consumption and wind speed are the most direct influential factors. The consumption or demand can become a problem because it also needs to be predicted and if this prediction shows to be inaccurate then it will add the error to the wind production forecast.  (ADD MORE LIKE DENSITY, DEW POINT, HUMIDITY, TIME OF DAY, ECT).
 
 \subsubsection{Wind Speed}
 The relationship between hourly wind speed and hourly wind power production of DK1 is seen in Figure~\ref{fig:windVsProd}. The graph clearly shows the expected impact of wind speed on the wind energy production.
@@ -33,15 +36,7 @@ The relationship between hourly wind speed and hourly wind power production of D
 \subsubsection{Air Density}
 It is described in the Wind Power Production section that wind energy is proportional to air density where a higher density means more power for a specific wind speed. This does not imply that a higher air density is equal to higher wind power production in general because it depends on the wind speed. Days with equal wind speed but variation in air density should show an increase in power production when the air density is highest. 
 
-Air density depends directly on temperature and pressure which can be described by $Air Density=\frac{P*M}{(R*T)}$ where R is a gas constant and M is the density of air. The monthly pressure in Denmark has low variation compared to the temperature as shown in Figure~\ref{fig:pressureTemperatureVariance}. For this reason, the temperature will have the most influence on the air density in Denmark. The formula express that when temperature decreases the air density will increase linearly, e.g. the wind power production for a specific wind speed will be higher in times of low temperature. This exact relationship is seen in some statistics that i will do IN A FIGURE HERE1.
-The air density has been calculated for every hour in the training set and the result can be seen in Figure~\ref{fig:windProductionVsAirDensity}. The relationship is as expected and the power production increases with the air density.
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.99\linewidth,natwidth=898,natheight=587]{billeder/tempVsProd.png}
-\caption{Temperature and Pressure variance for 2012}
-\label{fig:tempVsProd}
-\end{figure}
+Air density depends directly on temperature and pressure which can be described by $Air Density=\frac{P*M}{(R*T)}$ where R is a gas constant and M is the density of air. The monthly pressure in Denmark has low variation compared to the temperature as shown in Figure~\ref{fig:pressureTemperatureVariance}. For this reason, the temperature will have the most influence on the air density in Denmark. The formula express that when temperature decreases the air density will increase linearly, e.g. the wind power production for a specific wind speed will be higher in times of low temperature. The air density has been calculated for every hour in the training set and the correlation has been established for each wind speed in Table~\ref{table:pearsonCoeficientAirDensity}. The wind power production increases with the air density for each wind speed as described by the formula.
 
 \begin{figure}[H]
 \centering
@@ -50,12 +45,47 @@ The air density has been calculated for every hour in the training set and the r
 \label{fig:pressureTemperatureVariance}
 \end{figure}
 
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.99\linewidth,natwidth=898,natheight=587]{billeder/windProductionVsAirDensity.png}
-\caption{Air Density vs. Wind Power in 2012}
-\label{fig:windProductionVsAirDensity}
-\end{figure}
+\begin{table}[H]
+\centering  % used for centering table
+\begin{tabular}{c c} % centered columns (3 columns)
+Wind Speed (mph) & Pearson Correlation Coefficient for Air Density \\ [0.5ex] % inserts table 
+%heading
+\hline                  % inserts single horizontal line
+2 & 0.299137300509 \\ \hline
+3 & 0.3796284049 \\ \hline
+4 & 0.282639503931 \\ \hline
+5 & 0.176882800847 \\ \hline
+6 & 0.26624422678 \\ \hline
+7 & 0.257509841245 \\ \hline
+8 & 0.293342212093 \\ \hline
+9 & 0.306523814111 \\ \hline
+10 & 0.279322572227  \\ \hline
+11 & 0.18103337532 \\ \hline
+12 & 0.187564572882 \\ \hline
+13 & 0.18967147434 \\ \hline
+14 & 0.186865264412 \\ \hline
+15 & 0.11895069643 \\ \hline
+16 & 0.0935379251673 \\ \hline
+17 & 0.218516563436 \\ \hline
+18 & 0.113577325408 \\ \hline
+19 & 0.280301272164 \\ \hline
+20 & 0.0938772997337 \\ \hline
+21 & 0.180318818497 \\ \hline
+22 & 0.176361903194 \\ \hline
+23 & 0.259569218995 \\ \hline
+24 & 0.012949223523 \\ \hline
+25 & 0.116039820562 \\ \hline
+26 & 0.197093832088 \\ \hline
+27 & 0.71694505409 \\ \hline
+28 & 0.867450709217 \\ \hline
+29 & 0.61036610708 \\ \hline
+30 & 0.758217075936 \\ \hline  
+Average: & 0.279325455487 \\ [1ex] % [1ex] adds vertical space      
+\hline %inserts single line
+\end{tabular}
+\caption{Table showing Pearson correlation coefficient between the various wind speeds in the dataset and the air density.} % title of Table
+\label{table:pearsonCoeficientAirDensity} % is used to refer this table in the text
+\end{table}
 
 \subsubsection{Wind Direction}
 bla bla intro. Figure~\ref{fig:windDirVsProd} shows that western wind has a tendency to produce more energy. (need to further investigated but seems valid when looking at dk).
@@ -76,7 +106,19 @@ It is expected that the wind power available on the energy market will be low at
 \label{fig:consumptionVsWindProduction}
 \end{figure}
 
-\subsection{Modelling Artificial Neural Network}
+\subsection{Time of day}
+The dataset consists of all hours of the years included. Based on this the network is going to forecast multiple hours ahead and it therefore necessary to establish if any correlation between the hours and the wind production exist. The average wind production distribution for a calendar day can be seen in Figure~\ref{fig:hourly_wind_production}. The wind production is at its highest during the day from 8-20.  
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.99\linewidth,natwidth=898,natheight=587]{billeder/hourly_wind_production.png}
+\caption{Time of day vs. Wind Production in 2012}
+\label{fig:hourly_wind_production}
+\end{figure}
+
+\subsection{Modelling the Artificial Neural Network}
 The ANN will be trained with input the hourly parameters of wind speed, temperature, pressure and humidity and then compared to the actual production of that hour.
+
+I FOUND RECURRENT LINK IN ARTICLE REF ID
 
 Black art --- experimenting with hidden layers, momentum and learning rate. 
