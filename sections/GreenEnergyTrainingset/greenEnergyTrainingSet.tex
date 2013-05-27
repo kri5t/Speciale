@@ -23,7 +23,7 @@ Wind Direction & 0.208374649781 \\ [1ex] % [1ex] adds vertical space
 
 It is obvious from Table~\ref{table:pearsonCoeficientWindProduction} that consumption and wind speed are the most direct influential factors. The consumption or demand can become a problem because it also needs to be predicted and if this prediction shows to be inaccurate then it will add the error to the wind production forecast.  (ADD MORE LIKE DENSITY, DEW POINT, HUMIDITY, TIME OF DAY, ECT).
 
-\subsubsection{Wind Speed}
+\subsection{Wind Speed}
 The relationship between hourly wind speed and hourly wind power production of DK1 is seen in Figure~\ref{fig:windVsProd}. The graph clearly shows the expected impact of wind speed on the wind energy production.
 
 \begin{figure}[H]
@@ -33,7 +33,7 @@ The relationship between hourly wind speed and hourly wind power production of D
 \label{fig:windVsProd}
 \end{figure}
 
-\subsubsection{Air Density}
+\subsection{Air Density}
 It is described in the Wind Power Production section that wind energy is proportional to air density where a higher density means more power for a specific wind speed. This does not imply that a higher air density is equal to higher wind power production in general because it depends on the wind speed. Days with equal wind speed but variation in air density should show an increase in power production when the air density is highest. 
 
 Air density depends directly on temperature and pressure which can be described by $Air Density=\frac{P*M}{(R*T)}$ where R is a gas constant and M is the density of air. The monthly pressure in Denmark has low variation compared to the temperature as shown in Figure~\ref{fig:pressureTemperatureVariance}. For this reason, the temperature will have the most influence on the air density in Denmark. The formula express that when temperature decreases the air density will increase linearly, e.g. the wind power production for a specific wind speed will be higher in times of low temperature. The air density has been calculated for every hour in the training set and the correlation has been established for each wind speed in Table~\ref{table:pearsonCoeficientAirDensity}. The wind power production increases with the air density for each wind speed as described by the formula.
@@ -87,7 +87,7 @@ Average: & 0.279325455487 \\ [1ex] % [1ex] adds vertical space
 \label{table:pearsonCoeficientAirDensity} % is used to refer this table in the text
 \end{table}
 
-\subsubsection{Wind Direction}
+\subsection{Wind Direction}
 bla bla intro. Figure~\ref{fig:windDirVsProd} shows that western wind has a tendency to produce more energy. (need to further investigated but seems valid when looking at dk).
 \begin{figure}[H]
 \centering
@@ -96,7 +96,7 @@ bla bla intro. Figure~\ref{fig:windDirVsProd} shows that western wind has a tend
 \label{fig:windDirVsProd}
 \end{figure}
 
-\subsubsection{Consumption}
+\subsection{Consumption}
 It is expected that the wind power available on the energy market will be low at times with low consumption, e.g if no energy is needed the wind power can't be sold.  This relationship is shown in Figure~\ref{fig:consumptionVsWindProduction}.
 
 \begin{figure}[H]
