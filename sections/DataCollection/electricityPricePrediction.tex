@@ -18,7 +18,7 @@ Energy price prediction is a cumbersome task to handle because of the highly vol
 %\label{table:pearsonCoeficientPrice} % is used to refer this table in the text
 %\end{table}
 
-\subsection{Demand}
+\subsubsection{Demand}
 Demand is directly connected to the energy prices which comes as no suprise since every market is driven by demand. Since demand is relative to the present time we are not able to use it directly as an input factor in the artificial neural network(ANN). We have to compute the demand and this is why we need to know what impacts the demand. As mentioned in related work we have seen a function that calculates the demand based on CDD(Cooling degree days), HDD(Heating degree days), ELD(Humidity), V$_w$ (Wind speed), M$_s$ (Sunshine), M$_r$ (Rainfall) \cite{19}. Based on these factors we will model the ANN to take these factors as inputs. This will be done as either direct input or as a seperate neural network for demand and feed that directly (as input) into the energy price ANN.
 
 \begin{figure}[H]
@@ -40,7 +40,7 @@ In figure ~\ref{fig:consump_price} we see the connection between energy price an
 
 In figure ~\ref{fig:consump_temp} we see the connection between demand and temperature. The temperature itself has an influence when it is very cold or very warm. This connection is expressed as CDD and HDD. In figure ~\ref{fig:consump_temp} we see that if temperature decreases the demand will go up. This is presumably because the people of Denmark use a lot of energy on heating our homes and lighting in the winter time. In \cite{19} they also describe CDD which indicates the need for cooling. In Denmark it is limited how high the temperature goes and how often we actually need to cool our homes.
 
-\subsection{Price}
+\subsubsection{Price}
 We present some of the influences on the price in this section and argue why these parameters has an impact on the price. We also account for the time perspective of the price and show the non-linear nature of energy prices. Since we just talked about demand and the influence on price we will here be focusing on the other impacting factors in the prediction of energy prices.
 
 \begin{figure}[H]
@@ -102,10 +102,10 @@ Low margin: & 5.88 & -3.92 & 2734.2 \\ [1ex] % [1ex] adds vertical space
 \label{table:similarHoursLimits} % is used to refer this table in the text
 \end{table}
 
-\section{Training the network}
+\subsection{Training the network}
 Training of the artificial neural network(ANN) is a complex matter and requires a lot of optimization to give us the best results. We experimented with different techniques and approaches to how an ANN is trained. The first and most simple approach was the naive method. After that we continued to do a bit of simple data classification and took a look at statistical classification and tried to apply it to our dataset.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{The naive method}
+\subsubsection{The naive method}
 First of all we tried out the most simple method available, the naive method, since this has almost no overhead and takes no preprocessing of the data. The method is simple; you take one neuron per input and one neuron as output. You add all of the data in your training set without doing any preprocessing of data. This kind of training set is good enough for simple problems e.g. the XOR problem or likewise. When we talk about more complex real-world problems like forecasting the energy prices this method does not perform to well and gives less than satisfactory results(seen in figure REF):
 
 \begin{table}[!ht]\footnotesize
@@ -126,7 +126,7 @@ Naive & 3-3-2-1 & 100 & 8522 & 1286.97 \\ [1ex] % [1ex] adds vertical space
 
 Since we haven't normalized any data the error is relative to the input data, but if we do some calculations on it; it shows that 1250 means 12.5\%. So we get an average error of twelve and a half percent which is a considerable deviation when doing forecasting of electricity prices. 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Simple classification}
+\subsubsection{Simple classification}
 Since the naive method proved to be less than satisfactory in the results we got we tried some simple classifications on our data e.g. grouping them per hour, per day and taking only parts of the dataset to train on. This approach is derived from REF and REF and from our earlier models that show connections: price/day-of-week and price/hour-of-day. The experiments with only training on parts of the set is to limit the span of the year. We got the following results which proved a little better but still not good:
 
 \begin{table}[!ht]
@@ -151,7 +151,7 @@ Limited dataset & 3-2-1 & 100 & 1500 & 498.61 \\
 
 The simple classification of our data gives us a rather broad specktrum ranging from 15.75\% to a respectable 4.35\%. The first four entries in the table; time-of-day and day-of-week, ranges over the whole year . They range from 15.75\% to 9.46\% in some of the examples a better result than the naive, but not by much. While the limited dataset only gives us an ANN that uses 1 month(750 entries) and 2 months(1500 entries) of data to train, it gives us a way better median error. This is because we are using a dataset with similar days e.g. winter days and meanwhile a limited set of data, which is easier to predict (REF til 1 maaned nu her og 1 maaned sidste aar). This is actually a pretty good error margin but we will test more sophisticated methods to see if it will give us better results. 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Normalization}
+\subsubsection{Normalization}
 For artificial neural networks to do the best work; the data should be normalized to either bipolar data(-1 to 1) or binary data(0 to 1). This ensures the best performance by the activation functions since fx. the sigmoid activation function input/output follows table ~\ref{fig:same_hour_distribution}
 
 \begin{table}[!ht]
@@ -171,9 +171,9 @@ x <= -1 & 0 \\
 \label{table:naiveTrainingApproach} % is used to refer this table in the text
 \end{table}
 
-\subsection{Statistical classification}
+\subsubsection{Statistical classification}
 
-\subsection{Blackbox optimization}
+\subsubsection{Blackbox optimization}
 
 Skriv om:
 	Naiv metode.
