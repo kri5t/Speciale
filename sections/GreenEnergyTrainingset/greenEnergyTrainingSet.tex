@@ -11,10 +11,10 @@ The Pearson Correlation Coefficient\footnote{\url{http://en.wikipedia.org/wiki/P
 Input factor & Pearson Correlation Coefficient \\ [0.5ex] % inserts table 
 %heading
 \hline                  % inserts single horizontal line
-Consumption & 0.61526858399 \\ % inserting body of the table
-Wind Speed & 0.9417727435 \\
-Temperature & -0.0901591939665 \\
-Wind Direction & 0.208374649781 \\ [1ex] % [1ex] adds vertical space
+Consumption & 0.62 \\ % inserting body of the table
+Wind Speed & 0.94 \\
+Temperature & -0.09 \\
+Wind Direction & 0.21 \\ [1ex] % [1ex] adds vertical space
 \hline %inserts single line
 \end{tabular}
 \caption{Table showing Pearson correlation coefficient between various factors and the wind production.} % title of Table
@@ -116,9 +116,59 @@ The dataset consists of all hours of the years included. Based on this the netwo
 \label{fig:hourly_wind_production}
 \end{figure}
 
-\subsection{Modelling the Artificial Neural Network}
-The ANN will be trained with input the hourly parameters of wind speed, temperature, pressure and humidity and then compared to the actual production of that hour.
+\subsection{Experimental Results}
+This subsection describes the experiments that uncovers the best combination of hidden layers, neurons and epochs as well as the different strategies The ANN will be trained with the hourly parameters of wind speed, temperature, consumption and air density then compared to the actual production of that hour. Furthermore statistical input parameters are included in an attempt to improve accuracy. 
 
 I FOUND RECURRENT LINK IN ARTICLE REF ID
 
 Black art --- experimenting with hidden layers, momentum and learning rate. 
+
+
+\subsubsection{Experiment One - Data Manipulation}
+The first experiment will show the difference in performance due to the manipulation of the time series data set. The three approaches are naive, trimming and matrix. These experiments do not include any statistical features.
+
+\begin{table}[H]
+\centering  % used for centering table
+\begin{tabular}{c c c c} % centered columns (3 columns)
+ANN Type & MAE & MPE & Rank \\ [0.5ex] % inserts table 
+%heading
+\hline                  % inserts single horizontal line
+ANN Naive & 0 & 0 & 0 \\ % inserting body of the table
+ANN Trimming & 0 & 0 & 0 \\
+ANN Matrix  & 0 & 0 & 0\\
+ANN Matrix and Trimming  & 0 & 0 & 0 \\ 
+ANN Statistical features  & 0 & 0 & 0\\ [1ex] % [1ex] adds vertical space
+\hline %inserts single line
+\end{tabular}
+\caption{Table showing the performance of different data manipulation approaches when all run with 1500 epochs.} % title of Table
+\label{table:dataManipulationApproaches} % is used to refer this table in the text
+\end{table}
+
+The purpose is to locate the 
+
+\todo{do 1-12-24 step ahead to show the "carry-with"-error} 
+
+Taking the most naive approach to prediction by simply including the important normalized input parameters and trying to predict the prices for an entire year. 
+
+\subsubsection{Experiment Two - Performance Optimization}
+The impact of different Layers/Neurons/Epochs combinations is huge and the results is shown here.
+
+\begin{table}[H]
+\centering  % used for centering table
+\begin{tabular}{c c c c c} % centered columns (3 columns)
+ANN Type & Epochs & MAE & MPE & Rank \\ [0.5ex] % inserts table 
+%heading
+\hline                  % inserts single horizontal line
+ANN & 500 & 0 & 0 & 0 \\ % inserting body of the table
+ANN & 1000 & 0 & 0 & 0 \\
+ANN & 2000 & 0 & 0 & 0 \\
+ANN & 2500 & 0 & 0 & 0 \\ [1ex] % [1ex] adds vertical space
+\hline %inserts single line
+\end{tabular}
+\caption{Table showing the performance of different data manipulation approaches.} % title of Table
+\label{table:performanceOpti} % is used to refer this table in the text
+\end{table} 
+
+\subsubsection{Experiment One - The idea}
+step-ahead from 1 to 24.
+
