@@ -226,3 +226,5 @@ pip-log.txt
 *.blg
 *.fdb_latexmk
 *.out
+
+*.gz(busy)
