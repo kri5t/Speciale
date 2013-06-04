@@ -1,4 +1,4 @@
-The purpose is to predict the total hourly wind production available on the energy market from all of western Denmark (DK1) with enough accuracy to make a green decision. It is important to note that it is the wind production available on the market and not the entire production of Western Denmark. The entire wind production would be much higher and is not all distributed through the deregulated market\ref{FIND ONE} - fx. vindstoed and private owned. This can also be seen by the correlation between consumption and wind production in Table~\ref{table:pearsonCoeficientWindProduction} and Figure~\ref{fig:consumptionVsWindProduction} which indicates that the production is moved into the market when the demand for electricity is high. It is our intention to get a close enough estimate so that it can be used as an indicator for the hourly amount of wind production in the market for the next 24 hours.
+The purpose is to predict the total hourly wind production available on the energy market from all of western Denmark (DK1) with enough accuracy to make a green decision. It is important to note that it is the wind production available on the market and not the entire production of Western Denmark. The entire wind production would be much higher and is not all distributed through the deregulated market\ref{FIND ONE} - fx. vindstoed and private owned. This can also be seen by the correlation between consumption and wind production in Table~\ref{table:pearsonCoeficientWindProduction} and Figure~\ref{fig:consumptionVsWindProduction} which indicates that the production is moved into the market when the demand for electricity is high. Because the wind production follows market trends it is necessary to consider economical and statistical factors of the current market situation when predicting the production. It is our intention to get a close enough estimate so that it can be used as an indicator for the hourly amount of wind production in the market for the next 24 hours.
 Most others have been forecasting the wind production for specific wind farms where exact weather conditions and wind mill throughput of the site was known. We do not. This is also more critical in the other examples because it is used to place the mills or the predict how much electricity the mill can sell the next year - a large investment would be lost if placed wrong. 
 
 It is not surprising that weather conditions directly impact the wind power generation. The typical input parameters for wind power prediction are wind speed, air density, temperature and pressure \cite{WindPowerGenerationUsingANN} with the most influential factor being wind speed because it is directly converted to power in the wind turbine. The following subsections will describe the parameters relationship to wind production and how it is used in the modelled ANN.
@@ -32,6 +32,8 @@ The relationship between hourly wind speed and hourly wind power production of D
 \caption{Wind speed vs. wind production in 2012}
 \label{fig:windVsProd}
 \end{figure}
+
+What is noticeable from the graph is wide range of productions that is covered by a relatively small number of wind speeds. Wind speed 15 can cover wind productions all the way from 700 to 1900 and therefore other input parameters are needed to point us in the right direction within these interval. 
 
 \subsection{Air Density}
 It is described in the Wind Power Production section that wind energy is proportional to air density where a higher density means more power for a specific wind speed. This does not imply that a higher air density is equal to higher wind power production in general because it depends on the wind speed. Days with equal wind speed but variation in air density should show an increase in power production when the air density is highest. 
@@ -107,7 +109,7 @@ It is expected that the wind power available on the energy market will be low at
 \end{figure}
 
 \subsection{Time of day}
-The dataset consists of all hours of the years included. Based on this the network is going to forecast multiple hours ahead and it therefore necessary to establish if any correlation between the hours and the wind production exist. The average wind production distribution for a calendar day can be seen in Figure~\ref{fig:hourly_wind_production}. The wind production is at its highest during the day from 8-20.  
+The dataset consists of all hours of the years included. Based on this the network is going to forecast multiple hours ahead and it therefore necessary to establish if any correlation between the time of day and the wind production exist. The average wind production distribution for a calendar day can be seen in Figure~\ref{fig:hourly_wind_production}. The wind production is at its highest during the day from 8-20 and therefore it is needed to use the time of day as input parameters.  
 
 \begin{figure}[H]
 \centering
@@ -117,8 +119,12 @@ The dataset consists of all hours of the years included. Based on this the netwo
 \end{figure}
 
 \subsection{Wind Production Development}
-\todo{Find graph and tell something about the general movements of the wind production. Further more show it together wind wind speed - should see coherence. Use this to locate the irregularities where it does not hold at all}
+The development of the wind production is much controlled by wind speed and air density together with the general trend on the market in relation to consumption. 
 
+\todo{Find graph and tell something about the general movements of the wind production. Further more show it together wind wind speed - should see coherence. Use this to locate the irregularities where it does not hold at all}
+\todo{write something about that we need to look back}
+
+\todo{In the experiments show a graph of why we add the curve analysis. The network itself tries to do a general fit and because the same input parameters can point to a interval of price/production we need to give the prediction a kind of "snapshop" of the current situation so that it knows which way to go based on the current market situation - we give it more information to base its decision on - if the current input parameters can point to a price between 700-1100 but the price from one hour ago was 900 and the current trend from the last 24 hours is going up then we should probably not guess below 900 - we don't know but since we otherwise would random an answer, the probability of trusting statistics is better. By doing this we can better approach our target to predict}
 
 \subsection{Experimental Results}
 This subsection describes the experiments that uncovers the best combination of hidden layers, neurons and epochs as well as the different strategies The ANN will be trained with the hourly parameters of wind speed, temperature, consumption and air density then compared to the actual production of that hour. Furthermore statistical input parameters are included in an attempt to improve accuracy. 
@@ -154,7 +160,10 @@ The purpose is to locate the
 
 Taking the most naive approach to prediction by simply including the important normalized input parameters and trying to predict the prices for an entire year. 
 
-\subsubsection{Experiment Two - Performance Optimization}
+\subsubsection{Experiment Two - Prediction Strategies}
+
+
+\subsubsection{Experiment Three - Performance Optimization}
 The impact of different Layers/Neurons/Epochs combinations is huge and the results is shown here.
 
 \begin{table}[H]
