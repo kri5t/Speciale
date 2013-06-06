@@ -47,25 +47,7 @@ As mentioned before we need to get rid of some of the outliers and some of the n
 When analysing the data it is possible to find connection between different rows of data eg. what time of the day or what day of the week it is. These kind of data can be describe using a single node where you normalize the data between -1 and 1 but this will only give this neuron one weight to change for ALL the hours in the day. One approach to making these inputs more important than others are splitting them up into a simple matrix. This means that we have a matrix with one row and 24 inputs(one for each hour); we set a 1 in the input representing the time of day and set the rest to 0. This way the neural network will have a specific weight to apply according to which hour of the day it is. This of course adds alot of overhead in terms of how many input nodes you need to have and how many nodes you need in the hidden layers. This will increase the processing time of the neural network iterations so you have to do some cost/benefit analysis on it. \todo{Matrix er ogsaa ok, selvom der skal kontekstualiseres en anelse.}
 
 \subsubsection{Historical Data}
-It is the intention to achieve day-ahead forecasting by predicting the next 24 hours based on the past --- this can be defined as multiple step-ahead forecasting \todo{FIND REF}. It is necessary to investigate how to include input information about the past hours from step to step in order to give an idea of what will come next. This becomes clear when considering price and wind production development curves where the immediate development of the price or production is significant factors for the movements to come. When looking at the wind production in Figure~\ref{fig:windHourDevelopment400Hours} it is obvious that the production has a tendency and based on this immediate history moves either up or down. It does not suddenly drop from 0 to 1500 without having any intermediary steps. It is necessary to identify these tendencies in every hour in order to predict it. One approach is to use statistical methods to capture the past as used in economics \todo{FIND REF}. Another approach could be to always include prices or wind productions at different times from the last 24 hours. What is evident is the need for analysing the price and wind production curves both to capture the tendencies but at the same time locating irregularities --- prices or productions that are so obscure that we won't be able to predict them.
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.99\linewidth,natwidth=898,natheight=587]{billeder/productionTendency400Hours.png}
-\caption{Wind production development for 400 hours in 2011}
-\label{fig:windHourDevelopment400Hours}
-\end{figure}
-
-\todo{price irregular price curves}
-
-Price and wind production curves must 
-It is the expectation that the further we get from the start time the less accurate a prediction will be because it uses data from its immediate past to do the prediction. 
-
-\todo{Mention the calculation of the outer percentiles with a neural network for itself}
-
-\subsection{Statistical Input}
-\todo{Talk about statistical input features like historical volatility (EWMA), skewness and basic calculation of line slope. Skewness is a more sophisticated way of calculating if the distribution is leaning to one sine of the mean - the simple line slope calculation is meant to calculate if we are on the way up or down}
-
-TEGNING MULTIPE STEP
-
-TALK ABOUT MULTIPLE-STEP-AHEAD FORECASTING --> see karlbranting
+\label{sec:historicalData}
+It is the intention to achieve day-ahead forecasting by predicting the next 24 hours based on the past captured by the ANN as a generalization function  --- this can be defined as multiple step-ahead forecasting using an ANN\todo{FIND REF}. 
+It is a well known fact in economics that markets follow current trends\todo{find ref}  and it will be necessary to investigate how to include input information about the immediate past hours in order to give a better idea of what will come next. This will apply for the electricity prices but also to some extend the wind production since it follows consumption\todo{page}. It points us in the direction of simple curve analysis or statistics used in economy to capture trends of the immediate past. The concrete methods will be discussed in more detail in sections to come. The purpose of using curve analysis would be to calculate the slope and use this as an indicator for the current trend - are we moving up or down?. This can be made more sophisticated by using actual statistics for gathering some of the price characteristics(~\ref{sec:electriciyPrices}) like frequency and volatility. It could also be an option to simply include past prices as input parameters as presented in \cite{singhal2011electricity}.
+What is evident is the need for analysing the price and wind production curves both to capture the tendencies but at the same time locating irregularities --- prices or productions that are so obscure that we won't be able to predict them. Experiments with the different approaches will be conducted.

@@ -36,7 +36,7 @@ The relationship between hourly wind speed and hourly wind power production of D
 What is noticeable from the graph is wide range of productions that is covered by a relatively small number of wind speeds. Wind speed 15 can cover wind productions all the way from 700 to 1900 and therefore other input parameters are needed to point us in the right direction within these interval. 
 
 \subsection{Air Density}
-It is described in the Wind Power Production section that wind energy is proportional to air density where a higher density means more power for a specific wind speed. This does not imply that a higher air density is equal to higher wind power production in general because it depends on the wind speed. Days with equal wind speed but variation in air density should show an increase in power production when the air density is highest. 
+It is described in ~\ref{sec:windmillPlacement} that wind energy is proportional to air density where a higher density means more power for a specific wind speed. This does not imply that a higher air density is equal to higher wind power production in general because it depends on the wind speed. Days with equal wind speed but variation in air density should show an increase in power production when the air density is highest. 
 
 Air density depends directly on temperature and pressure which can be described by $Air Density=\frac{P*M}{(R*T)}$ where R is a gas constant and M is the density of air. The monthly pressure in Denmark has low variation compared to the temperature as shown in Figure~\ref{fig:pressureTemperatureVariance}. For this reason, the temperature will have the most influence on the air density in Denmark. The formula express that when temperature decreases the air density will increase linearly, e.g. the wind power production for a specific wind speed will be higher in times of low temperature. The air density has been calculated for every hour in the training set and the correlation has been established for each wind speed in Table~\ref{table:pearsonCoeficientAirDensity}. The wind power production increases with the air density for each wind speed as described by the formula.
 
@@ -99,7 +99,7 @@ bla bla intro. Figure~\ref{fig:windDirVsProd} shows that western wind has a tend
 \end{figure}
 
 \subsection{Consumption}
-It is expected that the wind power available on the energy market will be low at times with low consumption, e.g if no energy is needed the wind power can't be sold.  This relationship is shown in Figure~\ref{fig:consumptionVsWindProduction}.
+It is expected that the wind power available on the energy market will be low at times with low consumption, e.g if no energy is needed the wind power can't be sold.  This relationship is shown in Figure~\ref{fig:consumptionVsWindProduction}. This also tells us that the wind production is connected to the market.
 
 \begin{figure}[H]
 \centering
@@ -119,7 +119,44 @@ The dataset consists of all hours of the years included. Based on this the netwo
 \end{figure}
 
 \subsection{Wind Production Development}
-The development of the wind production is much controlled by wind speed and air density together with the general trend on the market in relation to consumption. 
+The above analysis shows the wind production development to be much dependent on wind speed and air density together with the general trend on the market. The need for identifying trends is discussed here~\ref{sec:usingStatisticalInput}. 
+
+The high volatility in the wind production is very clear when considering the development curve in Figure~\ref{fig:windHourDevelopment400Hours}. This is not a problem if the correlation between the input parameters result in a low number of output possibilities because the generalization of the ANN then would be enough. This is not the case for our input parameters for wind productions and an example of such can be seen in ~\ref{fig:inputParameterDistribution} where outputs for similar inputs are shown --- the input limits can be seen in Table~\ref{table:similarHoursLimitsWindProd}. The generalization would lean towards 898-1048 but if the last wind production was 1198 and the tendency rising then the prediction would be better off guessing above or around 1198. This can be further supported by Figure~\ref{fig:windHourDevelopment400Hours} which illustrates the tendency of the production curve and the need to consider the immediate past because of its significance for the movements to come. It is necessary to identify these tendencies in every hour in order to predict the wind production more accurately. The issue with when to stop moving up or down is discussed here together with how the ANN will generalize~\ref{sec:usingStatisticalInput}.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.99\linewidth,natwidth=898,natheight=587]{billeder/productionTendency400Hours.png}
+\caption{Wind production development for 400 hours in 2011}
+\label{fig:windHourDevelopment400Hours}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.99\linewidth,natwidth=898,natheight=587]{billeder/Equal_wind.png}
+\caption{Same input parameter to wind production output distribution}
+\label{fig:inputParameterDistribution}
+\end{figure}
+
+\begin{table}[H]
+\centering  % used for centering table
+\begin{tabular}{c c c c} % centered columns (3 columns)
+ & \#1 Windspeed & \#2 Temperature (Celsius) & \#3 Demand \\ [0.5ex] % inserts table 
+%heading
+\hline                  % inserts single horizontal line
+High margin: & 16.5 & 3.3 & 2359.5  \\
+Low margin: & 13.5 & 2.7 & 1930.5 \\ [1ex] % [1ex] adds vertical space
+\hline %inserts single line
+\end{tabular}
+\caption{This is the high and low margins used for the the similar input to output distribution.} % title of Table
+\label{table:similarHoursLimitsWindProd} % is used to refer this table in the text
+\end{table}
+
+\todo{price irregular price curves}
+
+
+It is the expectation that the further we get from the start time the less accurate a prediction will be because it uses data from its immediate past to do the prediction. 
+
+\todo{Mention the calculation of the outer percentiles with a neural network for itself}
 
 \todo{Find graph and tell something about the general movements of the wind production. Further more show it together wind wind speed - should see coherence. Use this to locate the irregularities where it does not hold at all}
 \todo{write something about that we need to look back}
