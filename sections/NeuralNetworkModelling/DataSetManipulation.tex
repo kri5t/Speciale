@@ -44,8 +44,14 @@ First of all we tried out the most simple approach available, the naive approach
 
 \subsubsection{Trimming}\label{sec:Trimming}
 As mentioned before we need to get rid of some of the outliers and some of the noise in the data set to make it easier for the network to approximate a function based on the input data. There are different approaches to trimming but the two we use are standard trimming and percentile trimming of the dataset. Standard trimming is a simple way of getting rid of the worst outliers. The way to do it is; take a low and a high number in your data set and remove everything below and above these limits. Of course this can be very arbitrary but with a simple plot diagram you will be able to see where the limits should be set. Percentile trimming is a statistic approach where you remove the x\% of the dataset from the top and the bottom. You make a percentwise distribution over your dataset; starting with the lowest values in the beginning and ending in the highest values. You calculate the 5th percentile which represents the lowest 5\% of your dataset and then remove these values. The same is done for the top 5\% which results in the removal of the most extreme outliers and has made your dataset less error prone when statistical analysis on it.
-\todo{LAV GRAF DER VISER TRIMMING}
-\todo{trimming og matrix skal skrives i lidt mindre hverdagssprog og saa er det fint}
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=\linewidth,natwidth=898,natheight=587]{billeder/trimming_graph.jpg}
+\caption{This shows how trimming affects the prices of 2012. The blue lines show the upper and lower bounds of a 1\% trim.}
+\label{fig:weight_of_layers}
+\end{figure}
+
+
 
 \subsubsection{Matrix}
 When analysing the data it is possible to find a connection between different rows of data eg. what time of the day or what day of the week it is. These kind of data can be described using a single node where you normalize the hours by distributing them between -1 and 1. This will give this single neuron one weight to represent ALL of the hours in a day. One approach to give inputs more importance are splitting them up into a simple matrix. This means that we have a matrix with one row and 24 inputs(one for each hour); we set a 1 in the input representing the time of day and set the rest to 0. This way the neural network will have a specific weight to apply according to which hour of the day it is. This of course adds alot of overhead in terms of how many input nodes you need to have and how many nodes you need in the hidden layers. This will increase the processing time of the neural network iterations. This method is not only applicable with days. It can be applied to most inputs where you have a fixed and rather small set of different inputs to a single node.
