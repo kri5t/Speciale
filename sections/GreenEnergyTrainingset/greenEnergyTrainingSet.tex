@@ -164,10 +164,9 @@ Low margin: & 13.5 & 2.7 & 1930.5 \\ [1ex] % [1ex] adds vertical space
 \label{table:similarHoursLimitsWindProd} % is used to refer this table in the text
 \end{table}
 
-\todo{price irregular price curves}
+\todo{price irregular price curves - it does not make sense to trim in the case of wind production because it does have irregularities that is unpredictable or at least does not make sense as seen in price. By doing this would wound break the curve and could potentially remove important data for the generalization function}
 
-
-It is the expectation that the further we get from the start time the less accurate a prediction will be because it uses data from its immediate past to do the prediction. 
+Figure~\ref{fig:windHourDevelopment400Hours} does not show any need for trimming when predicting wind production. The curve of wind production does not contain any cases that are unpredictable, e.g productions that suddenly drops without any intermediary steps. \todo{Explain better!!}. 
 
 \todo{Mention the calculation of the outer percentiles with a neural network for itself}
 
@@ -187,9 +186,42 @@ Black art --- experimenting with hidden layers, momentum and learning rate.
 
 \todo{remember to compare temperature inclusion in relation to consumption}
 
+\subsubsection{Experiment One - Selection of input parameters}
+Test if better predictions are achieved when using meteorological factors instead of predicted consumption. Also try with or without wind direction.
 
-\subsubsection{Experiment One - Data Manipulation}
-The first experiment will show the difference in performance due to the manipulation of the time series data set. The three approaches are naive, trimming and matrix. These experiments do not include any statistical features.
+\begin{table}[H]
+\centering  % used for centering table
+\begin{tabular}{c c c c} % centered columns (3 columns)
+ANN Type & MAE & MPE & Rank \\ [0.5ex] % inserts table 
+%heading
+\hline                  % inserts single horizontal line
+ANN With Meteorological & 0 & 0 & 0 \\ % inserting body of the table
+ANN With Consumption & 0 & 0 & 0 \\ [1ex] % [1ex] adds vertical space
+\hline %inserts single line
+\end{tabular}
+\caption{Table showing the difference between using consumption and meteorological factors} % title of Table
+\label{table:consumptionInclusionTable} % is used to refer this table in the text
+\end{table}
+
+The above table shows something that results in next table:
+\begin{table}[H]
+\centering  % used for centering table
+\begin{tabular}{c c c c} % centered columns (3 columns)
+ANN Type & MAE & MPE & Rank \\ [0.5ex] % inserts table 
+%heading
+\hline                  % inserts single horizontal line
+ANN With Wind Direction & 0 & 0 & 0 \\
+ANN Without Wind Direction & 0 & 0 & 0 \\ [1ex] % [1ex] adds vertical space
+\hline %inserts single line
+\end{tabular}
+\caption{The table shows the impact of using Wind Direction together with the best consumption approach} % title of Table
+\label{table:windDirectionInclusion} % is used to refer this table in the text
+\end{table}
+
+\subsubsection{Experiment Two - Data Manipulation}
+The first experiment will show the difference in performance due to the manipulation of the time series data set. The three approaches are naive, trimming and matrix. These experiments do not include any statistical features. The point of this experiment is to find the best approach to simple data manipulation as presented in~\ref{sec:DataManipulation}.
+
+\todo{also different size of dataset}
 
 \begin{table}[H]
 \centering  % used for centering table
@@ -208,16 +240,21 @@ ANN Statistical features  & 0 & 0 & 0\\ [1ex] % [1ex] adds vertical space
 \label{table:dataManipulationApproaches} % is used to refer this table in the text
 \end{table}
 
+\todo{better with or without trimming?}
+
 The purpose is to locate the 
 
 \todo{do 1-12-24 step ahead to show the "carry-with"-error} 
 
 Taking the most naive approach to prediction by simply including the important normalized input parameters and trying to predict the prices for an entire year. 
 
-\subsubsection{Experiment Two - Prediction Strategies}
+\subsubsection{Experiment Three - Size of data set}
+
+\subsubsection{Experiment Four - Prediction Strategies}
+Statistics
 
 
-\subsubsection{Experiment Three - Performance Optimization}
+\subsubsection{Experiment Five - Performance Optimization}
 The impact of different Layers/Neurons/Epochs combinations is huge and the results is shown here.
 
 \begin{table}[H]
@@ -235,7 +272,3 @@ ANN & 2500 & 0 & 0 & 0 \\ [1ex] % [1ex] adds vertical space
 \caption{Table showing the performance of different data manipulation approaches.} % title of Table
 \label{table:performanceOpti} % is used to refer this table in the text
 \end{table} 
-
-\subsubsection{Experiment One - The idea}
-step-ahead from 1 to 24.
-
