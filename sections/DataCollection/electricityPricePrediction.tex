@@ -24,7 +24,6 @@ Demand is directly connected to the energy prices (which comes as no suprise) si
 Pearson's correlations:
 \begin{table}[!ht]
 \centering  % used for centering table
-\resizebox{\columnwidth}{!}{%
 \begin{tabular}{c c} % centered columns
  \#0 Parameters & \#1 Pearsons \\ [0.5ex] % inserts table 
 %heading
@@ -32,14 +31,13 @@ Pearson's correlations:
 Price/Demand & .310686748459 \\
 Demand/Wind & 0.567853517055 \\
 Demand/Temperature & -0.592827186022 \\
-Day-Of-Week(Sunday) & 3-2-1 & 100 & 1255 & 946.7 \\
-Limited dataset & 3-2-1 & 100 & 750 & 435.18 \\
-Limited dataset & 3-2-1 & 100 & 1500 & 498.61 \\
+Day-Of-Week(Sunday) & 3-2-1  \\
+Limited dataset & 3-2-1 \\
+Limited dataset & 3-2-1 \\
 \hline %inserts single line
 \end{tabular}
-}
-\caption{Results from the simple classification approach} % title of Table
-\label{table:naiveTrainingApproach} % is used to refer this table in the text
+\caption{Pearson's correlations for price prediction variables} % title of Table
+\label{table:pearsonsPriceVariables} % is used to refer this table in the text
 \end{table}
 
 \begin{figure}[H]
