@@ -1,4 +1,4 @@
-Energy price prediction is a cumbersome task to handle because of the highly volatile nature and the plethora of factors that influence the energy price. In this section we will show the factors that influence the price by analysing relevant data that will later become input in our ANN. Not to surprisingly the most important factor in any market is demand and this greatly influences the price "REFERENCE". But also time of day, day of the week, wind speed and temperature (which are the quantifiable factors) play a big role and sociocultural influences affects the price aswell. This section will show the connection between energy price and some of the influential factors.
+Energy price prediction is a cumbersome task to handle because of the highly volatile nature of price prediction and the plethora of factors that influence the energy price. In this section we will show the factors that influence the price by analysing relevant data that will later become input in our ANN. Not to surprisingly; the most important factor in any market is demand and this greatly influences the price "REFERENCE". But also time of day, day of the week, wind speed and temperature (which are the quantifiable factors) play a big role. Sociocultural influences affects the price aswell but are hard to measure. This section will show the connection between energy price and some of the influential factors.
 
 %Table ~\ref{table:pearsonCoeficientPrice} shows the correlation coefficient between factors that have been discussed earlier as having an influence on the electricity price. As discussed in the wind production section the correlation coefficient is a value between -1 and +1 that represents the linear dependency between two variables. 
 
@@ -19,7 +19,28 @@ Energy price prediction is a cumbersome task to handle because of the highly vol
 %\end{table}
 
 \subsubsection{Demand}
-Demand is directly connected to the energy prices which comes as no suprise since every market is driven by demand. Since demand is relative to the present time we are not able to use it directly as an input factor in the artificial neural network(ANN). We have to compute the demand and this is why we need to know what impacts the demand. As mentioned in related work we have seen a function that calculates the demand based on CDD(Cooling degree days), HDD(Heating degree days), ELD(Humidity), V$_w$ (Wind speed), M$_s$ (Sunshine), M$_r$ (Rainfall) \cite{19}. Based on these factors we will model the ANN to take these factors as inputs. This will be done as either direct input or as a seperate neural network for demand and feed that directly (as input) into the energy price ANN.
+Demand is directly connected to the energy prices (which comes as no suprise) since every market is driven by demand. Since demand is relative to the present time we are not able to use it directly as an input factor in the artificial neural network(ANN). We have to compute the demand and this is why we need to know what impacts the demand. As mentioned in related work we have seen a function that calculates the demand based on CDD(Cooling degree days), HDD(Heating degree days), ELD(Humidity), V$_w$ (Wind speed), M$_s$ (Sunshine), M$_r$ (Rainfall) \cite{19}. Based on these factors we will model the ANN to take these factors as inputs. This will be done as either direct input or as a seperate neural network for demand and feed that directly (as input) into the energy price ANN.
+
+Pearson's correlations:
+\begin{table}[!ht]
+\centering  % used for centering table
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{c c} % centered columns
+ \#0 Parameters & \#1 Pearsons \\ [0.5ex] % inserts table 
+%heading
+\hline                  % inserts single horizontal line
+Price/Demand & .310686748459 \\
+Demand/Wind & 0.567853517055 \\
+Demand/Temperature & -0.592827186022 \\
+Day-Of-Week(Sunday) & 3-2-1 & 100 & 1255 & 946.7 \\
+Limited dataset & 3-2-1 & 100 & 750 & 435.18 \\
+Limited dataset & 3-2-1 & 100 & 1500 & 498.61 \\
+\hline %inserts single line
+\end{tabular}
+}
+\caption{Results from the simple classification approach} % title of Table
+\label{table:naiveTrainingApproach} % is used to refer this table in the text
+\end{table}
 
 \begin{figure}[H]
 \centering
@@ -40,6 +61,15 @@ In figure ~\ref{fig:consump_price} we see the connection between energy price an
 
 In figure ~\ref{fig:consump_temp} we see the connection between demand and temperature. The temperature itself has an influence when it is very cold or very warm. This connection is expressed as CDD and HDD. In figure ~\ref{fig:consump_temp} we see that if temperature decreases the demand will go up. This is presumably because the people of Denmark use a lot of energy on heating our homes and lighting in the winter time. In \cite{19} they also describe CDD which indicates the need for cooling. In Denmark it is limited how high the temperature goes and how often we actually need to cool our homes.
 
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth ,natwidth=410,natheight=237]{billeder/energy_price_plots/consump_wind.png}
+\caption{Demand and wind plot.}
+\label{fig:consump_wind}
+\end{figure}
+
+Wind speed plays a role in predicting electrical demand. The wind affects the electrical heating needed in homes across the country. The wind cools down the houses and thus need for heating arises. As seen in figure ~\ref{fig:consump_wind} there is a pretty good corealtion between the two.
+
 \subsubsection{Price}
 We present some of the influences on the price in this section and argue why these parameters has an impact on the price. We also account for the time perspective of the price and show the non-linear nature of energy prices. Since we just talked about demand and the influence on price we will here be focusing on the other impacting factors in the prediction of energy prices.
 
@@ -51,6 +81,7 @@ We present some of the influences on the price in this section and argue why the
 \end{figure}
 
 In figure ~\ref{fig:price_temp} we see how the price decreases as the temperature rises. This is due to the same factors as explained in the demand and temperature plot graph. Temperature impacts the demand which impacts the production of energy. If the demand thus the production is high then the price will automatically rise aswell.
+\todo{Skriv hvorfor temp ikke skal bruges i stedet for hvad der staar nu.}
 
 \begin{figure}[H]
 \centering
@@ -60,6 +91,7 @@ In figure ~\ref{fig:price_temp} we see how the price decreases as the temperatur
 \end{figure}
 
 In figure ~\ref{fig:price_wind} we see how the wind impacts the price. If the wind speed increases the energy price decreases. This is because the wind power production will allow for a bigger output on the general power production. When the production is high and the demand is moderate the price will decrease to get demand up since we cannot store energy for later use. Also wind power production produces nearly "free" energy when the windmill park is up and running.
+\todo{Snak om distributionen. Det skal ikke ses som en 1-til-1, men som en variabel der kan sende prisen i den rigtige retning.}
 
 \begin{figure}[H]
 \centering
@@ -180,6 +212,12 @@ x <= -1 & 0 \\
 \subsubsection{Statistical classification}
 
 \subsubsection{Blackbox optimization}
+
+\subsubsection{Seasonality}
+
+\subsubsection{Frequency}
+
+\subsubsection{Volatility}
 
 Skriv om:
 	Naiv metode.
