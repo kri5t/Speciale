@@ -55,7 +55,7 @@ In figure ~\ref{fig:price_temp} we see how the price decreases as the temperatur
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth ,natwidth=410,natheight=237]{billeder/energy_price_plots/price_wind.png}
-\caption{Price and wind plot.}
+\caption{Price and wind speed plot.}
 \label{fig:price_wind}
 \end{figure}
 
@@ -68,7 +68,7 @@ The price is influenced greatly by the seasonality. Seasonality covers the time 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth ,natwidth=410,natheight=237]{billeder/energy_price_plots/Average_price_over_weekdays.png}
-\caption{Price dispersion over weekdays}
+\caption{Daily price dispersion}
 \label{fig:price_over_weekdays}
 \end{figure}
 
@@ -78,7 +78,7 @@ The graph show us a difference between highest (wednesday) and lowest (sunday) o
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth ,natwidth=410,natheight=237]{billeder/energy_price_plots/price_per_hour.png}
-\caption{Price dispersion over hours of the day}
+\caption{Hourly price dispersion}
 \label{fig:price_per_hour}
 \end{figure}
 
@@ -87,11 +87,18 @@ In ~\ref{fig:price_per_hour} we see the average price per hour over a whole day.
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth ,natwidth=410,natheight=237]{billeder/energy_price_plots/seasons.png}
-\caption{Price dispersion over seasonality}
+\caption{Seasonal price dispersion}
 \label{fig:seasons}
 \end{figure}
 
 The sesonality is also reflected in what time of year it is. In the winter time the electrical heating and need for electric light plays a significant role on how much electricity is consumed and thus the price goes up. This is shown in figure ~\ref{fig:seasons} where it clearly show the average price is higher in winter and fall compared to summer and spring.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth ,natwidth=410,natheight=237]{billeder/energy_price_plots/averageMonthlyPrice.png}
+\caption{Monthly price dispersion}
+\label{fig:monthlyAveragePrice}
+\end{figure}
 
 \subsubsection{Frequency}
 
@@ -151,96 +158,10 @@ In figure ~\ref{fig:consump_temp} we see the connection between demand and tempe
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth ,natwidth=410,natheight=237]{billeder/energy_price_plots/consump_wind.png}
-\caption{Demand and wind plot.}
+\caption{Demand and wind speed plot.}
 \label{fig:consump_wind}
 \end{figure}
 
 Wind speed plays a role in predicting electrical demand. The wind affects the electrical heating needed in homes across the country. The wind cools down the houses and thus need for heating arises \cite{19}. As seen in figure ~\ref{fig:consump_wind} and in table ~\ref{table:pearsonsPriceVariables} there is a pretty good correlation between wind speed and consumption. The graph clearly shows us that; when the wind speed increases (from 15 and up) the overall demand increases aswell. This indicates that mostly high wind speeds will influence the demand the most.
 
 
-
-\subsection{Training the network}
-Training of the artificial neural network(ANN) is a complex matter and requires a lot of optimization to give us the best results. We experimented with different techniques and approaches to how an ANN is trained. The first and most simple approach was the naive method. After that we continued to do a bit of simple data classification and took a look at statistical classification and tried to apply it to our dataset.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{The naive method}
-First of all we tried out the most simple method available, the naive method, since this has almost no overhead and takes no preprocessing of the data. The method is simple; you take one neuron per input and one neuron as output. You add all of the data in your training set without doing any preprocessing of data. This kind of training set is good enough for simple problems e.g. the XOR problem or likewise. When we talk about more complex real-world problems like forecasting the energy prices this method does not perform to well and gives less than satisfactory results(seen in figure REF):
-
-\begin{table}[!ht]\footnotesize
-\centering  % used for centering table
-\resizebox{\columnwidth}{!}{%
-\begin{tabular}{c c c c c} % centered columns
- \#0 Method & \#1 Layers & \#2 Number of epochs & \#3 Dataset entries & \#4 Median Error \\ [0.5ex] % inserts table 
-%heading
-\hline                  % inserts single horizontal line
-Naive & 3-2-1 & 100 & 8522 & 1250.35  \\
-Naive & 3-3-2-1 & 100 & 8522 & 1286.97 \\ [1ex] % [1ex] adds vertical space
-\hline %inserts single line
-\end{tabular}
-}
-\caption{Results from the naive training approach.} % title of Table
-\label{table:naiveTrainingApproach} % is used to refer this table in the text
-\end{table}
-
-Since we haven't normalized any data the error is relative to the input data, but if we do some calculations on it; it shows that 1250 means 12.5\%. So we get an average error of twelve and a half percent which is a considerable deviation when doing forecasting of electricity prices. 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{Simple classification}
-Since the naive method proved to be less than satisfactory in the results we got we tried some simple classifications on our data e.g. grouping them per hour, per day and taking only parts of the dataset to train on. This approach is derived from REF and REF and from our earlier models that show connections: price/day-of-week and price/hour-of-day. The experiments with only training on parts of the set is to limit the span of the year. We got the following results which proved a little better but still not good:
-
-\begin{table}[!ht]
-\centering  % used for centering table
-\resizebox{\columnwidth}{!}{%
-\begin{tabular}{c c c c c} % centered columns
- \#0 Method & \#1 Layers & \#2 Number of epochs & \#3 Dataset entries & \#4 Median Error \\ [0.5ex] % inserts table 
-%heading
-\hline                  % inserts single horizontal line
-Time-Of-Day(17-18) & 3-2-1 & 100 & 344 & 1575.49 \\
-Time-Of-Day(04-05) & 3-2-1 & 100 & 361 & 1086.35 \\
-Day-Of-Week(Monday) & 3-2-1 & 100 & 1216 & 2362.1 \\
-Day-Of-Week(Sunday) & 3-2-1 & 100 & 1255 & 946.7 \\
-Limited dataset & 3-2-1 & 100 & 750 & 435.18 \\
-Limited dataset & 3-2-1 & 100 & 1500 & 498.61 \\
-\hline %inserts single line
-\end{tabular}
-}
-\caption{Results from the simple classification approach} % title of Table
-\label{table:naiveTrainingApproach} % is used to refer this table in the text
-\end{table}
-
-The simple classification of our data gives us a rather broad specktrum ranging from 15.75\% to a respectable 4.35\%. The first four entries in the table; time-of-day and day-of-week, ranges over the whole year . They range from 15.75\% to 9.46\% in some of the examples a better result than the naive, but not by much. While the limited dataset only gives us an ANN that uses 1 month(750 entries) and 2 months(1500 entries) of data to train, it gives us a way better median error. This is because we are using a dataset with similar days e.g. winter days and meanwhile a limited set of data, which is easier to predict (REF til 1 maaned nu her og 1 maaned sidste aar). This is actually a pretty good error margin but we will test more sophisticated methods to see if it will give us better results. 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{Normalization}
-For artificial neural networks to do the best work; the data should be normalized to either bipolar data(-1 to 1) or binary data(0 to 1). This ensures the best performance by the activation functions since fx. the sigmoid activation function input/output follows table ~\ref{fig:same_hour_distribution}
-
-\begin{table}[!ht]
-\centering  % used for centering table
-\resizebox{0.8\columnwidth}{!}{%
-\begin{tabular}{c c} % centered columns
- \#0 x & \#1 f(x) \\ [0.5ex] % inserts table 
-%heading
-\hline                  % inserts single horizontal line
-x >= 1 & 1 \\
--1 < x < 1 & 0.5 + x * (1 - abs(x) / 2) \\
-x <= -1 & 0 \\
-\hline %inserts single line
-\end{tabular}
-}
-\caption{Results from the simple classification approach} % title of Table
-\label{table:naiveTrainingApproach} % is used to refer this table in the text
-\end{table}
-
-\subsubsection{Statistical classification}
-
-\subsubsection{Blackbox optimization}
-
-Skriv om:
-	Naiv metode.
-	Indeling i mandag - søndag
-	Indeling per time
-	Zero-to-one normalization
-	Statistical classification
-	Blackbox optimization.
-	Hvad der fejler.
-	Mulige løsninger.
-	Trimming
-	Percentile normalization
-	Vis tingene paa side 4
