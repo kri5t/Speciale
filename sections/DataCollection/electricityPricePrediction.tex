@@ -18,8 +18,8 @@ Energy price prediction is a cumbersome task to handle because of the highly vol
 %\label{table:pearsonCoeficientPrice} % is used to refer this table in the text
 %\end{table}
 
-\subsubsection{Demand}
-Demand is directly connected to the energy prices (which comes as no suprise) since every market is driven by demand. Since demand is relative to the present time we are not able to use it directly as an input factor in the artificial neural network(ANN). We have to compute the demand and this is why we need to know what impacts the demand. As mentioned in related work we have seen a function that calculates the demand based on CDD(Cooling degree days), HDD(Heating degree days), ELD(Humidity), V$_w$ (Wind speed), M$_s$ (Sunshine), M$_r$ (Rainfall) \cite{19}. Based on these factors we will model the ANN to take these factors as inputs. This will be done as either direct input or as a seperate neural network for demand and feed that directly (as input) into the energy price ANN.
+\subsection{Price}
+We present some of the influences on the price in this section and argue why these parameters has an impact on the price. We also account for the time perspective of the price and show the non-linear nature of energy prices. Since we just talked about demand and the influence on price we will here be focusing on the other impacting factors in the prediction of energy prices. To accompany the graphs we also calculated the Pearson's correlations (section ~\ref{sec:Pearsons}) which can be seen in table ~\ref{table:pearsonsPriceVariables}.
 
 Pearson's correlations:
 \begin{table}[!ht]
@@ -28,48 +28,19 @@ Pearson's correlations:
  \#0 Parameters & \#1 Pearsons \\ [0.5ex] % inserts table 
 %heading
 \hline                  % inserts single horizontal line
-Price/Demand & .310686748459 \\
-Demand/Wind & 0.567853517055 \\
+Price/Demand & 0.310686748459 \\
+Price/Wind speed & -0.278480552449  \\
+Price/Temperature & -0.175026569339 \\
+Demand/Wind speed & 0.567853517055 \\
 Demand/Temperature & -0.592827186022 \\
-Day-Of-Week(Sunday) & 3-2-1  \\
-Limited dataset & 3-2-1 \\
-Limited dataset & 3-2-1 \\
 \hline %inserts single line
 \end{tabular}
 \caption{Pearson's correlations for price prediction variables} % title of Table
 \label{table:pearsonsPriceVariables} % is used to refer this table in the text
 \end{table}
 
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.8\textwidth ,natwidth=410,natheight=237]{billeder/energy_price_plots/consump_price.png}
-\caption{Demand and price plot.}
-\label{fig:consump_price}
-\end{figure}
-
-In figure ~\ref{fig:consump_price} we see the connection between energy price and the demand. The model shows us that if the demand rises the price on the energy rises aswell. This is a common tendency in a market where there isn't endless supply. Since the price is heavily influenced by demand and demand is a relative factor the same calculations are also done by the powerplants because they need to know how much power to produce in a certain timeframe. We want to imitate this forecast and predict our own demand based on the aforementioned parameters. This is key to how accurate we will be able to predict the price. In other words: A good prediction of the demand will give us a good prediction of the price.
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.8\textwidth ,natwidth=410,natheight=237]{billeder/energy_price_plots/consump_temp.png}
-\caption{Demand and temperature plot.}
-\label{fig:consump_temp}
-\end{figure}
-
-
-In figure ~\ref{fig:consump_temp} we see the connection between demand and temperature. The temperature itself has an influence when it is very cold or very warm. This connection is expressed as CDD and HDD. In figure ~\ref{fig:consump_temp} we see that if temperature decreases the demand will go up. This is presumably because the people of Denmark use a lot of energy on heating our homes and lighting in the winter time. In \cite{19} they also describe CDD which indicates the need for cooling. In Denmark it is limited how high the temperature goes and how often we actually need to cool our homes.
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.8\textwidth ,natwidth=410,natheight=237]{billeder/energy_price_plots/consump_wind.png}
-\caption{Demand and wind plot.}
-\label{fig:consump_wind}
-\end{figure}
-
-Wind speed plays a role in predicting electrical demand. The wind affects the electrical heating needed in homes across the country. The wind cools down the houses and thus need for heating arises. As seen in figure ~\ref{fig:consump_wind} there is a pretty good corealtion between the two.
-
-\subsubsection{Price}
-We present some of the influences on the price in this section and argue why these parameters has an impact on the price. We also account for the time perspective of the price and show the non-linear nature of energy prices. Since we just talked about demand and the influence on price we will here be focusing on the other impacting factors in the prediction of energy prices.
+\subsubsection{Weather conditional influences}
+The electricity price is affected by different weather conditions. We present temperature and wind speed and show how they influence the price.
 
 \begin{figure}[H]
 \centering
@@ -91,6 +62,9 @@ In figure ~\ref{fig:price_temp} we see how the price decreases as the temperatur
 In figure ~\ref{fig:price_wind} we see how the wind impacts the price. If the wind speed increases the energy price decreases. This is because the wind power production will allow for a bigger output on the general power production. When the production is high and the demand is moderate the price will decrease to get demand up since we cannot store energy for later use. Also wind power production produces nearly "free" energy when the windmill park is up and running.
 \todo{Snak om distributionen. Det skal ikke ses som en 1-til-1, men som en variabel der kan sende prisen i den rigtige retning.}
 
+\subsubsection{Seasonality}
+The price is influenced greatly by the seasonality. Seasonality covers the time of year but also the time-of-day and the day-of-the-week in this section. Sesonality plays a significant role in price prediction because the demand is affected by the consumption of the people and since people follow patterns the demand does aswell.
+
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth ,natwidth=410,natheight=237]{billeder/energy_price_plots/Average_price_over_weekdays.png}
@@ -98,16 +72,30 @@ In figure ~\ref{fig:price_wind} we see how the wind impacts the price. If the wi
 \label{fig:price_over_weekdays}
 \end{figure}
 
-Figure ~\ref{fig:price_over_weekdays} shows us how the trend of the price varies over the different days in a week. The most noticeable here is how the price is decreasing in the weekend (saturday and sunday) and are somewhat steady for the weekdays. We are looking at two options for our neural network. One is to make a prediction for whole days at a time which are good for days with incomplete information and the other is to predict the hourly price which requires specific data for the given hour. In the daily prediction proposal we will want to distinquish between weekdays and weekends. We will also have to look at seperating saturday and sunday since they show a substantial difference in price per day.
+Figure ~\ref{fig:price_over_weekdays} shows us how the trend of the price varies over the different days in a week. The most noticeable here is how the price is decreasing in the weekend (saturday and sunday) and are somewhat steady for the weekdays. We are looking at two options for our neural network. We can represent it as a matrix (section ~\ref{sec:Matrix}) which is the most granulated method. We can also normalize the days 1-7 and represent all days with only 1 input neuron.
+The graph show us a difference between highest (wednesday) and lowest (sunday) of 80 which is pretty much when the price fluctuates between 632 and 61 (with 1\% top and bottom trim see section ~\ref{sec:Trimming}).
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth ,natwidth=410,natheight=237]{billeder/energy_price_plots/price_per_hour.png}
-\caption{}
+\caption{Price dispersion over hours of the day}
 \label{fig:price_per_hour}
 \end{figure}
 
-In ~\ref{fig:price_per_hour} we see the average price per hour over a whole day. We see a trend where the price is highest from 08 to 10 and again from 17 to 19. This is because most people wake up in the first interval and use a lot of electricity on getting ready for the day and the second interval is when everybody gets home and cooks dinner. As mentioned before we want to experiment with an ANN that is different per hour. This will require 24 networks one for each hour in a day this is because of the high fluctuation in price over all of the hours.
+In ~\ref{fig:price_per_hour} we see the average price per hour over a whole day. We see a trend where the price is highest from 08 to 10 and again from 17 to 19. This is because most people wake up in the first interval and use a lot of electricity and the second interval is when everybody gets home and cooks dinner. The price can be represented (as described in price-over-weekdays) as a matrix or a single normalized input. The price fluctuates between 335(18) and 190(03) which gives us a difference of 145.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth ,natwidth=410,natheight=237]{billeder/energy_price_plots/seasons.png}
+\caption{Price dispersion over seasonality}
+\label{fig:seasons}
+\end{figure}
+
+The sesonality is also reflected in what time of year it is. In the winter time the electrical heating and need for electric light plays a significant role on how much electricity is consumed and thus the price goes up. This is shown in figure ~\ref{fig:seasons} where it clearly show the average price is higher in winter and fall compared to summer and spring.
+
+\subsubsection{Frequency}
+
+\subsubsection{Volatility}
 
 \begin{figure}[H]
 \centering
@@ -137,6 +125,39 @@ Low margin: & 9.9 & 5.4 & 2053 \\ [1ex] % [1ex] adds vertical space
 \todo{Talk about why volatility is needed by looking at the graph \url{http://en.wikipedia.org/wiki/Volatility_(finance)} and take a look at the historical historical volatility docs in dropbox. The text called Risk and Volatility: Econometric Models and Financial Practice talk about periods on page 405 2nd column - ...if too long.. if too short to much noise}
 
 \todo{Thoughts about using a frequency distribution \url{http://en.wikipedia.org/wiki/Frequency_distribution} - f.x dividing the prices into groups and counting their occurrences}
+
+\subsubsection{Demand}
+Demand is directly connected to the energy prices (which comes as no suprise) since every market is driven by demand. Since demand is relative to the present time we are not able to use it directly as an input factor in the artificial neural network(ANN). We have to compute the demand and this is why we need to know what impacts the demand. As mentioned in related work we have seen a function that calculates the demand based on CDD(Cooling degree days), HDD(Heating degree days), ELD(Humidity), V$_w$ (Wind speed), M$_s$ (Sunshine), M$_r$ (Rainfall) \cite{19}. Based on these factors we will model the ANN to take these factors as inputs. This will be done as either direct input or as a seperate neural network for demand and feed that directly (as input) into the energy price ANN.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth ,natwidth=410,natheight=237]{billeder/energy_price_plots/consump_price.png}
+\caption{Demand and price plot.}
+\label{fig:consump_price}
+\end{figure}
+
+In figure ~\ref{fig:consump_price} we see the connection between energy price and the demand. The model shows us that if the demand rises the price on the energy rises aswell. This is a common tendency in a market where there isn't endless supply. Since the price is heavily influenced by demand and demand is a relative factor the same calculations are also done by the powerplants because they need to know how much power to produce in a certain timeframe. We want to imitate this forecast and predict our own demand based on the aforementioned parameters. This is key to how accurate we will be able to predict the price. In other words: A good prediction of the demand will give us a good prediction of the price.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth ,natwidth=410,natheight=237]{billeder/energy_price_plots/consump_temp.png}
+\caption{Demand and temperature plot.}
+\label{fig:consump_temp}
+\end{figure}
+
+
+In figure ~\ref{fig:consump_temp} we see the connection between demand and temperature. The temperature itself has an influence when it is very cold or very warm. This connection is expressed as CDD and HDD. In figure ~\ref{fig:consump_temp} we see that if temperature decreases the demand will go up. This is presumably because the people of Denmark use a lot of energy on heating our homes and lighting in the winter time. In \cite{19} they also describe CDD which indicates the need for cooling. In Denmark it is limited how high the temperature goes and how often we actually need to cool our homes.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth ,natwidth=410,natheight=237]{billeder/energy_price_plots/consump_wind.png}
+\caption{Demand and wind plot.}
+\label{fig:consump_wind}
+\end{figure}
+
+Wind speed plays a role in predicting electrical demand. The wind affects the electrical heating needed in homes across the country. The wind cools down the houses and thus need for heating arises \cite{19}. As seen in figure ~\ref{fig:consump_wind} and in table ~\ref{table:pearsonsPriceVariables} there is a pretty good correlation between wind speed and consumption. The graph clearly shows us that; when the wind speed increases (from 15 and up) the overall demand increases aswell. This indicates that mostly high wind speeds will influence the demand the most.
+
+
 
 \subsection{Training the network}
 Training of the artificial neural network(ANN) is a complex matter and requires a lot of optimization to give us the best results. We experimented with different techniques and approaches to how an ANN is trained. The first and most simple approach was the naive method. After that we continued to do a bit of simple data classification and took a look at statistical classification and tried to apply it to our dataset.
@@ -210,12 +231,6 @@ x <= -1 & 0 \\
 \subsubsection{Statistical classification}
 
 \subsubsection{Blackbox optimization}
-
-\subsubsection{Seasonality}
-
-\subsubsection{Frequency}
-
-\subsubsection{Volatility}
 
 Skriv om:
 	Naiv metode.

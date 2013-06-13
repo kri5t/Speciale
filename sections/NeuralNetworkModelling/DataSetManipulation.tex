@@ -54,7 +54,7 @@ As mentioned before we need to get rid of some of the outliers and some of the n
 
 
 
-\subsubsection{Matrix}
+\subsubsection{Matrix}\label{sec:Matrix}
 When analysing the data it is possible to find a connection between different rows of data eg. what time of the day or what day of the week it is. These kind of data can be described using a single node where you normalize the hours by distributing them between -1 and 1. This will give this single neuron one weight to represent ALL of the hours in a day. One approach to give inputs more importance are splitting them up into a simple matrix. This means that we have a matrix with one row and 24 inputs(one for each hour); we set a 1 in the input representing the time of day and set the rest to 0. This way the neural network will have a specific weight to apply according to which hour of the day it is. This of course adds alot of overhead in terms of how many input nodes you need to have and how many nodes you need in the hidden layers. This will increase the processing time of the neural network iterations. This method is not only applicable with days. It can be applied to most inputs where you have a fixed and rather small set of different inputs to a single node.
 
 \subsubsection{Historical Data}
