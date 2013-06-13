@@ -59,7 +59,7 @@ In figure ~\ref{fig:price_temp} we see how the price decreases as the temperatur
 \label{fig:price_wind}
 \end{figure}
 
-In figure ~\ref{fig:price_wind} we see how the wind impacts the price. If the wind speed increases the energy price decreases. This is because the wind power production will allow for a bigger output on the general power production. When the production is high and the demand is moderate the price will decrease to get demand up since we cannot store energy for later use. Also wind power production produces nearly "free" energy when the windmill park is up and running.
+In figure ~\ref{fig:price_wind} we see how the wind impacts the price. If the wind speed increases the energy price decreases. This is because the wind power production will allow for a bigger output on the general power production. When the production is high and the demand is moderate the price will decrease to get demand up since we cannot store energy for later use. Also wind power production produces nearly \"free\" energy when the windmill park is up and running.
 \todo{Snak om distributionen. Det skal ikke ses som en 1-til-1, men som en variabel der kan sende prisen i den rigtige retning.}
 
 \subsubsection{Seasonality}
@@ -82,7 +82,7 @@ The graph show us a difference between highest (wednesday) and lowest (sunday) o
 \label{fig:price_per_hour}
 \end{figure}
 
-In ~\ref{fig:price_per_hour} we see the average price per hour over a whole day. We see a trend where the price is highest from 08 to 10 and again from 17 to 19. This is because most people wake up in the first interval and use a lot of electricity and the second interval is when everybody gets home and cooks dinner. The price can be represented (as described in price-over-weekdays) as a matrix or a single normalized input. The price fluctuates between 335(18) and 190(03) which gives us a difference of 145.
+In ~\ref{fig:price_per_hour} we see the average price per hour over a whole day. We see a trend where the price is highest from 08 to 10 and again from 17 to 19. This is because most people wake up in the first interval and use a lot of electricity and the second interval is when everybody gets home and cooks dinner. The price can be represented (as described in price-over-weekdays) as a matrix or a single normalized input. The price fluctuates between 335(18) and 190(03) which gives us a difference of 145. This is a pretty significant difference between highest and lowest and will help us point the prediction in the right direction.
 
 \begin{figure}[H]
 \centering
@@ -91,7 +91,7 @@ In ~\ref{fig:price_per_hour} we see the average price per hour over a whole day.
 \label{fig:seasons}
 \end{figure}
 
-The sesonality is also reflected in what time of year it is. In the winter time the electrical heating and need for electric light plays a significant role on how much electricity is consumed and thus the price goes up. This is shown in figure ~\ref{fig:seasons} where it clearly show the average price is higher in winter and fall compared to summer and spring.
+The sesonality is also reflected in what time of year it is. In the winter time the electrical heating and need for electric light plays a significant role on how much electricity is consumed and thus the price goes up. This is shown in figure ~\ref{fig:seasons} where it clearly shows the average price is higher in winter and fall than in summer and spring.
 
 \begin{figure}[H]
 \centering
@@ -100,6 +100,8 @@ The sesonality is also reflected in what time of year it is. In the winter time 
 \label{fig:monthlyAveragePrice}
 \end{figure}
 
+To get a more fine grained representation of the seasonal influences on the price; we created a monthly distribution of the price. The figure ~\ref{fig:monthlyAveragePrice} shows that the highest average price is 360(february) and lowest 190(july). This is a significant price jump and shows the same trend as for the seasonal figure ~\ref{fig:seasons} but here we see the effects of the holidays in july; where the price is significantly lower than the rest of the year.
+
 \subsubsection{Frequency}
 
 \subsubsection{Volatility}
@@ -107,11 +109,11 @@ The sesonality is also reflected in what time of year it is. In the winter time 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth ,natwidth=410,natheight=237]{billeder/energy_price_plots/same_hour_distribution.png}
-\caption{}
+\caption{Price ditribution over equal hours}
 \label{fig:same_hour_distribution}
 \end{figure}
 
-In the earlier figures we have shown how the input influences the price and given some reasons to why this influences the price. In figure ~\ref{fig:same_hour_distribution} we have chosen similar hours across all days of a year and we show how different the price can be for similar inputs. Even though the price is volatile we can see a trend in the graph that shows us that the price most of the time will be between 246 and 285. The hours is chosen between the limits shown in table ~\ref{table:similarHoursLimits}.
+In earlier figures we have shown how the input influences the price and given some reasons to why this influences the price. In figure ~\ref{fig:same_hour_distribution} we have chosen similar hours across all days of a year and we show how different the price can be for similar inputs. The similar days have been chosen from the \"core\" inputs (wind speed, temperature and demand) and the margins seen in table ~\ref{table:similarHoursLimits} reflects the upper and lower bound of the inputs. The margins are calculated from a randomly chosen day and the interval is 10\% up and down. Even though the price is volatile we can see a trend in the graph that shows us that the price most of the time will be about 265.
 
 \begin{table}[H]
 \centering  % used for centering table
@@ -126,6 +128,15 @@ Low margin: & 9.9 & 5.4 & 2053 \\ [1ex] % [1ex] adds vertical space
 \caption{This is the high and low margins for our similar hours comparison.} % title of Table
 \label{table:similarHoursLimits} % is used to refer this table in the text
 \end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth ,natwidth=410,natheight=237]{billeder/energy_price_plots/plotGraph.jpg}
+\caption{A plot graph of the price development over the first 1500 hours in 2012}
+\label{fig:same_hour_distribution}
+\end{figure}
+
+The volatility of the price is clearly shown in ~\ref{fig:same_hour_distribution} where the price on similar hours fluctuates from 215 to 345. To address the volatile nature of the price we need to look at the trends of the known historical price.
 
 \todo{This clearly shows the need for more information than just the simple inputs. The information needs to know abut the current trend as presented in (Trending section). Concrete example. The neural network will make a generalization towards 200-210, but if the last value was 110 and the trend is going down the next will probably not be 200-210 but more likely 80-90.}
 
