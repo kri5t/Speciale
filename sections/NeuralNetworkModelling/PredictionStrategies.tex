@@ -8,7 +8,7 @@ As described in the Section~\ref{sec:annSection} and in Figure~\ref{fig:overfitt
 
 Other problems arise together with the inclusion of tendency --- when have we moved enough in one direction? We need to rely on the other input parameters to pull us either up or down so that we can identify the next trend. This can possibly result in the prediction to significantly over-shoot or under-shoot its target. The statistical approach could potentially help out even more since it gives us the tool to calculate probability of the movement to come, e.g. what is the probability of the curve continuously moving up after 24 hours. It will need to be tested thoroughly during our experiments. 
 
-One thing to keep in mind here is that this is only a minority of the input parameters. Without these the Artificial Neural Network would have made one generalization and the addition would in theory only help the function to approach the target better when a lot of output possibilities exist. The result will be a new function where the immediate past is considered at every hour and the possibility of a improved generalization.
+One thing to keep in mind here is that the trend and slope are only a minority of the input parameters. Without these the Artificial Neural Network would have made one generalization and the addition would in theory only help the function to approach the target better when a lot of output possibilities exist. The result will be a new function where the immediate past is considered at every hour and the possibility of a improved generalization.
 
 \begin{figure}[H]
 \centering
@@ -22,9 +22,7 @@ We will work with several statistical methods as input and with combinations of 
 \subsubsection{Statistical Input}
 \todo{Talk about statistical input features like historical volatility (EWMA), skewness and basic calculation of line slope. Skewness is a more sophisticated way of calculating if the distribution is leaning to one sine of the mean - the simple line slope calculation is meant to calculate if we are on the way up or down}
 
-EWMA should be used for time series that do not have a clear trend direction\cite[Chapter~7.3.2]{econometrics} which is exactly what we have. \todo{see page 588 in econometrics book}
-
-The EWMA is a latent trend model where a latent variable is included to describe a discrete choice model. The latent variable is called the smoothing factor and if this factor is close to one then the last trend has a higher weight than the recent observation- in our case the observation would be either production or price and the smoothing factor is calculated based on the last calculated trend.
+EWMA should be used for time series that do not have a clear trend direction\cite[Chapter~7.3.2]{econometrics} which is exactly what we have. \todo{see page 588 in econometrics book}. EWMA is a latent trend model where a latent variable is included to describe a discrete choice model. The latent variable is called the smoothing factor and if this factor is close to one then the last trend has a higher weight than the recent observation- in our case the observation would be either production or price and the smoothing factor is calculated based on the last calculated trend.
 
 Choice of smoothing factor.
 
