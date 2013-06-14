@@ -13,7 +13,7 @@ The Pearson Correlation Coefficient\footnote{\url{http://en.wikipedia.org/wiki/P
 Input factor & Pearson Correlation Coefficient \\ [0.5ex] % inserts table 
 %heading
 \hline                  % inserts single horizontal line
-Consumption & 0.62 \\ % inserting body of the table
+Consumption & 0.61 \\ % inserting body of the table
 Wind Speed & 0.94 \\
 Temperature & -0.09 \\
 Wind Direction & 0.21 \\ [1ex] % [1ex] adds vertical space
@@ -40,6 +40,7 @@ The relationship between hourly wind speed and hourly wind power production of D
 What is noticeable from the graph is wide range of productions that is covered by a relatively small number of wind speeds. Wind speed 15 can cover wind productions all the way from 700 to 1900 and therefore other input parameters are needed to point us in the right direction within these interval. 
 
 \subsubsection{Air Density}
+\label{sec:airDensity}
 It is described in~\ref{sec:windmillPlacement} that wind energy is proportional to air density where a higher density means more power for a specific wind speed. This does not imply that a higher air density is equal to higher wind power production in general because it depends on the wind speed. Days with equal wind speed but variation in air density should show an increase in power production when the air density is highest. 
 
 Air density depends directly on temperature and pressure which can be described by $Air Density=\frac{P*M}{(R*T)}$ where R is a gas constant and M is the density of air. The monthly pressure in Denmark has low variation compared to the temperature as shown in Figure~\ref{fig:pressureTemperatureVariance}. For this reason, the temperature will have the most influence on the air density in Denmark. The formula express that when temperature decreases the air density will increase linearly, e.g. the wind power production for a specific wind speed will be higher in times of low temperature. The air density has been calculated for every hour in the training set and the correlation has been established for each wind speed in Table~\ref{table:pearsonCoeficientAirDensity}. The wind power production increases with the air density for each wind speed as described by the formula.
@@ -94,12 +95,35 @@ Average: & 0.279325455487 \\ [1ex] % [1ex] adds vertical space
 \end{table}
 
 \subsubsection{Wind Direction}
-bla bla intro. Figure~\ref{fig:windDirVsProd} shows that western wind has a tendency to produce more energy. (need to further investigated but seems valid when looking at dk).
+Figure~\ref{fig:windDirVsProd} shows that the wind direction in general has an impact on the wind production. Wind mills are turning in the direction of the wind which could make these numbers a coincidence. The answer could be that the wind speed is more powerful when coming from the west. This relationship is established in Figure~\ref{fig:windDirectionVersusWindSpeed}. It needs to be validated in experiments if the wind direction makes sense in relation to the other parameters used as input. \todo{show compass and show the relation between west wind and more powerful speeds
+ }.   
+ 
+ \begin{table}[H]
+\centering  % used for centering table
+\begin{tabular}{c c} % centered columns (3 columns)
+Input factor & Pearson Correlation Coefficient \\ [0.5ex] % inserts table 
+%heading
+\hline                  % inserts single horizontal line
+Wind Production & 0.21 \\ % inserting body of the table
+Wind Speed & 0.20 \\ [1ex] % [1ex] adds vertical space
+\hline %inserts single line
+\end{tabular}
+\caption{Table showing Pearson correlation coefficient between various factors and the wind direction.} % title of Table
+\label{table:pearsonCoeficientWindDirection} % is used to refer this table in the text
+\end{table}
+
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.99\linewidth,natwidth=898,natheight=587]{billeder/productionVsWindDirection.png}
 \caption{Wind Direction vs. wind production in 2012}
 \label{fig:windDirVsProd}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.99\linewidth,natwidth=898,natheight=587]{billeder/windDirectionVersusWindSpeed.png}
+\caption{Wind Direction vs. wind production in 2012}
+\label{fig:windDirectionVersusWindSpeed}
 \end{figure}
 
 \subsection{Other factors}
@@ -134,6 +158,7 @@ The dataset consists of all hours of the years included. Based on this the netwo
 \end{figure}
 
 \subsection{Wind Production Development}
+\label{sec:windProductionDev}
 The above analysis shows the wind production development to be much dependent on wind speed and air density together with the general trend on the market. The need for identifying trends is discussed here~\ref{sec:usingStatisticalInput}. 
 
 The high volatility in the wind production is very clear when considering the development curve in Figure~\ref{fig:windHourDevelopment400Hours}. This is not a problem if the correlation between the input parameters result in a low number of output possibilities because the generalization of the ANN then would be enough. This is not the case for our input parameters for wind productions and an example of such can be seen in ~\ref{fig:inputParameterDistribution} where outputs for similar inputs are shown --- the input limits can be seen in Table~\ref{table:similarHoursLimitsWindProd}. The generalization would lean towards 898-1048 but if the last wind production was 1198 and the tendency rising then the prediction would be better off guessing above or around 1198. This can be further supported by Figure~\ref{fig:windHourDevelopment400Hours} which illustrates the tendency of the production curve and the need to consider the immediate past because of its significance for the movements to come. It is necessary to identify these tendencies in every hour in order to predict the wind production more accurately. The concept of tendency as input is discussed in detail at~\ref{sec:usingStatisticalInput}.
@@ -178,7 +203,7 @@ Figure~\ref{fig:windHourDevelopment400Hours} does not show any need for trimming
 \todo{GENERATION HOURS}
 
 \subsection{Experimental Results}
-This subsection describes the experiments that uncovers the best combination of hidden layers, neurons and epochs as well as the different strategies. Based on the above analysis of wind production influences the network will be build upon following core input parameters; 1) Wind speed; 2) Air Density; and 3) Time of day. Experiments are needed to investigate the impact the influence of wind direction and statistical inputs as presented in section~\ref{sec:usingStatisticalInput}. Furthermore it is needed to test the use of meteorological factors as a substitute for consumption.
+This subsection describes the experiments that uncovers the best combination of hidden layers, neurons and epochs as well as the different strategies. Based on the above analysis of wind production influences the network will be tested with the following input parameters; 1) Wind speed; 2) Air Density; 3) Time of day 4) Temperature and 5) Consumption;. Furthermore, experiments are needed to investigate the statistical inputs as presented in section~\ref{sec:usingStatisticalInput}.
 
 \todo{DRAWING OF NETWORK}
 
@@ -188,37 +213,38 @@ Black art --- experimenting with hidden layers, momentum and learning rate.
 
 \todo{remember to compare temperature inclusion in relation to consumption}
 
-\subsubsection{Experiment One - Selection of input parameters}
-Test if better predictions are achieved when using meteorological factors instead of predicted consumption. Also try with or without wind direction.
+\subsubsection{Experiment Series One - Selection of input parameters}
+The first experiment series is an attempt to find the best input parameters of the network. The input parameters to experiment with is wind speed, air density, time of day, consumption and temperature. The most significant tests will be to determine if meteorological factors can stand as a substitute for consumption and if wind direction improves the prediction.
+
 
 \begin{table}[H]
 \centering  % used for centering table
-\begin{tabular}{c c c c} % centered columns (3 columns)
-ANN Type & MAE & MPE & Rank \\ [0.5ex] % inserts table 
+\begin{tabular}{c c c c c c c c} % centered columns (3 columns)
+Wind & Air &  &  & Wind & Time & & \\ 
+Speed & Dens & Consump & Temp & Direction & of Day & MAE & Rank \\
+[0.5ex] % inserts table 
 %heading
 \hline                  % inserts single horizontal line
-ANN With Meteorological & 0 & 0 & 0 \\ % inserting body of the table
-ANN With Consumption & 0 & 0 & 0 \\ [1ex] % [1ex] adds vertical space
+x & x & & x & x & 0 & 0 & 0 \\ % inserting body of the table
+x & x & x & x &  & 0 & 0 & 0 \\ [1ex] % [1ex] adds vertical space
 \hline %inserts single line
 \end{tabular}
 \caption{Table showing the difference between using consumption and meteorological factors} % title of Table
 \label{table:consumptionInclusionTable} % is used to refer this table in the text
 \end{table}
 
-The above table shows something that results in next table:
-\begin{table}[H]
-\centering  % used for centering table
-\begin{tabular}{c c c c} % centered columns (3 columns)
-ANN Type & MAE & MPE & Rank \\ [0.5ex] % inserts table 
-%heading
-\hline                  % inserts single horizontal line
-ANN With Wind Direction & 0 & 0 & 0 \\
-ANN Without Wind Direction & 0 & 0 & 0 \\ [1ex] % [1ex] adds vertical space
-\hline %inserts single line
-\end{tabular}
-\caption{The table shows the impact of using Wind Direction together with the best consumption approach} % title of Table
-\label{table:windDirectionInclusion} % is used to refer this table in the text
-\end{table}
+Since the co-relation between wind production and wind speed is 0.94 it has been tested on its own. The result is bla and shows that even though the co-relation is close to 1, there is still need for further parameters --- as expected. Air density is added because it is directly proportional to the wind speed as described in~\ref{sec:airDensity}. This brings us at.
+As a simple test for the importance of the current wind production development (~\ref{sec:windProductionDev}) the network has been supplied with the wind production from one hour ago. This shows a huge improvement.
+It is obvious that using the consumption is much more accurate than substituting it with just meteorological factors. The wind direction does not give better prediction so this is omitted from the experiments to come.
+
+The following experiments will be based on the input parameters:
+\begin{itemize}
+\item Wind Speed;
+\item Air Density;
+\item Wind production from last hour;
+\item Consumption;
+\end{itemize}
+
 
 \subsubsection{Experiment Two - Data Manipulation}
 The first experiment will show the difference in performance due to the manipulation of the time series data set. The three approaches are naive, trimming and matrix. These experiments do not include any statistical features. The point of this experiment is to find the best approach to simple data manipulation as presented in~\ref{sec:DataManipulation}.
