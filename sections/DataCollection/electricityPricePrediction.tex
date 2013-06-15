@@ -101,7 +101,7 @@ The sesonality is also reflected in what time of year it is. In the winter time 
 
 To get a more fine grained representation of the seasonal influences on the price; we created a monthly distribution of the price. The figure ~\ref{fig:monthlyAveragePrice} shows that the highest average price is 360(february) and lowest 190(july). This is a significant price jump and shows the same trend as for the seasonal figure ~\ref{fig:seasons} but here we see the effects of the holidays in july; where the price is significantly lower than the rest of the year.
 
-\subsubsection{Volatility & High-Frequency}
+\subsubsection{Volatility and High-Frequency}
 The energy prices are very volatile and changes on an hourly basis. The volatility is often reflected in the same conditions for the hour gives completely different results. In addition to the volatility the price has a very high frequence of spike prices. A spike price is a price that elavates very quickly and drops in a matter of a few hours. These conditions can be tricky to handle but we will here address some of the problems in handling volatility and spike prices.
 
 \begin{figure}[H]
@@ -170,3 +170,5 @@ In figure ~\ref{fig:consump_temp} we see the connection between demand and tempe
 \end{figure}
 
 Wind speed plays a role in predicting electrical demand. The wind affects the electrical heating needed in homes across the country. The wind cools down the houses and thus need for heating arises \cite{19}. As seen in figure ~\ref{fig:consump_wind} and in table ~\ref{table:pearsonsPriceVariables} there is a pretty good correlation between wind speed and consumption. The graph clearly shows us that; when the wind speed increases (from 15 and up) the overall demand increases aswell. This indicates that high wind speeds will have th greatest influence on the demand.
+
+\input{sections/DataCollection/electricityPricePrediction.tex}
