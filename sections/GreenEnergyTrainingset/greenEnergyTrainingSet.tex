@@ -219,23 +219,36 @@ The first experiment series is an attempt to find the best input parameters of t
 
 \begin{table}[H]
 \centering  % used for centering table
-\begin{tabular}{c c c c c c c c} % centered columns (3 columns)
-Wind & Air &  &  & Wind & Time & & \\ 
-Speed & Dens & Consump & Temp & Direction & of Day & MAE & Rank \\
+\resizebox{\textwidth}{!}{
+\begin{tabular}{c c c c c c c c c c} % centered columns (3 columns)
+ & Wind & Air &  &  & Wind & Time & Last & \\ 
+Test & Speed & Dens & Consump & Temp & Direction & of Day & Production & MAE & Rank \\
 [0.5ex] % inserts table 
 %heading
 \hline                  % inserts single horizontal line
-x & x & & x & x & 0 & 0 & 0 \\ % inserting body of the table
-x & x & x & x &  & 0 & 0 & 0 \\ [1ex] % [1ex] adds vertical space
+1. & x &  &  &  &  &  &  & 153.6 & 0 \\ %
+2. & x & & x & & & & & 139.8 & 0 \\ 
+3. & x & & x & & & x & & 138.7 & 0 \\
+4. & x & & x & & & x & x & 139.0 & 0 \\ 
+5. & x & & x & & x & x & & 147.7 & 0 \\
+7. & x & & x & x &  &  & x & x 141.8 & 0 \\
+8. & x & x & & & & & & 140.4 & 0 \\
+9. & x & x & & & & x & & 139.2 & 0 \\
+10. & x & x & x & & & x & & 138.3 & 0 \\
+11. & x & x & x & & & x & x & 138.3 & 0 \\ [1ex] % [1ex] adds vertical space
 \hline %inserts single line
-\end{tabular}
+\end{tabular}}
 \caption{Table showing the difference between using consumption and meteorological factors} % title of Table
 \label{table:consumptionInclusionTable} % is used to refer this table in the text
 \end{table}
 
-Since the co-relation between wind production and wind speed is 0.94 it has been tested on its own. The result is bla and shows that even though the co-relation is close to 1, there is still need for further parameters --- as expected. Air density is added because it is directly proportional to the wind speed as described in~\ref{sec:airDensity}. This brings us at.
-As a simple test for the importance of the current wind production development (~\ref{sec:windProductionDev}) the network has been supplied with the wind production from one hour ago. This shows a huge improvement.
+Since the co-relation between wind production and wind speed is 0.94 it has been tested on its own. The result clearly shows this relationship by only missing the ideal wind production with 143.9 in average in test number 1. Wind speed has been tested in combination with different input parameters. The addition of air density stands out with a MAE of 116.3 which can somehow be expected since it is directly proportional to the wind speed as described in~\ref{sec:airDensity}. 
+
+The table clearly shows that wind direction does not have a correlation to the other parameters and therefore must be omitted in tests to come.
+The importance of the wind production development is described in~\ref{sec:windProductionDev} and to account for this the network has been supplied with the wind production from one hour ago - more sophisticated attempts with statistics will come in other experiments.
 It is obvious that using the consumption is much more accurate than substituting it with just meteorological factors. The wind direction does not give better prediction so this is omitted from the experiments to come.
+
+\todo{The hours can be reflected as described in matrix section. Now each of the values will reflect one hour instead of one value reflecting all of the hours.}
 
 The following experiments will be based on the input parameters:
 \begin{itemize}
@@ -300,3 +313,108 @@ ANN & 2500 & 0 & 0 & 0 \\ [1ex] % [1ex] adds vertical space
 \caption{Table showing the performance of different data manipulation approaches.} % title of Table
 \label{table:performanceOpti} % is used to refer this table in the text
 \end{table} 
+
+\subsection{testlol}
+\begin{table}[H]
+\centering  % used for centering table
+\definecolor{light-gray}{gray}{0.70}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{c c c c c c c c c c} % centered columns (3 columns)
+
+Wind & Air &  &  & Wind & Time & Last & Time & \\ 
+Speed & Dens & Consump & Temp & Direction & of Day & Production & Matrix & MAE & Rank \\
+[0.5ex] % inserts table 
+%heading
+\hline                  % inserts single horizontal line
+ x &  x &  &  &  x &  x &  x &  x & 115.9 & \#1 \\ \arrayrulecolor{light-gray} \hline
+ x &  x &  x &  &  x &  x &  x &  x & 117.12 & \#2 \\ \hline
+ x &  x &  &  x &  &  x &  x &  x & 119.51 & \#3 \\ \hline
+ x &  x &  x &  x &  &  x &  &  x & 119.98 & \#4 \\ \hline
+ x &  &  x &  x &  &  x &  &  x & 120.39 & \#5 \\
+ x &  x &  x &  x &  &  x &  &  x & 120.46 & \#6 \\
+ x &  x &  x &  x &  x &  x &  x &  x & 121.19 & \#7 \\
+ x &  &  x &  &  &  x &  &  x & 121.5 & \#8 \\
+ x &  &  x &  &  &  &  x &  & 121.72 & \#9 \\
+ x &  &  &  &  &  x &  x &  & 121.75 & \#10 \\
+ x &  x &  &  &  &  x &  x &  x & 122.05 & \#11 \\
+ x &  &  &  &  &  x &  x &  x & 122.24 & \#12 \\
+ x &  &  x &  x &  &  x &  x &  x & 122.28 & \#13 \\
+ x &  x &  &  &  &  x &  x &  x & 122.97 & \#14 \\
+ x &  x &  x &  &  x &  x &  &  x & 123.06 & \#15 \\
+ x &  &  x &  x &  x &  x &  x &  x & 123.29 & \#16 \\
+ x &  &  x &  &  x &  x &  &  x & 123.52 & \#17 \\
+ x &  x &  x &  &  &  x &  &  x & 123.65 & \#18 \\
+ x &  x &  &  x &  &  x &  x &  x & 123.78 & \#19 \\
+ x &  x &  &  &  x &  x &  x &  x & 123.84 & \#20 \\
+ x &  &  &  &  x &  x &  x &  & 124.53 & \#21 \\
+ x &  x &  &  &  x &  x &  x &  x & 124.74 & \#22 \\
+ x &  &  &  &  x &  &  x &  & 125.16 & \#23 \\
+ x &  x &  &  &  x &  x &  &  x & 125.22 & \#24 \\
+ x &  x &  &  &  &  x &  &  x & 125.26 & \#25 \\
+ x &  x &  x &  x &  x &  x &  x &  x & 125.56 & \#26 \\
+ x &  &  &  x &  &  x &  &  x & 125.59 & \#27 \\
+ x &  x &  x &  &  &  x &  &  x & 126.77 & \#28 \\
+ x &  x &  &  x &  &  x &  &  x & 127.25 & \#29 \\
+ x &  x &  &  &  &  x &  &  x & 127.74 & \#30 \\
+ x &  &  &  &  &  x &  &  x & 127.94 & \#31 \\
+ x &  &  &  &  x &  x &  x &  x & 128.49 & \#32 \\
+ x &  x &  &  x &  &  x &  &  x & 128.52 & \#33 \\
+ x &  &  &  &  x &  x &  &  x & 128.85 & \#34 \\
+ x &  x &  &  x &  &  x &  x &  x & 129.14 & \#35 \\
+ x &  &  x &  &  x &  &  x &  & 129.32 & \#36 \\
+ x &  x &  x &  &  x &  x &  x &  x & 130.57 & \#37 \\
+ x &  &  &  x &  &  x &  x &  x & 131.17 & \#38 \\
+ x &  x &  x &  x &  x &  x &  x &  x & 132.16 & \#39 \\
+ x &  &  x &  x &  x &  x &  x &  & 133.79 & \#40 \\
+ x &  x &  x &  &  &  x &  x &  x & 135.53 & \#41 \\
+ x &  &  x &  &  x &  x &  x &  & 136.57 & \#42 \\
+ x &  &  x &  &  x &  x &  x &  x & 137.08 & \#43 \\
+ x &  &  x &  &  &  x &  x &  & 137.33 & \#44 \\
+ x &  &  &  x &  &  x &  &  & 137.52 & \#45 \\
+ x &  x &  &  x &  x &  x &  x &  x & 137.76 & \#46 \\
+ x &  x &  &  x &  &  x &  x &  x & 138.41 & \#47 \\
+ x &  &  x &  &  &  x &  x &  x & 138.42 & \#48 \\
+ x &  &  x &  &  x &  x &  &  & 138.52 & \#49 \\
+ x &  &  x &  &  x &  &  &  & 139.3 & \#50 \\
+ x &  &  &  x &  &  &  &  & 139.33 & \#51 \\
+ x &  &  &  x &  &  &  x &  & 139.41 & \#52 \\
+ x &  &  x &  x &  x &  x &  x &  & 139.48 & \#53 \\
+ x &  &  x &  x &  &  &  &  & 139.59 & \#54 \\
+ x &  &  &  &  x &  x &  x &  & 139.99 & \#55 \\
+ x &  &  &  x &  &  x &  x &  & 140.13 & \#56 \\
+ x &  &  &  &  &  x &  &  & 140.24 & \#57 \\
+ x &  x &  x &  x &  x &  x &  x &  x & 140.79 & \#58 \\
+ x &  x &  &  x &  x &  x &  x &  x & 141.68 & \#59 \\
+ x &  &  x &  &  &  &  &  & 141.77 & \#60 \\
+ x &  &  &  &  x &  x &  &  & 141.79 & \#61 \\
+ x &  &  &  x &  x &  &  x &  & 141.85 & \#62 \\
+ x &  &  &  &  &  &  &  & 141.87 & \#63 \\
+ x &  &  x &  &  &  x &  &  & 141.92 & \#64 \\
+ x &  &  x &  x &  &  x &  &  & 142.4 & \#65 \\
+ x &  &  x &  x &  &  x &  x &  & 142.76 & \#66 \\
+ x &  &  &  x &  &  &  x &  & 143.35 & \#67 \\
+ x &  &  &  &  x &  &  &  & 143.58 & \#68 \\
+ x &  &  &  &  x &  &  x &  & 143.76 & \#69 \\
+ x &  &  &  &  x &  x &  x &  x & 143.96 & \#70 \\
+ x &  &  x &  x &  x &  &  x &  & 145.07 & \#71 \\
+ x &  &  &  x &  &  x &  x &  x & 146.65 & \#72 \\
+ x &  &  x &  x &  x &  x &  x &  & 146.78 & \#73 \\
+ x &  &  x &  &  x &  x &  x &  & 148.84 & \#74 \\
+ x &  &  x &  x &  x &  &  x &  & 152.48 & \#75 \\
+ x &  &  x &  &  x &  x &  x &  x & 153.36 & \#76 \\
+ x &  &  x &  x &  x &  x &  x &  x & 155.83 & \#77 \\
+ x &  x &  x &  &  &  x &  x &  x & 156.78 & \#78 \\
+ x &  &  &  x &  x &  x &  x &  & 159.09 & \#79 \\
+ x &  &  &  x &  &  x &  x &  & 159.3 & \#80 \\
+ x &  &  &  &  &  &  x &  & 159.57 & \#81 \\
+ x &  &  x &  &  x &  &  x &  & 161.28 & \#82 \\ [1ex]
+ x &  &  &  x &  x &  x &  x &  x & 167.37 & \#83 \\ [1ex]
+ x &  &  x &  x &  &  &  x &  & 173.48 & \#84 \\ [1ex]
+ x &  x &  x &  &  x &  x &  x &  x & 178.81 & \#85 \\ [1ex]
+ x &  &  x &  x &  x &  &  x &  & 202.93 & \#86 \\ [1ex] % [1ex] adds vertical space
+\hline %inserts single line
+\end{tabular}}
+\caption{Table showing the difference between using consumption and meteorological factors} % title of Table
+\label{table:consumptionInclusionTable} % is used to refer this table in the text
+\end{table}
+
