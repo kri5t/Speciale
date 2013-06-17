@@ -45,11 +45,13 @@
 \monthname\ \the\year  \\[1ex] Advisor: Niels Olof Bouvin\\[15ex]}\\[\fill]}
 \epsfig{file=logo.eps}\clearpage
 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \pagestyle{plain}
 \chapter*{Abstract}
 \addcontentsline{toc}{chapter}{Abstract}
+\definecolor{light-gray}{gray}{0.70}
 
 \todo{in English\dots}
 
@@ -146,22 +148,36 @@ Being able to predict electricity prices and green energy production is the basi
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\chapter{The Prediction Networks}
+\chapter{Dataset Analysis and Method}
 This chapter will describe the modelling of the Artificial Neural Networks used for prediction of wind power and electricity prices. It will include the entire process from data collecting to the finished Artificial Neural Networks.  
 \label{ch:theANNs}
 \section{Data Collection}
 \input{sections/DataCollection/datacollection.tex}
-\section{Statistical Evaluation Methods}
-\input{sections/Statistics/Statistics.tex}
+\section{Wind Power Prediction}
+\input{sections/GreenEnergyTrainingset/greenEnergyTrainingSet.tex}
+\section{Electricity Price Prediction}
+\input{sections/DataCollection/electricityPricePrediction.tex}
 \section{Neural Network Model}
 \input{sections/NeuralNetworkModelling/NeuralNetworkAnalysis.tex}
 \input{sections/NeuralNetworkModelling/DataSetManipulation.tex}
 \input{sections/NeuralNetworkModelling/PredictionStrategies.tex}
 \input{sections/NeuralNetworkModelling/Conclusion.tex}
-\section{Wind Power Prediction}
-\input{sections/GreenEnergyTrainingset/greenEnergyTrainingSet.tex}
-\section{Electricity Price Prediction}
-\input{sections/DataCollection/electricityPricePrediction.tex}
+\section{Discussion}
+\input{sections/NetworkDiscussion/dataSetDiscussion.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Experimental Results}
+\label{ch:experimentalResults}
+\section{Statistical Evaluation Methods}
+\label{sec:statisticalEvaluation}
+\input{sections/Statistics/Statistics.tex}
+\section{Wind Production Experiments}
+\label{sec:windProductionExperiments}
+\input{sections/Experiments/WindProductionExperiments.tex}
+\section{Electricity Price Experiments}
+\label{sec:priceExperiments}
+\input{sections/DataCollection/pricePredictionExperiments.tex}
 \section{Discussion}
 \input{sections/NetworkDiscussion/annDiscussion.tex}
 
