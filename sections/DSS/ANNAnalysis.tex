@@ -1,10 +1,12 @@
 \section{Trust - b}
-We have obtained the best possible prediction through data manipulation and black box optimization which have been verified through our experiments. The network outputs a prediction which in itself could be used as decision support by the traders. The problematic here is for the users to know when it can be trusted and why to even trust it. People are not in the habit of blindly trusting everything that is placed in front of them and especially not when it comes to high-risk decisions. There is a need for making the black box more transparent by communicating what is happening inside it.
+We have obtained the best possible prediction through data manipulation and black box optimization which have been verified through our experiments in Chapter~\ref{ch:experimentalResults}. The network outputs a prediction which in itself could be used as decision support by the traders. The problematic here is for the users to know when it can be trusted and why to even trust it. People are not in the habit of blindly trusting everything that is placed in front of them and especially not when it comes to high-risk decisions. 
+Artificial Neural Networks are known to be a black box \cite{fromBlackBoxToTransparentBox} because the only knowledge consist in the input and output but nothing about the internal logic. There is a need for making the black box more transparent by communicating what is happening inside it.
 
-\todo{discuss in relation to other texts}
+\todo{discuss in relation to other texts. Many texts we did not know how to trust because we had no idea of the underlying data and what they used and how they manipulated}
 
 \subsection{The underlying data}
-Artificial Neural Networks are known to be a black box\todo{ref}. Knowledge about the underlying data is only known by the ones who built the system. First and foremost the system must communicate the input parameters and where it comes from.
+The underlying input data is easy to present to the user. It should always be shown together with the output so the user gets an idea of what inputs resulted in what output. The system must communicate the input parameters and their origin at all times. Knowing where things come from and exactly what input parameters constitute a result is the basis for creating trust. As introduced in~\ref{sec:uncertainInformation} autonomous systems do not always guarantee the best result and therefore it could be implemented so that the users themselves supply the input. This would create an extra layer of security since the input parameters could be checked and validated before letting them into the system. 
+
 
 \subsection{Uncertain information}
 The need for presenting uncertain information is presented in~\ref{sec:uncertainInformation}.
