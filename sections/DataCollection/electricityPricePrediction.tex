@@ -158,9 +158,33 @@ In figure ~\ref{fig:consump_price} we see the connection between energy price an
 \end{figure}
 
 
-In figure ~\ref{fig:consump_temp} we see the connection between demand and temperature. The temperature itself has an influence when it is very cold or very warm. This connection is expressed as CDD and HDD. In figure ~\ref{fig:consump_temp} we see that if temperature decreases the demand will go up. This is presumably because the people of Denmark use a lot of energy on heating their homes and lighting them in the winter time. In \cite{19} they also describe CDD which indicates the need for cooling. In Denmark it is limited how high the temperature goes and how often we actually need to cool our homes.
+In figure ~\ref{fig:consump_temp} we see the connection between demand and temperature. The temperature itself has an influence when it is very cold or very warm. This connection is expressed as CDD(Cooling degree days) and HDD(Heating degree days). In figure ~\ref{fig:consump_temp} we see that if temperature decreases the demand will go up. This is because the people of Denmark use a lot of energy on heating their homes and lighting them (HDD) in the winter time. In \cite{19} they also describe CDD which indicates the need for cooling. In Denmark it is limited how high the temperature goes and how often we actually need to cool our homes see table 
 
-\todo{Create the CDD and HDD graphs}
+\begin{table}[!ht]
+\centering  % used for centering table
+\begin{tabular}{c c} % centered columns
+ \#0 Parameters & \#1 Pearsons \\ [0.5ex] % inserts table 
+%heading
+\hline                  % inserts single horizontal line
+Price/Demand & 0.310686748459 \\
+Price/Wind speed & -0.278480552449  \\
+Price/Temperature & -0.175026569339 \\
+Demand/Wind speed & 0.567853517055 \\
+Demand/Temperature & -0.592827186022 \\
+\hline %inserts single line
+\end{tabular}
+\caption{Pearson's correlations for price prediction variables} % title of Table
+\label{table:pearsonsPriceVariables} % is used to refer this table in the text
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth ,natwidth=410,natheight=237]{billeder/energy_price_plots/consump_wind.png}
+\caption{Demand and wind speed plot.}
+\label{fig:consump_wind}
+\end{figure}
+
+In our analysis of HDD and CDD we see that 
 
 \begin{figure}[H]
 \centering
