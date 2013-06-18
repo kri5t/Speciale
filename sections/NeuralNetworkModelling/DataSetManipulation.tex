@@ -1,8 +1,8 @@
-\subsection{Data manipulation}
+\section{Data manipulation}
 \label{sec:DataManipulation}
 In the following subsections we describe different strategies for data set manipulation from the most naive approach to more refined approaches such as trimming and analysis. These approaches are applied to the data before sending the input to the network. These strategies are used in experiments with the actual networks to locate the best possible strategy.
 
-\subsubsection{Normalization}
+\subsection{Normalization}
 For artificial neural networks to do the best work; the data should be normalized to either bipolar data [-1,1] or binary data [0,1]. This ensures the best performance by the activation functions since the sigmoid activation function has the steepest gradient (see figure ~\ref{fig:Sigmoid}) between -1 and 1 thus giving the finest granulated outputs. The same applies for the hyperbolic tangent(tanh) (see figure ~\ref{fig:Tanh}) activation function. The difference between the two are the output it generates from the same input. The hyperbolic tangent generates output that ranges from -1 to 1 and it has a steeper gradient around the y-axis than the sigmoid function thus giving the tanh function more granulated outputs than the sigmoid function.
 \begin{figure}[H]
 \centering
@@ -40,10 +40,10 @@ Minus-one-to-one & $ X_{norm} = \frac{X_i - (\frac{X_{max} - X_{min}}{2})}{\frac
 \end{table}
 Where $X_i$ is the data entry, $X_{min}$ is the lowest value in the data set and $X_{max}$ is the highest value in the dataset.
 
-\subsubsection{The naive approach}
+\subsection{The naive approach}
 First of all we tried out the most simple approach available, the naive approach, since this has almost no overhead and takes no preprocessing of the data. The method is simple; you take one neuron per input and one neuron as output. You add all of the data in your training set without doing any preprocessing of data. This kind of training set is good enough for simple problems e.g. the XOR problem or likewise. When we talk about more complex real-world problems like forecasting the energy prices this method does not perform to well and gives less than satisfactory results. Another factor is that a huge part of getting a neural network to perform well is the manipulation of the dataset to get rid of outliers and some of the noise in the dataset. Nevertheless it still gives an indication whether you have some kind of coherence between your input data and the output data even though the results are less than satisfactory. \todo{Mere generelt}
 
-\subsubsection{Trimming}\label{sec:Trimming}
+\subsection{Trimming}\label{sec:Trimming}
 As mentioned before we need to get rid of some of the outliers and some of the noise in the data set to make it easier for the network to approximate a function based on the input data. There are different approaches to trimming but the two we use are standard trimming and percentile trimming of the dataset. Standard trimming is a simple way of getting rid of the worst outliers. The way to do it is; take a low and a high number in your data set and remove everything below and above these limits. Of course this can be very arbitrary but with a simple plot diagram you will be able to see where the limits should be set. Percentile trimming is a statistic approach where you remove the x\% of the dataset from the top and the bottom. You make a percentwise distribution over your dataset; starting with the lowest values in the beginning and ending in the highest values. You calculate the 5th percentile which represents the lowest 5\% of your dataset and then remove these values. The same is done for the top 5\% which results in the removal of the most extreme outliers and has made your dataset less error prone when statistical analysis on it.
 \begin{figure}[!ht]
 \centering
@@ -54,10 +54,10 @@ As mentioned before we need to get rid of some of the outliers and some of the n
 
 
 
-\subsubsection{Matrix}\label{sec:Matrix}
+\subsection{Matrix}\label{sec:Matrix}
 When analysing the data it is possible to find a connection between different rows of data eg. what time of the day or what day of the week it is. These kind of data can be described using a single node where you normalize the hours by distributing them between -1 and 1. This will give this single neuron one weight to represent ALL of the hours in a day. One approach to give inputs more importance are splitting them up into a simple matrix. This means that we have a matrix with one row and 24 inputs(one for each hour); we set a 1 in the input representing the time of day and set the rest to 0. This way the neural network will have a specific weight to apply according to which hour of the day it is. This of course adds alot of overhead in terms of how many input nodes you need to have and how many nodes you need in the hidden layers. This will increase the processing time of the neural network iterations. This method is not only applicable with days. It can be applied to most inputs where you have a fixed and rather small set of different inputs to a single node.
 
-\subsubsection{Historical Data}
+\subsection{Historical Data}
 \label{sec:historicalData}
 It is the intention to achieve day-ahead forecasting by predicting the next 24 hours based on the past captured by the ANN as a generalization function  --- this can be defined as multiple step-ahead forecasting using an ANN\cite[Chapter~7.1.6]{econometrics}. 
 If the analysis of a time series can identify trending behaviour then it will be of utmost importance for the forecast. The trends can be deterministic or stochastic but our time-series show stochastic properties since it at some time intervals will have a sequence of values that can lead to local trendlike movements\cite[Chapter~7.3]{econometrics}. Furthermore, it is necessary to investigate how to include this input information about the immediate past hours in order to give a better idea of what will come next. This will apply for the electricity prices but also to some extend the wind production since it follows consumption\todo{page}. It points us in the direction of simple curve analysis or statistics used in economy to capture trends of the immediate past and use it as input. The concrete methods will be discussed in more detail in sections to come. The purpose of using curve analysis would be to calculate the slope and use this as an indicator for the current trend - are we moving up or down?. This can be made more sophisticated by using actual statistics for gathering some of the price characteristics (Presented at~\ref{sec:electriciyPrices}) like frequency, seasonality and volatility. It could also be an option to include past prices as input parameters to include the historical perspective as presented in \cite{singhal2011electricity}.
