@@ -1,7 +1,7 @@
 This section describes what needs to considered when building and modelling the network in terms of actual design and data set manipulation.
 
 \subsection{Neural Network Optimization}
-The forecasting models is implemented using an Artificial Neural Network with back propagation as training algorithm. The network takes as input a time series and in return outputs the predicted value. The success of the network is much dependent on the number of layers, neurons and epochs and the answer is never unambiguous. It is necessary to experiment with different types of numbers in order to find the best match for the problem at hand.
+The forecasting models are implemented using an Artificial Neural Network with back propagation as training algorithm. The network takes as input a time series and in return outputs the predicted value. The success of the network is much dependent on the number of layers, neurons and epochs and the answer is never unambiguous. It is necessary to experiment with different types of numbers in order to find the best match for the problem at hand.
 
 \subsubsection{Layers and Neurons}
 We are using a feedforward ANN which is often organized in one input layer, one or more hidden layers and an output layer where each layer has a number of neurons attached\cite{1} --- also see Figure~\ref{fig:ANN}. The number of input neurons is equal to the input parameters which also applies for the output layer. 

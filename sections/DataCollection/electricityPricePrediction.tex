@@ -19,7 +19,7 @@ Energy price prediction is a cumbersome task to handle because of the highly vol
 %\end{table}
 
 \subsection{Price}
-We present some of the influences on the price in this section and argue why these parameters has an impact on the price. We also account for the time perspective of the price and show the non-linear nature of energy prices. Since we just talked about demand and the influence on price we will here be focusing on the other impacting factors in the prediction of energy prices. To accompany the graphs we also calculated the Pearson's correlations (section ~\ref{sec:Pearsons}) which can be seen in table ~\ref{table:pearsonsPriceVariables}.
+We present some of the influences on the price in this section and argue why these parameters have an impact on the price. We also account for the time perspective of the price and show the non-linear nature of energy prices. Since we just talked about demand and the influence on price we are focusing on the other impacting factors in the prediction of energy prices \todo{demand is not above?}. To accompany the graphs we also calculated the Pearson's correlations (section ~\ref{sec:Pearsons}) which can be seen in table ~\ref{table:pearsonsPriceVariables}.
 
 Pearson's correlations:
 \begin{table}[!ht]
@@ -58,7 +58,7 @@ In figure~\ref{fig:price_temp} and table~\ref{table:pearsonsPriceVariables} we s
 \label{fig:price_wind}
 \end{figure}
 
-In figure ~\ref{fig:price_wind} we see how the wind impacts the price. If the wind speed increases the energy price decreases. This is because the wind power production will allow for a bigger output on the general power production. When the production is high and the demand is moderate the price will decrease to get demand up since we cannot store energy for later use. Also wind power production produces nearly 'free' energy when the windmill park is up and running.
+In Figure ~\ref{fig:price_wind} we see how the wind impacts the price. If the wind speed increases the energy price decreases. This is because the wind power production will allow for a bigger output on the general power production. When the production is high and the demand is moderate the price will decrease to get demand up since we cannot store energy for later use. Also wind power production produces nearly 'free' energy when the windmill park is up and running.
 \todo{Snak om distributionen. Det skal ikke ses som en 1-til-1, men som en variabel der kan sende prisen i den rigtige retning.}
 
 \subsubsection{Seasonality}
@@ -81,7 +81,7 @@ The graph show us a difference between highest (Wednesday) and lowest (Sunday) o
 \label{fig:price_per_hour}
 \end{figure}
 
-In ~\ref{fig:price_per_hour} we see the average price per hour over a whole day. We see a trend where the price is highest from 08 to 10 and again from 17 to 19. This is because most people wake up in the first interval and use a lot of electricity and the second interval is when everybody gets home and cooks dinner. The price can be represented (as described in price-over-weekdays) as a matrix or a single normalized input. The price fluctuates between 335(18) and 190(03) which gives us a difference of 145. This is a pretty significant difference between highest and lowest and will help us point the prediction in the right direction.
+In Figure~\ref{fig:price_per_hour} we see the average price per hour over a whole day. We see a trend where the price is highest from 08 to 10 and again from 17 to 19. This is because most people wake up in the first interval and use a lot of electricity and the second interval is when everybody gets home and cooks dinner. The price can be represented (as described in price-over-weekdays) as a matrix or a single normalized input. The price fluctuates between 335(18) and 190(03) which gives us a difference of 145. This is a pretty significant difference between highest and lowest and will help us point the prediction in the right direction.
 
 \begin{figure}[H]
 \centering

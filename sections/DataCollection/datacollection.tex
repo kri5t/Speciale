@@ -1,6 +1,10 @@
-Historical weather data has been collected for various Danish weather stations from NOAA\footnote{\url{http://www.ncdc.noaa.gov/}}. The data is in a fixed length format and contains all the necessary weather data for prediction. Format can be seen in BILAG 11111. 
+\todo{figur der viser input, ann og output med hvilket type output, vi ønsker, for at skabe bedre forståelse for kommende diskusion}
+
+The data must come from a trusted source so that proper predictions can be based on it. The data must be of a certain quality in relation number of observations because we need to make hourly predictions, e.g. the meteorological observations must be within an interval of 60 minutes or else we ill ignore data from that particular station.
+
+The National Oceanic and Atmospheric Administration's (NOAA) National Climatic Data Center (NCDC) provides public access to all climate and historical weather data from various weather stations around the world\footnote{\url{http://www.ncdc.noaa.gov/}}. We have used it for collection of historical weather data from various Danish weather stations that delivers observations from at least every hour. The data is in a fixed length format and contains all the necessary weather data for prediction. Format can be seen in \todo{BILAG 11111}. 
 The historical hourly price and wind production data has been downloaded from nordpoolspot\footnote{\url{www.nordpoolspot.com}} in excel format BILAG2.
-The data will be aggregated into one file for each of the predictions containing the needed input and output parameters.
+The data will be aggregated into one file that contains the needed input and output parameters for both prediction of price and wind production. The file includes all meteorological factors, prices, consumptions and wind productions from every hour of the last two years. 
 
 For the sake of simplicity we will be focusing on West Denmark and Funen which is also known as DK1 in the electricity market [find ref]. The collected data will be validated through plot diagrams that show and establish the relationships between weather conditions and the power generation/price of DK1.
 
@@ -15,5 +19,3 @@ The weather data is collected from all available weather stations in DK1 from NO
 
 
 We will remove data that is obscure and is related to conditions we cannot predict. (See trimming~\ref{sec:Trimming})
-
-we need to discuss the fact that all production data stems from nordpoolspot. The impact is obscure values a times of very low consumption. The production would not make sense in decision making if not predicted based on market conditions. The consumption will decide production together with wind speed.
