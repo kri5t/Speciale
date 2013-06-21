@@ -2,14 +2,15 @@
 This section contains experimental results to find the best possible price predicting solution. The results are divided into 5 experiments. The first experiment finds the best combination of input parameters for the network. These input paramters count meteorological, social and seasonal factors we indentified in section~\ref{sec:Price}. The next experiment indentifies the need for trimming and reasons why it is needed in this particular dataset. The third experiment tests different statistical strategies to incorporate historical prices as a part of the dataset. This includes historical prices, curve behaviour analysis, skewness analysis and historical EWMA(Exponentially-Weighted Moving Average). The fourth experiment takes care of the Artificial Neural Network parameters. This includes black-box optimization like pruning of the network and optimization of epochs.
 
 \subsubsection{Experiment 1: Inputs}
+In this section we experimented with the basic input parameters that we indentified in section~\ref{sec:Price}. This includes last hours Price (Price), The Demand (Demand), Wind Speed, Temperature, The Hourly Time of Day (Time of Day), The Day of The Week(Weekdays), The Month of The Year(Months), The Season of The Year(Seasons).
 
 \begin{table}[H]
 \centering  % used for centering table
 \resizebox{\textwidth}{!}{
-	\begin{tabular}{c c c c c c c c c c c} % centered columns (7 columns)
-	Price & Consumption & Wind speed & Temperature & Time of day & Weekdays & Months & Seasons & Matrix & MAE & Rank\\ [0.5ex] % inserts table 
-	%heading
-	\hline                  % inserts single horizontal line
+\begin{tabular}{c c c c c c c c c c c} % centered columns (7 columns)
+Price & Demand & Wind speed & Temperature & Time of day & Weekdays & Months & Seasons & Matrix & MAE & Rank\\ [0.5ex] % inserts table 
+%heading
+\hline                  % inserts single horizontal line
  x    & x    & x    & x    & x(M) & x(M) &      & x(M) & 57.12 & \#1 \\
  x    & x    & x    & x    & x    & x    &      & x    & 58.09 & \#2 \\
  x    & x    & x    & x    & x    &      & x    &      & 58.79 & \#3 \\
@@ -154,8 +155,8 @@ This section contains experimental results to find the best possible price predi
  x    & x    &      & x    &      & x(M) &      & x(M) & 115.83 & \#142 \\
  x    & x    &      & x    &      & x    & x    &      & 117.17 & \#143 \\
  x    & x    &      &      &      & x(M) & x(M) &      & 117.34 & \#144 \\
-	\hline %inserts single line
-	\end{tabular}
+\hline %inserts single line
+\end{tabular}
 }
 \caption{This is the high and low margins for our similar hours comparison.} % title of Table
 \label{table:similarHoursLimits} % is used to refer this table in the text
@@ -183,7 +184,7 @@ This section contains experimental results to find the best possible price predi
 \caption{Average MAE of ten runs per entry} % title of Table
 \label{table:similarHoursLimits} % is used to refer this table in the text
 \end{table}
-
+\subsubsection{Experiment 2: Trimming}
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.85\linewidth,natwidth=898,natheight=587]{billeder/PriceExperimentalAnalysis/NoTrimming.jpg}
@@ -223,28 +224,7 @@ This section contains experimental results to find the best possible price predi
 
 363 entries gets removed per percent.
 
-\begin{table}[H]
-\centering  % used for centering table
-\resizebox{\textwidth}{!}{
-	\begin{tabular}{c c c c} % centered columns (7 columns)
-	\#1 Time of day & \#2 Day of week & \#3 Month of year & \#4 Season of year  \\ [0.5ex] % inserts table 
-	%heading
-	\hline                  % inserts single horizontal line
-	 x &  &  & \\
- 	 x &  & x & \\  % [1ex] adds vertical space
-	 x &  &  & x\\  % [1ex] adds vertical space
- 	 x & x & & \\  % [1ex] adds vertical space
-	 x & x & x & \\  % [1ex] adds vertical space
-	 x & x &  & x\\  % [1ex] adds vertical space
-	  & x &  & \\  % [1ex] adds vertical space
-  	  & x & x & \\  % [1ex] adds vertical space
-	  & x &  & x\\ % [1ex] adds vertical space
-	  &  & x & \\  % [1ex] adds vertical space
-	  &  & & x\\ [1ex] % [1ex] adds vertical space
-	\hline %inserts single line
-	\end{tabular}
-}
-\caption{This is the high and low margins for our similar hours comparison.} % title of Table
-\label{table:similarHoursLimits} % is used to refer this table in the text
-\end{table}
+\subsubsection{Experiment 3: Statistical strategies}
+
+\subsubsection{Experiment 4: Blackbox optimization}
 
