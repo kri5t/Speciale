@@ -23,6 +23,7 @@ P & D & WS & T & ToD & WoD & MoY & SoY & MAE & Rank\\ [0.5ex] % inserts table
  x    & x    & x    & x    & x    & x    &      & x(M) & 63.94 & \#8 \\
  x    & x    & x    & x    & x    & x(M) & x(M) &      & 64.19 & \#9 \\
  x    & x    & x    &      & x(M) & x    & x(M) &      & 64.72 & \#10 \\
+
  x    & x    & x    &      & x    & x    & x(M) &      & 65.07 & \#11 \\
  x    & x    & x    & x    & x(M) & x(M) &      &      & 65.95 & \#12 \\
  x    & x    & x    & x    & x(M) & x(M) & x(M) &      & 66.55 & \#13 \\
@@ -40,8 +41,11 @@ P & D & WS & T & ToD & WoD & MoY & SoY & MAE & Rank\\ [0.5ex] % inserts table
 \end{table}
 
 
-If we take a look at the top 20 best input combinations shown in table~\ref{table:Top20Prices} we see some clear tendencies. If we start from the beginning the price and demand are static as mentioned earlier since they are fundamental market forces and thus not a part of this analysis. The next input parameter is the Wind Speed. We see that every input combination in the top 20 includes the wind production and it is therefore a must for the prediction of the energy prices. This is further strengthened by the bottom 10 combinations table~\ref{table:Bottom10Prices} where we only see wind prices in one of the combinations. Also we saw in section~\ref{sec:Price}
- The Hourly Time of Day (ToD); it is included in every single combination in the top 20. This clearly shows that this input parameter is important for the prediction of the price. This is kind of obvious since what we are predicting is the hourly price and in section~\ref{sec:seasonality}(figure~\ref{fig:price_per_hour}) we saw that the price varied from 190 to between 335. Also the top 7 all have the ToD on matrix form which indicates that this is the best way of representing the ToD.
+If we take a look at the top 20 best input combinations shown in table~\ref{table:Top20Prices} we see some clear tendencies. If we start from the beginning the price and demand are static as mentioned earlier since they are fundamental market forces and thus not a part of this analysis. The next input parameter is the Wind Speed. We see that every input combination in the top 20 includes the wind production and it is therefore a must for the prediction of the energy prices. This is further strengthened by the bottom 10 combinations table~\ref{table:Bottom10Prices} where we only see wind prices in one of the combinations. Also we saw in section~\ref{sec:windPowerAnalysis}(table~\ref{table:pearsonCoeficientWindProduction}) that the Wind Speed heavily influences the green energy production and thus influencing the energy prices. \todo{Lav en sammenligning af wind speed og wind production for at udelukke den ene}
+
+The temperature is a less obvious candidate for the prediction of price since the Pearson's correlation between the two only are 0.17. Nevertheless it is showing up in 8/10 top combinations in table~\ref{table:Top20Prices} and this might be because of the correlation between temperature/demand which is -0.59. The temperature is scattered all over the 144 combinations and thus it is hard to say anything about this input with confidence. \todo{Lav en analyse med og uden temperatur paa den bedste}.
+The Hourly Time of Day (ToD) is included in every single combination in the top 20. This clearly shows that this input parameter is important for the prediction of the price. This is kind of obvious since what we are predicting is the hourly price. In section~\ref{sec:seasonality}(figure~\ref{fig:price_per_hour}) we saw that the price varied from 190 to 335 which strengthens the importance of the relationship between time of day and the price. Also the top 7 all have the ToD on matrix form which indicates that this is the best way of representing the ToD.
+
 
 \begin{table}[H]
 \centering  % used for centering table
@@ -50,7 +54,6 @@ If we take a look at the top 20 best input combinations shown in table~\ref{tabl
 P & D & WS & T & ToD & WoD & MoY & SoY & MAE & Rank\\ [0.5ex] % inserts table 
 %heading
 \hline                  % inserts single horizontal line
- x    & x    &      & x    & x    &      &      & x    & 105.04 & \#133 \\
  x    & x    & x    &      &      & x(M) & x(M) &      & 105.70 & \#134 \\
  x    & x    &      &      &      & x(M) &      & x(M) & 107.85 & \#135 \\
  x    & x    &      & x    & x    &      & x    &      & 108.37 & \#136 \\
