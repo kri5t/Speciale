@@ -2,9 +2,9 @@
 This section contains experimental results to find the best possible price predicting solution. The results are divided into 5 experiments. The first experiment finds the best combination of input parameters for the network. These input parameters count meteorological, social and seasonal factors we identified in section~\ref{sec:Price}. The next experiment identifies the need for trimming and reasons why it is needed in this particular dataset. The third experiment tests different statistical strategies to incorporate historical prices as a part of the dataset. This includes historical prices, curve behavior analysis, skewness analysis and historical EWMA(Exponentially-Weighted Moving Average). The fourth experiment takes care of the Artificial Neural Network parameters. This includes black-box optimization like pruning of the network and optimization of epochs.
 
 \subsubsection{Experiment 1: Inputs}
-In this section we experimented with the basic input parameters that we identified in section~\ref{sec:Price}. We did a cross comparison of all the inputs and possible combinations (For those that made sense). The Price and the Demand is such a basic measure when you define a price in any markets that they are included in every prediction. We did not make a cross comparison of the Month of Year and the Seasons of Year since they say the same thing more or less. We did a cross comparison both with and without 
+In this section we experimented with the basic input parameters that we identified in section~\ref{sec:Price}. We did a cross comparison of all the inputs and possible combinations (For those that made sense). The Price and the Demand is such a basic measure when you define a price in any markets that they are included in every prediction. We did not make a cross comparison of the Month of Year and the Seasons of Year since they say the same but with different granularity. We did a cross comparison both with and without matrix inputs and with a mix of non-matrix and matrix inputs. This is done to determine whether an input makes better sense on matrix form or just as a simple normalized value. 
 
-This includes last hours Price (P), The Demand (D), Wind Speed(WS), Temperature(T), The Hourly Time of Day (ToD), The Day of The Week(DoW), The Month of The Year(MoY), The Season of The Year(SoY).
+This includes last hours Price (P), The Demand (D), Wind Speed(WS), Temperature(T), The Hourly Time of Day (ToD), The Day of The Week(DoW), The Month of The Year(MoY), The Season of The Year(SoY). The (M) is for Matrix input and states whether the input in the seasonal rows(ToD, WoD, MoY, SoY) are on matrix form or not.
 
 \begin{table}[H]
 \centering  % used for centering table
@@ -13,45 +13,83 @@ This includes last hours Price (P), The Demand (D), Wind Speed(WS), Temperature(
 P & D & WS & T & ToD & WoD & MoY & SoY & MAE & Rank\\ [0.5ex] % inserts table 
 %heading
 \hline                  % inserts single horizontal line
- x    & x    & x    & x    & x(M) & x(M) &      & x(M) & 57,12 & \#1 \\
- x    & x    & x    & x    & x    & x    &      & x    & 58,09 & \#2 \\
- x    & x    & x    & x    & x    &      & x    &      & 58,79 & \#3 \\
- x    & x    & x    &      & x(M) & x(M) & x(M) &      & 60,14 & \#4 \\
- x    & x    & x    & x    & x    & x    &      &      & 62,19 & \#5 \\
- x    & x    & x    & x    & x    &      &      & x    & 62,26 & \#6 \\
- x    & x    & x    & x    & x    & x    & x    &      & 62,84 & \#7 \\
- x    & x    & x    & x    & x    & x    &      & x    & 63,94 & \#8 \\
- x    & x    & x    & x    & x    & x    & x    &      & 64,19 & \#9 \\
- x    & x    & x    &      & x    & x    & x    &      & 64,72 & \#10 \\
-\hline %inserts single line
+ x    & x    & x    & x    & x(M) & x(M) &      & x(M) & 57.12 & \#1 \\
+ x    & x    & x    & x    & x(M) & x    &      & x(M) & 58.09 & \#2 \\
+ x    & x    & x    & x    & x(M) &      & x(M) &      & 58.79 & \#3 \\
+ x    & x    & x    &      & x(M) & x(M) & x(M) &      & 60.14 & \#4 \\
+ x    & x    & x    & x    & x(M) & x    &      &      & 62.19 & \#5 \\
+ x    & x    & x    & x    & x(M) &      &      & x(M) & 62.26 & \#6 \\
+ x    & x    & x    & x    & x(M) & x    & x(M) &      & 62.84 & \#7 \\
+ x    & x    & x    & x    & x    & x    &      & x(M) & 63.94 & \#8 \\
+ x    & x    & x    & x    & x    & x(M) & x(M) &      & 64.19 & \#9 \\
+ x    & x    & x    &      & x(M) & x    & x(M) &      & 64.72 & \#10 \\
+ x    & x    & x    &      & x    & x    & x(M) &      & 65.07 & \#11 \\
+ x    & x    & x    & x    & x(M) & x(M) &      &      & 65.95 & \#12 \\
+ x    & x    & x    & x    & x(M) & x(M) & x(M) &      & 66.55 & \#13 \\
+ x    & x    & x    &      & x    &      &      & x(M) & 67.21 & \#14 \\
+ x    & x    & x    & x    & x    & x    &      &      & 67.88 & \#15 \\
+ x    & x    & x    &      & x    & x    &      & x    & 68.21 & \#16 \\
+ x    & x    & x    &      & x(M) & x(M) &      &      & 68.34 & \#17 \\
+ x    & x    & x    &      & x(M) &      &      & x(M) & 68.35 & \#18 \\
+ x    & x    & x    & x    & x    & x    & x    &      & 68.43 & \#19 \\
+ x    & x    & x    & x    & x    &      &      & x(M) & 68.45 & \#20 \\\hline %inserts single line
 \end{tabular}
 }
-\caption{This is the high and low margins for our similar hours comparison.} % title of Table
-\label{table:Top10Prices} % is used to refer this table in the text
+\caption{The top 20 input combinations for price prediction} % title of Table
+\label{table:Top20Prices} % is used to refer this table in the text
 \end{table}
+
+
+If we take a look at the top 20 best input combinations shown in table~\ref{table:Top20Prices} we see some clear tendencies. If we start from the beginning the price and demand are static as mentioned earlier since they are fundamental market forces and thus not a part of this analysis. The next input parameter is the Wind Speed. We see that every input combination in the top 20 includes the wind production and it is therefore a must for the prediction of the energy prices. This is further strengthened by the bottom 10 combinations table~\ref{table:Bottom10Prices} where we only see wind prices in one of the combinations. Also we saw in section~\ref{sec:Price}
+ The Hourly Time of Day (ToD); it is included in every single combination in the top 20. This clearly shows that this input parameter is important for the prediction of the price. This is kind of obvious since what we are predicting is the hourly price and in section~\ref{sec:seasonality}(figure~\ref{fig:price_per_hour}) we saw that the price varied from 190 to between 335. Also the top 7 all have the ToD on matrix form which indicates that this is the best way of representing the ToD.
 
 \begin{table}[H]
 \centering  % used for centering table
 \resizebox{\textwidth}{!}{
-	\begin{tabular}{c c c c c c c c c c c} % centered columns (7 columns)
-	P & D & WS & T & ToD & WoD & MoY & SoY & MAE & Rank\\ [0.5ex] % inserts table 
-	\hline                  % inserts single horizontal line
-	x & x & x & x & x    & x(M) & x(M) &      & 61,95 & \#1 \\ %newPredictions/TEN__MIXEDPrice_Consump_windSpeed_temperatureRow_timeOfDay_weekdaysMATRIX_monthOfYearMATRIX
-	x & x & x & x & x(M) & x    &      & x(M) & 62,76 & \#2 \\ %newPredictions/TEN__MIXEDPrice_Consump_windSpeed_temperatureRow_timeOfDayMATRIX_weekdays",%
-	x & x & x & x & x(M) & x(M) &      & x(M) & 62,87 & \#3 \\ %newPredictions/TEN__MIXEDPrice_Consump_windSpeed_temperatureRow_timeOfDayMATRIX_weekdays_monthOfYearMATRIX",
-	x & x & x &   & x(M) & x    & x(M) &      & 62,99 & \#4 \\ %newPredictions/TEN__MIXEDPrice_Consump_windSpeed_timeOfDayMATRIX_weekdays_monthOfYearMATRIX",
-	x & x & x & x & x(M) & x    & x(M) &      & 64,24 & \#5 \\ %newPredictions/TEN__MATRIX_Price_Consump_windSpeed_temperatureRow_timeOfDay_weekdays_seasonOfYear",
-	x & x & x & x & x(M) & x    &      &      & 65,18 & \#6 \\ %newPredictions/TEN__MIXEDPrice_Consump_windSpeed_temperatureRow_timeOfDayMATRIX_weekdays_seasonOfYearMATRIX",
-	x & x & x & x & x(M) &      & x(M) &      & 65,53 & \#7 \\ %newPredictions/TEN__MIXEDPrice_Consump_windSpeed_temperatureRow_timeOfDayMATRIX_monthOfYearMATRIX",
-	x & x & x & x & x    & x    &      & x(M) & 65,80 & \#8 \\ %newPredictions/TEN__MIXEDPrice_Consump_windSpeed_temperatureRow_timeOfDayMATRIX_seasonOfYearMATRIX",
-	x & x & x & x & x(M) &      &      & x(M) & 67,21 & \#9 \\ %newPredictions/TEN__MIXEDPrice_Consump_windSpeed_temperatureRow_timeOfDay_weekdays_seasonOfYearMATRIX",
-	x & x & x &   & x(M) & x(M) & x(M) &      & 70,25 & \#10 \\ %newPredictions/TEN__MATRIX_Price_Consump_windSpeed_timeOfDay_weekdays_monthOfYear"
-	\hline %inserts single line
-	\end{tabular}
+\begin{tabular}{c c c c c c c c c c c} % centered columns (7 columns)
+P & D & WS & T & ToD & WoD & MoY & SoY & MAE & Rank\\ [0.5ex] % inserts table 
+%heading
+\hline                  % inserts single horizontal line
+ x    & x    &      & x    & x    &      &      & x    & 105.04 & \#133 \\
+ x    & x    & x    &      &      & x(M) & x(M) &      & 105.70 & \#134 \\
+ x    & x    &      &      &      & x(M) &      & x(M) & 107.85 & \#135 \\
+ x    & x    &      & x    & x    &      & x    &      & 108.37 & \#136 \\
+ x    & x    &      & x    &      &      & x    &      & 111.14 & \#137 \\
+ x    & x    &      & x    &      &      & x(M) &      & 111.65 & \#138 \\
+ x    & x    &      & x    &      & x(M) & x(M) &      & 113.56 & \#139 \\
+ x    & x    &      & x    &      &      &      & x    & 115.29 & \#140 \\
+ x    & x    &      &      &      &      & x(M) &      & 115.81 & \#141 \\
+ x    & x    &      & x    &      & x(M) &      & x(M) & 115.83 & \#142 \\
+ x    & x    &      & x    &      & x    & x    &      & 117.17 & \#143 \\
+ x    & x    &      &      &      & x(M) & x(M) &      & 117.34 & \#144 \\
+\end{tabular}
 }
-\caption{Average MAE of ten runs per entry} % title of Table
-\label{table:Top10Average} % is used to refer this table in the text
+\caption{The bottom 10 input combinations for price prediction} % title of Table
+\label{table:Bottom10Prices} % is used to refer this table in the text
 \end{table}
+
+%\begin{table}[H]
+%\centering  % used for centering table
+%\resizebox{\textwidth}{!}{
+%	\begin{tabular}{c c c c c c c c c c c} % centered columns (7 columns)
+%	P & D & WS & T & ToD & WoD & MoY & SoY & MAE & Rank\\ [0.5ex] % inserts table 
+%	\hline                  % inserts single horizontal line
+%	x & x & x & x & x    & x(M) & x(M) &      & 61,95 & \#1 \\ %newPredictions/TEN__MIXEDPrice_Consump_windSpeed_temperatureRow_timeOfDay_weekdaysMATRIX_monthOfYearMATRIX
+%	x & x & x & x & x(M) & x    &      & x(M) & 62,76 & \#2 \\ %newPredictions/TEN__MIXEDPrice_Consump_windSpeed_temperatureRow_timeOfDayMATRIX_weekdays",%
+%	x & x & x & x & x(M) & x(M) &      & x(M) & 62,87 & \#3 \\ %newPredictions/TEN__MIXEDPrice_Consump_windSpeed_temperatureRow_timeOfDayMATRIX_weekdays_monthOfYearMATRIX",
+%	x & x & x &   & x(M) & x    & x(M) &      & 62,99 & \#4 \\ %newPredictions/TEN__MIXEDPrice_Consump_windSpeed_timeOfDayMATRIX_weekdays_monthOfYearMATRIX",
+%	x & x & x & x & x(M) & x    & x(M) &      & 64,24 & \#5 \\ %newPredictions/TEN__MATRIX_Price_Consump_windSpeed_temperatureRow_timeOfDay_weekdays_seasonOfYear",
+%	x & x & x & x & x(M) & x    &      &      & 65,18 & \#6 \\ %newPredictions/TEN__MIXEDPrice_Consump_windSpeed_temperatureRow_timeOfDayMATRIX_weekdays_seasonOfYearMATRIX",
+%	x & x & x & x & x(M) &      & x(M) &      & 65,53 & \#7 \\ %newPredictions/TEN__MIXEDPrice_Consump_windSpeed_temperatureRow_timeOfDayMATRIX_monthOfYearMATRIX",
+%	x & x & x & x & x    & x    &      & x(M) & 65,80 & \#8 \\ %newPredictions/TEN__MIXEDPrice_Consump_windSpeed_temperatureRow_timeOfDayMATRIX_seasonOfYearMATRIX",
+%	x & x & x & x & x(M) &      &      & x(M) & 67,21 & \#9 \\ %newPredictions/TEN__MIXEDPrice_Consump_windSpeed_temperatureRow_timeOfDay_weekdays_seasonOfYearMATRIX",
+%	x & x & x &   & x(M) & x(M) & x(M) &      & 70,25 & \#10 \\ %newPredictions/TEN__MATRIX_Price_Consump_windSpeed_timeOfDay_weekdays_monthOfYear"
+%	\hline %inserts single line
+%	\end{tabular}
+%}
+%\caption{Average MAE of ten runs per entry} % title of Table
+%\label{table:Top10Average} % is used to refer this table in the text
+%\end{table}
 
 \subsubsection{Experiment 2: Trimming}
 \begin{figure}[H]
