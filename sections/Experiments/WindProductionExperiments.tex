@@ -1,117 +1,81 @@
-\subsection{Experimental Results}
-This subsection describes the experiments that uncovers the best combination of hidden layers, neurons and epochs as well as the different strategies. Based on the above analysis of wind production influences the network will be tested with the following input parameters; 1) Wind speed; 2) Air Density; 3) Time of day 4) Temperature and 5) Consumption;. Furthermore, experiments are needed to investigate the statistical inputs as presented in section~\ref{sec:usingStatisticalInput}.
+This subsection describes the experiments that uncovers the best combination of hidden layers, neurons and epochs as well as the different strategies. Based on the above analysis of wind production influences the network will be tested with combinations of the following input parameters:
+
+\begin{itemize}
+\item Wind speed;
+\item Air density;
+\item Consumption;
+\item Time of day (As matrix or not);
+\item Temperature
+\item Wind direction
+\item Last known production
+\item Date
+\end{itemize}
+
+Furthermore, experiments are needed to investigate the statistical inputs as presented in Section~\ref{sec:usingStatisticalInput}. 
 
 \todo{DRAWING OF NETWORK}
 
-I FOUND RECURRENT LINK IN ARTICLE REF ID
+\subsection{Experiment Series One - Selection of input parameters}
+The first experiment series is an attempt to find the best constitution of network input parameters based on the analysis in Section~\ref{sec:windPowerAnalysis}. All test results can be see in Appendix~\ref{sec:windResultsAppendix} and have been carried out naively with only normalization. Since the co-relation between wind production and wind speed is very significant it will always be included as a core input parameter in all test combinations.
 
-Black art --- experimenting with hidden layers, momentum and learning rate. 
+\footnotesize
+\begin{center}
+\begin{longtable}{|c|c|c|c|c|c|c|c|c|c|}
+\hline
+\textbf{WS} & \textbf{AD} & \textbf{C} & \textbf{T} & \textbf{WD} & \textbf{L-P} & \textbf{Mo}& \textbf{ToD} & \textbf{MAE} & \textbf{Rank} \\
+\hline
+\endfirsthead
+\multicolumn{9}{c}%
+{\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
+\hline
+\textbf{WS} & \textbf{AD} & \textbf{C} & \textbf{T} & \textbf{WD} & \textbf{L-P} & \textbf{Mo}& \textbf{ToD} & \textbf{MAE} & \textbf{Rank} \\
+\hline
+\endhead
+\hline \multicolumn{9}{r}{\textit{Continued on next page}} \\
+\endfoot
+\hline
+\endlastfoot
+\arrayrulecolor{light-gray}
+ x &  x &  x &  x &  &  x &  &  &  116.08 & \#1 \\ \hline
+ x &  &  x &  &  &  x &  &  &  118.13 & \#2 \\ \hline
+ x &  &  &  &  &  x &  &  & 119.69 & \#3 \\ \hline
+ x &  &  x &  x &  x &  x &  &  &  119.81 & \#4 \\ \hline
+ x &  x &  x &  x &  x &  x &  &  & 119.88 & \#5 \\ \hline
+ x &  x &  &  x &  &  x &  &  &  122.59 & \#6 \\ \hline
+ x &  &  &  x &  &  x &  &  &  123.08 & \#7 \\ \hline
+ x &  x &  &  &  &  x &  &  &  123.4 & \#8 \\ \hline
+ x &  &  x &  &  x &  x &  &  & 123.7 & \#9 \\ \hline
+ x &  x &  &  &  x &  x &  &  & 124.42 & \#10 \\ \hline
+\caption{Wind Production Input Parameter Test Top 10}
+\end{longtable}
+\label{table:windProdInputParamsTop10}
+\end{center}
+\normalsize
+\todo{see appendix}
 
-\todo{remember to compare temperature inclusion in relation to consumption}
+The results vary from the best MAE at 116.08 to the worst being 489.6. What is obvious from the table in Appendix~\ref{sec:windResultsAppendix} is that date clearly makes the prediction worse. All results from rank 82-128 have month as an input parameter. The month reflects seasonality. In the other end of the scale it is inclusions of the last known production and time of day matrix that ranks the highest. This correspond well with the analysis in Section~\ref{sec:windPowerAnalysis} where the relationship between production and time of day is clear. The usage of the matrix implementation makes the benefit even better because each of the hours has its own value instead of only one value representing all hours (see Section~\ref{sec:Matrix}). The analysis also established that the wind production does not differ much from one hour to the next as which is reflected in the last known production --- more sophisticated attempts with statistic will be in experiments to come. What can come as a surprise is that consumption is not represented better in the top rankings since of its co-relation to the wind production.
+The best ranked combination of parameters will be the basis for all coming experiments. The prediction for 400 hours can be seen in Figure~\ref{fig:bestCombiForecast400Hours}.
 
-\subsubsection{Experiment Series One - Selection of input parameters}
-The first experiment series is an attempt to find the best input parameters of the network. The input parameters to experiment with is wind speed, air density, time of day, consumption and temperature. The most significant tests will be to determine if meteorological factors can stand as a substitute for consumption and if wind direction improves the prediction.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.99\linewidth,natwidth=898,natheight=587]{billeder/productionTendency400Hours.png}
+\caption{Wind production development for 400 hours in 2012}
+\label{fig:bestCombiForecast400Hours}
+\end{figure}   
 
 
-\begin{table}[H]
-\centering  % used for centering table
-\resizebox{\textwidth}{!}{
-\begin{tabular}{c c c c c c c c c c} % centered columns (3 columns)
- & Wind & Air &  &  & Wind & Time & Last & \\ 
-Test & Speed & Dens & Consump & Temp & Direction & of Day & Production & MAE & Rank \\
-[0.5ex] % inserts table 
-%heading
-\hline                  % inserts single horizontal line
-1. & x &  &  &  &  &  &  & 153.6 & 0 \\ %
-2. & x & & x & & & & & 139.8 & 0 \\ 
-3. & x & & x & & & x & & 138.7 & 0 \\
-4. & x & & x & & & x & x & 139.0 & 0 \\ 
-5. & x & & x & & x & x & & 147.7 & 0 \\
-7. & x & & x & x &  &  & x & x 141.8 & 0 \\
-8. & x & x & & & & & & 140.4 & 0 \\
-9. & x & x & & & & x & & 139.2 & 0 \\
-10. & x & x & x & & & x & & 138.3 & 0 \\
-11. & x & x & x & & & x & x & 138.3 & 0 \\ [1ex] % [1ex] adds vertical space
-\hline %inserts single line
-\end{tabular}}
-\caption{Table showing the difference between using consumption and meteorological factors} % title of Table
-\label{table:consumptionInclusionTable} % is used to refer this table in the text
-\end{table}
-
-Since the co-relation between wind production and wind speed is 0.94 it has been tested on its own. The result clearly shows this relationship by only missing the ideal wind production with 143.9 in average in test number 1. Wind speed has been tested in combination with different input parameters. The addition of air density stands out with a MAE of 116.3 which can somehow be expected since it is directly proportional to the wind speed as described in~\ref{sec:airDensity}. 
-
-The table clearly shows that wind direction does not have a correlation to the other parameters and therefore must be omitted in tests to come.
-The importance of the wind production development is described in~\ref{sec:windProductionDev} and to account for this the network has been supplied with the wind production from one hour ago - more sophisticated attempts with statistics will come in other experiments.
-It is obvious that using the consumption is much more accurate than substituting it with just meteorological factors. The wind direction does not give better prediction so this is omitted from the experiments to come.
-
-\todo{The hours can be reflected as described in matrix section. Now each of the values will reflect one hour instead of one value reflecting all of the hours.}
-
-The following experiments will be based on the input parameters:
+The experiments to come will be based on the following input parameters:
 \begin{itemize}
-\item Wind Speed;
-\item Air Density;
-\item Wind production from last hour;
+\item Wind speed;
+\item Air density;
 \item Consumption;
+\item Temperature;
+\item Last known production;
+\item Time of day as a matrix;
 \end{itemize}
 
-
-\subsubsection{Experiment Two - Data Manipulation}
-The first experiment will show the difference in performance due to the manipulation of the time series data set. The three approaches are naive, trimming and matrix. These experiments do not include any statistical features. The point of this experiment is to find the best approach to simple data manipulation as presented in~\ref{sec:DataManipulation}.
-
-\todo{also different size of dataset}
-
-\begin{table}[H]
-\centering  % used for centering table
-\begin{tabular}{c c c c} % centered columns (3 columns)
-ANN Type & MAE & MPE & Rank \\ [0.5ex] % inserts table 
-%heading
-\hline                  % inserts single horizontal line
-ANN Naive & 0 & 0 & 0 \\ % inserting body of the table
-ANN Trimming & 0 & 0 & 0 \\
-ANN Matrix  & 0 & 0 & 0\\
-ANN Matrix and Trimming  & 0 & 0 & 0 \\ 
-ANN Statistical features  & 0 & 0 & 0\\ [1ex] % [1ex] adds vertical space
-\hline %inserts single line
-\end{tabular}
-\caption{Table showing the performance of different data manipulation approaches when all run with 1500 epochs.} % title of Table
-\label{table:dataManipulationApproaches} % is used to refer this table in the text
-\end{table}
-
-\todo{better with or without trimming?}
-
-The purpose is to locate the 
-
-\todo{do 1-12-24 step ahead to show the "carry-with"-error} 
-
-Taking the most naive approach to prediction by simply including the important normalized input parameters and trying to predict the prices for an entire year. 
-
-\subsubsection{Experiment Three - Size of data set}
-
-\subsubsection{Experiment Four - Prediction Strategies}
-Statistics
-
-
-\subsubsection{Experiment Five - Performance Optimization}
-The impact of different Layers/Neurons/Epochs combinations is huge and the results is shown here.
-
-\begin{table}[H]
-\centering  % used for centering table
-\begin{tabular}{c c c c c} % centered columns (3 columns)
-ANN Type & Epochs & MAE & MPE & Rank \\ [0.5ex] % inserts table 
-%heading
-\hline                  % inserts single horizontal line
-ANN & 500 & 0 & 0 & 0 \\ % inserting body of the table
-ANN & 1000 & 0 & 0 & 0 \\
-ANN & 2000 & 0 & 0 & 0 \\
-ANN & 2500 & 0 & 0 & 0 \\ [1ex] % [1ex] adds vertical space
-\hline %inserts single line
-\end{tabular}
-\caption{Table showing the performance of different data manipulation approaches.} % title of Table
-\label{table:performanceOpti} % is used to refer this table in the text
-\end{table} 
-
-\subsection{testlol}
-
+\subsection{Experiment Two - Data Manipulation}
+The above inputs with matrix
 \footnotesize
 \begin{center}
 \begin{longtable}{|c|c|c|c|c|c|c|c|c|c|c|}
@@ -122,7 +86,7 @@ ANN & 2500 & 0 & 0 & 0 \\ [1ex] % [1ex] adds vertical space
 \multicolumn{10}{c}%
 {\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
 \hline
-\textbf{WS} & \textbf{AD} & \textbf{C} & \textbf{T} & \textbf{WD} & \textbf{L-P} & \textbf{D}& \textbf{ToD} & \textbf{M} & \textbf{MAE} & \textbf{Rank} \\
+\textbf{WS} & \textbf{AD} & \textbf{C} & \textbf{T} & \textbf{WD} & \textbf{L-P} & \textbf{Mo}& \textbf{ToD} & \textbf{Ma} & \textbf{MAE} & \textbf{Rank} \\
 \hline
 \endhead
 \hline \multicolumn{10}{r}{\textit{Continued on next page}} \\
@@ -145,156 +109,194 @@ ANN & 2500 & 0 & 0 & 0 \\ [1ex] % [1ex] adds vertical space
 \label{table:windProdInputParamsTop10}
 \end{center}
 \normalsize
-\todo{see appendig}
+\todo{see appendix}
+
+\subsection{Experiment Two - Statistical Inputs}
+Statistics. This subsection is experimenting with the concepts described in Section~\ref{sec:usingStatisticalInput}.
+
+\todo{also different size of dataset}
 
 \footnotesize
 \begin{center}
-\begin{longtable}{|c|c|c|c|c|c|c|c|c|c|c|}
-\caption{Wind Production Input Parameter Test}\\
+\begin{longtable}{|c|c|}
 \hline
-\textbf{WS} & \textbf{AD} & \textbf{C} & \textbf{T} & \textbf{WD} & \textbf{L-P} & \textbf{D}& \textbf{ToD} & \textbf{M} & \textbf{MAE} & \textbf{Rank} \\
+\textbf{Hours} & \textbf{MAE} \\
 \hline
 \endfirsthead
-\multicolumn{10}{c}%
+\multicolumn{2}{c}%
 {\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
 \hline
-\textbf{WS} & \textbf{AD} & \textbf{C} & \textbf{T} & \textbf{WD} & \textbf{L-P} & \textbf{D}& \textbf{ToD} & \textbf{M} & \textbf{MAE} & \textbf{Rank} \\
+\textbf{Hours} & \textbf{MAE} \\
 \hline
 \endhead
-\hline \multicolumn{10}{r}{\textit{Continued on next page}} \\
+\hline \multicolumn{2}{r}{\textit{Continued on next page}} \\
 \endfoot
 \hline
 \endlastfoot
 \arrayrulecolor{light-gray}
- x &  x &  x &  x &  &  x &  &  &  x & 116.08 & \#1 \\ \hline
- x &  &  x &  &  &  x &  &  &  x & 118.13 & \#2 \\ \hline
- x &  &  &  &  &  x &  &  &  x & 119.69 & \#3 \\ \hline
- x &  &  x &  x &  x &  x &  &  &  x & 119.81 & \#4 \\ \hline
- x &  x &  x &  x &  x &  x &  &  &  x & 119.88 & \#5 \\ \hline
- x &  x &  &  x &  &  x &  &  &  x & 122.59 & \#6 \\ \hline
- x &  &  &  x &  &  x &  &  &  x & 123.08 & \#7 \\ \hline
- x &  x &  &  &  &  x &  &  &  x & 123.4 & \#8 \\ \hline
- x &  &  x &  &  x &  x &  &  &  x & 123.7 & \#9 \\ \hline
- x &  x &  &  &  x &  x &  &  &  x & 124.42 & \#10 \\ \hline
- x &  x &  &  x &  x &  x &  &  &  x & 124.97 & \#11 \\ \hline
- x &  x &  &  &  &  x &  &  x &  & 126.54 & \#12 \\ \hline
- x &  x &  x &  &  x &  x &  &  &  x & 127.77 & \#13 \\ \hline
- x &  x &  x &  &  &  x &  &  &  x & 127.81 & \#14 \\ \hline
- x &  &  &  &  &  &  &  &  x & 129.03 & \#15 \\ \hline
- x &  &  &  &  x &  x &  &  &  x & 129.06 & \#16 \\ \hline
- x &  x &  &  x &  x &  x &  &  x &  & 129.58 & \#17 \\ \hline
- x &  &  x &  x &  &  x &  &  &  x & 129.93 & \#18 \\ \hline
- x &  &  &  x &  x &  x &  &  &  x & 130.79 & \#19 \\ \hline
- x &  x &  &  &  &  &  &  &  x & 131.27 & \#20 \\ \hline
- x &  x &  x &  &  x &  &  &  &  x & 132.29 & \#21 \\ \hline
- x &  &  x &  &  &  x &  &  x &  & 132.32 & \#22 \\ \hline
- x &  &  x &  &  x &  x &  &  x &  & 132.88 & \#23 \\ \hline
- x &  x &  x &  &  &  x &  &  x &  & 133.72 & \#24 \\ \hline
- x &  x &  &  x &  &  x &  &  x &  & 134.69 & \#25 \\ \hline
- x &  &  x &  &  x &  &  &  &  x & 135.59 & \#26 \\ \hline
- x &  x &  x &  &  &  &  &  &  x & 136.23 & \#27 \\ \hline
- x &  &  x &  &  &  &  x &  &  x & 137.27 & \#28 \\ \hline
- x &  &  &  &  x &  x &  &  x &  & 138.22 & \#29 \\ \hline
- x &  &  &  x &  &  x &  &  x &  & 138.26 & \#30 \\ \hline
- x &  &  &  &  &  x &  &  x &  & 138.96 & \#31 \\ \hline
- x &  &  &  &  x &  &  x &  &  x & 139.34 & \#32 \\ \hline
- x &  &  &  x &  x &  x &  &  x &  & 139.59 & \#33 \\ \hline
- x &  x &  &  &  x &  &  &  &  x & 140.28 & \#34 \\ \hline
- x &  &  x &  x &  &  x &  &  x &  & 140.41 & \#35 \\ \hline
- x &  x &  x &  &  &  &  &  x &  & 140.5 & \#36 \\ \hline
- x &  x &  x &  x &  x &  &  &  &  x & 141.04 & \#37 \\ \hline
- x &  &  x &  x &  x &  x &  &  x &  & 141.09 & \#38 \\ \hline
- x &  &  x &  &  &  &  &  x &  & 141.67 & \#39 \\ \hline
- x &  &  &  &  &  &  &  x &  & 141.68 & \#40 \\ \hline
- x &  x &  x &  &  x &  x &  &  x &  & 141.87 & \#41 \\ \hline
- x &  &  x &  x &  x &  &  &  &  x & 142.09 & \#42 \\ \hline
- x &  &  &  &  x &  &  &  &  x & 143.29 & \#43 \\ \hline
- x &  x &  x &  &  x &  &  &  x &  & 143.39 & \#44 \\ \hline
- x &  x &  x &  x &  &  &  &  &  x & 143.41 & \#45 \\ \hline
- x &  &  x &  x &  &  &  &  &  x & 143.44 & \#46 \\ \hline
- x &  &  &  &  x &  &  &  x &  & 143.86 & \#47 \\ \hline
- x &  x &  &  &  x &  &  &  x &  & 144.22 & \#48 \\ \hline
- x &  x &  x &  x &  &  &  x &  x &  & 144.42 & \#49 \\ \hline
- x &  &  x &  x &  &  &  &  x &  & 144.79 & \#50 \\ \hline
- x &  &  x &  &  x &  &  &  x &  & 145.1 & \#51 \\ \hline
- x &  &  &  x &  x &  &  &  &  x & 145.3 & \#52 \\ \hline
- x &  x &  &  x &  x &  &  x &  x &  & 145.88 & \#53 \\ \hline
- x &  &  &  x &  &  &  &  x &  & 146.13 & \#54 \\ \hline
- x &  x &  &  &  &  &  x &  x &  & 146.44 & \#55 \\ \hline
- x &  x &  &  &  &  &  &  x &  & 146.71 & \#56 \\ \hline
- x &  &  x &  x &  x &  &  &  x &  & 146.79 & \#57 \\ \hline
- x &  x &  x &  x &  &  &  &  x &  & 146.94 & \#58 \\ \hline
- x &  &  &  x &  x &  &  &  x &  & 147.75 & \#59 \\ \hline
- x &  x &  &  &  x &  x &  &  x &  & 147.81 & \#60 \\ \hline
- x &  &  x &  x &  &  &  x &  &  x & 148.13 & \#61 \\ \hline
- x &  x &  &  x &  &  &  &  x &  & 148.25 & \#62 \\ \hline
- x &  &  &  &  &  x &  x &  &  x & 148.74 & \#63 \\ \hline
- x &  &  x &  &  &  &  &  &  x & 149.69 & \#64 \\ \hline
- x &  &  &  x &  &  &  &  &  x & 150.33 & \#65 \\ \hline
- x &  x &  x &  &  &  &  x &  x &  & 150.57 & \#66 \\ \hline
- x &  &  x &  &  x &  &  x &  x &  & 150.64 & \#67 \\ \hline
- x &  &  &  &  x &  &  x &  x &  & 150.73 & \#68 \\ \hline
- x &  x &  x &  x &  x &  x &  &  x &  & 152.3 & \#69 \\ \hline
- x &  x &  x &  x &  x &  x &  x &  x &  & 153.53 & \#70 \\ \hline
- x &  x &  x &  x &  x &  &  &  x &  & 153.96 & \#71 \\ \hline
- x &  &  x &  &  &  &  x &  x &  & 154.5 & \#72 \\ \hline
- x &  &  &  &  &  &  x &  &  x & 154.91 & \#73 \\ \hline
- x &  x &  &  x &  x &  &  &  &  x & 154.98 & \#74 \\ \hline
- x &  &  x &  x &  x &  x &  x &  &  x & 155.03 & \#75 \\ \hline
- x &  x &  &  x &  x &  &  &  x &  & 155.86 & \#76 \\ \hline
- x &  &  x &  x &  &  x &  x &  &  x & 158.42 & \#77 \\ \hline
- x &  x &  x &  x &  x &  &  x &  x &  & 158.65 & \#78 \\ \hline
- x &  x &  &  x &  &  &  &  &  x & 161.76 & \#79 \\ \hline
- x &  x &  x &  &  x &  &  x &  x &  & 162.46 & \#80 \\ \hline
- x &  x &  x &  x &  &  x &  &  x &  & 162.7 & \#81 \\ \hline
- x &  x &  &  x &  &  x &  x &  x &  & 162.97 & \#82 \\ \hline
- x &  x &  &  x &  &  &  x &  &  x & 164.48 & \#83 \\ \hline
- x &  x &  &  x &  &  x &  x &  &  x & 164.59 & \#84 \\ \hline
- x &  &  &  x &  &  x &  x &  x &  & 165.33 & \#85 \\ \hline
- x &  &  x &  &  &  x &  x &  x &  & 165.54 & \#86 \\ \hline
- x &  x &  x &  x &  &  x &  x &  x &  & 165.96 & \#87 \\ \hline
- x &  &  x &  x &  x &  &  x &  &  x & 166.0 & \#88 \\ \hline
- x &  x &  &  &  x &  x &  x &  x &  & 166.94 & \#89 \\ \hline
- x &  x &  x &  &  &  x &  x &  &  x & 167.92 & \#90 \\ \hline
- x &  x &  x &  &  x &  x &  x &  x &  & 168.79 & \#91 \\ \hline
- x &  &  x &  x &  x &  &  x &  x &  & 169.58 & \#92 \\ \hline
- x &  &  &  &  &  x &  x &  x &  & 171.32 & \#93 \\ \hline
- x &  &  &  &  x &  x &  x &  x &  & 175.0 & \#94 \\ \hline
- x &  &  x &  x &  &  x &  x &  x &  & 176.33 & \#95 \\ \hline
- x &  &  &  x &  x &  x &  x &  &  x & 177.15 & \#96 \\ \hline
- x &  x &  &  x &  x &  x &  x &  x &  & 177.4 & \#97 \\ \hline
- x &  &  &  x &  &  &  x &  &  x & 177.63 & \#98 \\ \hline
- x &  x &  &  &  x &  x &  x &  &  x & 178.74 & \#99 \\ \hline
- x &  x &  x &  &  x &  &  x &  &  x & 178.96 & \#100 \\ \hline
- x &  x &  x &  x &  &  &  x &  &  x & 178.99 & \#101 \\ \hline
- x &  &  x &  &  x &  &  x &  &  x & 179.78 & \#102 \\ \hline
- x &  &  &  x &  x &  &  x &  &  x & 179.86 & \#103 \\ \hline
- x &  x &  &  &  &  &  x &  &  x & 181.99 & \#104 \\ \hline
- x &  x &  x &  &  &  &  x &  &  x & 182.83 & \#105 \\ \hline
- x &  &  x &  x &  x &  x &  x &  x &  & 185.07 & \#106 \\ \hline
- x &  x &  x &  x &  x &  &  x &  &  x & 188.81 & \#107 \\ \hline
- x &  x &  &  &  &  x &  x &  &  x & 190.13 & \#108 \\ \hline
- x &  &  x &  x &  &  &  x &  x &  & 191.88 & \#109 \\ \hline
- x &  x &  x &  x &  &  x &  x &  &  x & 195.7 & \#110 \\ \hline
- x &  &  &  &  &  &  x &  x &  & 198.85 & \#111 \\ \hline
- x &  x &  &  x &  x &  x &  x &  &  x & 199.19 & \#112 \\ \hline
- x &  &  &  x &  x &  x &  x &  x &  & 199.61 & \#113 \\ \hline
- x &  &  &  x &  x &  &  x &  x &  & 202.94 & \#114 \\ \hline
- x &  &  x &  &  x &  x &  x &  x &  & 207.87 & \#115 \\ \hline
- x &  x &  x &  &  x &  x &  x &  &  x & 209.94 & \#116 \\ \hline
- x &  x &  x &  &  &  x &  x &  x &  & 210.27 & \#117 \\ \hline
- x &  x &  x &  x &  x &  x &  x &  &  x & 220.38 & \#118 \\ \hline
- x &  &  x &  &  x &  x &  x &  &  x & 231.28 & \#119 \\ \hline
- x &  x &  &  x &  x &  &  x &  &  x & 231.32 & \#120 \\ \hline
- x &  &  &  &  x &  x &  x &  &  x & 233.58 & \#121 \\ \hline
- x &  x &  &  &  x &  &  x &  &  x & 265.71 & \#122 \\ \hline
- x &  x &  &  &  &  x &  x &  x &  & 277.09 & \#123 \\ \hline
- x &  &  x &  &  &  x &  x &  &  x & 284.25 & \#124 \\ \hline
- x &  &  &  x &  &  x &  x &  &  x & 291.61 & \#125 \\ \hline
- x &  &  &  x &  &  &  x &  x &  & 332.74 & \#126 \\ \hline
- x &  x &  &  &  x &  &  x &  x &  & 378.23 & \#127 \\ \hline
- x &  x &  &  x &  &  &  x &  x &  & 489.6 & \#128 \\ \hline
+20 & 118,15 \\ \hline
+8 & 119,58 \\ \hline
+12 & 121,54 \\ \hline
+4 & 122,51  \\ \hline
+16 & 123,87 \\ \hline
+24 & 124,89 \\ \hline
+6 & 129,32 \\ \hline
+2 & 137,55 \\ \hline
+\caption{Prediction With Historical Volatility and different hours}
 \end{longtable}
-\label{table:windProdInputParams}
+\label{table:historicalVoltalityHours}
 \end{center}
 \normalsize
+
+\begin{center}
+\begin{longtable}{|c|c|}
+\hline
+\textbf{Hours} & \textbf{MAE} \\
+\hline
+\endfirsthead
+\multicolumn{2}{c}%
+{\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
+\hline
+\textbf{Hours} & \textbf{MAE}\\
+\hline
+\endhead
+\hline \multicolumn{2}{r}{\textit{Continued on next page}} \\
+\endfoot
+\hline
+\endlastfoot
+\arrayrulecolor{light-gray}
+2 & 114,71 \\ \hline
+8 & 116,09 \\ \hline
+12 & 117,33\\ \hline
+4 & 117,49  \\ \hline
+16& 118,09  \\ \hline
+20 & 119,35 \\ \hline
+6 & 120,64 \\ \hline
+24 & 121,67 \\ \hline
+\caption{Prediction With Skewness and different hours}
+\end{longtable}
+\label{table:skewnessHours}
+\end{center}
+\normalsize
+
+
+\begin{center}
+\begin{longtable}{|c|c|}
+\hline
+\textbf{Hours} & \textbf{MAE} \\
+\hline
+\endfirsthead
+\multicolumn{2}{c}%
+{\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
+\hline
+\textbf{Hours} & \textbf{MAE} \\
+\hline
+\endhead
+\hline \multicolumn{2}{r}{\textit{Continued on next page}} \\
+\endfoot
+\hline
+\endlastfoot
+\arrayrulecolor{light-gray}
+24 & 119,73 \\ \hline
+12 & 126,62 \\ \hline
+20 & 126,84 \\ \hline
+16 & 129,87 \\ \hline
+6 & 135,56 \\ \hline
+4 & 140,18 \\ \hline
+8 & 141,36 \\ \hline
+2 & 146,13 \\ \hline
+\caption{Curve Analysis on different hours}
+\end{longtable}
+\label{table:curveAnalysisHours}
+\end{center}
+\normalsize
+
+\begin{center}
+\begin{longtable}{|c|c|}
+\hline
+\textbf{Hours} & \textbf{MAE} \\
+\hline
+\endfirsthead
+\multicolumn{2}{c}%
+{\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
+\hline
+\textbf{Hours} & \textbf{MAE} \\
+\hline
+\endhead
+\hline \multicolumn{2}{r}{\textit{Continued on next page}} \\
+\endfoot
+\hline
+\endlastfoot
+\arrayrulecolor{light-gray}
+Skewness & 114,71 \\ \hline
+Volatility & 118,15 \\ \hline
+Scatter & 118,61 \\ \hline
+Curve Analysis & 119,73 \\ \hline
+\caption{Comparison of the approaches}
+\end{longtable}
+\label{table:comparisonStatistics}
+\end{center}
+\normalsize
+
+\todo{say something clever about them}.
+Also tried scatter as presented~\cite{singhal2011electricity}. This achieved a MAE of 118.61. A combination of the approaches is illustrated in Table~\ref{table:idealCombination}.
+
+\begin{center}
+\begin{longtable}{|c|c|c|}
+\hline
+\textbf{Hours} & \textbf{MAE} & \textbf{Rank} \\
+\hline
+\endfirsthead
+\multicolumn{3}{c}%
+{\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
+\hline
+\textbf{Hours} & \textbf{MAE} & \textbf{Rank} \\
+\hline
+\endhead
+\hline \multicolumn{3}{r}{\textit{Continued on next page}} \\
+\endfoot
+\hline
+\endlastfoot
+\arrayrulecolor{light-gray}
+2 & 114.71 & \#1 \\ \hline
+\caption{Ideal combination}
+\end{longtable}
+\label{table:idealCombination}
+\end{center}
+\normalsize
+
+
+
+
+
+
+\todo{better with or without trimming?}
+
+
+\todo{do 1-12-24 step ahead to show the "carry-with"-error} 
+
+
+\subsection{Experiment Three - Prediction Strategies}
+
+\subsection{Experiment Four - Black Box Optimization}
+Statistics
+
+
+\subsection{Experiment Five - Performance Optimization}
+The impact of different Layers/Neurons/Epochs combinations is huge and the results is shown here.
+
+\begin{table}[H]
+\centering  % used for centering table
+\begin{tabular}{c c c c c} % centered columns (3 columns)
+ANN Type & Epochs & MAE & MPE & Rank \\ [0.5ex] % inserts table 
+%heading
+\hline                  % inserts single horizontal line
+ANN & 500 & 0 & 0 & 0 \\ % inserting body of the table
+ANN & 1000 & 0 & 0 & 0 \\
+ANN & 2000 & 0 & 0 & 0 \\
+ANN & 2500 & 0 & 0 & 0 \\ [1ex] % [1ex] adds vertical space
+\hline %inserts single line
+\end{tabular}
+\caption{Table showing the performance of different data manipulation approaches.} % title of Table
+\label{table:performanceOpti} % is used to refer this table in the text
+\end{table} 
