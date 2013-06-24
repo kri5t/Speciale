@@ -1,189 +1,58 @@
 \subsection{Experimental results}
-This section contains experimental results to find the best possible price predicting solution. The results are divided into 5 experiments. The first experiment finds the best combination of input parameters for the network. These input paramters count meteorological, social and seasonal factors we indentified in section~\ref{sec:Price}. The next experiment indentifies the need for trimming and reasons why it is needed in this particular dataset. The third experiment tests different statistical strategies to incorporate historical prices as a part of the dataset. This includes historical prices, curve behaviour analysis, skewness analysis and historical EWMA(Exponentially-Weighted Moving Average). The fourth experiment takes care of the Artificial Neural Network parameters. This includes black-box optimization like pruning of the network and optimization of epochs.
+This section contains experimental results to find the best possible price predicting solution. The results are divided into 5 experiments. The first experiment finds the best combination of input parameters for the network. These input parameters count meteorological, social and seasonal factors we identified in section~\ref{sec:Price}. The next experiment identifies the need for trimming and reasons why it is needed in this particular dataset. The third experiment tests different statistical strategies to incorporate historical prices as a part of the dataset. This includes historical prices, curve behavior analysis, skewness analysis and historical EWMA(Exponentially-Weighted Moving Average). The fourth experiment takes care of the Artificial Neural Network parameters. This includes black-box optimization like pruning of the network and optimization of epochs.
 
 \subsubsection{Experiment 1: Inputs}
-In this section we experimented with the basic input parameters that we indentified in section~\ref{sec:Price}. This includes last hours Price (Price), The Demand (Demand), Wind Speed, Temperature, The Hourly Time of Day (Time of Day), The Day of The Week(Weekdays), The Month of The Year(Months), The Season of The Year(Seasons).
+In this section we experimented with the basic input parameters that we identified in section~\ref{sec:Price}. We did a cross comparison of all the inputs and possible combinations (For those that made sense). The Price and the Demand is such a basic measure when you define a price in any markets that they are included in every prediction. We did not make a cross comparison of the Month of Year and the Seasons of Year since they say the same thing more or less. We did a cross comparison both with and without 
+
+This includes last hours Price (P), The Demand (D), Wind Speed(WS), Temperature(T), The Hourly Time of Day (ToD), The Day of The Week(DoW), The Month of The Year(MoY), The Season of The Year(SoY).
 
 \begin{table}[H]
 \centering  % used for centering table
 \resizebox{\textwidth}{!}{
 \begin{tabular}{c c c c c c c c c c c} % centered columns (7 columns)
-Price & Demand & Wind speed & Temperature & Time of day & Weekdays & Months & Seasons & Matrix & MAE & Rank\\ [0.5ex] % inserts table 
+P & D & WS & T & ToD & WoD & MoY & SoY & MAE & Rank\\ [0.5ex] % inserts table 
 %heading
 \hline                  % inserts single horizontal line
- x    & x    & x    & x    & x(M) & x(M) &      & x(M) & 57.12 & \#1 \\
- x    & x    & x    & x    & x    & x    &      & x    & 58.09 & \#2 \\
- x    & x    & x    & x    & x    &      & x    &      & 58.79 & \#3 \\
- x    & x    & x    &      & x(M) & x(M) & x(M) &      & 60.14 & \#4 \\
- x    & x    & x    & x    & x    & x    &      &      & 62.19 & \#5 \\
- x    & x    & x    & x    & x    &      &      & x    & 62.26 & \#6 \\
- x    & x    & x    & x    & x    & x    & x    &      & 62.84 & \#7 \\
- x    & x    & x    & x    & x    & x    &      & x    & 63.94 & \#8 \\
- x    & x    & x    & x    & x    & x    & x    &      & 64.19 & \#9 \\
- x    & x    & x    &      & x    & x    & x    &      & 64.72 & \#10 \\
- x    & x    & x    &      & x    & x    & x    &      & 65.07 & \#11 \\
- x    & x    & x    & x    & x(M) & x(M) &      &      & 65.95 & \#12 \\
- x    & x    & x    & x    & x(M) & x(M) & x(M) &      & 66.55 & \#13 \\
- x    & x    & x    &      & x    &      &      & x    & 67.21 & \#14 \\
- x    & x    & x    & x    & x    & x    &      &      & 67.88 & \#15 \\
- x    & x    & x    &      & x    & x    &      & x    & 68.21 & \#16 \\
- x    & x    & x    &      & x(M) & x(M) &      &      & 68.34 & \#17 \\
- x    & x    & x    &      & x(M) &      &      & x(M) & 68.35 & \#18 \\
- x    & x    & x    & x    & x    & x    & x    &      & 68.43 & \#19 \\
- x    & x    & x    & x    & x    &      &      & x    & 68.45 & \#20 \\
- x    & x    & x    &      & x    &      &      &      & 69.09 & \#21 \\
- x    & x    & x    & x    &      & x    &      &      & 69.14 & \#22 \\
- x    & x    & x    &      & x    &      & x    &      & 69.34 & \#23 \\
- x    & x    & x    & x    & x    & x    & x    &      & 69.37 & \#24 \\
- x    & x    & x    & x    & x(M) &      &      & x(M) & 69.46 & \#25 \\
- x    & x    & x    & x    & x    & x    & x    &      & 69.47 & \#26 \\
- x    & x    & x    & x    &      & x(M) &      &      & 69.50 & \#27 \\
- x    & x    & x    & x    & x    &      &      &      & 69.62 & \#28 \\
- x    & x    & x    & x    &      & x    & x    &      & 69.70 & \#29 \\
- x    & x    & x    & x    & x    &      &      & x    & 69.71 & \#30 \\
- x    & x    & x    &      & x    &      &      & x    & 69.75 & \#31 \\
- x    & x    & x    & x    & x    &      & x    &      & 69.82 & \#32 \\
- x    & x    & x    &      &      &      &      &      & 69.90 & \#33 \\
- x    & x    & x    & x    &      & x    & x    &      & 70.29 & \#34 \\
- x    & x    & x    &      & x    & x    & x    &      & 70.58 & \#35 \\
- x    & x    & x    & x    & x    & x    &      & x    & 70.75 & \#36 \\
- x    & x    & x    &      & x    & x    &      & x    & 70.96 & \#37 \\
- x    & x    & x    & x    &      &      &      &      & 71.31 & \#38 \\
- x    & x    &      & x    & x(M) & x(M) &      &      & 71.39 & \#39 \\
- x    & x    & x    &      & x    & x    &      &      & 71.49 & \#40 \\
- x    & x    & x    & x    &      &      &      &      & 71.58 & \#41 \\
- x    & x    & x    & x    &      & x    &      & x    & 71.74 & \#42 \\
- x    & x    & x    &      & x(M) &      & x(M) &      & 71.81 & \#43 \\
- x    & x    & x    &      & x(M) & x(M) &      & x(M) & 71.89 & \#44 \\
- x    & x    & x    & x    & x    & x    &      & x    & 71.92 & \#45 \\
- x    & x    & x    &      & x    &      &      & x    & 72.70 & \#46 \\
- x    & x    & x    &      & x    & x    &      & x    & 72.74 & \#47 \\
- x    & x    & x    & x    & x(M) &      &      &      & 73.70 & \#48 \\
- x    & x    & x    & x    &      & x    & x    &      & 73.80 & \#49 \\
- x    & x    & x    & x    &      & x(M) & x(M) &      & 74.19 & \#50 \\
- x    & x    & x    & x    & x    &      & x    &      & 74.29 & \#51 \\
- x    & x    & x    &      & x    & x    &      &      & 74.56 & \#52 \\
- x    & x    & x    &      & x    & x    & x    &      & 74.89 & \#53 \\
- x    & x    & x    &      & x    & x    &      & x    & 75.25 & \#54 \\
- x    & x    & x    & x    &      & x(M) &      & x(M) & 75.31 & \#55 \\
- x    & x    & x    & x    & x    & x    & x    &      & 75.40 & \#56 \\
- x    & x    & x    & x    & x    & x    &      &      & 75.45 & \#57 \\
- x    & x    & x    &      &      &      &      & x(M) & 75.52 & \#58 \\
- x    & x    & x    &      &      & x    &      &      & 75.63 & \#59 \\
- x    & x    & x    &      & x(M) &      &      &      & 75.77 & \#60 \\
- x    & x    & x    & x    &      & x    &      & x    & 76.12 & \#61 \\
- x    & x    & x    & x    &      &      & x(M) &      & 76.18 & \#62 \\
- x    & x    & x    & x    & x    & x    &      & x    & 76.19 & \#63 \\
- x    & x    & x    &      &      &      &      &      & 76.32 & \#64 \\
- x    & x    & x    &      & x    &      & x    &      & 76.39 & \#65 \\
- x    & x    & x    & x    & x(M) &      & x(M) &      & 77.70 & \#66 \\
- x    & x    & x    &      & x    & x    & x    &      & 77.72 & \#67 \\
- x    & x    & x    & x    & x    &      & x    &      & 78.05 & \#68 \\
- x    & x    & x    & x    &      & x    &      & x    & 78.49 & \#69 \\
- x    & x    &      & x    & x(M) & x(M) &      & x(M) & 78.57 & \#70 \\
- x    & x    & x    & x    & x    &      &      & x    & 78.69 & \#71 \\
- x    & x    & x    &      & x    & x    &      & x    & 78.74 & \#72 \\
- x    & x    & x    &      & x    & x    &      &      & 78.88 & \#73 \\
- x    & x    &      & x    & x    & x    &      &      & 79.01 & \#74 \\
- x    & x    &      &      & x(M) & x(M) & x(M) &      & 79.71 & \#75 \\
- x    & x    & x    & x    &      &      & x    &      & 79.89 & \#76 \\
- x    & x    & x    &      &      & x(M) &      & x(M) & 80.20 & \#77 \\
- x    & x    & x    & x    & x    & x    &      & x    & 81.11 & \#78 \\
- x    & x    &      &      &      &      &      &      & 81.28 & \#79 \\
- x    & x    & x    & x    &      & x    &      & x    & 81.34 & \#80 \\
- x    & x    &      &      & x(M) & x(M) &      & x(M) & 81.58 & \#81 \\
- x    & x    & x    & x    &      &      &      & x(M) & 82.03 & \#82 \\
- x    & x    & x    &      & x    & x    & x    &      & 82.04 & \#83 \\
- x    & x    &      & x    & x    &      &      &      & 82.29 & \#84 \\
- x    & x    & x    &      &      & x(M) &      &      & 82.32 & \#85 \\
- x    & x    &      & x    &      &      &      &      & 82.72 & \#86 \\
- x    & x    &      &      & x    &      &      &      & 83.35 & \#87 \\
- x    & x    & x    &      & x    &      & x    &      & 83.82 & \#88 \\
- x    & x    & x    &      & x    & x    &      & x    & 84.08 & \#89 \\
- x    & x    &      & x    & x(M) & x(M) & x(M) &      & 84.50 & \#90 \\
- x    & x    &      &      & x(M) & x(M) &      &      & 85.15 & \#91 \\
- x    & x    &      & x    & x(M) &      &      & x(M) & 85.51 & \#92 \\
- x    & x    & x    &      &      &      & x    &      & 85.55 & \#93 \\
- x    & x    & x    &      &      & x    &      & x    & 85.57 & \#94 \\
- x    & x    & x    &      &      &      &      & x    & 85.66 & \#95 \\
- x    & x    & x    &      & x    &      & x    &      & 85.77 & \#96 \\
- x    & x    & x    &      &      & x    & x    &      & 85.99 & \#97 \\
- x    & x    &      &      & x    & x    &      &      & 86.00 & \#98 \\
- x    & x    & x    &      & x    &      &      & x    & 86.13 & \#99 \\
- x    & x    &      & x    &      & x    &      &      & 86.33 & \#100 \\
- x    & x    &      &      & x(M) &      &      & x(M) & 87.00 & \#101 \\
- x    & x    & x    &      &      & x    &      & x    & 87.63 & \#102 \\
- x    & x    & x    & x    &      & x    & x    &      & 87.87 & \#103 \\
- x    & x    &      &      &      & x    &      &      & 87.89 & \#104 \\
- x    & x    &      & x    &      &      &      &      & 87.94 & \#105 \\
- x    & x    &      &      &      &      &      &      & 89.03 & \#106 \\
- x    & x    & x    &      &      & x    & x    &      & 89.14 & \#107 \\
- x    & x    & x    & x    &      &      &      & x    & 89.55 & \#108 \\
- x    & x    &      &      & x    & x    & x    &      & 90.73 & \#109 \\
- x    & x    &      & x    & x(M) &      &      &      & 91.06 & \#110 \\
- x    & x    &      &      & x(M) &      &      &      & 91.23 & \#111 \\
- x    & x    &      &      &      &      &      & x(M) & 91.67 & \#112 \\
- x    & x    & x    &      &      & x    &      & x    & 91.91 & \#113 \\
- x    & x    & x    &      &      & x    & x    &      & 92.65 & \#114 \\
- x    & x    &      & x    & x    & x    &      & x    & 92.95 & \#115 \\
- x    & x    & x    &      &      &      & x(M) &      & 93.63 & \#116 \\
- x    & x    & x    &      &      & x    & x    &      & 94.58 & \#117 \\
- x    & x    &      &      &      &      &      & x    & 96.70 & \#118 \\
- x    & x    &      &      &      & x(M) &      &      & 96.78 & \#119 \\
- x    & x    &      &      & x    &      &      & x    & 97.09 & \#120 \\
- x    & x    &      & x    & x    & x    & x    &      & 98.17 & \#121 \\
- x    & x    &      &      & x    & x    &      & x    & 99.10 & \#122 \\
- x    & x    &      &      &      &      & x    &      & 99.38 & \#123 \\
- x    & x    &      &      & x    &      & x    &      & 99.78 & \#124 \\
- x    & x    & x    &      &      & x    &      & x    & 100.63 & \#125 \\
- x    & x    &      & x    &      &      &      & x(M) & 102.76 & \#126 \\
- x    & x    &      & x    & x(M) &      & x(M) &      & 103.01 & \#127 \\
- x    & x    &      &      &      & x    & x    &      & 103.56 & \#128 \\
- x    & x    &      &      &      & x    &      & x    & 103.71 & \#129 \\
- x    & x    &      & x    &      & x    &      & x    & 104.19 & \#130 \\
- x    & x    &      & x    &      & x(M) &      &      & 104.33 & \#131 \\
- x    & x    &      &      & x(M) &      & x(M) &      & 104.93 & \#132 \\
- x    & x    &      & x    & x    &      &      & x    & 105.04 & \#133 \\
- x    & x    & x    &      &      & x(M) & x(M) &      & 105.70 & \#134 \\
- x    & x    &      &      &      & x(M) &      & x(M) & 107.85 & \#135 \\
- x    & x    &      & x    & x    &      & x    &      & 108.37 & \#136 \\
- x    & x    &      & x    &      &      & x    &      & 111.14 & \#137 \\
- x    & x    &      & x    &      &      & x(M) &      & 111.65 & \#138 \\
- x    & x    &      & x    &      & x(M) & x(M) &      & 113.56 & \#139 \\
- x    & x    &      & x    &      &      &      & x    & 115.29 & \#140 \\
- x    & x    &      &      &      &      & x(M) &      & 115.81 & \#141 \\
- x    & x    &      & x    &      & x(M) &      & x(M) & 115.83 & \#142 \\
- x    & x    &      & x    &      & x    & x    &      & 117.17 & \#143 \\
- x    & x    &      &      &      & x(M) & x(M) &      & 117.34 & \#144 \\
+ x    & x    & x    & x    & x(M) & x(M) &      & x(M) & 57,12 & \#1 \\
+ x    & x    & x    & x    & x    & x    &      & x    & 58,09 & \#2 \\
+ x    & x    & x    & x    & x    &      & x    &      & 58,79 & \#3 \\
+ x    & x    & x    &      & x(M) & x(M) & x(M) &      & 60,14 & \#4 \\
+ x    & x    & x    & x    & x    & x    &      &      & 62,19 & \#5 \\
+ x    & x    & x    & x    & x    &      &      & x    & 62,26 & \#6 \\
+ x    & x    & x    & x    & x    & x    & x    &      & 62,84 & \#7 \\
+ x    & x    & x    & x    & x    & x    &      & x    & 63,94 & \#8 \\
+ x    & x    & x    & x    & x    & x    & x    &      & 64,19 & \#9 \\
+ x    & x    & x    &      & x    & x    & x    &      & 64,72 & \#10 \\
 \hline %inserts single line
 \end{tabular}
 }
 \caption{This is the high and low margins for our similar hours comparison.} % title of Table
-\label{table:similarHoursLimits} % is used to refer this table in the text
+\label{table:Top10Prices} % is used to refer this table in the text
 \end{table}
 
 \begin{table}[H]
 \centering  % used for centering table
 \resizebox{\textwidth}{!}{
 	\begin{tabular}{c c c c c c c c c c c} % centered columns (7 columns)
-	Price & Consumption & Wind speed & Temperature & Time of day & Weekdays & Months & Seasons & MAE & Rank\\ [0.5ex] % inserts table 
+	P & D & WS & T & ToD & WoD & MoY & SoY & MAE & Rank\\ [0.5ex] % inserts table 
 	\hline                  % inserts single horizontal line
-	x & x & x & x & x    & x(M) & x(M) &      & 61.95 & \#1 \\ %newPredictions/TEN__MIXEDPrice_Consump_windSpeed_temperatureRow_timeOfDay_weekdaysMATRIX_monthOfYearMATRIX
-	x & x & x & x & x(M) & x    &      & x(M) & 62.76 & \#2 \\ %newPredictions/TEN__MIXEDPrice_Consump_windSpeed_temperatureRow_timeOfDayMATRIX_weekdays",%
-	x & x & x & x & x(M) & x(M) &      & x(M) & 62.87 & \#3 \\ %newPredictions/TEN__MIXEDPrice_Consump_windSpeed_temperatureRow_timeOfDayMATRIX_weekdays_monthOfYearMATRIX",
-	x & x & x &   & x(M) & x    & x(M) &      & 62.99 & \#4 \\ %newPredictions/TEN__MIXEDPrice_Consump_windSpeed_timeOfDayMATRIX_weekdays_monthOfYearMATRIX",
-	x & x & x & x & x(M) & x    & x(M) &      & 64.24 & \#5 \\ %newPredictions/TEN__MATRIX_Price_Consump_windSpeed_temperatureRow_timeOfDay_weekdays_seasonOfYear",
-	x & x & x & x & x(M) & x    &      &      & 65.18 & \#6 \\ %newPredictions/TEN__MIXEDPrice_Consump_windSpeed_temperatureRow_timeOfDayMATRIX_weekdays_seasonOfYearMATRIX",
-	x & x & x & x & x(M) &      & x(M) &      & 65.53 & \#7 \\ %newPredictions/TEN__MIXEDPrice_Consump_windSpeed_temperatureRow_timeOfDayMATRIX_monthOfYearMATRIX",
-	x & x & x & x & x    & x    &      & x(M) & 65.80 & \#8 \\ %newPredictions/TEN__MIXEDPrice_Consump_windSpeed_temperatureRow_timeOfDayMATRIX_seasonOfYearMATRIX",
-	x & x & x & x & x(M) &      &      & x(M) & 67.21 & \#9 \\ %newPredictions/TEN__MIXEDPrice_Consump_windSpeed_temperatureRow_timeOfDay_weekdays_seasonOfYearMATRIX",
-	x & x & x &   & x(M) & x(M) & x(M) &      & 70.25 & \#10 \\ %newPredictions/TEN__MATRIX_Price_Consump_windSpeed_timeOfDay_weekdays_monthOfYear"
+	x & x & x & x & x    & x(M) & x(M) &      & 61,95 & \#1 \\ %newPredictions/TEN__MIXEDPrice_Consump_windSpeed_temperatureRow_timeOfDay_weekdaysMATRIX_monthOfYearMATRIX
+	x & x & x & x & x(M) & x    &      & x(M) & 62,76 & \#2 \\ %newPredictions/TEN__MIXEDPrice_Consump_windSpeed_temperatureRow_timeOfDayMATRIX_weekdays",%
+	x & x & x & x & x(M) & x(M) &      & x(M) & 62,87 & \#3 \\ %newPredictions/TEN__MIXEDPrice_Consump_windSpeed_temperatureRow_timeOfDayMATRIX_weekdays_monthOfYearMATRIX",
+	x & x & x &   & x(M) & x    & x(M) &      & 62,99 & \#4 \\ %newPredictions/TEN__MIXEDPrice_Consump_windSpeed_timeOfDayMATRIX_weekdays_monthOfYearMATRIX",
+	x & x & x & x & x(M) & x    & x(M) &      & 64,24 & \#5 \\ %newPredictions/TEN__MATRIX_Price_Consump_windSpeed_temperatureRow_timeOfDay_weekdays_seasonOfYear",
+	x & x & x & x & x(M) & x    &      &      & 65,18 & \#6 \\ %newPredictions/TEN__MIXEDPrice_Consump_windSpeed_temperatureRow_timeOfDayMATRIX_weekdays_seasonOfYearMATRIX",
+	x & x & x & x & x(M) &      & x(M) &      & 65,53 & \#7 \\ %newPredictions/TEN__MIXEDPrice_Consump_windSpeed_temperatureRow_timeOfDayMATRIX_monthOfYearMATRIX",
+	x & x & x & x & x    & x    &      & x(M) & 65,80 & \#8 \\ %newPredictions/TEN__MIXEDPrice_Consump_windSpeed_temperatureRow_timeOfDayMATRIX_seasonOfYearMATRIX",
+	x & x & x & x & x(M) &      &      & x(M) & 67,21 & \#9 \\ %newPredictions/TEN__MIXEDPrice_Consump_windSpeed_temperatureRow_timeOfDay_weekdays_seasonOfYearMATRIX",
+	x & x & x &   & x(M) & x(M) & x(M) &      & 70,25 & \#10 \\ %newPredictions/TEN__MATRIX_Price_Consump_windSpeed_timeOfDay_weekdays_monthOfYear"
 	\hline %inserts single line
 	\end{tabular}
 }
 \caption{Average MAE of ten runs per entry} % title of Table
-\label{table:similarHoursLimits} % is used to refer this table in the text
+\label{table:Top10Average} % is used to refer this table in the text
 \end{table}
+
 \subsubsection{Experiment 2: Trimming}
 \begin{figure}[H]
 \centering
@@ -205,26 +74,26 @@ Price & Demand & Wind speed & Temperature & Time of day & Weekdays & Months & Se
 	\begin{tabular}{c c c c c c} % centered columns (7 columns)
 	1PTrim & 2PTrim & 3PTrim & 4PTrim & 5PTrim & Number\\ [0.5ex] % inserts table 
 	\hline                  % inserts single horizontal line
-	47.21 & 42.90 & 44.48 & 42.46 & 41.79 & \#1 \\
-	46.15 & 43.67 & 43.07 & 39.16 & 40.28 & \#2 \\
-	47.14 & 45.10 & 43.38 & 40.50 & 39.41 & \#3 \\
-	46.70 & 43.96 & 43.21 & 40.03 & 40.29 & \#4 \\
-	45.96 & 43.25 & 45.51 & 40.74 & 40.42 & \#5 \\
-	47.27 & 45.96 & 44.98 & 41.39 & 39.98 & \#6 \\
-	45.93 & 44.66 & 43.39 & 41.02 & 40.40 & \#7 \\
-	46.64 & 42.69 & 44.48 & 41.69 & 40.61 & \#8 \\
-	45.98 & 44.51 & 43.71 & 40.74 & 41.08 & \#9 \\
-	45.60 & 46.07 & 45.81 & 42.52 & 41.32 & \#10 \\
+	47,21 & 42,90 & 44,48 & 42,46 & 41,79 & \#1 \\
+	46,15 & 43,67 & 43,07 & 39,16 & 40,28 & \#2 \\
+	47,14 & 45,10 & 43,38 & 40,50 & 39,41 & \#3 \\
+	46,70 & 43,96 & 43,21 & 40,03 & 40,29 & \#4 \\
+	45,96 & 43,25 & 45,51 & 40,74 & 40,42 & \#5 \\
+	47,27 & 45,96 & 44,98 & 41,39 & 39,98 & \#6 \\
+	45,93 & 44,66 & 43,39 & 41,02 & 40,40 & \#7 \\
+	46,64 & 42,69 & 44,48 & 41,69 & 40,61 & \#8 \\
+	45,98 & 44,51 & 43,71 & 40,74 & 41,08 & \#9 \\
+	45,60 & 46,07 & 45,81 & 42,52 & 41,32 & \#10 \\
 	\hline %inserts single line
 	\end{tabular}
 }
 \caption{Trims} % title of Table
-\label{table:similarHoursLimits} % is used to refer this table in the text
+\label{table:Top10Trimming} % is used to refer this table in the text
 \end{table}
 
 363 entries gets removed per percent.
 
 \subsubsection{Experiment 3: Statistical strategies}
 
-\subsubsection{Experiment 4: Blackbox optimization}
+\subsubsection{Experiment 4: Black box optimization}
 
