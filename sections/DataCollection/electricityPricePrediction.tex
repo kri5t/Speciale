@@ -1,4 +1,5 @@
-Energy price prediction is a cumbersome task to handle because of the highly volatile nature of price prediction and the plethora of factors that influence the energy price. In this section we will show the factors that influence the price by analysing relevant data that will later become input in our ANN. Not to surprisingly; the most important factor in any market is demand and this greatly influences the price "REFERENCE". But also time of day, day of the week, wind speed and temperature (which are the quantifiable factors) play a big role. Sociocultural influences affects the price aswell but are hard to measure. This section will show the connection between energy price and some of the influential factors.
+Energy price prediction is a cumbersome task to handle because of the highly volatile nature of price prediction and the plethora of factors that influence the energy price. In this section we will show the factors that influence the price by analysing relevant data that will later become input in our ANN. Not to surprisingly; the most important factor in any market is demand and this greatly influences the price "REFERENCE". But also time of day, day of the week, wind speed and temperature (which are the quantifiable factors) play a big role. Sociocultural influences affects the price as well but are hard to measure. This section will show the connection between energy price and some of the influential factors.
+\todo{Make reference to earlier work in the thesis}
 
 %Table ~\ref{table:pearsonCoeficientPrice} shows the correlation coefficient between factors that have been discussed earlier as having an influence on the electricity price. As discussed in the wind production section the correlation coefficient is a value between -1 and +1 that represents the linear dependency between two variables. 
 
@@ -61,7 +62,7 @@ In figure~\ref{fig:price_temp} and table~\ref{table:pearsonsPriceVariables} we s
 In Figure ~\ref{fig:price_wind} we see how the wind impacts the price. If the wind speed increases the energy price decreases. This is because the wind power production will allow for a bigger output on the general power production. When the production is high and the demand is moderate the price will decrease to get demand up since we cannot store energy for later use. Also wind power production produces nearly 'free' energy when the windmill park is up and running.
 \todo{Snak om distributionen. Det skal ikke ses som en 1-til-1, men som en variabel der kan sende prisen i den rigtige retning.}
 
-\subsubsection{Seasonality}
+\subsection{Seasonality}\label{sec:seasonality}
 The price is influenced greatly by the seasonality. Seasonality covers the time of year but also the time-of-day and the day-of-the-week in this section. Sesonality plays a significant role in price prediction because the demand is affected by the consumption of the people and since people follow patterns the demand does aswell.
 \todo{Make section about seasonality in general}
 \begin{figure}[H]
@@ -101,7 +102,7 @@ The sesonality is also reflected in what time of year it is. In the winter time 
 
 To get a more fine grained representation of the seasonal influences on the price; we created a monthly distribution of the price. The figure ~\ref{fig:monthlyAveragePrice} shows that the highest average price is 360(february) and lowest 190(july). This is a significant price jump and shows the same trend as for the seasonal figure ~\ref{fig:seasons} but here we see the effects of the holidays in july; where the price is significantly lower than the rest of the year.
 
-\subsubsection{Volatility and High-Frequency}
+\subsection{Volatility and High-Frequency}
 The energy prices are very volatile and changes on an hourly basis. The volatility is often reflected in the same conditions for the hour gives completely different results. In addition to the volatility the price has a very high frequence of spike prices. A spike price is a price that elavates very quickly and drops in a matter of a few hours. These conditions can be tricky to handle but we will here address some of the problems in handling volatility and spike prices.
 
 \begin{figure}[H]
@@ -138,7 +139,7 @@ The volatility of the price is clearly shown in~\ref{fig:same_hour_distribution}
 
 In the same manner we can address the high-frequency spike prices that occurs in the time series. We have to identify a tendency in the historical data and use this to make the predictions follow the steep spikes in the dataset. The volatility is often easier to handle than the spike prices because the volatility most of the times only causes small jumps in the price and these are easier to predict.
 
-\subsubsection{Demand}
+\subsection{Demand}
 Demand is directly connected to the energy prices (which comes as no suprise) since every market is driven by demand. Since demand is relative to the present time we are not able to use it directly as an input factor in the artificial neural network(ANN). We have a couple of choices here. We can take the demand from other instances like Nord Pool Spot; where they predict what the demand will be. We can compute the demand in artificial neural network and use the outputs as input for our price prediction ANN. At last we can try and substitute the demand input with the factors that plays a role in predicting the demand. The last two methods requires us to have an idea of what the input parameters for the prediction of demand is. As mentioned in related work we have seen a function that calculates the demand based on CDD(Cooling degree days), HDD(Heating degree days), ELD(Humidity), V$_w$ (Wind speed), M$_s$ (Sunshine), M$_r$ (Rainfall) \cite{19}. Based on this we will model the ANN to take the above mentioned factors as inputs.
 
 \begin{figure}[H]
@@ -160,31 +161,7 @@ In figure ~\ref{fig:consump_price} we see the connection between energy price an
 
 In figure ~\ref{fig:consump_temp} we see the connection between demand and temperature. The temperature itself has an influence when it is very cold or very warm. This connection is expressed as CDD(Cooling degree days) and HDD(Heating degree days). In figure ~\ref{fig:consump_temp} we see that if temperature decreases the demand will go up. This is because the people of Denmark use a lot of energy on heating their homes and lighting them (HDD) in the winter time. In \cite{19} they also describe CDD which indicates the need for cooling. In Denmark it is limited how high the temperature goes and how often we actually need to cool our homes see table 
 
-\begin{table}[!ht]
-\centering  % used for centering table
-\begin{tabular}{c c} % centered columns
- \#0 Parameters & \#1 Pearsons \\ [0.5ex] % inserts table 
-%heading
-\hline                  % inserts single horizontal line
-Price/Demand & 0.310686748459 \\
-Price/Wind speed & -0.278480552449  \\
-Price/Temperature & -0.175026569339 \\
-Demand/Wind speed & 0.567853517055 \\
-Demand/Temperature & -0.592827186022 \\
-\hline %inserts single line
-\end{tabular}
-\caption{Pearson's correlations for price prediction variables} % title of Table
-\label{table:pearsonsPriceVariables} % is used to refer this table in the text
-\end{table}
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.8\textwidth ,natwidth=410,natheight=237]{billeder/energy_price_plots/consump_wind.png}
-\caption{Demand and wind speed plot.}
-\label{fig:consump_wind}
-\end{figure}
-
-In our analysis of HDD and CDD we see that 
+In our analysis of HDD and CDD we see that \todo{finish the CDD HDD}
 
 \begin{figure}[H]
 \centering
