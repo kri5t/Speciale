@@ -4,19 +4,19 @@ This subsection describes the experiments that uncovers the best combination of 
 \item Wind speed;
 \item Air density;
 \item Consumption;
-\item Time of day (As matrix or not);
-\item Temperature
-\item Wind direction
-\item Last known production
-\item Date
+\item Time of day;
+\item Temperature;
+\item Wind direction;
+\item Last known production;
+\item Date;
 \end{itemize}
 
-Furthermore, experiments are needed to investigate the statistical inputs as presented in Section~\ref{sec:usingStatisticalInput}. 
+Furthermore, experiments are needed to investigate the influence of data manipulation and statistical inputs as presented in Section~\ref{sec:usingStatisticalInput}. 
 
 \todo{DRAWING OF NETWORK}
 
 \subsection{Experiment Series One - Selection of input parameters}
-The first experiment series is an attempt to find the best constitution of network input parameters based on the analysis in Section~\ref{sec:windPowerAnalysis}. All test results can be see in Appendix~\ref{sec:windResultsAppendix} and have been carried out naively with only normalization. Since the co-relation between wind production and wind speed is very significant it will always be included as a core input parameter in all test combinations.
+The first experiment series is an attempt to find the best constitution of network input parameters based on the analysis in Section~\ref{sec:windPowerAnalysis}. All test results can be see in Appendix~\ref{sec:windResultsAppendix} and have been carried out naively with only normalization - top 20 will be shown here. Since the co-relation between wind production and wind speed is very significant it will always be included as a core input parameter in all test combinations.
 
 \footnotesize
 \begin{center}
@@ -36,16 +36,27 @@ The first experiment series is an attempt to find the best constitution of netwo
 \hline
 \endlastfoot
 \arrayrulecolor{light-gray}
- x &  x &  x &  x &  &  x &  &  &  116.08 & \#1 \\ \hline
- x &  &  x &  &  &  x &  &  &  118.13 & \#2 \\ \hline
- x &  &  &  &  &  x &  &  & 119.69 & \#3 \\ \hline
- x &  &  x &  x &  x &  x &  &  &  119.81 & \#4 \\ \hline
- x &  x &  x &  x &  x &  x &  &  & 119.88 & \#5 \\ \hline
- x &  x &  &  x &  &  x &  &  &  122.59 & \#6 \\ \hline
- x &  &  &  x &  &  x &  &  &  123.08 & \#7 \\ \hline
- x &  x &  &  &  &  x &  &  &  123.4 & \#8 \\ \hline
- x &  &  x &  &  x &  x &  &  & 123.7 & \#9 \\ \hline
- x &  x &  &  &  x &  x &  &  & 124.42 & \#10 \\ \hline
+ x &  x &  x &  &  &  x &  &  x & 125.31 \\ \hline
+ x &  &  x &  &  &  x &  &  x & 128.35 \\ \hline
+ x &  x &  x &  &  &  x &  x &  x & 134.73 \\ \hline
+ x &  &  x &  x &  &  x &  &  x & 136.2 \\ \hline
+ x &  x &  x &  x &  &  x &  &  x & 139.01 \\ \hline
+ x &  &  x &  &  x &  x &  x &  x & 141.94 \\ \hline
+ x &  x &  x &  x &  &  x &  x &  x & 142.72 \\ \hline
+ x &  x &  x &  &  x &  x &  &  x & 143.51 \\ \hline
+ x &  &  x &  &  x &  x &  &  x & 144.39 \\ \hline
+ x &  x &  x &  &  x &  &  x &  x & 147.46 \\ \hline
+ x &  &  x &  x &  x &  x &  &  x & 148.52 \\ \hline
+ x &  x &  x &  x &  x &  x &  &  x & 150.27 \\ \hline
+ x &  &  x &  x &  x &  &  &  x & 151.49 \\ \hline
+ x &  x &  x &  &  x &  x &  x &  x & 156.04 \\ \hline
+ x &  x &  x &  x &  x &  x &  x &  x & 156.39 \\ \hline
+ x &  &  x &  x &  &  x &  x &  x & 159.04 \\ \hline
+ x &  &  x &  &  &  x &  x &  x & 159.97 \\ \hline
+ x &  x &  x &  x &  x &  &  &  x & 162.45 \\ \hline
+ x &  x &  x &  x &  x &  &  x &  x & 164.28 \\ \hline
+ x &  &  x &  x &  x &  x &  x &  x & 169.88 \\ \hline
+ x &  &  x &  x &  x &  &  x &  x & 175.32 \\ \hline
 \caption{Wind Production Input Parameter Test Top 10}
 \end{longtable}
 \label{table:windProdInputParamsTop10}

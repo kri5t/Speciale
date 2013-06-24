@@ -28,7 +28,7 @@ It is obvious from Table~\ref{table:pearsonCoeficientWindProduction} that consum
 \subsection{Meteorological factors}
 
 \subsubsection{Wind Speed}
-The relationship between hourly wind speed and hourly wind power production of DK1 is seen in Figure~\ref{fig:windVsProd}. The graph clearly shows the expected impact of wind speed on the wind energy production.
+Wind speed is directly proportional to wind production as described in Section~\ref{sec:windmillPlacement} \todo{discuss reliability of the formula}. This relationship between hourly wind speed and hourly wind power production of DK1 is seen in Figure~\ref{fig:windVsProd}. The graph clearly shows the expected impact of wind speed on the wind energy production.
 
 \begin{figure}[H]
 \centering
@@ -41,9 +41,9 @@ What is noticeable from the graph is wide range of productions that is covered b
 
 \subsubsection{Air Density}
 \label{sec:airDensity}
-It is described in~\ref{sec:windmillPlacement} that wind energy is proportional to air density where a higher density means more power for a specific wind speed. This does not imply that a higher air density is equal to higher wind power production in general because it depends on the wind speed. Days with equal wind speed but variation in air density should show an increase in power production when the air density is highest. 
+It is described in Section~\ref{sec:windmillPlacement} that wind energy is proportional to air density where a higher density means more power for a specific wind speed. This does not imply that a higher air density is equal to higher wind power production in general because it depends on the wind speed. Days with equal wind speed but variation in air density should show an increase in power production when the air density is highest. 
 
-Air density depends directly on temperature and pressure which can be described by $Air Density=\frac{P*M}{(R*T)}$ where R is a gas constant and M is the density of air. The monthly pressure in Denmark has low variation compared to the temperature as shown in Figure~\ref{fig:pressureTemperatureVariance}. For this reason, the temperature will have the most influence on the air density in Denmark. The formula express that when temperature decreases the air density will increase linearly, e.g. the wind power production for a specific wind speed will be higher in times of low temperature. The air density has been calculated for every hour in the training set and the correlation has been established for each wind speed in Table~\ref{table:pearsonCoeficientAirDensity}. The wind power production increases with the air density for each wind speed as described by the formula.
+Air density depends directly on temperature and pressure which can be described by $Air Density=\frac{P*M}{(R*T)}$ where R is a gas constant and M is the mass of dry air. The monthly pressure in Denmark has low variation compared to the temperature as shown in Figure~\ref{fig:pressureTemperatureVariance}. For this reason, the temperature will have the most influence on the air density in Denmark and it might even be enough to leave out pressure and only include temperature. The formula express that when temperature decreases the air density will increase linearly, e.g. the wind power production for a specific wind speed will be higher in times of low temperature. The air density has been calculated for every hour in the training set and the correlation has been established for each wind speed in Table~\ref{table:pearsonCoeficientAirDensity}. The wind power production increases with the air density for each wind speed as described by the formula.
 
 \begin{figure}[H]
 \centering
@@ -158,7 +158,21 @@ The dataset consists of all hours of the years included. Based on this the netwo
 \end{figure}
 
 \subsubsection{Seasonality}
-The wind 
+The wind follows the seasons and the production follows the wind. The wind production should therefore vary according to the current season. This is validated by Figure~\ref{fig:windProductionMonths} and~\ref{fig:windProductionSeasons} where there is a significant distinction between summer and the other 3 seasonality.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.99\linewidth,natwidth=898,natheight=587]{billeder/Seasons/windProdctionSeasons.png}
+\caption{Wind production in relation to the four seasons in 2012}
+\label{fig:windProductionSeasons}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.99\linewidth,natwidth=898,natheight=587]{billeder/Seasons/windProductionMonths.png}
+\caption{Wind production in relation to months in 2012}
+\label{fig:windProductionMonths}
+\end{figure}
 
 \subsection{Wind Production Development}
 \label{sec:windProductionDev}
@@ -206,3 +220,7 @@ Figure~\ref{fig:windHourDevelopment400Hours} does not show any need for trimming
 \todo{In the experiments show a graph of why we add the curve analysis. The network itself tries to do a general fit and because the same input parameters can point to a interval of price/production we need to give the prediction a kind of "snapshop" of the current situation so that it knows which way to go based on the current market situation - we give it more information to base its decision on - if the current input parameters can point to a price between 700-1100 but the price from one hour ago was 900 and the current trend from the last 24 hours is going up then we should probably not guess below 900 - we don't know but since we otherwise would random an answer, the probability of trusting statistics is better. By doing this we can better approach our target to predict}
 
 \todo{GENERATION HOURS}
+
+\subsection{Conclusion}
+The above analysis has clarified to what extend the different parameters effect the wind production. Not surprisingly wind speed has the greatest influence, but also consumption has shown to have a good co-relation with the production which tells us about a link to the electricity market. The wind production vary from hour to hour which makes the time of day a significant factor. The wind production is decreased significantly during winter so the season will also need to be included in test. The analysis of the wind production development showed the need for including past productions for better knowing the movements to come.
+The air density is according to its formula proportional to wind production and it showed a co-relation of 0,28 in average. The current wind direction and wind production showed a co-relation but further validation needs to be carried out in experiments.

@@ -1,4 +1,11 @@
-\todo{figur der viser input, ann og output med hvilket type output, vi ønsker, for at skabe bedre forstaaelse for kommende diskusion}
+Section~\ref{sec:predictionSection} describes the concepts of prediction within the area of wind production and electricity prices. What is important to emphasize here is the type of input data used for the prediction of both price and production. Meteorological factors are important in both cases and can therefore be extracted from the same source. The second type of data is the prices and the productions themselves. Artificial Neural Networks calculates a generalized function by looking at historical data and comparing with the actual values (Section~\ref{sec:annSection}), e.g. comparing the weather factors at time t with the actual production at time t. For this reason it is necessary to collect historical meteorological, price and production data in order to do the prediction. A simple drawing of the input and outout can be seen in Figure~\ref{fig:verySimpleANN}.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\linewidth,natwidth=898,natheight=587]{billeder/simpleANN.png}
+\caption{Simple ANN -- VERY UGLY DRAWING NEED REPLACE}
+\label{fig:verySimpleANN}
+\end{figure}
 
 The data must come from a trusted source so that proper predictions can be based on it. The data must be of a certain quality in relation number of observations because we need to make hourly predictions, e.g. the meteorological observations must be within an interval of 60 minutes or else we ill ignore data from that particular station.
 
