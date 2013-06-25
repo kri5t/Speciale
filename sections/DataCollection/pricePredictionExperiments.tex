@@ -4,46 +4,61 @@ This section contains experimental results to find the best possible price predi
 \subsubsection{Experiment 1: Inputs}
 In this section we experimented with the basic input parameters that we identified in section~\ref{sec:Price}. We did a cross comparison of all the inputs and possible combinations (For those that made sense). The Price and the Demand is such a basic measure when you define a price in any markets that they are included in every prediction. We did not make a cross comparison of the Month of Year and the Seasons of Year since they say the same but with different granularity. We did a cross comparison both with and without matrix inputs and with a mix of non-matrix and matrix inputs. This is done to determine whether an input makes better sense on matrix form or just as a simple normalized value. 
 
+Experiment 1 is based on a dataset consisting of the last 3 months averaging to about 2189 hours. We use 200 epochs for each training iteration.
+
 This includes last hours Price (P), The Demand (D), Wind Speed(WS), Temperature(T), The Hourly Time of Day (ToD), The Day of The Week(DoW), The Month of The Year(MoY), The Season of The Year(SoY). The (M) is for Matrix input and states whether the input in the seasonal rows(ToD, WoD, MoY, SoY) are on matrix form or not.
+
+As we saw in the wind production experiments(WPE) section~\ref{sec:windPowerAnalysis} there was a problem regarding the way we conducted tests for the seasonality; specifically for the MoY and the SoY. We only use the last 3 months to train the network and that sort of eliminates the obvious purpose of the MoY and SoY. As we saw in the results for the first experiment in WPE if we include the same month as we are in from last year and reintroduce the purpose of the SoY and MoY it gave us a worse result than leaving it out. To make sure the same thing applies on the price prediction experiments we conducted to runs of all the combinations of inputs. First we ran it with the last 3 months including the same month that we are in from last year and after that we ran the experiment with only the last 3 months.
+
+Table~\ref{table:Top20Prices} shows us the top 20 MAE from the experiment with a training set containing the last 3 months(3Month). We have compared this to the experiment with a training set containing the last 3 months and the same month from last year(4Month). As we see in the table there isn't the biggest deviation between the two data sets. This also shows in \todo{Ref Appendix for both} that the distribution of the MAE over the two datasets are quite similar. From this we can conclude that the effect of using last years month in our dataset does not make a significant difference and can be left out. This raises the question if the MoY and the SoY can be left out as well, since the obvious use for it is eliminated by never having a full month or full season in the training set - that is equal to the one we predict.
+
+First we conducted an experiment containing a training set with a full year (to test the effect of seasonality on a full year) we included the rest of the parameters equal to rank \#1 in table~\ref{table:Top20Prices} and shifted the seasonality. The results can be seen in table
 
 \begin{table}[H]
 \centering  % used for centering table
 \resizebox{\textwidth}{!}{
-\begin{tabular}{c c c c c c c c c c c} % centered columns (7 columns)
-P & D & WS & T & ToD & DoW & MoY & SoY & MAE & Rank\\ [0.5ex] % inserts table 
+\begin{tabular}{c c c c c c c c c c c c} % centered columns (7 columns)
+P & D & WS & T & ToD & DoW & MoY & SoY & 3Month & 4Month Rank\\ [0.5ex] % inserts table 
 %heading
 \hline                  % inserts single horizontal line
- \x    & \x    & \x    & \x    & \x\m  & \x\m  &       &       & 58.19 & \#1 \\
- \x    & \x    & \x    & \x    & \x\m  & \x\m  &       & \x\m  & 61.70 & \#2 \\
- \x    & \x    & \x    & \x    & \x\m  &       &       & \x\m  & 61.86 & \#3 \\
- \x    & \x    & \x    & \x    & \x\m  & \x    & \x\m  &       & 62.62 & \#4 \\
- \x    & \x    & \x    & \x    & \x    &       &       &       & 62.98 & \#5 \\
- \x    & \x    & \x    & \x    & \x\m  &       & \x\m  &       & 63.80 & \#6 \\
- \x    & \x    & \x    &       & \x\m  &       &       & \x\m  & 64.90 & \#7 \\
- \x    & \x    & \x    &       & \x\m  & \x    &       & \x\m  & 65.32 & \#8 \\
- \x    & \x    & \x    & \x    & \x\m  & \x    & \x    &       & 66.42 & \#9 \\
- \x    & \x    & \x    &       & \x    &       &       &       & 66.48 & \#10 \\
+ \x    & \x    & \x    & \x    & \x\m  & \x\m  &       & \x\m  & 57.12 & 61.70 & \#1 \\
+ \x    & \x    & \x    & \x    & \x\m  & \x    &       & \x\m  & 58.09 & 68.23 & \#2 \\
+ \x    & \x    & \x    & \x    & \x\m  &       & \x\m  &       & 58.79 & 63.80 & \#3 \\
+ \x    & \x    & \x    &       & \x\m  & \x\m  & \x\m  &       & 60.14 & 67.82 & \#4 \\
+ \x    & \x    & \x    & \x    & \x\m  & \x    &       &       & 62.19 & 74.89 & \#5 \\
+ \x    & \x    & \x    & \x    & \x\m  &       &       & \x\m  & 62.26 & 61.86 & \#6 \\
+ \x    & \x    & \x    & \x    & \x\m  & \x    & \x\m  &       & 62.84 & 62.62 & \#7 \\
+ \x    & \x    & \x    & \x    & \x    & \x    &       & \x\m  & 63.94 & 72.37 & \#8 \\
+ \x    & \x    & \x    & \x    & \x    & \x\m  & \x\m  &       & 64.19 & 84.12 & \#9 \\
+ \x    & \x    & \x    &       & \x\m  & \x    & \x\m  &       & 64.72 & 72.29 & \#10 \\
 
- \x    & \x    & \x    &       & \x\m  & \x\m  &       & \x\m  & 67.06 & \#11 \\
- \x    & \x    & \x    & \x    & \x\m  & \x\m  & \x\m  &       & 67.31 & \#12 \\
- \x    & \x    & \x    &       & \x\m  & \x    &       &       & 67.60 & \#13 \\
- \x    & \x    & \x    & \x    & \x\m  &       & \x\m  &       & 67.76 & \#14 \\
- \x    & \x    & \x    &       & \x\m  & \x\m  & \x\m  &       & 67.82 & \#15 \\
- \x    & \x    & \x    &       & \x\m  & \x    & \x    &       & 68.13 & \#16 \\
- \x    & \x    & \x    & \x    & \x\m  & \x    &       & \x\m  & 68.23 & \#17 \\
- \x    & \x    & \x    & \x    & \x\m  &       &       & \x    & 68.41 & \#18 \\
- \x    & \x    & \x    &       & \x    & \x    & \x    &       & 68.43 & \#19 \\
- \x    & \x    &       & \x    & \x\m  & \x\m  &       & \x\m  & 68.63 & \#20 \\ \hline %inserts single line
+ \x    & \x    & \x    &       & \x    & \x    & \x\m  &       & 65.07 & 79.71 & \#11 \\
+ \x    & \x    & \x    & \x    & \x\m  & \x\m  &       &       & 65.95 & 58.19 & \#12 \\
+ \x    & \x    & \x    & \x    & \x\m  & \x\m  & \x\m  &       & 66.55 & 67.31 & \#13 \\
+ \x    & \x    & \x    &       & \x    &       &       & \x\m  & 67.21 & 74.67 & \#14 \\
+ \x    & \x    & \x    & \x    & \x    & \x    &       &       & 67.88 & 77.29 & \#15 \\
+ \x    & \x    & \x    &       & \x    & \x    &       & \x    & 68.21 & 72.45 & \#16 \\
+ \x    & \x    & \x    &       & \x\m  & \x\m  &       &       & 68.34 & 72.31 & \#17 \\
+ \x    & \x    & \x    &       & \x\m  &       &       & \x\m  & 68.35 & 76.25 & \#18 \\
+ \x    & \x    & \x    & \x    & \x    & \x    & \x    &       & 68.43 & 75.10 & \#19 \\
+ \x    & \x    & \x    & \x    & \x    &       &       & \x\m  & 68.45 & 75.97 & \#20 \\ \hline %inserts single line
 \end{tabular}
 }
-\caption{The top 20 input combinations for price prediction} % title of Table
+\caption{The top 20 results on training set 3 last months} % title of Table
 \label{table:Top20Prices} % is used to refer this table in the text
 \end{table}
 
-FIX
-Cite[1]
-FIX
-
+\begin{table}[H]
+\centering  % used for centering table
+\begin{tabular}{c c c c c c c c c c c} % centered columns (7 columns)
+P & D & WS & T & ToD & DoW & MoY & SoY & MAE & Rank\\ [0.5ex] % inserts table 
+\x    & \x    & \x    & \x    & \x\m  & \x\m  &       & \x\m  & 63.74 & \#1 \\
+\x    & \x    & \x    & \x    & \x\m  & \x\m  &       &       & 90.79 & \#2 \\
+\x    & \x    & \x    & \x    & \x\m  & \x\m  & \x\m  &       & 94.75 & \#3 \\
+\end{tabular}
+\caption{The top 20 results on training set 3 last months} % title of Table
+\label{table:Top20Prices} % is used to refer this table in the text
+\end{table}
 
 If we take a look at the top 20 best input combinations shown in table~\ref{table:Top20Prices} we see some clear tendencies. If we start from the beginning the price and demand are static as mentioned earlier since they are fundamental market forces and thus not a changing factor in this analysis. The next input parameter is the Wind Speed. We see that every input combination in the top 20 includes the wind production and it is therefore a must for the prediction of the energy prices. This is further strengthened by the bottom 10 combinations table~\ref{table:Bottom10Prices} where we only see wind prices in one of the combinations. Also we saw in section~\ref{sec:windPowerAnalysis}(table~\ref{table:pearsonCoeficientWindProduction}) that the Wind Speed heavily influences the green energy production and thus influencing the energy prices. \todo{Lav en sammenligning af wind speed og wind production for at udelukke den ene}
 
