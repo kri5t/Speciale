@@ -22,7 +22,11 @@
 \usepackage{todonotes}
 \usepackage{menukeys}
 \usepackage{longtable}
+\usepackage{amssymb}% http://ctan.org/pkg/amssymb
+\usepackage{pifont}% http://ctan.org/pkg/pifont
 
+\newcommand{\x}{\scalebox{0.6}{\ding{53}}}%
+\newcommand{\m}{\scalebox{0.6}{(M)}}%
 \renewcommand*\ttdefault{txtt}
 
 %\newcommand{\todo}[1]{{\color[rgb]{.5,0,0}\textbf{$\blacktriangleright$#1$\blacktriangleleft$}}}
@@ -132,7 +136,7 @@ Being able to predict electricity prices and green energy production is the basi
 \label{sec:electriciyPrices}
 \input{sections/SimilarDaysApporach/SDMandANN.tex}
 
-\subsubsection{Arima Prediction}
+\subsubsection{ARIMA Prediction}
  \input{sections/ARIMA/ArimaPrediction.tex}
 \subsubsection{Support Vector Machine Prediction}
 \input{sections/SVMforecasting/SVMforecasting.tex}
@@ -152,7 +156,7 @@ Being able to predict electricity prices and green energy production is the basi
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \chapter{Dataset Analysis}
-This chapter will analyse what influence the price and wind production. The analysis will contribute to locating the potential input parameters to be used in the Artificial Neural Network. 
+This chapter will analyze what influence the price and wind production. The analysis will contribute to locating the potential input parameters to be used in the Artificial Neural Network. 
 \label{ch:theANNs}
 \section{Data Collection}
 \label{sec:dataCollection}
