@@ -16,7 +16,7 @@ Furthermore, experiments are needed to investigate the influence of data manipul
 \todo{DRAWING OF NETWORK}
 
 \subsection{Experiment Series One - Selection of input parameters}
-The first experiment series is an attempt to find the best constitution of network input parameters based on the analysis in Section~\ref{sec:windPowerAnalysis}. All test results can be see in Appendix~\ref{sec:windResultsAppendix} and have been carried out naively with only normalization - top 20 will be shown here. Since the co-relation between wind production and wind speed is very significant it will always be included as a core input parameter in all test combinations.
+The first experiment series is an attempt to find the best constitution of network input parameters based on the analysis in Section~\ref{sec:windPowerAnalysis}. All test results can be see in Appendix~\ref{sec:windResultsAppendix} and have been carried out naively with only normalization - only parts will be shown here. Since the co-relation between wind production and wind speed is very significant it will always be included as a core input parameter in all test combinations.
 
 \footnotesize
 \begin{center}
@@ -36,35 +36,103 @@ The first experiment series is an attempt to find the best constitution of netwo
 \hline
 \endlastfoot
 \arrayrulecolor{light-gray}
- x &  x &  x &  &  &  x &  &  x & 125.31 \\ \hline
- x &  &  x &  &  &  x &  &  x & 128.35 \\ \hline
- x &  x &  x &  &  &  x &  x &  x & 134.73 \\ \hline
- x &  &  x &  x &  &  x &  &  x & 136.2 \\ \hline
- x &  x &  x &  x &  &  x &  &  x & 139.01 \\ \hline
- x &  &  x &  &  x &  x &  x &  x & 141.94 \\ \hline
- x &  x &  x &  x &  &  x &  x &  x & 142.72 \\ \hline
- x &  x &  x &  &  x &  x &  &  x & 143.51 \\ \hline
- x &  &  x &  &  x &  x &  &  x & 144.39 \\ \hline
- x &  x &  x &  &  x &  &  x &  x & 147.46 \\ \hline
- x &  &  x &  x &  x &  x &  &  x & 148.52 \\ \hline
- x &  x &  x &  x &  x &  x &  &  x & 150.27 \\ \hline
- x &  &  x &  x &  x &  &  &  x & 151.49 \\ \hline
- x &  x &  x &  &  x &  x &  x &  x & 156.04 \\ \hline
- x &  x &  x &  x &  x &  x &  x &  x & 156.39 \\ \hline
- x &  &  x &  x &  &  x &  x &  x & 159.04 \\ \hline
- x &  &  x &  &  &  x &  x &  x & 159.97 \\ \hline
- x &  x &  x &  x &  x &  &  &  x & 162.45 \\ \hline
- x &  x &  x &  x &  x &  &  x &  x & 164.28 \\ \hline
- x &  &  x &  x &  x &  x &  x &  x & 169.88 \\ \hline
- x &  &  x &  x &  x &  &  x &  x & 175.32 \\ \hline
-\caption{Wind Production Input Parameter Test Top 10}
+ x &  x &  x &  &  &  x &  &  x & 125.31 & \#1 \\ \hline
+ x &  &  x &  &  &  x &  &  x & 128.35 & \#2 \\ \hline
+ x &  x &  &  x &  x &  x &  &  x & 128.75 & \#3 \\ \hline
+ x &  x &  &  &  &  x &  &  x & 130.0 & \#4 \\ \hline
+ x &  x &  &  x &  &  x &  &  x & 133.38 & \#5 \\ \hline
+ x &  &  &  &  &  x &  &  x & 133.99 & \#6 \\ \hline
+ x &  x &  &  &  &  x &  x &  x & 134.69 & \#7 \\ \hline
+ x &  x &  x &  &  &  x &  x &  x & 134.73 & \#8 \\ \hline
+ x &  x &  &  &  x &  x &  &  x & 134.79 & \#9 \\ \hline
+ x &  &  x &  x &  &  x &  &  x & 136.2 & \#10 \\ \hline
+ x &  &  x &  &  &  x &  x &  x & 159.97 & \#54 \\ \hline
+ x &  &  &  x &  x &  &  &  x & 160.86 & \#55 \\ \hline
+ x &  x &  x &  x &  x &  &  &  x & 162.45 & \#56 \\ \hline
+ x &  x &  x &  x &  x &  &  x &  x & 164.28 & \#57 \\ \hline
+ x &  &  &  x &  x &  x &  x &  x & 165.25 & \#58 \\ \hline
+ x &  &  &  &  &  x &  x &  x & 166.25 & \#59 \\ \hline
+ x &  x &  &  &  &  &  &  x & 167.38 & \#60 \\ \hline
+ x &  &  x &  x &  x &  x &  x &  x & 169.88 & \#61 \\ \hline
+ x &  &  &  x &  &  x &  x &  x & 171.49 & \#62 \\ \hline
+ x &  x &  &  &  x &  x &  x &  x & 171.7 & \#63 \\ \hline
+ x &  &  x &  x &  x &  &  x &  x & 175.32 & \#64 \\ \hline
+\caption{Wind Production Input Parameter Test Top and bottom 10. It is based on 3 month of historical data and 200 epochs. It is an average of the prediction over 8000 hours}
 \end{longtable}
 \label{table:windProdInputParamsTop10}
 \end{center}
 \normalsize
+
+All results from the first experiment can be seen in Appendix~\ref{sec:simpleInputTest}. The results vary from the best MAE at 123,29 to the worst being 175,32. Top and bottom 10 is shown in Table~\ref{table:windProdInputParamsTop10} indicated by rank. The experiment clearly show the importance of air density, time of day and last production. This correspond well with the analysis in Section~\ref{sec:windPowerAnalysis} where the relationship between wind production and the parameters are established to be significant. Especially the analysis concerning the importance of wind production development and time of day is  seen in the experiments. The production does not differ much from one hour to the next which is reflected in the last known production input parameter --- more sophisticated attempts with statistic will be in experiments to come. What comes as a surprise is the under representation of consumption in top 10 because the analysis showed a good co-relation. It can be explained by a bad co-relation between consumption and some of the other input parameters that makes more noise and influence the prediction badly. The analysis section also discussed the substitution of temperature with consumption --- this is obviously not the best solution when looking at rank \#2 and \#6 where the substitution results in a decrease in MAE.\todo{discuss wind direction}. What is obvious from the experiment is the impact of month as input parameter and how it in general does not help the prediction. What comes to mind is the historical data used for testing. Month represents the seasonal perspective and is suppose to find the relation between months in general and the production. Since the historical data used for prediction is only 3 months, it does not capture how months in general influenced the production in the past year. A possible solution to obtain the seasonality aspect is presented in\cite{pjmForecast} where the Neural Network is trained with 45 days from before the day to be predicted, and 45 days before and after in the previous year. By using this approach the month parameter will reflect the influence of the months around you from the last year. This needs validation in an experiment for itself. The experiment results can be seen in Table~\ref{table:seasonalWindProdInputParamsTop10}. What is clear is the immediate decrease in MAE. This can be explained by the increase data in the training set which makes it harder for the ANN to generalize. According to\cite{1} too large training sets should be avoided because it has a tendency to be overtrained. The possible benefits from including the seasonal aspect when predicting wind production can not make up for the loss in accuracy by the increase in the size of training data. To completely eliminate any doubts about the decrease in accuracy when using season, another test on an entire year has been conducted. Results can be seen in Table~\ref{table:seasonWindProdInputParamsTop2WholeYear}. The two results are using the same input parameters as \#7 and \#8 in Table~\ref{table:windProdInputParamsTop10} and the MAE is around 10 worse in both cases. The usage of only 3 months in the dataset can be argued to contain the seasonal aspect for the hours to predict. The three months in the set will reflect the current season that you are in and therefore more data will only create more noise. The month parameter will not say anything about the past year but only the months it has already seen. It will also include the transitions between the seasons instead of putting the seasons into boxes, e.g. when moving into summer from winter, the month parameter over an entire year would immediately put it into the summer box. It needs to be made clear that it is only worsened with 10 in average and it is only one input parameter of the entire network. The above discussion clearly illustrates that the small data itself contains the seasonality itself because the network trains and generalizes only upon the current season. For this reason the month parameter is not needed in this case which is also clear from the Table~\ref{table:windProdInputParamsTop10} where top 6 is without month and almost 10 better. \todo{argument and compare curves from 2012 and 2011}. 
+
+In experiments concerning prediction of wind production the month input parameter will be left out.  
+
+\footnotesize
+\begin{center}
+\begin{longtable}{|c|c|c|c|c|c|c|c|c|c|}
+\hline
+\textbf{WS} & \textbf{AD} & \textbf{C} & \textbf{T} & \textbf{WD} & \textbf{L-P} & \textbf{Mo}& \textbf{ToD} & \textbf{MAE} & \textbf{Rank} \\
+\hline
+\endfirsthead
+\multicolumn{9}{c}%
+{\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
+\hline
+\textbf{WS} & \textbf{AD} & \textbf{C} & \textbf{T} & \textbf{WD} & \textbf{L-P} & \textbf{Mo}& \textbf{ToD} & \textbf{MAE} & \textbf{Rank} \\
+\hline
+\endhead
+\hline \multicolumn{9}{r}{\textit{Continued on next page}} \\
+\endfoot
+\hline
+\endlastfoot
+\arrayrulecolor{light-gray}
+ x &  x &  &  &  &  x &  &  x & 139.38 & \#1 \\ \hline
+ x &  x &  x &  &  &  x &  &  x & 139.89 & \#2 \\ \hline
+ x &  x &  x &  x &  x &  x &  &  x & 140.09 & \#3 \\ \hline
+ x &  x &  &  x &  &  x &  &  x & 140.59 & \#4 \\ \hline
+ x &  &  x &  &  &  x &  &  x & 141.66 & \#5 \\ \hline
+ x &  x &  &  &  x &  x &  &  x & 142.72 & \#6 \\ \hline
+ x &  &  x &  &  &  x &  x &  x & 142.77 & \#7 \\ \hline
+ x &  x &  &  &  &  &  &  x & 144.08 & \#8 \\ \hline
+ x &  &  &  &  x &  x &  &  x & 144.35 & \#9 \\ \hline
+ x &  x &  x &  &  x &  &  &  x & 144.47 & \#10 \\ \hline
+\caption{Top 10 seasonal wind production test. It is based on 3 month of historical data and one month after from the previous year. It is run with 200 epochs and predicts 8000 hours in 2012}
+\end{longtable}
+\label{table:seasonalWindProdInputParamsTop10}
+\end{center}
+\normalsize
+
+
+
+\todo{trend discussion in relation to why seasonal impl is better on small dataset}.
+
+\footnotesize
+\begin{center}
+\begin{longtable}{|c|c|c|c|c|c|c|c|c|c|}
+\hline
+\textbf{WS} & \textbf{AD} & \textbf{C} & \textbf{T} & \textbf{WD} & \textbf{L-P} & \textbf{Mo}& \textbf{ToD} & \textbf{MAE} & \textbf{Rank} \\
+\hline
+\endfirsthead
+\multicolumn{9}{c}%
+{\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
+\hline
+\textbf{WS} & \textbf{AD} & \textbf{C} & \textbf{T} & \textbf{WD} & \textbf{L-P} & \textbf{Mo}& \textbf{ToD} & \textbf{MAE} & \textbf{Rank} \\
+\hline
+\endhead
+\hline \multicolumn{9}{r}{\textit{Continued on next page}} \\
+\endfoot
+\hline
+\endlastfoot
+\arrayrulecolor{light-gray}
+ x &  x &  x &  &  &  x &  x &  x & 143.23 & \#1 \\ \hline
+ x &  x &  &  &  &  x &  x &  x & 147.98 & \#2 \\ \hline
+\caption{Seasonal wind production test based on an entire year. It is run with 200 epochs and predicts 8000 hours in 2012}
+\end{longtable}
+\label{table:seasonWindProdInputParamsTop2WholeYear}
+\end{center}
+\normalsize
 \todo{see appendix}
 
-The results vary from the best MAE at 116.08 to the worst being 489.6. What is obvious from the table in Appendix~\ref{sec:windResultsAppendix} is that date clearly makes the prediction worse. All results from rank 82-128 have month as an input parameter. The month reflects seasonality. In the other end of the scale it is inclusions of the last known production and time of day matrix that ranks the highest. This correspond well with the analysis in Section~\ref{sec:windPowerAnalysis} where the relationship between production and time of day is clear. The usage of the matrix implementation makes the benefit even better because each of the hours has its own value instead of only one value representing all hours (see Section~\ref{sec:Matrix}). The analysis also established that the wind production does not differ much from one hour to the next as which is reflected in the last known production --- more sophisticated attempts with statistic will be in experiments to come. What can come as a surprise is that consumption is not represented better in the top rankings since of its co-relation to the wind production.
+
 The best ranked combination of parameters will be the basis for all coming experiments. The prediction for 400 hours can be seen in Figure~\ref{fig:bestCombiForecast400Hours}.
 
 \begin{figure}[H]
@@ -86,7 +154,8 @@ The experiments to come will be based on the following input parameters:
 \end{itemize}
 
 \subsection{Experiment Two - Data Manipulation}
-The above inputs with matrix
+Trimming is only an issue if irregularities exist\todo{use curves to illustrate that it is not necessary here}. The purpose of the experiments in series two is to turn inputs into a matrix whenever possible. As described in Section~\ref{sec:Matrix} one input parameter is split into one input parameter for all of its possible values --- it makes sense because each input parameter has a weight that is adjusting itself according to the error as illustrated in Section~\ref{sec:annSection}. This is of course only an option if all values are known in advance and of a manageable size. When considering wind production forecasting this is valid for hours of the day, month and wind speed. Wind speeds are represented  by 41 different speeds in our data set. Instead of having only one input to represent each of the values, we can have 41 inputs for every single one of them. The purpose is to have a weight that tells exactly how much the specific input parameter in general influence the wind production to predict. Whenever a specific value is inserted it will be indicated with 1 and the rest of the matrix with 0. The network will then be adjusting a weight for the different entrances in the matrix whenever they are seen. What can become a problem is if some values does not exist or are under-represented which will cause that specific value to be under-expressed and not able to cover unseen data because the weight has only been adjusted a few times or not at all. In theory the matrix manipulation makes the most sense when all values to some degree are equally distributed so that every input in the matrix can express all values equally. Consider the case where wind speed 5 is not represented in the training dataset but is in the prediction data set, the network then won't have any clue how to relate to 5 when using the matrix implementation. In this case it makes sense to use one input parameter as representation because one weight have been adjusted to all the other values and illustrates how they in general influence the wind production. With that information contained in the weight it can also express 5 when the two are multiplied. Hours of the day and months are of course equally distributed. 
+
 \footnotesize
 \begin{center}
 \begin{longtable}{|c|c|c|c|c|c|c|c|c|c|c|}
@@ -122,7 +191,9 @@ The above inputs with matrix
 \normalsize
 \todo{see appendix}
 
-\subsection{Experiment Two - Statistical Inputs}
+\todo{discuss how matrix both influence indirectly and directly influence the prediction. Both pros and cons. The point is that a new month will not be influenced by the month before in terms of the weight. It will have its own. You remove responsibility from the other weights, they do not have to incorporate fx. how the month influence, they can focus only on wind speed and how it relates to the output}
+
+\subsection{Experiment Three - Statistical Inputs}
 Statistics. This subsection is experimenting with the concepts described in Section~\ref{sec:usingStatisticalInput}.
 
 \todo{also different size of dataset}
