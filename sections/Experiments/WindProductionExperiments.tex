@@ -16,7 +16,7 @@ Furthermore, experiments are needed to investigate the influence of data manipul
 \todo{DRAWING OF NETWORK}
 
 \subsection{Experiment Series One - Selection of input parameters}
-The first experiment series is an attempt to find the best constitution of network input parameters based on the analysis in Section~\ref{sec:windPowerAnalysis}. All test results can be see in Appendix~\ref{sec:windResultsAppendix} and have been carried out naively with only normalization - only parts will be shown here. Since the co-relation between wind production and wind speed is very significant it will always be included as a core input parameter in all test combinations.
+The first experiment series is an attempt to find the best constitution of network input parameters based on the analysis in Section~\ref{sec:windPowerAnalysis}. All test results can be seen in Appendix~\ref{sec:windResultsAppendix} and have been carried out naively with only normalization - relevant results will be shown here. Since the co-relation between wind production and wind speed is very significant it will always be included as a core input parameter in all test combinations.
 
 \footnotesize
 \begin{center}
@@ -46,7 +46,9 @@ The first experiment series is an attempt to find the best constitution of netwo
  x &  x &  x &  &  &  x &  x &  x & 134.73 & \#8 \\ \hline
  x &  x &  &  &  x &  x &  &  x & 134.79 & \#9 \\ \hline
  x &  &  x &  x &  &  x &  &  x & 136.2 & \#10 \\ \hline
- x &  &  x &  &  &  x &  x &  x & 159.97 & \#54 \\ \hline
+ . & . & . & . &  .  & . &  . & . & . & . \\ 
+ . & . & . & . &  .  & . &  . & . & . & . \\ 
+ . & . & . & . &  .  & . &  . & . & . & .\\ \hline
  x &  &  &  x &  x &  &  &  x & 160.86 & \#55 \\ \hline
  x &  x &  x &  x &  x &  &  &  x & 162.45 & \#56 \\ \hline
  x &  x &  x &  x &  x &  &  x &  x & 164.28 & \#57 \\ \hline
@@ -133,24 +135,24 @@ In experiments concerning prediction of wind production the month input paramete
 \todo{see appendix}
 
 
-The best ranked combination of parameters will be the basis for all coming experiments. The prediction for 400 hours can be seen in Figure~\ref{fig:bestCombiForecast400Hours}.
+The three best ranked combination of parameters will be the basis for all coming experiments. The prediction for the first 175 hours can be seen in Figure~\ref{fig:bestInputParameterPrediction}. It can be seen that the prediction follows the trend of the actual wind production. The obvious challenge is that the prediction takes time to identify shifting trend --- either it identifies it before happens or after it happened. From hour 25-50 it is way behind the actual slope. It can also be seen around hour 100-110 that it significantly overshoots and in 110-150 undershoots its target before actually identifying the shift. The statistical approach described in Section~\ref{sec:usingStatisticalInput} can possible help in these cases by taking current trend into consideration. Experiments will take up this approach for comparison.  
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.99\linewidth,natwidth=898,natheight=587]{billeder/productionTendency400Hours.png}
-\caption{Wind production development for 400 hours in 2012}
-\label{fig:bestCombiForecast400Hours}
+\includegraphics[width=0.99\linewidth]{billeder/bestInputParameterPrediction.png}
+\caption{Wind production prediction for 175 hours in 2012}
+\label{fig:bestInputParameterPrediction}
 \end{figure}   
 
-
-The experiments to come will be based on the following input parameters:
+The experiments to come will be based on input combinations from the top 3 from Table~\ref{table:windProdInputParamsTop10}. The inputs are:
 \begin{itemize}
 \item Wind speed;
 \item Air density;
 \item Consumption;
+\item Wind Direction;
 \item Temperature;
 \item Last known production;
-\item Time of day as a matrix;
+\item Time of day;
 \end{itemize}
 
 \subsection{Experiment Two - Data Manipulation}
@@ -158,15 +160,15 @@ Trimming is only an issue if irregularities exist\todo{use curves to illustrate 
 
 \footnotesize
 \begin{center}
-\begin{longtable}{|c|c|c|c|c|c|c|c|c|c|c|}
+\begin{longtable}{|c|c|c|c|c|c|c|c|c|c|}
 \hline
-\textbf{WS} & \textbf{AD} & \textbf{C} & \textbf{T} & \textbf{WD} & \textbf{L-P} & \textbf{D}& \textbf{ToD} & \textbf{M} & \textbf{MAE} & \textbf{Rank} \\
+\textbf{WS} & \textbf{AD} & \textbf{C} & \textbf{T} & \textbf{WD} & \textbf{L-P} & \textbf{Mo}& \textbf{ToD} & \textbf{MAE} & \textbf{Rank} \\
 \hline
 \endfirsthead
 \multicolumn{10}{c}%
 {\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
 \hline
-\textbf{WS} & \textbf{AD} & \textbf{C} & \textbf{T} & \textbf{WD} & \textbf{L-P} & \textbf{Mo}& \textbf{ToD} & \textbf{Ma} & \textbf{MAE} & \textbf{Rank} \\
+\textbf{WS} & \textbf{AD} & \textbf{C} & \textbf{T} & \textbf{WD} & \textbf{L-P} & \textbf{Mo}& \textbf{ToD} & \textbf{MAE} & \textbf{Rank} \\
 \hline
 \endhead
 \hline \multicolumn{10}{r}{\textit{Continued on next page}} \\
@@ -174,16 +176,18 @@ Trimming is only an issue if irregularities exist\todo{use curves to illustrate 
 \hline
 \endlastfoot
 \arrayrulecolor{light-gray}
- x &  x &  x &  x &  &  x &  &  &  x & 116.08 & \#1 \\ \hline
- x &  &  x &  &  &  x &  &  &  x & 118.13 & \#2 \\ \hline
- x &  &  &  &  &  x &  &  &  x & 119.69 & \#3 \\ \hline
- x &  &  x &  x &  x &  x &  &  &  x & 119.81 & \#4 \\ \hline
- x &  x &  x &  x &  x &  x &  &  &  x & 119.88 & \#5 \\ \hline
- x &  x &  &  x &  &  x &  &  &  x & 122.59 & \#6 \\ \hline
- x &  &  &  x &  &  x &  &  &  x & 123.08 & \#7 \\ \hline
- x &  x &  &  &  &  x &  &  &  x & 123.4 & \#8 \\ \hline
- x &  &  x &  &  x &  x &  &  &  x & 123.7 & \#9 \\ \hline
- x &  x &  &  &  x &  x &  &  &  x & 124.42 & \#10 \\ \hline
+ \x &  &  \x &  &  &  \x &  &  \x (m) &120.17 & \#1 \\ \hline
+ \x &  \x &  &  \x &  &  \x &  &  \x (m) &127.82 & \#2 \\ \hline
+ \x &  \x &  \x &  &  &  \x &  &  \x (m) &131.61 & \#3 \\ \hline
+ \x &  \x &  \x &  &  &  \x &  &  \x & 135.54 & \#4 \\ \hline
+ \x (m) & \x &  \x &  &  &  \x &  &  \x & 138.08 & \#5 \\ \hline
+ \x (m) & &  \x &  &  &  \x &  &  \x & 139.99 & \#6 \\ \hline
+ \x &  \x &  &  \x &  &  \x &  &  \x & 141.5 & \#7 \\ \hline
+ \x &  &  \x &  &  &  \x &  &  \x & 142.7 & \#8 \\ \hline
+ \x (m) & \x &  &  \x &  &  \x &  &  \x & 144.46 & \#9 \\ \hline
+ \x (m) & &  \x &  &  &  \x &  &  \x (m) &146.6 & \#10 \\ \hline
+ \x (m) & \x &  &  \x &  &  \x &  &  \x (m) &167.85 & \#11 \\ \hline
+ \x (m) & \x &  \x &  &  &  \x &  &  \x (m) &188.37 & \#12 \\ \hline
 \caption{Wind Production Input Parameter Test Top 10}
 \end{longtable}
 \label{table:windProdInputParamsTop10}
