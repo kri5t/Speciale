@@ -18,7 +18,7 @@ First we conducted an experiment containing a training set with a full year (to 
 \centering  % used for centering table
 \resizebox{\textwidth}{!}{
 \begin{tabular}{c c c c c c c c c c c c} % centered columns (7 columns)
-P & D & WS & T & ToD & DoW & MoY & SoY & 3Month & 4Month Rank\\ [0.5ex] % inserts table 
+P & D & WS & T & ToD & DoW & MoY & SoY & 3Month & 4Month & Rank\\ [0.5ex] % inserts table 
 %heading
 \hline                  % inserts single horizontal line
  \x    & \x    & \x    & \x    & \x\m  & \x\m  &       & \x\m  & 57.12 & 61.70 & \#1 \\
@@ -41,7 +41,8 @@ P & D & WS & T & ToD & DoW & MoY & SoY & 3Month & 4Month Rank\\ [0.5ex] % insert
  \x    & \x    & \x    &       & \x\m  & \x\m  &       &       & 68.34 & 72.31 & \#17 \\
  \x    & \x    & \x    &       & \x\m  &       &       & \x\m  & 68.35 & 76.25 & \#18 \\
  \x    & \x    & \x    & \x    & \x    & \x    & \x    &       & 68.43 & 75.10 & \#19 \\
- \x    & \x    & \x    & \x    & \x    &       &       & \x\m  & 68.45 & 75.97 & \#20 \\ \hline %inserts single line
+ \x    & \x    & \x    & \x    & \x    &       &       & \x\m  & 68.45 & 75.97 & \#20 \\ 
+ \hline %inserts single line
 \end{tabular}
 }
 \caption{The top 20 results on training set 3 last months} % title of Table
@@ -52,15 +53,31 @@ P & D & WS & T & ToD & DoW & MoY & SoY & 3Month & 4Month Rank\\ [0.5ex] % insert
 \centering  % used for centering table
 \begin{tabular}{c c c c c c c c c c c} % centered columns (7 columns)
 P & D & WS & T & ToD & DoW & MoY & SoY & MAE & Rank\\ [0.5ex] % inserts table 
+\hline
 \x    & \x    & \x    & \x    & \x\m  & \x\m  & \x\m  &       & 63.74 & \#1 \\
 \x    & \x    & \x    & \x    & \x\m  & \x\m  &       &       & 90.79 & \#2 \\
 \x    & \x    & \x    & \x    & \x\m  & \x\m  &       & \x\m  & 94.75 & \#3 \\
+\hline
 \end{tabular}
 \caption{The top 20 results on training set 3 last months} % title of Table
 \label{table:1YearTrain} % is used to refer this table in the text
 \end{table}
 
-If we take a look at the top 20 best input combinations shown in table~\ref{table:Top20Prices} we see some clear tendencies. If we start from the beginning the price and demand are static as mentioned earlier since they are fundamental market forces and thus not a changing factor in this analysis. The next input parameter is the Wind Speed. We see that every input combination in the top 20 includes the wind production and it is therefore a must for the prediction of the energy prices. This is further strengthened by the bottom 10 combinations table~\ref{table:Bottom10Prices} where we only see wind prices in one of the combinations. Also we saw in section~\ref{sec:windPowerAnalysis}(table~\ref{table:pearsonCoeficientWindProduction}) that the Wind Speed heavily influences the green energy production and thus influencing the energy prices. \todo{Lav en sammenligning af wind speed og wind production for at udelukke den ene}
+\begin{table}[H]
+\centering  % used for centering table
+\begin{tabular}{c c c c c c c c c c c} % centered columns (7 columns)
+P & D & WS & T & ToD & DoW & MoY & SoY & MAE & Rank\\ [0.5ex] % inserts table 
+\hline
+\x    & \x    & \x    & \x    & \x\m  & \x\m  & \x\m  &       & 63.74 & \#1 \\
+\x    & \x    & \x    & \x    & \x\m  & \x\m  &       &       & 90.79 & \#2 \\
+\x    & \x    & \x    & \x    & \x\m  & \x\m  &       & \x\m  & 94.75 & \#3 \\
+\hline
+\end{tabular}
+\caption{The top 20 results on training set 3 last months} % title of Table
+\label{table:1YearTrain} % is used to refer this table in the text
+\end{table}
+
+If we take a look at the top 20 best input combinations shown in table~\ref{table:Top20Prices} we see some clear tendencies. If we start from the beginning the price and demand are static as mentioned earlier since they are fundamental market forces and thus not a changing factor in this analysis. The next input parameter is the Wind Speed. We see that every input combination in the top 20 includes the wind production and it is therefore a must for the prediction of the energy prices. Also we saw in section~\ref{sec:windPowerAnalysis}(table~\ref{table:pearsonCoeficientWindProduction}) that the Wind Speed heavily influences the green energy production and thus influencing the energy prices. \todo{Lav en sammenligning af wind speed og wind production for at udelukke den ene}
 
 The temperature is a less obvious candidate for the prediction of price since the Pearson's correlation between the two only are 0.17. Nevertheless it is showing up in 8/10 top combinations in table~\ref{table:Top20Prices} and this might be because of the correlation between temperature/demand which is -0.59. The temperature is scattered all over the 144 combinations and thus it is hard to say anything about this input with confidence. \todo{Lav en analyse med og uden temperatur paa den bedste}.
 
@@ -78,24 +95,24 @@ The last two parameters - Month of Year(MoY) and Season of Year (SoY) - are code
 P & D & WS & T & ToD & DoW & MoY & SoY & MAE & Rank\\ [0.5ex] % inserts table 
 %heading
 \hline                  % inserts single horizontal line
- \x    & \x    &       & \x    &       &       &       &       & 93.69 & \#132 \\
- \x    & \x    &       &       &       &       &       & \x    & 94.34 & \#133 \\
- \x    & \x    &       &       &       &       &       &       & 94.99 & \#134 \\
- \x    & \x    &       & \x    &       &       &       & \x\m  & 96.45 & \#135 \\
- \x    & \x    &       &       &       & \x\m  &       &       & 96.79 & \#136 \\
- \x    & \x    &       &       &       &       & \x\m  &       & 96.94 & \#137 \\
- \x    & \x    &       &       &       & \x    &       &       & 97.94 & \#138 \\
- \x    & \x    &       & \x    &       & \x\m  &       & \x\m  & 100.13 & \#139 \\
- \x    & \x    &       & \x    &       & \x\m  & \x\m  &       & 100.61 & \#140 \\
- \x    & \x    &       &       &       & \x\m  & \x\m  &       & 102.47 & \#141 \\
- \x    & \x    &       &       &       & \x    &       & \x    & 104.56 & \#142 \\
+ \x    & \x    & \x    &       &       & \x\m  & \x\m  &       & 105.70 & \#134 \\
+ \x    & \x    &       &       &       & \x\m  &       & \x\m  & 107.85 & \#135 \\
+ \x    & \x    &       & \x    & \x    &       & \x    &       & 108.37 & \#136 \\
+ \x    & \x    &       & \x    &       &       & \x    &       & 111.14 & \#137 \\
+ \x    & \x    &       & \x    &       &       & \x\m  &       & 111.65 & \#138 \\
+ \x    & \x    &       & \x    &       & \x\m  & \x\m  &       & 113.56 & \#139 \\
+ \x    & \x    &       & \x    &       &       &       & \x    & 115.29 & \#140 \\
+ \x    & \x    &       &       &       &       & \x\m  &       & 115.81 & \#141 \\
+ \x    & \x    &       & \x    &       & \x\m  &       & \x\m  & 115.83 & \#142 \\
+ \x    & \x    &       & \x    &       & \x    & \x    &       & 117.17 & \#143 \\
+ \x    & \x    &       &       &       & \x\m  & \x\m  &       & 117.34 & \#144 \\
 \end{tabular}
 }
 \caption{The bottom 10 input combinations for price prediction} % title of Table
 \label{table:Bottom10Prices} % is used to refer this table in the text
 \end{table}
 
-If we take a look at the bottom 10 input combinations in terms of ability to predict the price we see some tendencies as well. 
+If we take a look at the bottom 10 input combinations in terms of MAE we see some tendencies as well. We see that Wind Speed only appears in one of the combinations and so does the Time of Day(And not in the same combination). This further strengthens that these two variables are very important for the price prediction.
 
 %\begin{table}[H]
 %\centering  % used for centering table
