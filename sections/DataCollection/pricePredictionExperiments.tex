@@ -10,15 +10,15 @@ This includes last hours Price (P), The Demand (D), Wind Speed(WS), Temperature(
 
 As we saw in the wind production experiments(WPE) section~\ref{sec:windPowerAnalysis} there was a problem regarding the way we conducted tests for the seasonality; specifically for the MoY and the SoY. We only use the last 3 months to train the network and that sort of eliminates the obvious purpose of the MoY and SoY. As we saw in the results for the first experiment in WPE if we include the same month as we are in from last year and reintroduce the purpose of the SoY and MoY it gave us a worse result than leaving it out. To make sure the same thing applies on the price prediction experiments we conducted to runs of all the combinations of inputs. First we ran it with the last 3 months including the same month that we are in from last year and after that we ran the experiment with only the last 3 months.
 
-Table~\ref{table:Top20Prices} shows us the top 20 MAE from the experiment with a training set containing the last 3 months(3Month). We have compared this to the experiment with a training set containing the last 3 months and the same month from last year(4Month). As we see in the table there isn't the biggest deviation between the two data sets. This also shows in \todo{Ref Appendix for both} that the distribution of the MAE over the two datasets are quite similar. From this we can conclude that the effect of using last years month in our dataset does not make a significant difference and can be left out. This raises the question if the MoY and the SoY can be left out as well, since the obvious use for it is eliminated by never having a full month or full season in the training set - that is equal to the one we predict.
+Table~\ref{table:Top20Prices} shows us the top 20 MAE from the experiment with a training set containing the last 3 months(3Month). We have compared this to the experiment with a training set containing the last 3 months and the same month from last year(4Month). As we see in the table there isn't the biggest deviation between the two datasets. This also shows in \todo{Ref Appendix for both} that the distribution of the MAE over the two datasets are quite similar. From this we can conclude that the effect of using last years month in our dataset does not make a significant difference and can be left out. This raises the question if the MoY and the SoY can be left out as well, since the obvious use for it is eliminated by never having a full month or full season in the training set - that is equal to the one we predict.
 
-First we conducted an experiment containing a training set with a full year (to test the effect of seasonality on a full year) we included the rest of the parameters equal to rank \#1 in table~\ref{table:Top20Prices} and shifted the seasonality. The results can be seen in table
+First we conducted an experiment containing a training set with a full year (to test the effect of seasonality on a full year) we included the rest of the parameters equal to rank \#1 in table~\ref{table:Top20Prices} and shifted the seasonality. The results can be seen in table~\ref{table:1YearTrain} where we can see the full effect of seasonality over a year. The table clearly shows that the MoY combination is the best of the three. If we compare the results to the results from table~\ref{table:Top20Prices} it shows us that with monthly seasonality the neural network will be able to do the same predictions as the predictions that only have a training set of 3 months. With the possibility of over training in too large datasets(see citation~\cite{1}) and that the neural network takes longer time training on a larger dataset. We can conclude that the smaller dataset of 3 months are better to use than the full year (We will elaborate on this in experiment X)\todo{Saet rigtigt experiment}. Further more we have to test if seasonality being an input parameter makes sense when our dataset is only 3 months big. 
 
 \begin{table}[H]
 \centering  % used for centering table
 \resizebox{\textwidth}{!}{
 \begin{tabular}{c c c c c c c c c c c c} % centered columns (7 columns)
-P & D & WS & T & ToD & DoW & MoY & SoY & 3Month & 4Month Rank\\ [0.5ex] % inserts table 
+P & D & WS & T & ToD & DoW & MoY & SoY & 3Month & 4Month & Rank\\ [0.5ex] % inserts table 
 %heading
 \hline                  % inserts single horizontal line
  \x    & \x    & \x    & \x    & \x\m  & \x\m  &       & \x\m  & 57.12 & 61.70 & \#1 \\
@@ -41,7 +41,8 @@ P & D & WS & T & ToD & DoW & MoY & SoY & 3Month & 4Month Rank\\ [0.5ex] % insert
  \x    & \x    & \x    &       & \x\m  & \x\m  &       &       & 68.34 & 72.31 & \#17 \\
  \x    & \x    & \x    &       & \x\m  &       &       & \x\m  & 68.35 & 76.25 & \#18 \\
  \x    & \x    & \x    & \x    & \x    & \x    & \x    &       & 68.43 & 75.10 & \#19 \\
- \x    & \x    & \x    & \x    & \x    &       &       & \x\m  & 68.45 & 75.97 & \#20 \\ \hline %inserts single line
+ \x    & \x    & \x    & \x    & \x    &       &       & \x\m  & 68.45 & 75.97 & \#20 \\ 
+ \hline %inserts single line
 \end{tabular}
 }
 \caption{The top 20 results on training set 3 last months} % title of Table
@@ -52,15 +53,31 @@ P & D & WS & T & ToD & DoW & MoY & SoY & 3Month & 4Month Rank\\ [0.5ex] % insert
 \centering  % used for centering table
 \begin{tabular}{c c c c c c c c c c c} % centered columns (7 columns)
 P & D & WS & T & ToD & DoW & MoY & SoY & MAE & Rank\\ [0.5ex] % inserts table 
-\x    & \x    & \x    & \x    & \x\m  & \x\m  &       & \x\m  & 63.74 & \#1 \\
+\hline
+\x    & \x    & \x    & \x    & \x\m  & \x\m  & \x\m  &       & 63.74 & \#1 \\
 \x    & \x    & \x    & \x    & \x\m  & \x\m  &       &       & 90.79 & \#2 \\
-\x    & \x    & \x    & \x    & \x\m  & \x\m  & \x\m  &       & 94.75 & \#3 \\
+\x    & \x    & \x    & \x    & \x\m  & \x\m  &       & \x\m  & 94.75 & \#3 \\
+\hline
 \end{tabular}
 \caption{The top 20 results on training set 3 last months} % title of Table
-\label{table:Top20Prices} % is used to refer this table in the text
+\label{table:1YearTrain} % is used to refer this table in the text
 \end{table}
 
-If we take a look at the top 20 best input combinations shown in table~\ref{table:Top20Prices} we see some clear tendencies. If we start from the beginning the price and demand are static as mentioned earlier since they are fundamental market forces and thus not a changing factor in this analysis. The next input parameter is the Wind Speed. We see that every input combination in the top 20 includes the wind production and it is therefore a must for the prediction of the energy prices. This is further strengthened by the bottom 10 combinations table~\ref{table:Bottom10Prices} where we only see wind prices in one of the combinations. Also we saw in section~\ref{sec:windPowerAnalysis}(table~\ref{table:pearsonCoeficientWindProduction}) that the Wind Speed heavily influences the green energy production and thus influencing the energy prices. \todo{Lav en sammenligning af wind speed og wind production for at udelukke den ene}
+\begin{table}[H]
+\centering  % used for centering table
+\begin{tabular}{c c c c c c c c c c c} % centered columns (7 columns)
+P & D & WS & T & ToD & DoW & MoY & SoY & MAE & Rank\\ [0.5ex] % inserts table 
+\hline
+\x    & \x    & \x    & \x    & \x\m  & \x\m  & \x\m  &       & 63.74 & \#1 \\
+\x    & \x    & \x    & \x    & \x\m  & \x\m  &       &       & 90.79 & \#2 \\
+\x    & \x    & \x    & \x    & \x\m  & \x\m  &       & \x\m  & 94.75 & \#3 \\
+\hline
+\end{tabular}
+\caption{The top 20 results on training set 3 last months} % title of Table
+\label{table:1YearTrain} % is used to refer this table in the text
+\end{table}
+
+If we take a look at the top 20 best input combinations shown in table~\ref{table:Top20Prices} we see some clear tendencies. If we start from the beginning the price and demand are static as mentioned earlier since they are fundamental market forces and thus not a changing factor in this analysis. The next input parameter is the Wind Speed. We see that every input combination in the top 20 includes the wind production and it is therefore a must for the prediction of the energy prices. Also we saw in section~\ref{sec:windPowerAnalysis}(table~\ref{table:pearsonCoeficientWindProduction}) that the Wind Speed heavily influences the green energy production and thus influencing the energy prices. \todo{Lav en sammenligning af wind speed og wind production for at udelukke den ene}
 
 The temperature is a less obvious candidate for the prediction of price since the Pearson's correlation between the two only are 0.17. Nevertheless it is showing up in 8/10 top combinations in table~\ref{table:Top20Prices} and this might be because of the correlation between temperature/demand which is -0.59. The temperature is scattered all over the 144 combinations and thus it is hard to say anything about this input with confidence. \todo{Lav en analyse med og uden temperatur paa den bedste}.
 
@@ -78,24 +95,24 @@ The last two parameters - Month of Year(MoY) and Season of Year (SoY) - are code
 P & D & WS & T & ToD & DoW & MoY & SoY & MAE & Rank\\ [0.5ex] % inserts table 
 %heading
 \hline                  % inserts single horizontal line
- \x    & \x    &       & \x    &       &       &       &       & 93.69 & \#132 \\
- \x    & \x    &       &       &       &       &       & \x    & 94.34 & \#133 \\
- \x    & \x    &       &       &       &       &       &       & 94.99 & \#134 \\
- \x    & \x    &       & \x    &       &       &       & \x\m  & 96.45 & \#135 \\
- \x    & \x    &       &       &       & \x\m  &       &       & 96.79 & \#136 \\
- \x    & \x    &       &       &       &       & \x\m  &       & 96.94 & \#137 \\
- \x    & \x    &       &       &       & \x    &       &       & 97.94 & \#138 \\
- \x    & \x    &       & \x    &       & \x\m  &       & \x\m  & 100.13 & \#139 \\
- \x    & \x    &       & \x    &       & \x\m  & \x\m  &       & 100.61 & \#140 \\
- \x    & \x    &       &       &       & \x\m  & \x\m  &       & 102.47 & \#141 \\
- \x    & \x    &       &       &       & \x    &       & \x    & 104.56 & \#142 \\
+ \x    & \x    & \x    &       &       & \x\m  & \x\m  &       & 105.70 & \#134 \\
+ \x    & \x    &       &       &       & \x\m  &       & \x\m  & 107.85 & \#135 \\
+ \x    & \x    &       & \x    & \x    &       & \x    &       & 108.37 & \#136 \\
+ \x    & \x    &       & \x    &       &       & \x    &       & 111.14 & \#137 \\
+ \x    & \x    &       & \x    &       &       & \x\m  &       & 111.65 & \#138 \\
+ \x    & \x    &       & \x    &       & \x\m  & \x\m  &       & 113.56 & \#139 \\
+ \x    & \x    &       & \x    &       &       &       & \x    & 115.29 & \#140 \\
+ \x    & \x    &       &       &       &       & \x\m  &       & 115.81 & \#141 \\
+ \x    & \x    &       & \x    &       & \x\m  &       & \x\m  & 115.83 & \#142 \\
+ \x    & \x    &       & \x    &       & \x    & \x    &       & 117.17 & \#143 \\
+ \x    & \x    &       &       &       & \x\m  & \x\m  &       & 117.34 & \#144 \\
 \end{tabular}
 }
 \caption{The bottom 10 input combinations for price prediction} % title of Table
 \label{table:Bottom10Prices} % is used to refer this table in the text
 \end{table}
 
-If we take a look at the bottom 10 input combinations in terms of ability to predict the price we see some tendencies as well. 
+If we take a look at the bottom 10 input combinations in terms of MAE we see some tendencies as well. We see that Wind Speed only appears in one of the combinations and so does the Time of Day(And not in the same combination). This further strengthens that these two variables are very important for the price prediction.
 
 %\begin{table}[H]
 %\centering  % used for centering table
@@ -161,6 +178,289 @@ If we take a look at the bottom 10 input combinations in terms of ability to pre
 363 entries gets removed per percent.
 
 \subsubsection{Experiment 3: Statistical strategies}
+
+MIXEDPrice ConsumpwindSpeed temperatureRow timeOfDay weekdaysMATRIX monthOfYearMATRIX
+\begin{table}[H]
+\centering  % used for centering table
+\resizebox{0.6\textwidth}{!}{
+	\begin{tabular}{c c c c c c} % centered columns (7 columns)
+	Curve & Skew & 1Historical & PAPER & MAE & Rank\\ [0.5ex] % inserts table 
+	\hline                  % inserts single horizontal line
+	       &       & \x    &       & 45.20 & \#1 \\
+	 \x    &       &       &       & 45.58 & \#2 \\
+	       & \x    & \x    &       & 45.67 & \#3 \\
+	 \x    &       & \x    &       & 46.55 & \#4 \\
+	 \x    & \x    &       &       & 47.03 & \#5 \\
+	 \x    &       & \x    & \x    & 47.05 & \#6 \\
+	       & \x    & \x    & \x    & 47.48 & \#7 \\
+	       & \x    &       &       & 47.50 & \#8 \\
+	 \x    & \x    & \x    & \x    & 47.72 & \#9 \\
+	       & \x    &       & \x    & 48.03 & \#10 \\
+	       &       & \x    & \x    & 48.09 & \#11 \\
+	 \x    &       &       & \x    & 48.37 & \#12 \\
+	       &       &       & \x    & 48.54 & \#13 \\
+	 \x    & \x    &       & \x    & 49.00 & \#14 \\
+	\hline %inserts single line
+	\end{tabular}
+}
+\caption{Trims} % title of Table
+\label{table:Statistical1} % is used to refer this table in the text
+\end{table}
+
+MIXEDPrice Consump windSpeed temperatureRow timeOfDayMATRIX weekdays
+\begin{table}[H]
+\centering  % used for centering table
+\resizebox{0.6\textwidth}{!}{
+	\begin{tabular}{c c c c c c} % centered columns (7 columns)
+	Curve & Skew & 1Historical & PAPER & MAE & Rank\\ [0.5ex] % inserts table 
+	\hline                  % inserts single horizontal line
+	 \x    &       &       &       & 43.97 & \#1 \\
+	       &       & \x    &       & 44.38 & \#2 \\
+	       & \x    & \x    &       & 44.60 & \#3 \\
+	       &       & \x    & \x    & 44.96 & \#4 \\
+	 \x    &       & \x    &       & 45.01 & \#5 \\
+	 \x    & \x    & \x    &       & 45.26 & \#6 \\
+	 \x    & \x    &       &       & 45.37 & \#7 \\
+	       &       &       & \x    & 45.67 & \#8 \\
+	 \x    &       & \x    & \x    & 46.46 & \#9 \\
+	       & \x    &       &       & 46.51 & \#10 \\
+	 \x    & \x    & \x    & \x    & 46.52 & \#11 \\
+	 \x    &       &       & \x    & 46.58 & \#12 \\
+	       & \x    &       & \x    & 46.63 & \#13 \\
+	 \x    & \x    &       & \x    & 47.58 & \#14 \\
+	       & \x    & \x    & \x    & 47.80 & \#15 \\
+	\hline %inserts single line
+	\end{tabular}
+}
+\caption{Trims} % title of Table
+\label{table:Statistical1} % is used to refer this table in the text
+\end{table}
+
+MIXEDPrice Consump windSpeed temperatureRow timeOfDayMATRIX weekdays monthOfYearMATRIX
+\begin{table}[H]
+\centering  % used for centering table
+\resizebox{0.6\textwidth}{!}{
+	\begin{tabular}{c c c c c c} % centered columns (7 columns)
+	Curve & Skew & 1Historical & PAPER & MAE & Rank\\ [0.5ex] % inserts table 
+	\hline                  % inserts single horizontal line
+	       &       & \x    &       & 45.54 & \#1 \\
+	 \x    & \x    & \x    & \x    & 46.12 & \#2 \\
+	 \x    & \x    & \x    &       & 46.34 & \#3 \\
+	       & \x    & \x    &       & 46.40 & \#4 \\
+	       &       &       & \x    & 46.51 & \#5 \\
+	 \x    &       & \x    &       & 46.52 & \#6 \\
+	 \x    & \x    &       &       & 46.57 & \#7 \\
+	 \x    &       &       & \x    & 46.87 & \#8 \\
+	 \x    &       &       &       & 46.93 & \#9 \\
+	       &       & \x    & \x    & 47.03 & \#10 \\
+	       & \x    &       & \x    & 47.15 & \#11 \\
+	       & \x    &       &       & 47.34 & \#12 \\
+	 \x    & \x    &       & \x    & 47.68 & \#13 \\
+	       & \x    & \x    & \x    & 47.87 & \#14 \\
+	\hline %inserts single line
+	\end{tabular}
+}
+\caption{Trims} % title of Table
+\label{table:Statistical1} % is used to refer this table in the text
+\end{table}
+
+MIXEDPrice Consump windSpeed timeOfDayMATRIX weekdays monthOfYearMATRIX
+\begin{table}[H]
+\centering  % used for centering table
+\resizebox{0.6\textwidth}{!}{
+	\begin{tabular}{c c c c c c} % centered columns (7 columns)
+	Curve & Skew & 1Historical & PAPER & MAE & Rank\\ [0.5ex] % inserts table 
+	\hline                  % inserts single horizontal line
+	       &       & \x    &       & 45.87 & \#1 \\
+	       & \x    & \x    &       & 46.68 & \#2 \\
+	       & \x    &       &       & 46.74 & \#3 \\
+	 \x    & \x    & \x    &       & 46.79 & \#4 \\
+	 \x    &       & \x    &       & 47.52 & \#5 \\
+	 \x    &       &       &       & 47.98 & \#6 \\
+	 \x    & \x    &       &       & 48.28 & \#7 \\
+	 \x    &       & \x    &       & 49.18 & \#8 \\
+	       &       & \x    &       & 49.77 & \#9 \\
+	       & \x    & \x    &       & 50.78 & \#10 \\
+	 \x    &       &       &       & 51.44 & \#11 \\
+	 \x    & \x    & \x    &       & 53.93 & \#12 \\
+	       & \x    &       &       & 54.63 & \#13 \\
+	 \x    & \x    &       &       & 55.22 & \#14 \\
+	\hline %inserts single line
+	\end{tabular}
+}
+\caption{Trims} % title of Table
+\label{table:Statistical1} % is used to refer this table in the text
+\end{table}
+
+MIXEDPrice Consump windSpeed timeOfDayMATRIX weekdays monthOfYearMATRIX
+\begin{table}[H]
+\centering  % used for centering table
+\resizebox{0.6\textwidth}{!}{
+	\begin{tabular}{c c c c c c} % centered columns (7 columns)
+	Curve & Skew & 1Historical & PAPER & MAE & Rank\\ [0.5ex] % inserts table 
+	\hline                  % inserts single horizontal line
+	       & \x    & \x    &       & 45.35 & \#1 \\
+	 \x    & \x    & \x    &       & 45.76 & \#2 \\
+	 \x    &       &       & \x    & 45.83 & \#3 \\
+	 \x    &       &       &       & 46.10 & \#4 \\
+	 \x    & \x    &       &       & 46.40 & \#5 \\
+	 \x    &       & \x    &       & 46.47 & \#6 \\
+	       & \x    &       &       & 46.53 & \#7 \\
+	       &       & \x    & \x    & 46.72 & \#8 \\
+	       &       &       & \x    & 46.88 & \#9 \\
+	 \x    & \x    & \x    & \x    & 47.40 & \#10 \\
+	       & \x    &       & \x    & 47.65 & \#11 \\
+	 \x    &       & \x    & \x    & 47.82 & \#12 \\
+	 \x    & \x    &       & \x    & 47.96 & \#13 \\
+	       & \x    & \x    & \x    & 48.45 & \#14 \\
+	\hline %inserts single line
+	\end{tabular}
+}
+\caption{Trims} % title of Table
+\label{table:Statistical1} % is used to refer this table in the text
+\end{table}
+
+MIXEDPrice Consump windSpeed temperatureRow timeOfDayMATRIX weekdays seasonOfYearMATRIX
+\begin{table}[H]
+\centering  % used for centering table
+\resizebox{0.6\textwidth}{!}{
+	\begin{tabular}{c c c c c c} % centered columns (7 columns)
+	Curve & Skew & 1Historical & PAPER & MAE & Rank\\ [0.5ex] % inserts table 
+	\hline                  % inserts single horizontal line
+	       & \x    & \x    &       & 45.11 & \#1 \\
+	       &       & \x    &       & 45.24 & \#2 \\
+	 \x    & \x    & \x    &       & 45.43 & \#3 \\
+	 \x    &       &       &       & 45.53 & \#4 \\
+	 \x    & \x    &       & \x    & 46.45 & \#5 \\
+	 \x    & \x    &       &       & 46.56 & \#6 \\
+	       &       & \x    & \x    & 46.76 & \#7 \\
+	 \x    &       & \x    &       & 46.87 & \#8 \\
+	       & \x    & \x    & \x    & 47.25 & \#9 \\
+	       & \x    &       &       & 47.88 & \#10 \\
+	 \x    & \x    & \x    & \x    & 48.01 & \#11 \\
+	 \x    &       & \x    & \x    & 48.13 & \#12 \\
+	       & \x    &       & \x    & 48.40 & \#13 \\
+	 \x    &       &       & \x    & 49.68 & \#14 \\
+	\hline %inserts single line
+	\end{tabular}
+}
+\caption{Trims} % title of Table
+\label{table:Statistical1} % is used to refer this table in the text
+\end{table}
+
+MIXEDPrice Consump windSpeed temperatureRow timeOfDayMATRIX monthOfYearMATRIX
+\begin{table}[H]
+\centering  % used for centering table
+\resizebox{0.6\textwidth}{!}{
+	\begin{tabular}{c c c c c c} % centered columns (7 columns)
+	Curve & Skew & 1Historical & PAPER & MAE & Rank\\ [0.5ex] % inserts table 
+	\hline                  % inserts single horizontal line
+       &       & \x    & \x    & 45.14 & \#1 \\
+       &       &       & \x    & 45.55 & \#2 \\
+       & \x    &       &       & 45.56 & \#3 \\
+       & \x    &       & \x    & 45.60 & \#4 \\
+ \x    &       & \x    &       & 45.91 & \#5 \\
+ \x    & \x    & \x    & \x    & 45.95 & \#6 \\
+ \x    & \x    &       &       & 45.99 & \#7 \\
+ \x    &       &       & \x    & 46.14 & \#8 \\
+ \x    &       &       &       & 46.58 & \#9 \\
+ \x    & \x    &       & \x    & 46.87 & \#10 \\
+       &       & \x    &       & 46.98 & \#11 \\
+       & \x    & \x    & \x    & 47.02 & \#12 \\
+ \x    & \x    & \x    &       & 47.08 & \#13 \\
+ \x    &       & \x    & \x    & 47.94 & \#14 \\
+       & \x    & \x    &       & 47.98 & \#15 \\
+	\hline %inserts single line
+	\end{tabular}
+}
+\caption{Trims} % title of Table
+\label{table:Statistical1} % is used to refer this table in the text
+\end{table}
+
+MIXEDPrice Consump windSpeed temperatureRow timeOfDayMATRIX seasonOfYearMATRIX
+\begin{table}[H]
+\centering  % used for centering table
+\resizebox{0.6\textwidth}{!}{
+	\begin{tabular}{c c c c c c} % centered columns (7 columns)
+	Curve & Skew & 1Historical & PAPER & MAE & Rank\\ [0.5ex] % inserts table 
+	\hline                  % inserts single horizontal line
+       &       & \x    &       & 44.72 & \#1 \\
+       & \x    &       &       & 45.23 & \#2 \\
+       & \x    &       & \x    & 45.95 & \#3 \\
+ \x    & \x    & \x    &       & 46.02 & \#4 \\
+       & \x    & \x    &       & 46.04 & \#5 \\
+ \x    & \x    &       & \x    & 46.09 & \#6 \\
+ \x    &       & \x    & \x    & 46.43 & \#7 \\
+ \x    & \x    &       &       & 46.45 & \#8 \\
+ \x    &       & \x    &       & 46.47 & \#9 \\
+ \x    & \x    & \x    & \x    & 46.50 & \#10 \\
+       & \x    & \x    & \x    & 46.62 & \#11 \\
+       &       & \x    & \x    & 47.06 & \#12 \\
+ \x    &       &       & \x    & 47.26 & \#13 \\
+       &       &       & \x    & 47.41 & \#14 \\
+ \x    &       &       &       & 47.89 & \#15 \\
+	\hline %inserts single line
+	\end{tabular}
+}
+\caption{Trims} % title of Table
+\label{table:Statistical1} % is used to refer this table in the text
+\end{table}
+
+MIXEDPrice Consump windSpeed temperatureRow timeOfDay weekdays seasonOfYearMATRIX
+\begin{table}[H]
+\centering  % used for centering table
+\resizebox{0.6\textwidth}{!}{
+	\begin{tabular}{c c c c c c} % centered columns (7 columns)
+	Curve & Skew & 1Historical & PAPER & MAE & Rank\\ [0.5ex] % inserts table 
+	\hline                  % inserts single horizontal line
+       & \x    & \x    &       & 45.58 & \#1 \\
+       &       & \x    &       & 46.22 & \#2 \\
+ \x    &       & \x    &       & 46.36 & \#3 \\
+       &       & \x    & \x    & 46.75 & \#4 \\
+ \x    & \x    &       & \x    & 46.81 & \#5 \\
+ \x    & \x    &       &       & 46.97 & \#6 \\
+ \x    & \x    & \x    &       & 47.04 & \#7 \\
+       & \x    &       & \x    & 47.22 & \#8 \\
+       & \x    &       &       & 47.26 & \#9 \\
+ \x    &       &       & \x    & 47.32 & \#10 \\
+ \x    &       &       &       & 47.47 & \#11 \\
+       &       &       & \x    & 47.64 & \#12 \\
+       & \x    & \x    & \x    & 47.76 & \#13 \\
+ \x    &       & \x    & \x    & 48.48 & \#14 \\
+ \x    & \x    & \x    & \x    & 48.73 & \#15 \\
+	\hline %inserts single line
+	\end{tabular}
+}
+\caption{Trims} % title of Table
+\label{table:Statistical1} % is used to refer this table in the text
+\end{table}
+
+MATRIX Price Consump windSpeed timeOfDay weekdays monthOfYear
+\begin{table}[H]
+\centering  % used for centering table
+\resizebox{0.6\textwidth}{!}{
+	\begin{tabular}{c c c c c c} % centered columns (7 columns)
+	Curve & Skew & 1Historical & PAPER & MAE & Rank\\ [0.5ex] % inserts table 
+	\hline                  % inserts single horizontal line
+       & \x    & \x    &       & 45.20 & \#1 \\
+       &       &       & \x    & 46.78 & \#2 \\
+ \x    &       &       &       & 46.83 & \#3 \\
+       & \x    &       &       & 47.00 & \#4 \\
+       &       & \x    &       & 47.06 & \#5 \\
+ \x    &       & \x    & \x    & 47.13 & \#6 \\
+ \x    & \x    & \x    &       & 47.36 & \#7 \\
+       &       & \x    & \x    & 47.51 & \#8 \\
+ \x    & \x    &       &       & 47.99 & \#9 \\
+ \x    & \x    &       & \x    & 48.30 & \#10 \\
+ \x    &       &       & \x    & 48.56 & \#11 \\
+ \x    & \x    & \x    & \x    & 48.63 & \#12 \\
+       & \x    &       & \x    & 48.77 & \#13 \\
+	\hline %inserts single line
+	\end{tabular}
+}
+\caption{Trims} % title of Table
+\label{table:Statistical1} % is used to refer this table in the text
+\end{table}
 
 \subsubsection{Experiment 4: Black box optimization}
 
