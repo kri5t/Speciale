@@ -158,9 +158,8 @@ The experiments to come will be based on input combinations from the top 3 from 
 \end{itemize}
 
 \subsection{Experiment Two - Data Manipulation}
-Trimming is only an issue if irregularities exist\todo{use curves to illustrate that it is not necessary here}. The purpose of the experiments in series two is to turn inputs into a matrix whenever possible. As described in Section~\ref{sec:Matrix} one input parameter is split into one input parameter for all of its possible values --- it makes sense because each input parameter then has a weight that is adjusting itself according to the error as illustrated in Section~\ref{sec:annSection}. This is of course only an option if all values are known in advance and of a manageable size. When considering wind production forecasting this is valid for hours of the day, month and wind speed. Wind speeds are represented  by 41 different speeds in our data set. Instead of having only one input to represent each of the values, we can have 41 inputs for every single one of them. The purpose is to have a weight that tells exactly how much the specific input parameter in general influence the wind production to predict. Whenever a specific value is inserted it will be indicated with 1 and the rest of the matrix with 0. The network will then be adjusting a weight for the different entrances in the matrix whenever they are seen. What can become a problem is if some values does not exist or are under-represented which will cause that specific value to be under-expressed and not able to cover unseen data because the weight has only been adjusted a few times or not at all. In theory the matrix manipulation makes the most sense when all values to some degree are equally distributed so that every input in the matrix can express all values equally. Consider the case where wind speed 5 is not represented in the training dataset but is in the prediction data set. The network then won't have any clue how to relate to 5 when using the matrix implementation. In this case it makes sense to use one input parameter as representation because one weight have been adjusted to all the other values and illustrates how they in general influence the wind production. With that information contained in the weight it can also express 5 when the two are multiplied. Hours of the day and months are of course equally distributed. This assumption is validated in Table~\ref{windProdInputParamsTop10WithMatrix} where matrix on the wind speeds are obviously a bad choice. 
+Trimming is only an issue if irregularities exist\todo{use curves to illustrate that it is not necessary here and make graph that shows that the top is cut off and it is not irregular in any way}. The purpose of the experiments in series two is to turn inputs into a matrix whenever possible. As described in Section~\ref{sec:Matrix} one input parameter is split into one input parameter for all of its possible values --- it makes sense because each input parameter then has a weight that is adjusting itself according to the error as illustrated in Section~\ref{sec:annSection}. This is of course only an option if all values are known in advance and of a manageable size. When considering wind production forecasting this is valid for hours of the day, month and wind speed. Wind speeds are represented  by 41 different speeds in our data set. Instead of having only one input to represent each of the values, we can have 41 inputs for every single one of them. The purpose is to have a weight that tells exactly how much the specific input parameter in general influence the wind production to predict. Whenever a specific value is inserted it will be indicated with 1 and the rest of the matrix with 0. The network will then be adjusting a weight for the different entrances in the matrix whenever they are seen. What can become a problem is if some values does not exist or are under-represented which will cause that specific value to be under-expressed and not able to cover unseen data because the weight has only been adjusted a few times or not at all. In theory the matrix manipulation makes the most sense when all values to some degree are equally distributed so that every input in the matrix can express all values equally. Consider the case where wind speed 5 is not represented in the training dataset but is in the prediction data set. The network then won't have any clue how to relate to 5 when using the matrix implementation. In this case it makes sense to use one input parameter as representation because one weight have been adjusted to all the other values and illustrates how they in general influence the wind production. With that information contained in the weight it can also express 5 when the two are multiplied. Hours of the day and months are of course equally distributed. This assumption is validated in Table~\ref{windProdInputParamsTop10WithMatrix} where matrix on the wind speeds are obviously a bad choice. 
 
-\footnotesize
 \begin{center}
 \begin{longtable}{|c|c|c|c|c|c|c|c|c|}
 \hline
@@ -191,7 +190,6 @@ Trimming is only an issue if irregularities exist\todo{use curves to illustrate 
 \end{longtable}
 \label{table:windProdInputParamsTop10WithMatrix}
 \end{center}
-\normalsize
 
 \todo{discuss how matrix both influence indirectly and directly influence the prediction. Both pros and cons. The point is that a new month will not be influenced by the month before in terms of the weight. It will have its own. You remove responsibility from the other weights, they do not have to incorporate fx. how the month influence, they can focus only on wind speed and how it relates to the output}
 
@@ -201,56 +199,36 @@ This subsection is experimenting with the concepts described in Section~\ref{sec
 \subsubsection{Historical Volatility}
 Historical Volatility is presented in Section~\ref{sec:usingStatisticalInput}. It will calculate the volatility of the productions from hour to hour. This means that the last hour in the training set will hold information of the volatility of the entire dataset. We will use the EWMA to calculate volatility \todo{ref it back} and here it is necessary to experiment with the correct decay rate. The EWMA will always include the last hours EWMA --- this is why it is called moving average. The test will be performed in the best MAE from last experiment. When the best rate has been established for hour dataset it will be tested on top 10 from Table~\ref{table:windProdInputParamsTop10} with and without matrix.
 
-\footnotesize
 \begin{center}
-\begin{longtable}{|c|c|c|}
+\begin{longtable}{|c|c|}
 \hline
-\textbf{Hours} & \textbf{Decay} & \textbf{MAE} \\
+\textbf{Devay} & \textbf{MAE} \\
 \hline
 \endfirsthead
-\multicolumn{3}{c}%
+\multicolumn{2}{c}%
 {\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
 \hline
-\textbf{Hours} & \textbf{Decay} & \textbf{MAE} \\
+\textbf{Decay} & \textbf{MAE}\\
 \hline
 \endhead
-\hline \multicolumn{3}{r}{\textit{Continued on next page}} \\
+\hline \multicolumn{2}{r}{\textit{Continued on next page}} \\
 \endfoot
 \hline
 \endlastfoot
 \arrayrulecolor{light-gray}
-16 & 0,10 & 116.84 \\ \hline
-6 & 0,20 & 120.12 \\ \hline
-24 & 0,40 & 121.0 \\ \hline
-24 & 0,50 & 123.56 \\ \hline
-16 & 0,60 & 124.72 \\ \hline
-24 & 0,20 & 125.16 \\ \hline
-6 & 0,60 & 125.37 \\ \hline
-6 & 0,40 & 125.8 \\ \hline
-16 & 0,40 & 126.1 \\ \hline
-16 & 0,20 & 126.37 \\ \hline
-6 & 0,30 & 127.29 \\ \hline
-6 & 0,50 & 127.45 \\ \hline
-16 & 0,50 & 127.81 \\ \hline
-6 & 0,10 & 128.37 \\ \hline
-6 & 0,70 & 130.58 \\ \hline
-16 & 0,70 & 131.1 \\ \hline
-6 & 0,90 & 131.93 \\ \hline
-16 & 0,90 & 132.52 \\ \hline
-24 & 0,70 & 133.13 \\ \hline
-24 & 0,80 & 133.26 \\ \hline
-24 & 0,60 & 133.92 \\ \hline
-24 & 0,10 & 134.52 \\ \hline
-24 & 0,30 & 134.59 \\ \hline
-16 & 0,30 & 135.64 \\ \hline
-6 & 0,80 & 137.47 \\ \hline
-24 & 0,90 & 139.3 \\ \hline
-16 & 0,80 & 140.3 \\ \hline
-\caption{Different decay rates for the top 3 volatility hours}
+0,10 & 122,75 \\ \hline
+0,30 & 125,49 \\ \hline
+0,60 & 127,49 \\ \hline
+0,70 & 127,97 \\ \hline
+0,50 & 130,47 \\ \hline
+0,20 & 134,06 \\ \hline
+0,80 & 135,17 \\ \hline
+0,40 & 137,21 \\ \hline
+0,90 & 139,16 \\ \hline
+\caption{Different decay rates for historical volatility}
 \end{longtable}
 \label{table:historicalVoltalityHours}
 \end{center}
-\normalsize
 
 \subsubsection{Skewness}
 Skewness is a calculation of how much a distribution leans to one side of the mean \todo{write some about it in the statistics section}. What is important to locate is how many previous hours to include in the calculation of the skew. Table~\ref{table:skewnessHours} shows results where the best fit is found to be 16 hours. This will be basis for further testing when trying to use the methods in combination to see if any of them can augment each other. At first glance skewness seems to be indifferent in the case of wind production.
@@ -284,7 +262,6 @@ Skewness is a calculation of how much a distribution leans to one side of the me
 \end{longtable}
 \label{table:skewnessHours}
 \end{center}
-\normalsize
 
 \subsubsection{Curve Analysis}
 Curve analysis covers basic slope calculation of the curve. The intention is to get a notion of how much the previous productions was going upwards before the current hour. The purpose is to capture how the slopes in general relates to the production --- when we have a very steep slope how does that in general affect the production. Table~\ref{table:curveAnalysisHours} clearly shows that the curve analysis does not work as intended. \todo{show graph}.
@@ -340,7 +317,7 @@ All of the results in the table.
 \hline
 \endlastfoot
 \arrayrulecolor{light-gray}
-Volatility with 0,10 decay & MISSING \\ \hline
+Volatility with 0,10 decay & 122,75 \\ \hline
 Skewness with 16 hours & 125.85 \\ \hline
 Scatter of prices & 134.7 \\ \hline
 Curve Analysis with 20 hours & 133.27 \\ \hline
@@ -348,37 +325,51 @@ Curve Analysis with 20 hours & 133.27 \\ \hline
 \end{longtable}
 \label{table:comparisonStatistics}
 \end{center}
-\normalsize
 
 \todo{say something clever about them}.
 Also tried scatter as presented~\cite{singhal2011electricity}. This achieved a MAE of 118.61. A combination of the approaches is illustrated in Table~\ref{table:idealCombination}.
 
+\footnotesize
 \begin{center}
-\begin{longtable}{|c|c|c|c|c|c|}
+\begin{longtable}{|c|c|c|c|c|}
 \hline
-\textbf{Volatility} & \textbf{Skewness} & \textbf{Scatter} & \textbf{Curve} & \textbf{MAE} & \textbf{Rank} \\
+\textbf{Volatility} & \textbf{Skewness} & \textbf{Scatter} & \textbf{Curve} & \textbf{MAE} \\
 \hline
 \endfirsthead
-\multicolumn{6}{c}%
+\multicolumn{5}{c}%
 {\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
 \hline
-\textbf{Volatility} & \textbf{Skewness} & \textbf{Scatter} & \textbf{Curve} & \textbf{MAE} & \textbf{Rank} \\
+\textbf{Volatility} & \textbf{Skewness} & \textbf{Scatter} & \textbf{Curve} & \textbf{MAE} \\
 \hline
 \endhead
-\hline \multicolumn{6}{r}{\textit{Continued on next page}} \\
+\hline \multicolumn{5}{r}{\textit{Continued on next page}} \\
 \endfoot
 \hline
 \endlastfoot
 \arrayrulecolor{light-gray}
- &  \x &  \x &  & DOODODOD \\ \hline
-\caption{Ideal combination}
+ \x &  \x &  &  & 118.17 \\ \hline
+ \x &  \x &  &  \x & 122.77 \\ \hline
+ &  &  &  & 127.65 \\ \hline
+ \x &  \x &  \x &  & 129.24 \\ \hline
+ &  \x &  \x &  & 130.02 \\ \hline
+ \x &  &  &  \x & 131.54 \\ \hline
+ &  &  &  \x & 132.29 \\ \hline
+ &  &  \x &  & 132.31 \\ \hline
+ \x &  &  \x &  & 132.55 \\ \hline
+ \x &  &  &  & 133.73 \\ \hline
+ &  \x &  &  & 134.61 \\ \hline
+ &  \x &  &  \x & 140.49 \\ \hline
+ &  \x &  \x &  \x & 140.66 \\ \hline
+ \x &  &  \x &  \x & 140.69 \\ \hline
+ \x &  \x &  \x &  \x & 150.24 \\ \hline
+ &  &  \x &  \x & 153.8 \\ \hline
+\caption{All combinations of statistical features on the best from matrix}
 \end{longtable}
 \label{table:idealCombination}
 \end{center}
 \normalsize
 
 
-\footnotesize
 \begin{center}
 \begin{longtable}{|c|c|c|c|c|c|c|c|}
 \hline
@@ -403,7 +394,6 @@ Also tried scatter as presented~\cite{singhal2011electricity}. This achieved a M
 \end{longtable}
 \label{table:top3FromMatrixWithStatistics}
 \end{center}
-\normalsize
 
 
 \todo{better with or without trimming?}
