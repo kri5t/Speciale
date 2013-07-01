@@ -13,6 +13,17 @@ This subsection describes the experiments that uncovers the best combination of 
 
 Furthermore, experiments are needed to investigate the influence of data manipulation and statistical inputs as presented in Section~\ref{sec:usingStatisticalInput}. 
 
+The following abbreviations will be used in all tables to come:
+WS = Wind Speed
+AD = Air Density
+C = Consumption
+T = Temperature
+WD = Wind Direction
+L-P = Last Known Production
+Mo = Month
+ToD = Time of Day
+(m) = matrix
+
 \todo{DRAWING OF NETWORK}
 
 \subsection{Experiment Series One - Selection of input parameters}
@@ -60,8 +71,8 @@ The first experiment series is an attempt to find the best constitution of netwo
  \x &  \x &  \x &  &  \x &  \x &  \x &  & 180.89 & \#127 \\ \hline
  \x &  \x &  &  &  \x &  \x &  \x &  \x & 199.22 & \#128 \\ \hline
 \caption{Wind Production Input Parameter Test Top and bottom 10. It is based on 3 month of historical data and 200 epochs. It is an average of the prediction over 8000 hours}
-\end{longtable}
 \label{table:windProdInputParamsTop10}
+\end{longtable}
 \end{center}
 \normalsize
 
@@ -102,8 +113,8 @@ In experiments concerning prediction of wind production the month input paramete
  \x &  &  \x &  &  \x &  \x &  &  & 144.42 & \#9 \\ \hline
  \x &  \x &  &  \x &  \x &  \x &  &  \x & 144.48 & \#10 \\ \hline
 \caption{Top 10 seasonal wind production test. It is based on 3 month of historical data and one month after from the previous year. It is run with 200 epochs and predicts 8000 hours in 2012}
-\end{longtable}
 \label{table:seasonalWindProdInputParamsTop10}
+\end{longtable}
 \end{center}
 \normalsize
 
@@ -131,8 +142,8 @@ In experiments concerning prediction of wind production the month input paramete
 \arrayrulecolor{light-gray}
  \x &  \x &  \x &  \x &  &  \x &  \x &  & 147.98 & \#6 \\ \hline
 \caption{Seasonal wind production test based on an entire year. It is run with 200 epochs and predicts 8000 hours in 2012}
-\end{longtable}
 \label{table:seasonWindProdInputParamsTop2WholeYear}
+\end{longtable}
 \end{center}
 \normalsize
 \todo{see appendix}
@@ -187,8 +198,8 @@ Trimming is only an issue if irregularities exist\todo{use curves to illustrate 
  \x (m) & &  &  \x &  &  \x &  \x & 149.19 & \#8 \\ \hline
  \x (m) & \x &  &  &  &  \x &  \x (m) &155.46 & \#9 \\ \hline
 \caption{Matrix test}
-\end{longtable}
 \label{table:windProdInputParamsTop10WithMatrix}
+\end{longtable}
 \end{center}
 
 \todo{discuss how matrix both influence indirectly and directly influence the prediction. Both pros and cons. The point is that a new month will not be influenced by the month before in terms of the weight. It will have its own. You remove responsibility from the other weights, they do not have to incorporate fx. how the month influence, they can focus only on wind speed and how it relates to the output}
@@ -226,8 +237,8 @@ Historical Volatility is presented in Section~\ref{sec:usingStatisticalInput}. I
 0,40 & 137,21 \\ \hline
 0,90 & 139,16 \\ \hline
 \caption{Different decay rates for historical volatility}
-\end{longtable}
 \label{table:historicalVoltalityHours}
+\end{longtable}
 \end{center}
 
 \subsubsection{Skewness}
@@ -259,8 +270,8 @@ Skewness is a calculation of how much a distribution leans to one side of the me
 20 & 134.81 \\ \hline
 2 & 139.33 \\ \hline
 \caption{Prediction With Skewness and different hours}
-\end{longtable}
 \label{table:skewnessHours}
+\end{longtable}
 \end{center}
 
 \subsubsection{Curve Analysis}
@@ -292,8 +303,8 @@ Curve analysis covers basic slope calculation of the curve. The intention is to 
 2 & 151.62 \\ \hline
 4 & 161.12 \\ \hline
 \caption{Curve Analysis on different hours}
-\end{longtable}
 \label{table:curveAnalysisHours}
+\end{longtable}
 \end{center}
 \normalsize
 
@@ -322,12 +333,12 @@ Skewness with 16 hours & 125.85 \\ \hline
 Scatter of prices & 134.7 \\ \hline
 Curve Analysis with 20 hours & 133.27 \\ \hline
 \caption{Comparison of the approaches}
-\end{longtable}
 \label{table:comparisonStatistics}
+\end{longtable}
 \end{center}
 
 \todo{say something clever about them}.
-Also tried scatter as presented~\cite{singhal2011electricity}. This achieved a MAE of 118.61. A combination of the approaches is illustrated in Table~\ref{table:idealCombination}.
+Also tried scatter as presented~\cite{singhal2011electricity} which achieved a MAE of 134.7 and way behind the other approaches. A combination of all is illustrated in Table~\ref{table:idealCombination}. \todo{something clever should be written}
 
 \footnotesize
 \begin{center}
@@ -349,7 +360,7 @@ Also tried scatter as presented~\cite{singhal2011electricity}. This achieved a M
 \arrayrulecolor{light-gray}
  \x &  \x &  &  & 118.17 \\ \hline
  \x &  \x &  &  \x & 122.77 \\ \hline
- &  &  &  & 127.65 \\ \hline
+ &  &  &  & 125.65 \\ \hline
  \x &  \x &  \x &  & 129.24 \\ \hline
  &  \x &  \x &  & 130.02 \\ \hline
  \x &  &  &  \x & 131.54 \\ \hline
@@ -364,35 +375,39 @@ Also tried scatter as presented~\cite{singhal2011electricity}. This achieved a M
  \x &  \x &  \x &  \x & 150.24 \\ \hline
  &  &  \x &  \x & 153.8 \\ \hline
 \caption{All combinations of statistical features on the best from matrix}
-\end{longtable}
 \label{table:idealCombination}
+\end{longtable}
 \end{center}
 \normalsize
 
+Table~\ref{table:topFromMatrixWithStatistics} shows the two top combinations applied on the top 3 input combinations with matrix from Table~\ref{table:windProdInputParamsTop10WithMatrix}. It is first of all noticeable that the top 3 positions are the same as in all of the combination tests. Secondly, the results are in general improved. The best from ~\ref{table:idealCombination} is the same as the best ranked here. The results are equal which again emphasizes the ranking and the input combination. \todo{re-articulate/rephrase and say more stuff}.     
 
 \begin{center}
-\begin{longtable}{|c|c|c|c|c|c|c|c|}
+\begin{longtable}{|c|c|c|c|c|c|c|c|c|c|c|c|}
 \hline
-\textbf{WS} & \textbf{AD} & \textbf{C} & \textbf{T} & \textbf{WD} & \textbf{L-P} & \textbf{ToD} & \textbf{MAE} \\
+\textbf{WS} & \textbf{AD} & \textbf{C} & \textbf{T} & \textbf{WD} & \textbf{L-P} & \textbf{ToD} & \textbf{Vola} & \textbf{Skew} & \textbf{Scat} & \textbf{Curve} & \textbf{MAE} \\
 \hline
 \endfirsthead
-\multicolumn{8}{c}%
+\multicolumn{12}{c}%
 {\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
 \hline
-\textbf{WS} & \textbf{AD} & \textbf{C} & \textbf{T} & \textbf{WD} & \textbf{L-P} & \textbf{ToD} & \textbf{MAE} \\
+\textbf{WS} & \textbf{AD} & \textbf{C} & \textbf{T} & \textbf{WD} & \textbf{L-P} & \textbf{ToD} & \textbf{Vola} & \textbf{Skew} & \textbf{Scat} & \textbf{Curve} & \textbf{MAE} \\
 \hline
 \endhead
-\hline \multicolumn{8}{r}{\textit{Continued on next page}} \\
+\hline \multicolumn{12}{r}{\textit{Continued on next page}} \\
 \endfoot
 \hline
 \endlastfoot
 \arrayrulecolor{light-gray}
- \x &  &  &  \x &  &  \x & \x (m) & 116.84  \\ \hline
- \x &  &  &  &  \x &  \x & \x (m) & 124.71 \\ \hline
- \x &  \x &  &  &  &  \x & \x (m) & 135.86 \\ \hline
-\caption{Top 3 tested with ideal statistics setting}
+ \x &  &  &  \x &  &  \x &  \x (m) & \x &  \x &  &  & 119.84 \\ \hline
+ \x &  \x &  &  &  &  \x &  \x (m) & \x &  \x &  &  & 124.31 \\ \hline
+ \x &  \x &  &  &  \x &  \x &   \x (m) & \x &  \x &  &  & 125.69 \\ \hline
+ \x &  \x &  &  &  \x &  \x &  \x (m) & \x &  \x &  &  \x & 127.42 \\ \hline
+ \x &  &  &  \x &  &  \x &  \x (m) & \x &  \x &  &  \x & 128.19 \\ \hline
+ \x &  \x &  &  &  &  \x &  \x (m) & \x &  \x &  &  \x & 130.19 \\ \hline
+\caption{Top 3 tested with the two ideal statistics setting}
+\label{table:topFromMatrixWithStatistics}
 \end{longtable}
-\label{table:top3FromMatrixWithStatistics}
 \end{center}
 
 
@@ -403,7 +418,44 @@ Also tried scatter as presented~\cite{singhal2011electricity}. This achieved a M
 
 
 \subsection{Experiment Three - Prediction Strategies}
+Similar days, the use of more than one neural network to "re-calculate" results. Try other training algorithm. Try recurrent network.
+
+The re-calculation concept works by letting other neural networks re-calculate the prediction from the original network. The purpose is to identify places where the generalization function has problems and then divide it into new neural networks that only have the purpose of focusing on these problematic situations. For simplicity we are going to apply this to the small numbers and big numbers of the dataset. We will define what is small and big by taking the 2 and 98 percentile. Whenever the "original" network predicts something in or close to the big or small interval then the responsibility of that prediction is forwarded to one of the two. It works like a second opinion but here the network has been specialized to only focus on a specific part of the dataset instead of everything\todo{give example of corrections}. It creates a normalization function on a smaller dataset and leaves out a lot of unnecessary information. It does not need to account for anything other than its interval in the generalization function so it should be able to predict its target group better. What is smart about the second opinion is that we let the original network decide if it actually thinks we are in the low numbers --- if we are then we can possibly make that prediction even more accurate. These thoughts could basically we applied on all other parts of possible wind production values. 
+
+The problem can be if the intervals are too small which will cause the dataset to be too small and hard for the ANN to generalize upon. This was the same problem seen with matrix and wind speeds \todo{elaborate}. Some periods can be with only a few small or big values and then the network will have a hard time predicting values if we are moving into a periods with a lot. Another problem is that you are basically chopping up the curves under or above a predefined number (98 or 2 percentile) (or this is a problem at all?). Another thing is the decrease in performance because you have to train and instantiate the number of new networks. Trade-off.
+
+\begin{center}
+\begin{longtable}{|c|c|}
+\hline
+\textbf{Strategy} & \textbf{MAE} \\
+\hline
+\endfirsthead
+\multicolumn{2}{c}%
+{\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
+\hline
+\textbf{Strategy} & \textbf{MAE} \\
+\hline
+\endhead
+\hline \multicolumn{2}{r}{\textit{Continued on next page}} \\
+\endfoot
+\hline
+\endlastfoot
+\arrayrulecolor{light-gray}
+Small and Big ANN strategy & 116.01 \\ \hline
+Small and big with Similar Days & 137.61 \\ \hline
+Just similar days and ideal inputs & 138.93 \\ \hline
+Hybrid training strategy (Levenberg-Marquat) & 142.07 \\ \hline
+Tried with recurrent neural network & 211.12 \\ \hline
+\caption{Strategies}
+\label{table:strategiesOnIdeal}
+\end{longtable}
+\end{center}
+
+The small and big ann is so close to the result with the strategy. It is hard to say if it is improved. The reason lays in the relatively small interval they are focusing on (Small being from 0-60 and big being 1950-maximum). To see the real potential in this approach more intervals need to be included and more testing is needed. \todo{hmm, try on only big because that should be the obvious result in MAE}.
+
+\todo{fix table so that it makes more sense}
+Problems with similar days is that it does not see the whole picture. The problem arises when only a few similar days exist in the last 3 months \todo{show}. Then it will be hard to generalize upon, especially if all other days are pulling the production in a other direction than the similar days. The similar days approach should be tested on an entire year.
 
 
 \subsection{Experiment Four - Black Box Optimization}
-Epochs
+Epochs, use 
