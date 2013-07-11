@@ -95,8 +95,7 @@ Average: & 0,28 \\ [1ex] % [1ex] adds vertical space
 \end{table}
 
 \subsubsection{Wind Direction}
-Figure~\ref{fig:windDirVsProd} shows that the wind direction in general has an impact on the wind production. Wind mills are turning in the direction of the wind which could make these numbers a coincidence. The answer could be that the wind speed is more powerful when coming from the west. This relationship is established in Figure~\ref{fig:windDirectionVersusWindSpeed}. It needs to be validated in experiments if the wind direction makes sense in relation to the other parameters used as input. \todo{show compass and show the relation between west wind and more powerful speeds
- }.   
+Figure~\ref{fig:windDirVsProd} shows that the wind direction in general has an impact on the wind production which can also be seen in the co-relation constant from Table~\ref{table:pearsonCoeficientWindProduction}. This was somehow expected based on Section~\ref{sec:windmillPlacement} where it is mentioned how change in wind direction affect placement of windmills. The wind speed could be more powerful when coming from a specific direction which differs according to the physical location. This relationship is established in Figure~\ref{fig:windDirectionVersusWindSpeed}. It needs to be validated in experiments if the wind direction makes sense in relation to the other parameters used as input.
  
 \begin{table}[H]
 \centering  % used for centering table
@@ -158,6 +157,7 @@ The dataset consists of all hours of the years included. Based on this the netwo
 \end{figure}
 
 \subsubsection{Seasonality}
+\label{sec:windProdSeasonality}
 The wind follows the seasons and the production follows the wind. The wind production should therefore vary according to the current season. This is validated by Figure~\ref{fig:windProductionMonths} and~\ref{fig:windProductionSeasons} where there is a significant distinction between summer and the other 3 seasonality.
 
 \begin{figure}[H]
