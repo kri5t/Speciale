@@ -4,10 +4,15 @@ This section contains experimental results to find the best possible price predi
 \subsection{Experiment 1: Inputs}
 In this section we experimented with the basic input parameters that we identified in section~\ref{sec:Price}. We did a cross comparison of all the inputs and possible combinations (For those that made sense). The Price and the Demand is such a basic measure when you define a price in any markets that they are included in every prediction. We did not make a cross comparison of the Month of Year and the Seasons of Year since they say the same but with different granularity. We did a cross comparison both with and without matrix inputs and with a mix of non-matrix and matrix inputs. This is done to determine whether an input makes better sense on matrix form or just as a simple normalized value. 
 
-Experiment 1 is based on a dataset consisting of the last 3 months averaging to about 2189 hours. We use 200 epochs for each training iteration.
+\subsubsection{Variables}
+Experiment 1 is based on a dataset consisting of the last 3 months averaging to 2189 hours. We use 200 epochs for each training iteration.
 
-This includes last hours Price (P), The Demand (D), Wind Speed(WS), Temperature(T), The Hourly Time of Day (ToD), The Day of The Week(DoW), The Month of The Year(MoY), The Season of The Year(SoY). The (M) is for Matrix input and states whether the input in the seasonal rows(ToD, WoD, MoY, SoY) are on matrix form or not.
+This includes last hours Price (P), The Demand (D), Wind Speed(WS), Temperature(T), The Hourly Time of Day (ToD), The Day of The Week(DoW), The Month of The Year(MoY), The Season of The Year(SoY). The (M) is for Matrix input and states whether the input in the seasonal rows(ToD, WoD, MoY, SoY) are represented as a matrix or not.
 
+\subsubsection{Hypothesis}
+In this experiment we want to test the impact of the different input variables describe above.
+
+\subsubsection{Results}
 As we saw in the wind production experiments(WPE) section~\ref{sec:windPowerAnalysis} there was a problem regarding the way we conducted tests for the seasonality; specifically for the MoY and the SoY. We only use the last 3 months to train the network and that sort of eliminates the obvious purpose of the MoY and SoY. As we saw in the results for the first experiment in WPE if we include the same month as we are in from last year and reintroduce the purpose of the SoY and MoY it gave us a worse result than leaving it out. To make sure the same thing applies on the price prediction experiments we conducted to runs of all the combinations of inputs. First we ran it with the last 3 months including the same month that we are in from last year and after that we ran the experiment with only the last 3 months.
 
 Table~\ref{table:Top20Prices} shows us the top 20 MAE from the experiment with a training set containing the last 3 months(3Month). We have compared this to the experiment with a training set containing the last 3 months and the same month from last year(4Month). As we see in the table there isn't the biggest deviation between the two datasets. This also shows in \todo{Ref Appendix for both} that the distribution of the MAE over the two datasets are quite similar. From this we can conclude that the effect of using last years month in our dataset does not make a significant difference and can be left out. This raises the question if the MoY and the SoY can be left out as well, since the obvious use for it is eliminated by never having a full month or full season in the training set - that is equal to the one we predict.
@@ -69,7 +74,7 @@ The temperature is a less obvious candidate for the prediction of price since th
 
 The Hourly Time of Day (ToD) is included in every single combination in the top 20. This clearly shows that this input parameter is important for the prediction of the price. This is kind of obvious since what we are predicting is the hourly price. In section~\ref{sec:seasonality}(figure~\ref{fig:price_per_hour}) we saw that the price varied from 190 to 335 which strengthens the importance of the relationship between time of day and the price. Also the top 7 all have the ToD on matrix form which indicates that this is the best way of representing the ToD.
 
-Next we have the Day of the Week (DoW) parameter. This parameter are present in 75\% of the 20 best results (8/10 and in 15/20 best combinations). We have to believe that it plays a significant role in the prediction of price. If we look at the analysis of the average price over weekdays in section~\ref{sec:seasonality}(figure~\ref{fig:price_over_weekdays}) we see that there is a significant difference in price on the different days especially the weekdays compared to the weekend. This parameter is mixed between matrix input and standard input. This might be due to the fact that the biggest difference between days are weekend and weekday thus minimizing the effect of a matrix representation. \todo{Maaske lav et forsøg med weekday/weekend matrix.}
+Next we have the Day of the Week (DoW) parameter. This parameter are present in 75\% of the 20 best results (8/10 and in 15/20 best combinations). We have to believe that it plays a significant role in the prediction of price. If we look at the analysis of the average price over weekdays in section~\ref{sec:seasonality}(figure~\ref{fig:price_over_weekdays}) we see that there is a significant difference in price on the different days especially the weekdays compared to the weekend. This parameter is mixed between matrix input and standard input. This might be due to the fact that the biggest difference between days are weekend and weekday thus minimizing the effect of a matrix representation. \todo{Maaske lav et forsoeg med weekday/weekend matrix.}
 
 The last two parameters - Month of Year(MoY) and Season of Year (SoY) - are codependent and will be covered together. As mentioned before they cover the same information and we therefore only need one of them at any time \todo{Lav forsoeg der viser at det ikke giver mening at have baade MoY og SoY paa samme tid.}. The values are present in 9/10 of the best combinations in ~\ref{table:Top20Prices}. This is an indicator that the seasonality in the form of MoY and SoY plays a role in predicting the electricity price. Also we saw in the analysis in section~\ref{sec:seasonality}(figure~\ref{fig:monthlyAveragePrice} and ~\ref{fig:seasons}) that the price changes with seasonality and that it especially was more expensive in the winther than the rest of the year.
 
@@ -123,9 +128,44 @@ If we take a look at the bottom 10 input combinations in terms of MAE we see som
 %\caption{Average MAE of ten runs per entry} % title of Table
 %\label{table:Top10Average} % is used to refer this table in the text
 %\end{table}
+\begin{table}[H]
+\centering  % used for centering table
+\resizebox{\textwidth}{!}{
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|} % centered columns (7 columns)
+\hline
+P & D & WS & T & ToD & DoW & MoY & SoY & 1 Run MAE & 10 Runs Average & Rank\\ [0.5ex] % inserts table 
+%heading
+\hline                  % inserts single horizontal line
+ \x    & \x    & \x    & \x    & \x    & \x\m  & \x\m  &       & 64.19 & 61.95 & \#9 \\ \hline
+ \x    & \x    & \x    & \x    & \x\m  & \x    &       & \x\m  & 58.09 & 62.76 & \#2 \\ \hline
+ \x    & \x    & \x    & \x    & \x\m  & \x\m  &       & \x\m  & 57.12 & 62.87 & \#1 \\ \hline
+ \x    & \x    & \x    &       & \x\m  & \x    & \x\m  &       & 64.72 & 62.99 & \#10 \\ \hline
+ \x    & \x    & \x    & \x    & \x\m  & \x    & \x\m  &       & 62.84 & 64.23 & \#7 \\ \hline
+ \x    & \x    & \x    & \x    & \x\m  & \x    &       &       & 62.19 & 65.17 & \#5 \\ \hline
+ \x    & \x    & \x    & \x    & \x\m  &       & \x\m  &       & 58.79 & 65.53 & \#3 \\ \hline
+ \x    & \x    & \x    & \x    & \x    & \x    &       & \x\m  & 63.94 & 65.80 & \#8 \\ \hline
+ \x    & \x    & \x    & \x    & \x\m  &       &       & \x\m  & 62.26 & 67.21 & \#6 \\ \hline
+ \x    & \x    & \x    &       & \x\m  & \x\m  & \x\m  &       & 60.14 & 70.25 & \#4 \\ \hline
+\end{tabular}
+}
+\caption{Top 10 average MAE of 10 runs. Shown with their respective ranks in the single run and with the MAE from the single run.} % title of Table
+\label{table:Bottom10Prices} % is used to refer this table in the text
+\end{table}
+
+\subsubsection{Conclusion}
 
 \subsection{Experiment 2: Trimming}
-As described in section~\ref{sec:Trimming} trimming is a solution to extreme outliers and a way to stream line your data; thus making it easier for neural networks to predict. The art is to get a good balance between the how much of the dataset you remove and how much of an accuracy boost your predictions will get. If you trim parts of the dataset that is actually common data it will get impossible to predict a very high price since the neural network never sees those values.
+As described in section~\ref{sec:Trimming} trimming is a solution to extreme outliers and a way to streamline your data; thus making it easier for neural networks to predict. The art is to get a good balance between the how much of the dataset you remove and how much of an accuracy boost your predictions will get. If you trim parts of the dataset that is actually common data it will get impossible to predict a very high price since the neural network never sees those values.
+
+\subsubsection{Variables}
+Experiment 2 is based on a dataset consisting of the last 3 months averaging to 2189 hours. We use 200 epochs for each training iteration.
+
+In this experiment our variables are the grade of trimming we conduct on the training set. We trim from 1\% to 5\% in the lowest and highest part of the dataset thus totaling to 2\% to 10\% of dataset has been removed.
+
+\subsubsection{Hypothesis}
+This experiment is conducted to show the effect of trimming on a dataset. By removing the most extreme outliers we expect the predictions to stabilize since the randomness of the extreme outliers have been removed. This should result in a better overall MAE and a better curve fit.
+
+\subsubsection{Results}
 
 As we can see in figure~\ref{fig:NoTrim} (where no trimming was applied) the predicted values some times goes way out of line and hits the very maximum(about 1500) also when the actual value is nothing near that. This is due to the seldom occurrence of these high prices that the neural network is never able to get a full connection between these prices and the input parameters. Another reason for this to happen is that it is extremely hard to predict such sudden and very high fluctuations in price; thus removing these will not give us a performance hit, since we would not be able to predict them anyways and they just add the possibility of errors in the rest of the predictions.
 
@@ -182,6 +222,81 @@ In figure~\ref{fig:AllTrims} we see the dataset from figure~\ref{fig:1PTrim} wit
 
 \subsection{Experiment 3: Statistical strategies}
 
+\subsubsection{Variables}
+Experiment 2 is based on a dataset consisting of the last 3 months averaging to 2189 hours. We use 200 epochs for each training iteration.
+
+In this experiment our variables are the grade of trimming we conduct on the training set. We trim from 1\% to 5\% in the lowest and highest part of the dataset thus totaling to 2\% to 10\% of dataset has been removed.
+
+\subsubsection{Hypothesis}
+This experiment is conducted to show the effect of trimming on a dataset. By removing the most extreme outliers we expect the predictions to stabilize since the randomness of the extreme outliers have been removed. This should result in a better overall MAE and a better curve fit.
+
+\subsubsection{Results}
+
+\begin{table}[H]
+\centering  % used for centering table
+\resizebox{0.3\textwidth}{!}{
+	\begin{tabular}{|c|c|} % centered columns (7 columns)
+	\hline
+	Decay weight & MAE \\ [0.5ex] % inserts table 
+	\hline                   % inserts single horizontal line
+	30\% & 44,69 \\ \hline
+	90\% & 44,82 \\ \hline
+	10\% & 44,87 \\ \hline
+	20\% & 45,51 \\ \hline
+	40\% & 45,51 \\ \hline
+	80\% & 46,16 \\ \hline
+	60\% & 46,29 \\ \hline
+	70\% & 46,55 \\ \hline
+	50\% & 46,92 \\ \hline
+	\end{tabular}
+}
+\caption{Trims} % title of Table
+\label{table:Top10Trimming} % is used to refer this table in the text
+\end{table}
+
+\begin{table}[H]
+\centering  % used for centering table
+\resizebox{0.3\textwidth}{!}{
+	\begin{tabular}{|c|c|} % centered columns (7 columns)
+	\hline
+	Skewness stack & MAE\\ [0.5ex] % inserts table 
+	\hline                  % inserts single horizontal line
+	4 & 45,09 \\ \hline
+	2 & 45,15 \\ \hline
+	6 & 45,69 \\ \hline
+	20 & 46,05 \\ \hline
+	8 & 46,14 \\ \hline
+	24 & 46,16 \\ \hline
+	16 & 46,47 \\ \hline
+	12 & 46,66 \\ \hline
+	\end{tabular}
+}
+\caption{Skewness stack size} % title of Table
+\label{table:SkewnessTest} % is used to refer this table in the text
+\end{table}
+
+\begin{table}[H]
+\centering  % used for centering table
+\resizebox{0.3\textwidth}{!}{
+	\begin{tabular}{|c|c|} % centered columns (7 columns)
+	\hline
+	Curve stack & MAE\\ [0.5ex] % inserts table 
+	\hline                  % inserts single horizontal line
+	4 & 45,72 \\ \hline
+	12 & 46,05 \\ \hline
+	6 & 46,09 \\ \hline
+	2 & 46,31 \\ \hline
+	16 & 46,67 \\ \hline
+	24 & 46,76 \\ \hline
+	20 & 46,87 \\ \hline
+	8 & 47,81 \\ \hline
+	\end{tabular}
+}
+\caption{Curve behavior stack size} % title of Table
+\label{table:CurveTest} % is used to refer this table in the text
+\end{table}
+
+
 MIXEDPrice ConsumpwindSpeed temperatureRow timeOfDay weekdaysMATRIX monthOfYearMATRIX
 \begin{table}[H]
 \centering  % used for centering table
@@ -190,20 +305,21 @@ MIXEDPrice ConsumpwindSpeed temperatureRow timeOfDay weekdaysMATRIX monthOfYearM
 	\hline
 	Curve & Skew & 1Historical & PAPER & MAE & Rank\\ [0.5ex] % inserts table 
 	\hline                  % inserts single horizontal line
-	       &       & \x    &       & 45.20 & \#1 \\ \hline
-	 \x    &       &       &       & 45.58 & \#2 \\ \hline 
-	       & \x    & \x    &       & 45.67 & \#3 \\ \hline
-	 \x    &       & \x    &       & 46.55 & \#4 \\ \hline
-	 \x    & \x    &       &       & 47.03 & \#5 \\ \hline 
-	 \x    &       & \x    & \x    & 47.05 & \#6 \\ \hline
-	       & \x    & \x    & \x    & 47.48 & \#7 \\ \hline
-	       & \x    &       &       & 47.50 & \#8 \\ \hline
-	 \x    & \x    & \x    & \x    & 47.72 & \#9 \\ \hline
-	       & \x    &       & \x    & 48.03 & \#10 \\ \hline
-	       &       & \x    & \x    & 48.09 & \#11 \\ \hline
-	 \x    &       &       & \x    & 48.37 & \#12 \\ \hline
-	       &       &       & \x    & 48.54 & \#13 \\ \hline
-	 \x    & \x    &       & \x    & 49.00 & \#14 \\ \hline
+	       &       & \x    &       & 45.20 & - \\ \hline
+	 \x    &       &       &       & 45.58 & 0.84\% \\ \hline
+	       & \x    & \x    &       & 45.67 & 1.04\% \\ \hline
+	 \x    &       & \x    &       & 46.55 & 2.99\% \\ \hline
+	 \x    & \x    & \x    &       & 47.03 & 4.05\% \\ \hline
+	 \x    & \x    &       &       & 47.03 & 4.05\% \\ \hline
+	 \x    &       & \x    & \x    & 47.05 & 4.11\% \\ \hline
+	       & \x    & \x    & \x    & 47.48 & 5.04\% \\ \hline
+	       & \x    &       &       & 47.50 & 5.1\% \\ \hline
+	 \x    & \x    & \x    & \x    & 47.72 & 5.58\% \\ \hline
+	       & \x    &       & \x    & 48.03 & 6.28\% \\ \hline
+	       &       & \x    & \x    & 48.09 & 6.4\% \\ \hline
+	 \x    &       &       & \x    & 48.37 & 7.02\% \\ \hline
+	       &       &       & \x    & 48.54 & 7.39\% \\ \hline
+	 \x    & \x    &       & \x    & 49.00 & 8.4\% \\ \hline
 	\end{tabular}
 }
 \caption{Trims} % title of Table
@@ -218,21 +334,21 @@ MIXEDPrice Consump windSpeed temperatureRow timeOfDayMATRIX weekdays
 	\hline
 	Curve & Skew & 1Historical & PAPER & MAE & Rank\\ [0.5ex] % inserts table 
 	\hline                  % inserts single horizontal line
-	 \x    &       &       &       & 43.97 & \#1 \\ \hline
-	       &       & \x    &       & 44.38 & \#2 \\ \hline
-	       & \x    & \x    &       & 44.60 & \#3 \\ \hline
-	       &       & \x    & \x    & 44.96 & \#4 \\ \hline
-	 \x    &       & \x    &       & 45.01 & \#5 \\ \hline
-	 \x    & \x    & \x    &       & 45.26 & \#6 \\ \hline
-	 \x    & \x    &       &       & 45.37 & \#7 \\ \hline
-	       &       &       & \x    & 45.67 & \#8 \\ \hline
-	 \x    &       & \x    & \x    & 46.46 & \#9 \\ \hline
-	       & \x    &       &       & 46.51 & \#10 \\ \hline
-	 \x    & \x    & \x    & \x    & 46.52 & \#11 \\ \hline
-	 \x    &       &       & \x    & 46.58 & \#12 \\ \hline
-	       & \x    &       & \x    & 46.63 & \#13 \\ \hline
-	 \x    & \x    &       & \x    & 47.58 & \#14 \\ \hline
-	       & \x    & \x    & \x    & 47.80 & \#15 \\ \hline
+	 \x    &       &       &       & 43.97 & - \\ \hline
+	       &       & \x    &       & 44.38 & 0.92\% \\ \hline
+	       & \x    & \x    &       & 44.60 & 1.43\% \\ \hline
+	       &       & \x    & \x    & 44.96 & 2.26\% \\ \hline
+	 \x    &       & \x    &       & 45.01 & 2.37\% \\ \hline
+	 \x    & \x    & \x    &       & 45.26 & 2.93\% \\ \hline
+	 \x    & \x    &       &       & 45.37 & 3.19\% \\ \hline
+	       &       &       & \x    & 45.67 & 3.87\% \\ \hline
+	 \x    &       & \x    & \x    & 46.46 & 5.67\% \\ \hline
+	       & \x    &       &       & 46.51 & 5.77\% \\ \hline
+	 \x    & \x    & \x    & \x    & 46.52 & 5.79\% \\ \hline
+	 \x    &       &       & \x    & 46.58 & 5.93\% \\ \hline
+	       & \x    &       & \x    & 46.63 & 6.05\% \\ \hline
+	 \x    & \x    &       & \x    & 47.58 & 8.2\% \\ \hline
+	       & \x    & \x    & \x    & 47.80 & 8.71\% \\ \hline
 	\end{tabular}
 }
 \caption{Trims} % title of Table
@@ -247,20 +363,21 @@ MIXEDPrice Consump windSpeed temperatureRow timeOfDayMATRIX weekdays monthOfYear
 	\hline
 	Curve & Skew & 1Historical & PAPER & MAE & Rank\\ [0.5ex] % inserts table 
 	\hline                  % inserts single horizontal line
-	       &       & \x    &       & 45.54 & \#1 \\ \hline
-	 \x    & \x    & \x    & \x    & 46.12 & \#2 \\ \hline
-	 \x    & \x    & \x    &       & 46.34 & \#3 \\ \hline
-	       & \x    & \x    &       & 46.40 & \#4 \\ \hline
-	       &       &       & \x    & 46.51 & \#5 \\ \hline
-	 \x    &       & \x    &       & 46.52 & \#6 \\ \hline
-	 \x    & \x    &       &       & 46.57 & \#7 \\ \hline
-	 \x    &       &       & \x    & 46.87 & \#8 \\ \hline
-	 \x    &       &       &       & 46.93 & \#9 \\ \hline
-	       &       & \x    & \x    & 47.03 & \#10 \\ \hline
-	       & \x    &       & \x    & 47.15 & \#11 \\ \hline
-	       & \x    &       &       & 47.34 & \#12 \\ \hline
-	 \x    & \x    &       & \x    & 47.68 & \#13 \\ \hline
-	       & \x    & \x    & \x    & 47.87 & \#14 \\ \hline
+	       &       & \x    &       & 45.54 & - \\ \hline
+	 \x    & \x    & \x    & \x    & 46.12 & 1.28\% \\ \hline
+	 \x    & \x    & \x    &       & 46.34 & 1.76\% \\ \hline
+	       & \x    & \x    &       & 46.40 & 1.9\% \\ \hline
+	       &       &       & \x    & 46.51 & 2.13\% \\ \hline
+	 \x    &       & \x    &       & 46.52 & 2.15\% \\ \hline
+	 \x    & \x    &       &       & 46.57 & 2.27\% \\ \hline
+	 \x    &       &       & \x    & 46.87 & 2.92\% \\ \hline
+	 \x    &       &       &       & 46.93 & 3.05\% \\ \hline
+	       &       & \x    & \x    & 47.03 & 3.27\% \\ \hline
+	 \x    &       & \x    & \x    & 47.03 & 3.28\% \\ \hline
+	       & \x    &       & \x    & 47.15 & 3.54\% \\ \hline
+	       & \x    &       &       & 47.34 & 3.95\% \\ \hline
+	 \x    & \x    &       & \x    & 47.68 & 4.71\% \\ \hline
+	       & \x    & \x    & \x    & 47.87 & 5.11\% \\ \hline
 	\hline %inserts single line
 	\end{tabular}
 }
@@ -276,20 +393,20 @@ MIXEDPrice Consump windSpeed timeOfDayMATRIX weekdays monthOfYearMATRIX
 	\hline
 	Curve & Skew & 1Historical & PAPER & MAE & Rank\\ [0.5ex] % inserts table 
 	\hline                  % inserts single horizontal line
-	       &       & \x    &       & 45.87 & \#1 \\ \hline
-	       & \x    & \x    &       & 46.68 & \#2 \\ \hline
-	       & \x    &       &       & 46.74 & \#3 \\ \hline
-	 \x    & \x    & \x    &       & 46.79 & \#4 \\ \hline
-	 \x    &       & \x    &       & 47.52 & \#5 \\ \hline
-	 \x    &       &       &       & 47.98 & \#6 \\ \hline
-	 \x    & \x    &       &       & 48.28 & \#7 \\ \hline
-	 \x    &       & \x    &       & 49.18 & \#8 \\ \hline
-	       &       & \x    &       & 49.77 & \#9 \\ \hline
-	       & \x    & \x    &       & 50.78 & \#10 \\ \hline
-	 \x    &       &       &       & 51.44 & \#11 \\ \hline
-	 \x    & \x    & \x    &       & 53.93 & \#12 \\ \hline
-	       & \x    &       &       & 54.63 & \#13 \\ \hline
-	 \x    & \x    &       &       & 55.22 & \#14 \\ \hline
+	       &       & \x    &       & 45.87 & - \\ \hline
+	       & \x    & \x    &       & 46.68 & 1.75\% \\ \hline
+	       & \x    &       &       & 46.74 & 1.89\% \\ \hline
+	 \x    & \x    & \x    &       & 46.79 & 2.0\% \\ \hline
+	 \x    &       & \x    &       & 47.52 & 3.59\% \\ \hline
+	 \x    &       &       &       & 47.98 & 4.6\% \\ \hline
+	 \x    & \x    &       &       & 48.28 & 5.26\% \\ \hline
+	 \x    &       & \x    &       & 49.18 & 7.22\% \\ \hline
+	       &       & \x    &       & 49.77 & 8.5\% \\ \hline
+	       & \x    & \x    &       & 50.78 & 10.7\% \\ \hline
+	 \x    &       &       &       & 51.44 & 12.15\% \\ \hline
+	 \x    & \x    & \x    &       & 53.93 & 17.57\% \\ \hline
+	       & \x    &       &       & 54.63 & 19.1\% \\ \hline
+	 \x    & \x    &       &       & 55.22 & 20.38\% \\ \hline
 	\end{tabular}
 }
 \caption{Trims} % title of Table
@@ -304,20 +421,21 @@ MIXEDPrice Consump windSpeed timeOfDayMATRIX weekdays monthOfYearMATRIX
 	\hline
 	Curve & Skew & 1Historical & PAPER & MAE & Rank\\ [0.5ex] % inserts table 
 	\hline                  % inserts single horizontal line
-	       & \x    & \x    &       & 45.35 & \#1 \\ \hline
-	 \x    & \x    & \x    &       & 45.76 & \#2 \\ \hline
-	 \x    &       &       & \x    & 45.83 & \#3 \\ \hline
-	 \x    &       &       &       & 46.10 & \#4 \\ \hline
-	 \x    & \x    &       &       & 46.40 & \#5 \\ \hline
-	 \x    &       & \x    &       & 46.47 & \#6 \\ \hline
-	       & \x    &       &       & 46.53 & \#7 \\ \hline
-	       &       & \x    & \x    & 46.72 & \#8 \\ \hline
-	       &       &       & \x    & 46.88 & \#9 \\ \hline
-	 \x    & \x    & \x    & \x    & 47.40 & \#10 \\ \hline
-	       & \x    &       & \x    & 47.65 & \#11 \\ \hline
-	 \x    &       & \x    & \x    & 47.82 & \#12 \\ \hline
-	 \x    & \x    &       & \x    & 47.96 & \#13 \\ \hline
-	       & \x    & \x    & \x    & 48.45 & \#14 \\ \hline
+	       & \x    & \x    &       & 45.35 & - \\ \hline
+	 \x    & \x    & \x    &       & 45.76 & 0.91\% \\ \hline
+	 \x    &       &       & \x    & 45.83 & 1.06\% \\ \hline
+	 \x    &       &       &       & 46.10 & 1.66\% \\ \hline
+	 \x    & \x    &       &       & 46.40 & 2.32\% \\ \hline
+	 \x    &       & \x    &       & 46.47 & 2.48\% \\ \hline
+	       & \x    &       &       & 46.53 & 2.6\% \\ \hline
+	       &       & \x    &       & 46.53 & 2.61\% \\ \hline
+	       &       & \x    & \x    & 46.72 & 3.03\% \\ \hline
+	       &       &       & \x    & 46.88 & 3.38\% \\ \hline
+	 \x    & \x    & \x    & \x    & 47.40 & 4.54\% \\ \hline
+	       & \x    &       & \x    & 47.65 & 5.09\% \\ \hline
+	 \x    &       & \x    & \x    & 47.82 & 5.46\% \\ \hline
+	 \x    & \x    &       & \x    & 47.96 & 5.76\% \\ \hline
+	       & \x    & \x    & \x    & 48.45 & 6.83\% \\ \hline
 	\end{tabular}
 }
 \caption{Trims} % title of Table
@@ -332,20 +450,21 @@ MIXEDPrice Consump windSpeed temperatureRow timeOfDayMATRIX weekdays seasonOfYea
 	\hline
 	Curve & Skew & 1Historical & PAPER & MAE & Rank\\ [0.5ex] % inserts table 
 	\hline                  % inserts single horizontal line
-	       & \x    & \x    &       & 45.11 & \#1 \\ \hline
-	       &       & \x    &       & 45.24 & \#2 \\ \hline
-	 \x    & \x    & \x    &       & 45.43 & \#3 \\ \hline
-	 \x    &       &       &       & 45.53 & \#4 \\ \hline
-	 \x    & \x    &       & \x    & 46.45 & \#5 \\ \hline
-	 \x    & \x    &       &       & 46.56 & \#6 \\ \hline
-	       &       & \x    & \x    & 46.76 & \#7 \\ \hline
-	 \x    &       & \x    &       & 46.87 & \#8 \\ \hline
-	       & \x    & \x    & \x    & 47.25 & \#9 \\ \hline
-	       & \x    &       &       & 47.88 & \#10 \\ \hline
-	 \x    & \x    & \x    & \x    & 48.01 & \#11 \\ \hline
-	 \x    &       & \x    & \x    & 48.13 & \#12 \\ \hline
-	       & \x    &       & \x    & 48.40 & \#13 \\ \hline
-	 \x    &       &       & \x    & 49.68 & \#14 \\ \hline
+	       & \x    & \x    &       & 45.11 & - \\ \hline
+	       &       & \x    &       & 45.24 & 0.28\% \\ \hline
+	 \x    & \x    & \x    &       & 45.43 & 0.7\% \\ \hline
+	 \x    &       &       &       & 45.53 & 0.92\% \\ \hline
+	 \x    & \x    &       & \x    & 46.45 & 2.98\% \\ \hline
+	 \x    & \x    &       &       & 46.56 & 3.2\% \\ \hline
+	       &       & \x    & \x    & 46.76 & 3.65\% \\ \hline
+	 \x    &       & \x    &       & 46.87 & 3.9\% \\ \hline
+	       & \x    & \x    & \x    & 47.25 & 4.73\% \\ \hline
+	       & \x    &       &       & 47.88 & 6.14\% \\ \hline
+	       &       &       & \x    & 47.88 & 6.14\% \\ \hline
+	 \x    & \x    & \x    & \x    & 48.01 & 6.43\% \\ \hline
+	 \x    &       & \x    & \x    & 48.13 & 6.68\% \\ \hline
+	       & \x    &       & \x    & 48.40 & 7.3\% \\ \hline
+	 \x    &       &       & \x    & 49.68 & 10.12\% \\ \hline
 	\end{tabular}
 }
 \caption{Trims} % title of Table
@@ -360,21 +479,21 @@ MIXEDPrice Consump windSpeed temperatureRow timeOfDayMATRIX monthOfYearMATRIX
 	\hline
 	Curve & Skew & 1Historical & PAPER & MAE & Rank\\ [0.5ex] % inserts table 
 	\hline                  % inserts single horizontal line
-	       &       & \x    & \x    & 45.14 & \#1 \\ \hline
-	       &       &       & \x    & 45.55 & \#2 \\ \hline
-	       & \x    &       &       & 45.56 & \#3 \\ \hline
-	       & \x    &       & \x    & 45.60 & \#4 \\ \hline
-	 \x    &       & \x    &       & 45.91 & \#5 \\ \hline
-	 \x    & \x    & \x    & \x    & 45.95 & \#6 \\ \hline
-	 \x    & \x    &       &       & 45.99 & \#7 \\ \hline
-	 \x    &       &       & \x    & 46.14 & \#8 \\ \hline
-	 \x    &       &       &       & 46.58 & \#9 \\ \hline
-	 \x    & \x    &       & \x    & 46.87 & \#10 \\ \hline
-	       &       & \x    &       & 46.98 & \#11 \\ \hline
-	       & \x    & \x    & \x    & 47.02 & \#12 \\ \hline
-	 \x    & \x    & \x    &       & 47.08 & \#13 \\ \hline
-	 \x    &       & \x    & \x    & 47.94 & \#14 \\ \hline
-	       & \x    & \x    &       & 47.98 & \#15 \\ \hline
+	       &       & \x    & \x    & 45.14 & - \\ \hline
+	       &       &       & \x    & 45.55 & 0.9\% \\ \hline
+	       & \x    &       &       & 45.56 & 0.92\% \\ \hline
+	       & \x    &       & \x    & 45.60 & 1.02\% \\ \hline
+	 \x    &       & \x    &       & 45.91 & 1.7\% \\ \hline
+	 \x    & \x    & \x    & \x    & 45.95 & 1.79\% \\ \hline
+	 \x    & \x    &       &       & 45.99 & 1.89\% \\ \hline
+	 \x    &       &       & \x    & 46.14 & 2.22\% \\ \hline
+	 \x    &       &       &       & 46.58 & 3.18\% \\ \hline
+	 \x    & \x    &       & \x    & 46.87 & 3.82\% \\ \hline
+	       &       & \x    &       & 46.98 & 4.08\% \\ \hline
+	       & \x    & \x    & \x    & 47.02 & 4.16\% \\ \hline
+	 \x    & \x    & \x    &       & 47.08 & 4.3\% \\ \hline
+	 \x    &       & \x    & \x    & 47.94 & 6.2\% \\ \hline
+	       & \x    & \x    &       & 47.98 & 6.29\% \\ \hline
 	\end{tabular}
 }
 \caption{Trims} % title of Table
@@ -389,21 +508,21 @@ MIXEDPrice Consump windSpeed temperatureRow timeOfDayMATRIX seasonOfYearMATRIX
 	\hline
 	Curve & Skew & 1Historical & PAPER & MAE & Rank\\ [0.5ex] % inserts table 
 	\hline                  % inserts single horizontal line
-	       &       & \x    &       & 44.72 & \#1 \\ \hline
-	       & \x    &       &       & 45.23 & \#2 \\ \hline
-	       & \x    &       & \x    & 45.95 & \#3 \\ \hline
-	 \x    & \x    & \x    &       & 46.02 & \#4 \\ \hline
-	       & \x    & \x    &       & 46.04 & \#5 \\ \hline
-	 \x    & \x    &       & \x    & 46.09 & \#6 \\ \hline
-	 \x    &       & \x    & \x    & 46.43 & \#7 \\ \hline
-	 \x    & \x    &       &       & 46.45 & \#8 \\ \hline
-	 \x    &       & \x    &       & 46.47 & \#9 \\ \hline
-	 \x    & \x    & \x    & \x    & 46.50 & \#10 \\ \hline
-	       & \x    & \x    & \x    & 46.62 & \#11 \\ \hline
-	       &       & \x    & \x    & 47.06 & \#12 \\ \hline
-	 \x    &       &       & \x    & 47.26 & \#13 \\ \hline
-	       &       &       & \x    & 47.41 & \#14 \\ \hline
-	 \x    &       &       &       & 47.89 & \#15 \\ \hline
+	       &       & \x    &       & 44.72 & - \\ \hline
+	       & \x    &       &       & 45.23 & 1.13\% \\ \hline
+	       & \x    &       & \x    & 45.95 & 2.74\% \\ \hline
+	 \x    & \x    & \x    &       & 46.02 & 2.91\% \\ \hline
+	       & \x    & \x    &       & 46.04 & 2.94\% \\ \hline
+	 \x    & \x    &       & \x    & 46.09 & 3.07\% \\ \hline
+	 \x    &       & \x    & \x    & 46.43 & 3.82\% \\ \hline
+	 \x    & \x    &       &       & 46.45 & 3.86\% \\ \hline
+	 \x    &       & \x    &       & 46.47 & 3.91\% \\ \hline
+	 \x    & \x    & \x    & \x    & 46.50 & 3.98\% \\ \hline
+	       & \x    & \x    & \x    & 46.62 & 4.25\% \\ \hline
+	       &       & \x    & \x    & 47.06 & 5.24\% \\ \hline
+	 \x    &       &       & \x    & 47.26 & 5.66\% \\ \hline
+	       &       &       & \x    & 47.41 & 6.01\% \\ \hline
+	 \x    &       &       &       & 47.89 & 7.08\% \\ \hline
 	\end{tabular}
 }
 \caption{Trims} % title of Table
@@ -418,21 +537,21 @@ MIXEDPrice Consump windSpeed temperatureRow timeOfDay weekdays seasonOfYearMATRI
 	\hline
 	Curve & Skew & 1Historical & PAPER & MAE & Rank\\ [0.5ex] % inserts table 
 	\hline                  % inserts single horizontal line
-       & \x    & \x    &       & 45.58 & \#1 \\ \hline
-       &       & \x    &       & 46.22 & \#2 \\ \hline
- \x    &       & \x    &       & 46.36 & \#3 \\ \hline
-       &       & \x    & \x    & 46.75 & \#4 \\ \hline
- \x    & \x    &       & \x    & 46.81 & \#5 \\ \hline
- \x    & \x    &       &       & 46.97 & \#6 \\ \hline
- \x    & \x    & \x    &       & 47.04 & \#7 \\ \hline
-       & \x    &       & \x    & 47.22 & \#8 \\ \hline
-       & \x    &       &       & 47.26 & \#9 \\ \hline
- \x    &       &       & \x    & 47.32 & \#10 \\ \hline
- \x    &       &       &       & 47.47 & \#11 \\ \hline
-       &       &       & \x    & 47.64 & \#12 \\ \hline
-       & \x    & \x    & \x    & 47.76 & \#13 \\ \hline
- \x    &       & \x    & \x    & 48.48 & \#14 \\ \hline
- \x    & \x    & \x    & \x    & 48.73 & \#15 \\ \hline
+	       & \x    & \x    &       & 45.58 & - \\ \hline
+	       &       & \x    &       & 46.22 & 1.41\% \\ \hline
+	 \x    &       & \x    &       & 46.36 & 1.71\% \\ \hline
+	       &       & \x    & \x    & 46.75 & 2.56\% \\ \hline
+	 \x    & \x    &       & \x    & 46.81 & 2.7\% \\ \hline
+	 \x    & \x    &       &       & 46.97 & 3.05\% \\ \hline
+	 \x    & \x    & \x    &       & 47.04 & 3.21\% \\ \hline
+	       & \x    &       & \x    & 47.22 & 3.61\% \\ \hline
+	       & \x    &       &       & 47.26 & 3.69\% \\ \hline
+	 \x    &       &       & \x    & 47.32 & 3.81\% \\ \hline
+	 \x    &       &       &       & 47.47 & 4.14\% \\ \hline
+	       &       &       & \x    & 47.64 & 4.52\% \\ \hline
+	       & \x    & \x    & \x    & 47.76 & 4.78\% \\ \hline
+	 \x    &       & \x    & \x    & 48.48 & 6.36\% \\ \hline
+	 \x    & \x    & \x    & \x    & 48.73 & 6.9\% \\ \hline
 	\end{tabular}
 }
 \caption{Trims} % title of Table
@@ -447,24 +566,77 @@ MATRIX Price Consump windSpeed timeOfDay weekdays monthOfYear
 	\hline
 	Curve & Skew & 1Historical & PAPER & MAE & Rank\\ [0.5ex] % inserts table 
 	\hline                  % inserts single horizontal line
-	       & \x    & \x    &       & 45.20 & \#1 \\ \hline
-	       &       &       & \x    & 46.78 & \#2 \\ \hline
-	 \x    &       &       &       & 46.83 & \#3 \\ \hline
-	       & \x    &       &       & 47.00 & \#4 \\ \hline
-	       &       & \x    &       & 47.06 & \#5 \\ \hline
-	 \x    &       & \x    & \x    & 47.13 & \#6 \\ \hline
-	 \x    & \x    & \x    &       & 47.36 & \#7 \\ \hline
-	       &       & \x    & \x    & 47.51 & \#8 \\ \hline
-	 \x    & \x    &       &       & 47.99 & \#9 \\ \hline
-	 \x    & \x    &       & \x    & 48.30 & \#10 \\ \hline
-	 \x    &       &       & \x    & 48.56 & \#11 \\ \hline
-	 \x    & \x    & \x    & \x    & 48.63 & \#12 \\ \hline
-	       & \x    &       & \x    & 48.77 & \#13 \\ \hline
+	       & \x    & \x    &       & 45.20 & - \\ \hline
+	       &       &       & \x    & 46.78 & 3.49\% \\ \hline
+	 \x    &       &       &       & 46.83 & 3.6\% \\ \hline
+	       & \x    & \x    & \x    & 46.83 & 3.62\% \\ \hline
+	       & \x    &       &       & 47.00 & 3.99\% \\ \hline
+	       &       & \x    &       & 47.06 & 4.12\% \\ \hline
+	 \x    &       & \x    &       & 47.13 & 4.27\% \\ \hline
+	 \x    &       & \x    & \x    & 47.13 & 4.27\% \\ \hline
+	 \x    & \x    & \x    &       & 47.36 & 4.79\% \\ \hline
+	       &       & \x    & \x    & 47.51 & 5.11\% \\ \hline
+	 \x    & \x    &       &       & 47.99 & 6.17\% \\ \hline
+	 \x    & \x    &       & \x    & 48.30 & 6.85\% \\ \hline
+	 \x    &       &       & \x    & 48.56 & 7.43\% \\ \hline
+	 \x    & \x    & \x    & \x    & 48.63 & 7.59\% \\ \hline
+	       & \x    &       & \x    & 48.77 & 7.91\% \\ \hline
 	\end{tabular}
 }
 \caption{Trims} % title of Table
 \label{table:Statistical10} % is used to refer this table in the text
 \end{table}
 
+\todo{Kig paa price og consumption only med statistical features. Se at det ikke forbedrer. Referer tilbage til scatter teksten. Tag de bedste 3. Foerste vis ingen sammenhaeng. Anden og tredje heller ingen sammenhaeng. Brug helt simple til at verificere.}
+
 \subsubsection{Experiment 4: Black box optimization}
+
+Dataset size:
+\begin{table}[H]
+\centering  % used for centering table
+\resizebox{0.6\textwidth}{!}{
+	\begin{tabular}{|c|c|c|c|c|c|} % centered columns (7 columns)
+	\hline
+	Entries & Time & H1 & H2 & MAE & \% Deviation\\ [0.5ex] % inserts table 
+	\hline                  % inserts single horizontal line
+	4378 & 397.28 & 6 & 11 & 46.34 & - \\ \hline
+	8756 & 844.68 & 12 & 5 & 47.82 & 3.19\% \\ \hline
+	2189 & 232.87 & 6 & 18 & 49.33 & 6.46\% \\ \hline
+	6567 & 677.33 & 14 & 6 & 49.67 & 7.19\% \\ \hline
+	\end{tabular}
+}
+\caption{Trims} % title of Table
+\label{table:Dataset} % is used to refer this table in the text
+\end{table}
+
+\begin{table}[H]
+\centering  % used for centering table
+\resizebox{0.6\textwidth}{!}{
+	\begin{tabular}{|c|c|c|c|c|c|} % centered columns (7 columns)
+	\hline
+	Epochs & Time & H1 & H2 & MAE & \% Deviation\\ [0.5ex] % inserts table 
+	\hline                  % inserts single horizontal line
+	600 & 375.02 & 7 & 11 & 46.14 & - \\ \hline
+	900 & 415.28 & 8 & 3 & 47.32 & 2.56\% \\ \hline
+	1100 & 566.83 & 10 & 5 & 47.40 & 2.73\% \\ \hline
+	200 & 264.03 & 14 & 8 & 47.92 & 3.85\% \\ \hline
+	100 & 213.95 & 14 & 11 & 48.13 & 4.3\% \\ \hline
+	1600 & 807.21 & 6 & 17 & 48.23 & 4.53\% \\ \hline
+	300 & 315.01 & 14 & 10 & 48.41 & 4.91\% \\ \hline
+	1200 & 676.83 & 10 & 9 & 48.74 & 5.64\% \\ \hline
+	400 & 345.01 & 12 & 8 & 49.37 & 7.0\% \\ \hline
+	800 & 518.7 & 8 & 16 & 50.15 & 8.68\% \\ \hline
+	1000 & 612.22 & 8 & 18 & 50.67 & 9.82\% \\ \hline
+	1300 & 877.29 & 13 & 13 & 50.78 & 10.05\% \\ \hline
+	500 & 1774.24 & 13 & 25 & 51.70 & 12.04\% \\ \hline
+	700 & 471.98 & 7 & 20 & 52.26 & 13.26\% \\ \hline
+	1500 & 36016.48 & 14 & 13 & 52.78 & 14.39\% \\ \hline
+	1400 & 978.75 & 12 & 18 & 54.41 & 17.92\% \\ \hline
+	\end{tabular}
+}
+\caption{Trims} % title of Table
+\label{table:Dataset} % is used to refer this table in the text
+\end{table}
+
+
 
