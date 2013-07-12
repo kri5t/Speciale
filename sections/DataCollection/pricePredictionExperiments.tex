@@ -281,72 +281,88 @@ In figure~\ref{fig:AllTrims} we see the dataset from figure~\ref{fig:1PTrim} wit
 \end{table}
 
 \subsection{Experiment 3: Statistical strategies}
-
+This experiment was conducted to test the different statistical strategies that we described in section~\ref{sec:stratsForPrediction}. This includes Curve Analysis, Skewness, EWMA - Historical Volatility and Scatter. We took the three best results from experiment one and ran every combination of the statistical strategies on them. The experiment was conducted on the 1\% trimmed version of the 3 best results from experiment 1 - due to the improvements seen in experiment 2. Also we did a test on the most basic dataset we had available: Price and Consumption with no trimming. This was done to validate the impact of the different strategies before applying any other factors to the prediction.
 
 \subsubsection{Variables}
+In this experiment we had 4 variables that we tested:
+\begin{itemize}
+	\item Curve behavior (Curve)
+	\item Skewness (Skew)
+	\item EWMA - Historical Volatility (EWMA)
+	\item Scatter (Scatter)
+\end{itemize}
+
+The setup of the different strategies have been tested on the best result from experiment 1.
 
 \subsubsection{Hypothesis}
+In this experiment we applied different statistical approaches to the neural network. This was done to give some knowledge about the prior trend when trying to predict the next 24 hours. This experiment is expected to show an improvement in the curve fitting thus giving us a better MAE.
 
-\subsubsection{Results}
+Also we conducted a trial to test the effect of these strategies on the vanilla dataset and we expect these predictions to improve a good deal thus making up for some of the other factors not included e.g. Wind Speed, Temperature, Time of Day etc.
 
+\subsubsection{EWMA}
 \begin{table}[H]
 \centering  % used for centering table
-\resizebox{0.3\textwidth}{!}{
-	\begin{tabular}{|c|c|} % centered columns (7 columns)
+\resizebox{0.5\textwidth}{!}{
+	\begin{tabular}{|c|c|c|} % centered columns (7 columns)
 	\hline
-	Smoothing factor & MAE \\ [0.5ex] % inserts table 
+	Smoothing factor & MAE & Deviation \\ [0.5ex] % inserts table 
 	\hline                   % inserts single horizontal line
-	30\% & 44,69 \\ \hline
-	90\% & 44,82 \\ \hline
-	10\% & 44,87 \\ \hline
-	20\% & 45,51 \\ \hline
-	40\% & 45,51 \\ \hline
-	80\% & 46,16 \\ \hline
-	60\% & 46,29 \\ \hline
-	70\% & 46,55 \\ \hline
-	50\% & 46,92 \\ \hline
+	0.3 & 44,69 & - \\ \hline
+	0.9 & 44,82 & 0.29\% \\ \hline
+	0.1 & 44,87 & 0.40\%\\ \hline
+	0.2 & 45,51 & 1.83\%\\ \hline
+	0.4 & 45,51 & 1.83\%\\ \hline
+	0.8 & 46,16 & 3.28\%\\ \hline
+	0.6 & 46,29 & 3.58\%\\ \hline
+	0.7 & 46,55 & 4.16\%\\ \hline
+	0.5 & 46,92 & 4.99\%\\ \hline
 	\end{tabular}
 }
 \caption{Smoothing factor test} % title of Table
 \label{table:SmoothingFactorTest} % is used to refer this table in the text
 \end{table}
 
+The EWMA is used to calculate the volatility of the curve. The electricity price is highly volatile thus we anticipate the need for knowledge about the historical volatility will help the predictions. In the EWMA we have a smoothing factor which indicates how sensitive the strategy will be towards fluctuations in the curve. A lower smoothing factor the more rapid it can change and vice versa. Here we see that the best result is a smoothing factor of 0.3. Also
+
+
+\subsubsection{Skewness}
 \begin{table}[H]
 \centering  % used for centering table
-\resizebox{0.3\textwidth}{!}{
-	\begin{tabular}{|c|c|} % centered columns (7 columns)
+\resizebox{0.5\textwidth}{!}{
+	\begin{tabular}{|c|c|c|} % centered columns (7 columns)
 	\hline
-	Skewness stack & MAE\\ [0.5ex] % inserts table 
+	Skewness stack & MAE & Deviation \\ [0.5ex] % inserts table 
 	\hline                  % inserts single horizontal line
-	4 & 45,09 \\ \hline
-	2 & 45,15 \\ \hline
-	6 & 45,69 \\ \hline
-	20 & 46,05 \\ \hline
-	8 & 46,14 \\ \hline
-	24 & 46,16 \\ \hline
-	16 & 46,47 \\ \hline
-	12 & 46,66 \\ \hline
+	4  & 45,09 & -\\ \hline
+	2  & 45,15 & 0.13\%\\ \hline
+	6  & 45,69 & 1.33\%\\ \hline
+	20 & 46,05 & 2.12\%\\ \hline
+	8  & 46,14 & 2.32\%\\ \hline
+	24 & 46,16 & 2.37\%\\ \hline
+	16 & 46,47 & 3.06\%\\ \hline
+	12 & 46,66 & 3.48\%\\ \hline
 	\end{tabular}
 }
 \caption{Skewness stack size} % title of Table
 \label{table:SkewnessTest} % is used to refer this table in the text
 \end{table}
 
+\subsubsection{Curve behavior}
 \begin{table}[H]
 \centering  % used for centering table
-\resizebox{0.3\textwidth}{!}{
-	\begin{tabular}{|c|c|} % centered columns (7 columns)
+\resizebox{0.5\textwidth}{!}{
+	\begin{tabular}{|c|c|c|} % centered columns (7 columns)
 	\hline
-	Curve stack & MAE\\ [0.5ex] % inserts table 
+	Curve stack & MAE & Deviation \\ [0.5ex] % inserts table 
 	\hline                  % inserts single horizontal line
-	4 & 45,72 \\ \hline
-	12 & 46,05 \\ \hline
-	6 & 46,09 \\ \hline
-	2 & 46,31 \\ \hline
-	16 & 46,67 \\ \hline
-	24 & 46,76 \\ \hline
-	20 & 46,87 \\ \hline
-	8 & 47,81 \\ \hline
+	4  & 45,72 & - \\ \hline
+	12 & 46,05 & 0.71\%\\ \hline
+	6  & 46,09 & 0.81\%\\ \hline
+	2  & 46,31 & 1.29\%\\ \hline
+	16 & 46,67 & 2.01\%\\ \hline
+	24 & 46,76 & 2.27\%\\ \hline
+	20 & 46,87 & 2.52\%\\ \hline
+	8  & 47,81 & 4.57\%\\ \hline
 	\end{tabular}
 }
 \caption{Curve behavior stack size} % title of Table
@@ -356,10 +372,10 @@ In figure~\ref{fig:AllTrims} we see the dataset from figure~\ref{fig:1PTrim} wit
 MATRIX Price Consump windSpeed temperatureRow timeOfDay weekdays seasonOfYear PREDICT
 \begin{table}[H]
 \centering  % used for centering table
-\resizebox{0.6\textwidth}{!}{
+\resizebox{0.7\textwidth}{!}{
 	\begin{tabular}{|c|c|c|c|c|c|} % centered columns (7 columns)
 	\hline
-	Curve & Skew & 1Historical & PAPER & MAE & Rank\\ [0.5ex] % inserts table 
+	Curve & Skew & EWMA & Scatter & MAE & Rank\\ [0.5ex] % inserts table 
 	\hline                  % inserts single horizontal line
 	       & \x    & \x    &       & 45.35 & - \\ \hline
 	 \x    & \x    & \x    &       & 45.76 & 0.91\% \\ \hline
@@ -385,10 +401,10 @@ MATRIX Price Consump windSpeed temperatureRow timeOfDay weekdays seasonOfYear PR
 MIXEDPrice Consump windSpeed temperatureRow timeOfDayMATRIX weekdays seasonOfYearMATRIX PREDICT
 \begin{table}[H]
 \centering  % used for centering table
-\resizebox{0.6\textwidth}{!}{
+\resizebox{0.7\textwidth}{!}{
 	\begin{tabular}{|c|c|c|c|c|c|} % centered columns (7 columns)
 	\hline
-	Curve & Skew & 1Historical & PAPER & MAE & Rank\\ [0.5ex] % inserts table 
+	Curve & Skew & EWMA & Scatter & MAE & Rank\\ [0.5ex] % inserts table 
 	\hline                  % inserts single horizontal line
 	       & \x    & \x    &       & 45.11 & - \\ \hline
 	       &       & \x    &       & 45.24 & 0.28\% \\ \hline
@@ -414,10 +430,10 @@ MIXEDPrice Consump windSpeed temperatureRow timeOfDayMATRIX weekdays seasonOfYea
 MIXEDPrice Consump windSpeed temperatureRow timeOfDayMATRIX monthOfYearMATRIX PREDICT
 \begin{table}[H]
 \centering  % used for centering table
-\resizebox{0.6\textwidth}{!}{
+\resizebox{0.7\textwidth}{!}{
 	\begin{tabular}{|c|c|c|c|c|c|} % centered columns (7 columns)
 	\hline
-	Curve & Skew & 1Historical & PAPER & MAE & Rank\\ [0.5ex] % inserts table 
+	Curve & Skew & EWMA & Scatter & MAE & Rank\\ [0.5ex] % inserts table 
 	\hline                  % inserts single horizontal line
 	       &       & \x    & \x    & 45.14 & - \\ \hline
 	       &       &       & \x    & 45.55 & 0.9\% \\ \hline
@@ -440,6 +456,61 @@ MIXEDPrice Consump windSpeed temperatureRow timeOfDayMATRIX monthOfYearMATRIX PR
 \label{table:Statistical1} % is used to refer this table in the text
 \end{table}
 
+\begin{table}[H]
+\centering  % used for centering table
+\resizebox{0.7\textwidth}{!}{
+	\begin{tabular}{|c|c|c|c|c|c|c|} % centered columns (7 columns)
+	\hline
+	Rank & Curve & Skew & EWMA & Scatter & MAE & Deviation\\ [0.5ex] % inserts table 
+	\hline                  % inserts single horizontal line
+	1 &        &       &       & \x    & 73.43 & - \\ \hline
+	2 &  \x    &       &       & \x    & 76.45 & 4.11\% \\ \hline
+	3 &        &       & \x    &       & 77.50 & 5.54\% \\ \hline
+	4 &  \x    &       & \x    & \x    & 77.54 & 5.6\% \\ \hline
+	5 &        & \x    &       & \x    & 79.17 & 7.82\% \\ \hline
+	6 &        &       & \x    & \x    & 80.67 & 9.86\% \\ \hline
+	7 &        & \x    & \x    & \x    & 80.85 & 10.11\% \\ \hline
+	8 &  \x    & \x    & \x    & \x    & 81.97 & 11.63\% \\ \hline
+	9 &        & \x    &       &       & 84.37 & 14.9\% \\ \hline
+	10 &  \x    & \x    &       & \x    & 84.86 & 15.57\% \\ \hline
+	11 &  \x    & \x    & \x    &       & 86.49 & 17.79\% \\ \hline
+	12 &  \x    &       & \x    &       & 86.95 & 18.41\% \\ \hline
+	13 &        & \x    & \x    &       & 88.50 & 20.52\% \\ \hline
+	14 &  \x    &       &       &       & 89.26 & 21.57\% \\ \hline
+	15 &  \x    & \x    &       &       & 96.24 & 31.07\% \\ \hline
+	\end{tabular}
+}
+\caption{Statistical features on Price \& Consumption with no trim.} % title of Table
+\label{table:StatisticalCheck} % is used to refer this table in the text
+\end{table}
+
+\begin{table}[H]
+\centering  % used for centering table
+\resizebox{0.7\textwidth}{!}{
+	\begin{tabular}{|c|c|c|c|c|c|c|} % centered columns (7 columns)
+	\hline
+	Rank & Curve & Skew & EWMA & Scatter & MAE & Deviation\\ [0.5ex] % inserts table 
+	\hline                  % inserts single horizontal line
+	1 &        &       &       & \x    & 68.28 & - \\ \hline
+	2 &  \x    & \x    &       & \x    & 69.40 & 1.63\% \\ \hline
+	3 &        & \x    &       & \x    & 70.17 & 2.77\% \\ \hline
+	4 &  \x    &       &       & \x    & 70.28 & 2.93\% \\ \hline
+	5 &        & \x    &       &       & 72.16 & 5.68\% \\ \hline
+	6 &  \x    & \x    &       &       & 75.31 & 10.29\% \\ \hline
+	7 &  \x    &       &       &       & 77.14 & 12.97\% \\ \hline
+	8 &  \x    &       & \x    & \x    & 93.86 & 37.46\% \\ \hline
+	9 &  \x    & \x    & \x    & \x    & 94.21 & 37.98\% \\ \hline
+	10 &        &       & \x    & \x    & 95.02 & 39.17\% \\ \hline
+	11 &        & \x    & \x    & \x    & 97.79 & 43.22\% \\ \hline
+	12 &        &       & \x    &       & 111.91 & 63.9\% \\ \hline
+	13 &        & \x    & \x    &       & 115.91 & 69.76\% \\ \hline
+	14 &  \x    &       & \x    &       & 116.83 & 71.11\% \\ \hline
+	15 &  \x    & \x    & \x    &       & 118.82 & 74.03\% \\ \hline
+	\end{tabular}
+}
+\caption{Statistical features on Price \& Consumption with 1\% trim.} % title of Table
+\label{table:StatisticalCheck} % is used to refer this table in the text
+\end{table}
 
 \todo{Kig paa price og consumption only med statistical features. Se at det ikke forbedrer. Referer tilbage til scatter teksten. Tag de bedste 3. Foerste vis ingen sammenhaeng. Anden og tredje heller ingen sammenhaeng. Brug helt simple til at verificere.}
 
