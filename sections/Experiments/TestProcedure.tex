@@ -1,15 +1,19 @@
-The following high level test procedure will be followed for experiments of both wind production and electricity prices. 
+The following high level test procedure describes the test process and environment for the experiments of both wind production and electricity prices. 
+\\[0.5cm]
+The construction of the neural network topology is done by incremental pruning as described in Section~\ref{sec:pruning}. The tool helps to decide the structure of the hidden layers and neurons in the network based on the pre-defined number of inputs and output. The returned configuration is considered to the optimal structuring. Every time the input combination change pruning will be applied to discover the best possible configuration. All predictions will be based on a simulation over an entire year where around 8600 hours is predicted. In the following experiments we consider this number of hours to be satisfying. \todo{talk about time constraint???? it would have taken a month just for the first test if more should have run} For testing purposes and simplicity the top-3 of a experiment will be used as basis for the next. A more accurate prediction will always be preferred but trade-offs will be discussed and analysed.
+\\[0.5cm]
+The procedure for every experiment:
+\begin{itemize}
+\item Describe purpose.
+\item Describe the expected outcome (Hypothesis).
+\item Find variables to be used.
+\item For all predictions in the experiment do:.
+\begin{itemize}
+	\item Prune network based on input parameters.
+	\item Simulate the prediction of 8600 hours.
+	\item Show results.
+	\item Analyse
+\end{itemize}
+\item Conclusion
 
-Describe the process from input selection to black box optimization where epochs is investigated.
-
-A test environment that execute all possible combinations. 
-
-The network topology of the different neurons and layers are discovered by using pruning of the network whenever the combination of input parameters change. Pruning is discussed in Section~\ref{sec:pruning}.
-
-All tests are done by predicting an entire year which is around 8600 hours.
-
-\todo{HUSK AT LAV ET EKSPERIMENT PAA OVERFITTING}
-
-It is run under these circumstances. We assume that 8000 hours of prediction in the following experiments is enough to be considered general. \todo{how do we explain that it is not realistic in the time that we have to do more tests since it would take 1 months just for one test}
-
-for testing purposes and simplicity the top-3 of every experiment will be moved on to test the next strategy and in prediction all improvements count.
+\end{itemize}

@@ -128,6 +128,7 @@ Wind Speed & 0.20 \\ [1ex] % [1ex] adds vertical space
 \subsection{Other factors}
 
 \subsubsection{Consumption}
+\label{sec:consumptionWindProduction}
 It is expected that the wind power available on the energy market will be low at times with low consumption, e.g if no energy is needed the wind power can't be sold.  This relationship is shown in Figure~\ref{fig:consumptionVsWindProduction}. This also tells us that the wind production is connected to the market and cannot be deduced only from meteorological factors.
 
 \begin{figure}[H]
@@ -147,6 +148,7 @@ It can be a disadvantage to use consumption as input since we will rely on predi
 \end{figure}
 
 \subsubsection{Time of day}
+\label{sec:greenTOD}
 The dataset consists of all hours of the years included. Based on this the network is going to forecast multiple hours ahead and it therefore necessary to establish if any correlation between the time of day and the wind production exist. The average wind production distribution for a calendar day can be seen in Figure~\ref{fig:hourly_wind_production}. The wind production is at its highest during the day from 8-20 and therefore it is needed to use the time of day as input parameters.  
 
 \begin{figure}[H]
