@@ -28,7 +28,14 @@ It is obvious from Table~\ref{table:pearsonCoeficientWindProduction} that consum
 \subsection{Meteorological factors}
 
 \subsubsection{Wind Speed}
-Wind speed is directly proportional to wind production as described in Section~\ref{sec:windmillPlacement} \todo{discuss reliability of the formula}. This relationship between hourly wind speed and hourly wind power production of DK1 is seen in Figure~\ref{fig:windVsProd}. The graph clearly shows the expected impact of wind speed on the wind energy production.
+Wind speed is directly proportional to wind production as described in Section~\ref{sec:windmillPlacement} \todo{discuss reliability of the formula}. This relationship between hourly wind speed and hourly wind power production of DK1 is seen in Figure~\ref{fig:windVsProd}. The graph clearly shows the expected impact of wind speed on the wind energy production. The established Pearson co-relation between wind production and wind speed is further seen in Figure~\ref{fig:windSpeedWindProductionPlot} where the wind production follows the same trend as wind speed except from the hours 70-80. 
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.99\linewidth,natwidth=898,natheight=587]{billeder/windSpeedWindProductionPlot.png}
+\caption{Wind speed and wind production in diagram}
+\label{fig:windSpeedWindProductionPlot}
+\end{figure}
 
 \begin{figure}[H]
 \centering
@@ -37,7 +44,11 @@ Wind speed is directly proportional to wind production as described in Section~\
 \label{fig:windVsProd}
 \end{figure}
 
-What is noticeable from the graph is wide range of productions that is covered by a relatively small number of wind speeds. Wind speed 15 can cover wind productions all the way from 700 to 1900 and therefore other input parameters are needed to point us in the right direction within these interval. 
+What is noticeable from the graphs is wide range of productions that is covered by a relatively small number of wind speeds. Wind speed 15 can cover wind productions all the way from 700 to 1900 and therefore other input parameters are needed to point us in the right direction within these interval. 
+
+
+
+
 
 \subsubsection{Air Density}
 \label{sec:airDensity}
@@ -129,13 +140,20 @@ Wind Speed & 0.20 \\ [1ex] % [1ex] adds vertical space
 
 \subsubsection{Consumption}
 \label{sec:consumptionWindProduction}
-It is expected that the wind power available on the energy market will be low at times with low consumption, e.g if no energy is needed the wind power can't be sold.  This relationship is shown in Figure~\ref{fig:consumptionVsWindProduction}. This also tells us that the wind production is connected to the market and cannot be deduced only from meteorological factors.
+It is expected that the wind power available on the energy market will be low at times with low consumption, e.g if no energy is needed the wind power can't be sold.  This relationship is shown in Figure~\ref{fig:consumptionVsWindProduction}. This also tells us that the wind production is connected to the market and cannot be deduced only from meteorological factors. The wind production follows the trend of the market which is observable from Figure~\ref{fig:windProductionAndConsumptionPlot}. The first 300 hours show a great co-relation whereas 3-500 is a whole other story. This can become problematic when trying to predict the production.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.99\linewidth,natwidth=898,natheight=587]{billeder/consumptionVsWindProduction.png}
 \caption{Consumption vs. Wind Production in 2012}
 \label{fig:consumptionVsWindProduction}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.99\linewidth,natwidth=898,natheight=587]{billeder/windProductionAndConsumptionPlot.png}
+\caption{Consumption vs. Wind Production in 2012}
+\label{fig:windProductionAndConsumptionPlot}
 \end{figure}
 
 It can be a disadvantage to use consumption as input since we will rely on predictions from nordpool spot - it is out of scope for this thesis to predict it in its own Neural Network. Following section~\ref{sec:ElectricityDemand} the demand is much controlled my the meteorological factors which can make it sufficient to include these as a substitute for the actual demand. The temperature impact on demand can be seen in Figure~\ref{fig:consump_temp_green}. We will compare the two approaches in experiments to come.
@@ -210,11 +228,16 @@ Low margin: & 13.5 & 2.7 & 1930.5 \\ [1ex] % [1ex] adds vertical space
 \label{table:similarHoursLimitsWindProd} % is used to refer this table in the text
 \end{table}
 
-\todo{COULD HAVE TRIED WITH SEASONALITY --?? WIND CAN BE SEASONAL?}
+Figure~\ref{fig:windHourDevelopment400Hours} does not show any need for trimming when predicting wind production. The curve of wind production does not contain any cases that are unpredictable, e.g productions that suddenly drops without any intermediary steps. 
 
-\todo{price irregular price curves - it does not make sense to trim in the case of wind production because it does have irregularities that is unpredictable or at least does not make sense as seen in price. By doing this would wound break the curve and could potentially remove important data for the generalization function}
+Different percentage of trims for an entire year can be seen in Figure~\ref{fig:windProductionTrimming}. The cutting of productions will result in the network being able to predict those specific values. This is valid if the values are out of the ordinary or unpredictable which is not the case for the wind power production. The curve contains only one irregular drop in the hours between 1200-1300 where the production suddenly drops to zero. The rest of the curve does not make sudden jumps and it follows intermediary steps or trends. When predicting wind power production for an entire year trimming should be omitted. It will be discussed later if it in the hands of a trader could make sense to trim data based on expertise, e.g. the trader knows the production from the last hour to 300 and due to the knowledge about trend choose to trim the training dataset above 1800 because experience tells that it does not reach this height and thereby possibly remove noise.
 
-Figure~\ref{fig:windHourDevelopment400Hours} does not show any need for trimming when predicting wind production. The curve of wind production does not contain any cases that are unpredictable, e.g productions that suddenly drops without any intermediary steps. \todo{Explain better!!}.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.99\linewidth,natwidth=898,natheight=587]{billeder/windProductionTrimming.png}
+\caption{Wind power production trimming}
+\label{fig:windProductionTrimming}
+\end{figure}
 
 \todo{Find graph and tell something about the general movements of the wind production. Further more show it together wind wind speed - should see coherence. Use this to locate the irregularities where it does not hold at all}
 \todo{write something about that we need to look back}
@@ -224,5 +247,7 @@ Figure~\ref{fig:windHourDevelopment400Hours} does not show any need for trimming
 \todo{GENERATION HOURS}
 
 \subsection{Conclusion}
-The above analysis has clarified to what extend the different parameters effect the wind production. Not surprisingly wind speed has the greatest influence, but also consumption has shown to have a good co-relation with the production which tells us about a link to the electricity market. The wind production vary from hour to hour which makes the time of day a significant factor. The wind production is decreased significantly during winter so the season will also need to be included in test. The analysis of the wind production development showed the need for including past productions for better knowing the movements to come.
+The above analysis has clarified to what extend the different parameters effect the wind production. Not surprisingly wind speed has the greatest influence and wind production followed same trends, but also consumption has shown to have a good co-relation with the production which tells us about a link to the electricity market. The wind production vary from hour to hour which makes the time of day a significant factor. The wind production is decreased significantly during winter so the season will also need to be included in test. The analysis of the wind production development showed the need for including past productions for better knowing the movements to come.
 The air density is according to its formula proportional to wind production and it showed a co-relation of 0,28 in average. The current wind direction and wind production showed a co-relation but further validation needs to be carried out in experiments.
+
+\todo{the wind speed does not map directly to wind production --- it makes sense because we find the co-relation in the last 3 months}
