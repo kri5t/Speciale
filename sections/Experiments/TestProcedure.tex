@@ -1,6 +1,6 @@
 The following high level test procedure describes the test process and environment for the experiments of both wind production and electricity prices. 
 \\[0.5cm]
-The construction of the neural network topology is done by incremental pruning as described in Section~\ref{sec:pruning}. The tool helps to decide the structure of the hidden layers and neurons in the network based on the pre-defined number of inputs and output. The returned configuration is considered to the optimal structuring. Every time the input combination change pruning will be applied to discover the best possible configuration. All predictions will be based on a simulation over an entire year where around 8600 hours is predicted. In the following experiments we consider this number of hours to be satisfying. \todo{talk about time constraint???? it would have taken a month just for the first test if more should have run} For testing purposes and simplicity the top-3 of a experiment will be used as basis for the next. A more accurate prediction will always be preferred but trade-offs will be discussed and analysed.
+The construction of the neural network topology is done by incremental pruning as described in Section~\ref{sec:pruning}. The tool helps to decide the structure of the hidden layers and neurons in the network based on the pre-defined number of inputs and output. The returned configuration is considered to the optimal structuring. Every time the input combination change pruning will be applied to discover the best possible configuration. All predictions will be based on a simulation over an entire year where around 8000 hours is predicted 24 hours at a time. It is important emphasize that the experiments are done in such a way to simulate a real-life use. In the following experiments we consider this number of hours to be satisfying. \todo{talk about time constraint???? it would have taken a month just for the first test if more should have run} For testing purposes and simplicity the top-3 of a experiment will be used as basis for the next. A more accurate prediction will always be preferred but trade-offs will be discussed and analysed.
 \\[0.5cm]
 The procedure for every experiment:
 \begin{itemize}
@@ -10,7 +10,7 @@ The procedure for every experiment:
 \item For all predictions in the experiment do:.
 \begin{itemize}
 	\item Prune network based on input parameters.
-	\item Simulate the prediction of 8600 hours.
+	\item Simulate the prediction of 8000 hours 24 hours at a time.
 	\item Show results.
 	\item Analyse
 \end{itemize}
