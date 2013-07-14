@@ -117,7 +117,7 @@ In the Wind Production Experiments section~\ref{sec:windProductionExperiments} w
 \todo{Matrix blandes fordi der er mange forskellige. Sammenlign med wind production, hvor der kun er 1. SKRIV HELT KONKRET OM MATRIX OG IKKE MATRIX I FORHOLD TIL AFSNITTET FOER}
 \todo{Referer til Brians. Han har allrede skrevet om Matrix i forhold til at hans ikke virker specielt overbevisende, men at det i mit virker meget bedre. Diskuter.}
 
-\begin{table}[H]
+\begin{table}[h!]
 \centering  % used for centering table
 \resizebox{\textwidth}{!}{
 \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|} % centered columns (7 columns)
@@ -151,7 +151,7 @@ Table~\ref{table:Top20Prices} shows us the top 20 MAE from the experiment with a
 
 First we conducted an experiment containing a training set with a full year (to test the effect of seasonality on a full year) we included the rest of the parameters equal to rank \#1 in table~\ref{table:Top20Prices} and shifted the seasonality. The results can be seen in table~\ref{table:1YearTrain} where we can see the full effect of seasonality over a year. The table clearly shows that the MoY combination is the best of the three. If we compare the results to the results from table~\ref{table:Top20Prices} it shows us that with monthly seasonality the neural network will be able to do the same predictions as the predictions that only have a training set of 3 months. With the possibility of over training in too large datasets(see citation~\cite{1}) and that the neural network takes longer time training on a larger dataset. We can conclude that the smaller dataset of 3 months are better to use than the full year (We will elaborate on this in experiment X)\todo{Saet rigtigt experiment}. Further more we have to test if seasonality being an input parameter makes sense when our dataset is only 3 months big.
 
-\begin{table}[H]
+\begin{table}[h!]
 \centering  % used for centering table
 \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|} % centered columns (7 columns)
 \hline
@@ -165,7 +165,7 @@ P & D & WS & T & ToD & DoW & MoY & SoY & MAE & Rank\\ [0.5ex] % inserts table
 \label{table:1YearTrain} % is used to refer this table in the text
 \end{table}
 
-%\begin{table}[H]
+%\begin{table}[h!]
 %\centering  % used for centering table
 %\resizebox{\textwidth}{!}{
 %	\begin{tabular}{|c|c|c|c|c|c| c c c c c} % centered columns (7 columns)
@@ -187,7 +187,7 @@ P & D & WS & T & ToD & DoW & MoY & SoY & MAE & Rank\\ [0.5ex] % inserts table
 %\caption{Average MAE of ten runs per entry} % title of Table
 %\label{table:Top10Average} % is used to refer this table in the text
 %\end{table}
-%\begin{table}[H]
+%\begin{table}[h!]
 %\centering  % used for centering table
 %\resizebox{\textwidth}{!}{
 %\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|} % centered columns (7 columns)
@@ -229,7 +229,7 @@ This experiment is conducted to show the effect of trimming on a dataset. By rem
 
 As we can see in figure~\ref{fig:NoTrim} (where no trimming was applied) the predicted values some times goes way out of line and hits the very maximum(about 1500) also when the actual value is nothing near that. This is due to the seldom occurrence of these high prices that the neural network is never able to get a full connection between these prices and the input parameters. Another reason for this to happen is that it is extremely hard to predict such sudden and very high fluctuations in price; thus removing these will not give us a performance hit, since we would not be able to predict them anyways and they just add the possibility of errors in the rest of the predictions.
 
-\begin{figure}[H]
+\begin{figure}[h!]
 \centering
 \includegraphics[width=0.85\linewidth,natwidth=898,natheight=587]{billeder/PriceExperimentalAnalysis/NoTrimming.jpg}
 \caption{The \#1 forecast with no trimming of the dataset}
@@ -238,7 +238,7 @@ As we can see in figure~\ref{fig:NoTrim} (where no trimming was applied) the pre
 
 If we take a look at the same dataset but this time with a 1\% high and low trim (2\% in total) in figure~\ref{fig:1PTrim}; we clearly see that the actual prices in the beginning aren't spiking as heavily as they did in figure~\ref{fig:NoTrim}. This of course prevents us from predicting these high spikes but if we take a look at the rest of the set we see that the 5 faulty spikes have gone as well. This shows the trade off between being able to predict the outliers and the errors they introduce.
 
-\begin{figure}[H]
+\begin{figure}[h!]
 \centering
 \includegraphics[width=0.85\linewidth,natwidth=898,natheight=587]{billeder/PriceExperimentalAnalysis/1PTrim.jpg}
 \caption{The \#1 forecast with 1\% trimming in both ends of the dataset}
@@ -247,7 +247,7 @@ If we take a look at the same dataset but this time with a 1\% high and low trim
 
 In figure~\ref{fig:AllTrims} we see the dataset from figure~\ref{fig:1PTrim} with 1\% trim. The lines shows how much would be cut of if we applied 2\%(Purple), 3\%(Red), 4\%(Black) and 5\%(Blue) trimming. Here we clearly see that it is removing data - that is part of the norm - from the set. With every percent we go up we remove 363 entries so at 5\% trim (top and bottom) we will be removing 1815 entries from our dataset. This will result in us never being able to predict value higher or lower than the bars; which we of course are not interested in as most of the values we trim from 2\% and up are part of the standardized dataset.
 
-\begin{figure}[H]
+\begin{figure}[h!]
 \centering
 \includegraphics[width=0.85\linewidth,natwidth=898,natheight=587]{billeder/PriceExperimentalAnalysis/restOfTrims.jpg}
 \caption{The \#1 forecast with 2\%(Purple), 3\%(Red), 4\%(Black) and 5\%(Blue) trimming in both ends of the dataset}
@@ -257,7 +257,7 @@ In figure~\ref{fig:AllTrims} we see the dataset from figure~\ref{fig:1PTrim} wit
 \todo{Skriv om tabellen. Vis sammenhaeng i forhold til 1815 entries vil mistes paa baggrund af en forbedring paa kun 8 MAE i bedste tilfaelde.}
 
 
-\begin{table}[H]
+\begin{table}[h!]
 \centering  % used for centering table
 \resizebox{0.6\textwidth}{!}{
 	\begin{tabular}{|c|c|c|c|c|c|} % centered columns (7 columns)
@@ -300,7 +300,7 @@ In this experiment we had 4 variables that we tested:
 The setup of the different strategies have been tested on the best result from experiment 1.
 
 \subsubsection{EWMA}
-\begin{table}[H]
+\begin{table}[h!]
 \centering  % used for centering table
 \resizebox{0.5\textwidth}{!}{
 	\begin{tabular}{|c|c|c|} % centered columns (7 columns)
@@ -326,7 +326,7 @@ The EWMA is used to calculate the volatility of the curve. The electricity price
 
 
 \subsubsection{Skewness}
-\begin{table}[H]
+\begin{table}[h!]
 \centering  % used for centering table
 \resizebox{0.5\textwidth}{!}{
 	\begin{tabular}{|c|c|c|} % centered columns (7 columns)
@@ -350,7 +350,7 @@ The EWMA is used to calculate the volatility of the curve. The electricity price
 The skewness denotes whether an observation falls to the left or the right of the median as described in section~\ref{sec:skewness}. This is used to determine in what direction the graph is currently moving thus giving us information about the trend. We experimented with how many historical prices we had to include in the calculation of the skewness and ended up with 4 being the best even though they are very close.
 
 \subsubsection{Curve behavior}
-\begin{table}[H]
+\begin{table}[h!]
 \centering  % used for centering table
 \resizebox{0.5\textwidth}{!}{
 	\begin{tabular}{|c|c|c|} % centered columns (7 columns)
@@ -374,6 +374,7 @@ The skewness denotes whether an observation falls to the left or the right of th
 The curve behavior analysis is conducted to tell us something about the gradient of the slope in the current curve as described in section~\ref{sec:curveAnalysis}. We examine here how many historical prices should be included in the curve gradient analysis to say something about what direction (up, down or steady) the curve is heading. The test shows us that a stack size of 4 prices is the best but again they are not differing much.
 
 \subsubsection{Results}
+We ran 3 experiments reflecting the top 3 results from experiment 1. Before the results of the experiments we list the input parameters that we use the strategies on. 
 
 \begin{itemize}
 	\item Price
@@ -385,7 +386,7 @@ The curve behavior analysis is conducted to tell us something about the gradient
 	\item Season of Year (Matrix)
 \end{itemize}
 
-\begin{table}[H]
+\begin{table}[h!]
 \centering  % used for centering table
 \resizebox{0.7\textwidth}{!}{
 	\begin{tabular}{|c|c|c|c|c|c|c|} 
@@ -413,6 +414,38 @@ The curve behavior analysis is conducted to tell us something about the gradient
 \label{table:Statistical1} % is used to refer this table in the text
 \end{table}
 
+The first run shown in table~\ref{table:Statistical1} shows no big improvements between the different strategies but they neither do they show an improvement compared to the results from experiment 2 - this combination gave us 47,21 in MAE. Compared to the best result from table~\ref{table:Statistical1} that is only an improvement of 4.10\%.
+
+In figure~\ref{fig:X2_X3_3800_4000} we see how the ANN has trouble predicting the unusual low values. This is the same for the experiment 2 prediction as it is for the experiment 3 prediction. The case we see in figure~\ref{fig:X2_X3_3800_4000} is what we hoped for the statistical features to help the ANN to be better at predicting; since it has gained some knowledge about the immediate past. Experiment 3 also introduces more jagged curves where is jumps up and down a lot compared to the prediction from experiment 2 - which has smoother curves. This is because of the statistical features that adds values that are interpreted into either a rising or a falling curve. Where as the prediction from experiment 2 has no such input values and relies only on the interaction between the quantifiable parameters from experiment 1.
+
+If we apply all of the statistical features to the prediction we get figure~\ref{fig:X2_X3_AllParameters_3800_4000} where we can see that it actually is able to drop to the unusually low values. On the other hand it has trouble rising from the low values which introduces just as a big an error as the first one did. This is due to the fact that with all applied statistical features it will follow the curve better but at the same time the history has to great of an influence on the predictions thus making it unable to rise/fall fast enough to follow the curve.
+
+Another problem with the statistical features is that making predictions with an ANN is about generalizing the inputs to reflect a mathematical function. If the ANN does not see enough examples of the statistical features throughout the training set it will not be able to make this generalization and thus not be able to use it efficiently in the predictions of the next 24 hours. If the first prediction in the next 24 hours is off (compared to the actual prices) the statistical features can help elevate/decrease the error since the last known price is added to the calculation of these features(This can be seen in figure~\ref{fig:X2_X3_3816_3840} and in ~\ref{fig:X3_Price_Consump_Worst}). Also the statistical features are more or less unique throughout the whole year since the price does not follow a specific pattern that makes it harder to generalize the statistical inputs in the price prediction.
+
+
+The results in table~\ref{table:Statistical2} and ~\ref{table:Statistical3} are control groups to show that it is not a single combination that has no benefit from the statistical features and that other combinations does not benefit from them either.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=\linewidth,natwidth=898,natheight=587]{billeder/PriceExperimentalAnalysis/X2_X3_3800_4000.png}
+\caption{A comparison of \#1 forecast from experiment 2 and 3. This segment is from the middle of the year. (Skew, EWMA)}
+\label{fig:X2_X3_3800_4000}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=\linewidth,natwidth=898,natheight=587]{billeder/PriceExperimentalAnalysis/X2_X3_AllFeatures_3800_4000.png}
+\caption{A comparison of \#1 forecast from experiment 2 and 3. This segment is from the middle of the year. All features applied(Skew, Curve, EWMA, Scatter).}
+\label{fig:X2_X3_AllParameters_3800_4000}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=\linewidth,natwidth=898,natheight=587]{billeder/PriceExperimentalAnalysis/X2_X3_3816_3840.png}
+\caption{A comparison of \#1 forecast from experiment 2 and 3. This is 24 hours from the middle of the year. (Skew, EWMA)}
+\label{fig:X2_X3_3816_3840}
+\end{figure}
+
 \begin{itemize}
 	\item Price
 	\item Consumption
@@ -423,7 +456,7 @@ The curve behavior analysis is conducted to tell us something about the gradient
 	\item Season of Year (Matrix)
 \end{itemize}
 
-\begin{table}[H]
+\begin{table}[h!]
 \centering  % used for centering table
 \resizebox{0.7\textwidth}{!}{
 	\begin{tabular}{|c|c|c|c|c|c|c|} 
@@ -448,7 +481,7 @@ The curve behavior analysis is conducted to tell us something about the gradient
 	\end{tabular}
 }
 \caption{Trims} % title of Table
-\label{table:Statistical1} % is used to refer this table in the text
+\label{table:Statistical2} % is used to refer this table in the text
 \end{table}
 
 \begin{itemize}
@@ -460,7 +493,7 @@ The curve behavior analysis is conducted to tell us something about the gradient
 	\item Month of Year (Matrix)
 \end{itemize}
 
-\begin{table}[H]
+\begin{table}[h!]
 \centering  % used for centering table
 \resizebox{0.7\textwidth}{!}{
 	\begin{tabular}{|c|c|c|c|c|c|c|}
@@ -468,10 +501,10 @@ The curve behavior analysis is conducted to tell us something about the gradient
 	Rank & Curve & Skew & EWMA & Scatter & MAE & Rank\\ [0.5ex] % inserts table 
 	\hline                  % inserts single horizontal line
 	1  &       &       & \x    & \x    & 45.14 & - \\ \hline
-	2  &       &       &       & \x    & 45.55 & 0.9\% \\ \hline
+	2  &       &       &       & \x    & 45.55 & 0.9\%  \\ \hline
 	3  &       & \x    &       &       & 45.56 & 0.92\% \\ \hline
 	4  &       & \x    &       & \x    & 45.60 & 1.02\% \\ \hline
-	5  & \x    &       & \x    &       & 45.91 & 1.7\% \\ \hline
+	5  & \x    &       & \x    &       & 45.91 & 1.7\%  \\ \hline
 	6  & \x    & \x    & \x    & \x    & 45.95 & 1.79\% \\ \hline
 	7  & \x    & \x    &       &       & 45.99 & 1.89\% \\ \hline
 	8  & \x    &       &       & \x    & 46.14 & 2.22\% \\ \hline
@@ -479,22 +512,49 @@ The curve behavior analysis is conducted to tell us something about the gradient
 	10 & \x    & \x    &       & \x    & 46.87 & 3.82\% \\ \hline
 	11 &       &       & \x    &       & 46.98 & 4.08\% \\ \hline
 	12 &       & \x    & \x    & \x    & 47.02 & 4.16\% \\ \hline
-	13 & \x    & \x    & \x    &       & 47.08 & 4.3\% \\ \hline
-	14 & \x    &       & \x    & \x    & 47.94 & 6.2\% \\ \hline
+	13 & \x    & \x    & \x    &       & 47.08 & 4.3\%  \\ \hline
+	14 & \x    &       & \x    & \x    & 47.94 & 6.2\%  \\ \hline
 	15 &       & \x    & \x    &       & 47.98 & 6.29\% \\ \hline
 	\end{tabular}
 }
 \caption{Trims} % title of Table
-\label{table:Statistical1} % is used to refer this table in the text
+\label{table:Statistical3} % is used to refer this table in the text
 \end{table}
 
+To test the benefit of the statistical features on a vanilla dataset (that only contains the price and consumption) we conducted two more experiments - one with trimming(1\%) and one without trimming. We also did a simulation of the strategy described in paper \cite{singhal2011electricity} since this is where we got the selection of scatter prices from.
+
+Test \#1 shown in table~\ref{table:price_consumption_x3} shows the statistical features applied on a dataset without trimming. The original test from experiment 1 can be seen in the price results appendix ~\ref{sec:priceResultAppendix} \#106 and gave us an MAE of 89. If we compare it to this test we see and improvement of 21.24\%. The most notable trend in the results in table~\ref{table:price_consumption_x3} is that nearly all of the scatter prices are the top results. That is also the case for the results in table~\ref{table:price_consumption_x3_1pTrim} (Same experiment with 1\% trim).
+
+The most noteworthy are that the two are very similar and the one with trimming is actually worse when the EWMA strategy is applied. When we moved from experiment 1 to experiment 2 we saw that the ANN became more accurate when we trimmed away the largest spikes; this does not seem to be the case here. From this we can conclude that trimming has no effect on the dataset if all the other input variables are not included. In figure~\ref{fig:X3_Price_Consump_NoTrim} and ~\ref{fig:X3_Price_Consump_1pTrim} we see the similarities between the 1\% trim and the no trim predictions. In figure ~\ref{fig:X3_Price_Consump_Worst} we see the same segment of the prediction as the other two but this one is with Curve, Skew, EWMA and 1\% trim. In the table ~\ref{table:price_consumption_x3} clearly see that it is way inferior. This is because the strategies applied accounts for to much of the prediction and it confuses more than it helps.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=\linewidth,natwidth=898,natheight=587]{billeder/PriceExperimentalAnalysis/X3_Price_Consump_1pTrim.png}
+\caption{Price and consumption with scatter and 1\% trim.)}
+\label{fig:X3_Price_Consump_1pTrim}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=\linewidth,natwidth=898,natheight=587]{billeder/PriceExperimentalAnalysis/X3_Price_Consump_NoTrim.png}
+\caption{Price and consumption with scatter and no trim.}
+\label{fig:X3_Price_Consump_NoTrim}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=\linewidth,natwidth=898,natheight=587]{billeder/PriceExperimentalAnalysis/X3_Price_Consump_Worst.png}
+\caption{Price and consumption with Curve, Skew, EWMA and 1\% trim.}
+\label{fig:X3_Price_Consump_Worst}
+\end{figure}
 
 \begin{itemize}
 	\item Price
 	\item Consumption
+	\item With no trimming
 \end{itemize}
 
-\begin{table}[H]
+\begin{table}[h!]
 \centering  % used for centering table
 \resizebox{0.7\textwidth}{!}{
 	\begin{tabular}{|c|c|c|c|c|c|c|} % centered columns (7 columns)
@@ -502,14 +562,14 @@ The curve behavior analysis is conducted to tell us something about the gradient
 	Rank & Curve & Skew & EWMA & Scatter & MAE & Deviation\\ [0.5ex] % inserts table 
 	\hline                  % inserts single horizontal line
 	1  &        &       &       & \x    & 73.43 & - \\ \hline
-	2  &  \x    &       &       & \x    & 76.45 & 4.11\% \\ \hline
-	3  &        &       & \x    &       & 77.50 & 5.54\% \\ \hline
-	4  &  \x    &       & \x    & \x    & 77.54 & 5.6\% \\ \hline
-	5  &        & \x    &       & \x    & 79.17 & 7.82\% \\ \hline
-	6  &        &       & \x    & \x    & 80.67 & 9.86\% \\ \hline
+	2  &  \x    &       &       & \x    & 76.45 & 4.11\%  \\ \hline
+	3  &        &       & \x    &       & 77.50 & 5.54\%  \\ \hline
+	4  &  \x    &       & \x    & \x    & 77.54 & 5.6\%   \\ \hline
+	5  &        & \x    &       & \x    & 79.17 & 7.82\%  \\ \hline
+	6  &        &       & \x    & \x    & 80.67 & 9.86\%  \\ \hline
 	7  &        & \x    & \x    & \x    & 80.85 & 10.11\% \\ \hline
 	8  &  \x    & \x    & \x    & \x    & 81.97 & 11.63\% \\ \hline
-	9  &        & \x    &       &       & 84.37 & 14.9\% \\ \hline
+	9  &        & \x    &       &       & 84.37 & 14.9\%  \\ \hline
 	10 &  \x    & \x    &       & \x    & 84.86 & 15.57\% \\ \hline
 	11 &  \x    & \x    & \x    &       & 86.49 & 17.79\% \\ \hline
 	12 &  \x    &       & \x    &       & 86.95 & 18.41\% \\ \hline
@@ -519,14 +579,15 @@ The curve behavior analysis is conducted to tell us something about the gradient
 	\end{tabular}
 }
 \caption{Statistical features on Price \& Consumption with no trim.} % title of Table
-\label{table:StatisticalCheck} % is used to refer this table in the text
+\label{table:price_consumption_x3} % is used to refer this table in the text
 \end{table}
 
 \begin{itemize}
 	\item Price
 	\item Consumption
+	\item With 1\% trimming
 \end{itemize}
-\begin{table}[H]
+\begin{table}[h!]
 \centering  % used for centering table
 \resizebox{0.7\textwidth}{!}{
 	\begin{tabular}{|c|c|c|c|c|c|c|} % centered columns (7 columns)
@@ -534,32 +595,93 @@ The curve behavior analysis is conducted to tell us something about the gradient
 	Rank & Curve & Skew & EWMA & Scatter & MAE & Deviation\\ [0.5ex] % inserts table 
 	\hline                  % inserts single horizontal line
 	1  &        &       &       & \x    & 68.28  & - \\ \hline
-	2  &  \x    & \x    &       & \x    & 69.40  & 1.63\% \\ \hline
-	3  &        & \x    &       & \x    & 70.17  & 2.77\% \\ \hline
-	4  &  \x    &       &       & \x    & 70.28  & 2.93\% \\ \hline
-	5  &        & \x    &       &       & 72.16  & 5.68\% \\ \hline
+	2  &  \x    & \x    &       & \x    & 69.40  & 1.63\%  \\ \hline
+	3  &        & \x    &       & \x    & 70.17  & 2.77\%  \\ \hline
+	4  &  \x    &       &       & \x    & 70.28  & 2.93\%  \\ \hline
+	5  &        & \x    &       &       & 72.16  & 5.68\%  \\ \hline
 	6  &  \x    & \x    &       &       & 75.31  & 10.29\% \\ \hline
 	7  &  \x    &       &       &       & 77.14  & 12.97\% \\ \hline
 	8  &  \x    &       & \x    & \x    & 93.86  & 37.46\% \\ \hline
 	9  &  \x    & \x    & \x    & \x    & 94.21  & 37.98\% \\ \hline
 	10 &        &       & \x    & \x    & 95.02  & 39.17\% \\ \hline
 	11 &        & \x    & \x    & \x    & 97.79  & 43.22\% \\ \hline
-	12 &        &       & \x    &       & 111.91 & 63.9\% \\ \hline
+	12 &        &       & \x    &       & 111.91 & 63.9\%  \\ \hline
 	13 &        & \x    & \x    &       & 115.91 & 69.76\% \\ \hline
 	14 &  \x    &       & \x    &       & 116.83 & 71.11\% \\ \hline
 	15 &  \x    & \x    & \x    &       & 118.82 & 74.03\% \\ \hline
 	\end{tabular}
 }
 \caption{Statistical features on Price \& Consumption with 1\% trim.} % title of Table
-\label{table:StatisticalCheck} % is used to refer this table in the text
+\label{table:price_consumption_x3_1pTrim} % is used to refer this table in the text
 \end{table}
+
+The last iterations we did was a clone of the experiments conducted in~\cite{singhal2011electricity}
+
+\begin{itemize}
+	\item Price
+	\item Consumption
+	\item Time of Day
+	\item Day of Week
+	\item With no trimming
+\end{itemize}
+\begin{table}[h!]
+\centering  % used for centering table
+\resizebox{0.7\textwidth}{!}{
+	\begin{tabular}{|c|c|c|c|c|c|c|} % centered columns (7 columns)
+	\hline
+	Rank & Curve & Skew & EWMA & Scatter & MAE & Deviation\\ [0.5ex] % inserts table 
+	\hline                  % inserts single horizontal line
+	1 &        & \x    &       & \x    & 71.51 & -       \\ \hline
+	2 &        &       & \x    & \x    & 73.17 & 2.33\%  \\ \hline
+	3 &        & \x    & \x    & \x    & 79.31 & 10.92\% \\ \hline
+	4 &        &       &       & \x    & 80.20 & 12.16\% \\ \hline
+	5 &  \x    & \x    & \x    & \x    & 82.03 & 14.73\% \\ \hline
+	6 &  \x    &       & \x    & \x    & 89.82 & 25.61\% \\ \hline
+	7 &  \x    &       &       & \x    & 94.26 & 31.83\% \\ \hline
+	8 &  \x    & \x    &       & \x    & 94.90 & 32.72\% \\ \hline
+
+	\end{tabular}
+}
+\caption{Statistical features on Price \& Consumption with 1\% trim.} % title of Table
+\label{table:price_consumption_x3_1pTrim} % is used to refer this table in the text
+\end{table}
+
+\begin{itemize}
+	\item Price
+	\item Consumption
+	\item Time of Day
+	\item Day of Week
+	\item With no trimming
+\end{itemize}
+\begin{table}[h!]
+\centering  % used for centering table
+\resizebox{0.7\textwidth}{!}{
+	\begin{tabular}{|c|c|c|c|c|c|c|} % centered columns (7 columns)
+	\hline
+	Rank & Curve & Skew & EWMA & Scatter & MAE & Deviation\\ [0.5ex] % inserts table 
+	\hline                  % inserts single horizontal line
+	1 &  \x    & \x    &       & \x    & 52.04 & - \\ \hline
+	2 &  \x    &       & \x    & \x    & 52.12 & 0.15\% \\ \hline
+	3 &        & \x    & \x    & \x    & 53.22 & 2.27\% \\ \hline
+	4 &        & \x    &       & \x    & 54.02 & 3.8\% \\ \hline
+	5 &  \x    &       &       & \x    & 54.55 & 4.83\% \\ \hline
+	6 &        &       & \x    & \x    & 55.80 & 7.23\% \\ \hline
+	7 &        &       &       & \x    & 56.33 & 8.24\% \\ \hline
+	8 &  \x    & \x    & \x    & \x    & 61.92 & 18.99\% \\ \hline
+
+	\end{tabular}
+}
+\caption{Statistical features on Price \& Consumption with 1\% trim.} % title of Table
+\label{table:price_consumption_x3_1pTrim} % is used to refer this table in the text
+\end{table}
+
 
 \todo{Kig paa price og consumption only med statistical features. Se at det ikke forbedrer. Referer tilbage til scatter teksten. Tag de bedste 3. Foerste vis ingen sammenhaeng. Anden og tredje heller ingen sammenhaeng. Brug helt simple til at verificere.}
 
 \subsubsection{Experiment 4: Black box optimization}
 
 Dataset size:
-\begin{table}[H]
+\begin{table}[h!]
 \centering  % used for centering table
 \resizebox{0.6\textwidth}{!}{
 	\begin{tabular}{|c|c|c|c|c|c|} % centered columns (7 columns)
@@ -576,7 +698,7 @@ Dataset size:
 \label{table:Dataset} % is used to refer this table in the text
 \end{table}
 
-\begin{table}[H]
+\begin{table}[h!]
 \centering  % used for centering table
 \resizebox{0.6\textwidth}{!}{
 	\begin{tabular}{|c|c|c|c|c|c|} % centered columns (7 columns)
