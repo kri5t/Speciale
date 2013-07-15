@@ -36,10 +36,10 @@ The table~\ref{table:Top20Prices} contains the following information as well:
 \subsubsection{Hypothesis}
 This is the first and most comprehensive of the tests conducted for price prediction. In this experiment we want to test all the different combinations of the parameters. We expect to see a better curve-fit as we include more variables and more complex variables. In regard to the dataset analysis in section~\ref{sec:ElectricityPriceAnalysis} we see the connection between the aforementioned variables and the price (that we are trying to predict). We have the following expectations based on the dataset analysis:
 \begin{itemize}
-	\item The Wind Speed will show an impact on the price because of the correlation between the two. Also the wind speed impacts the production of green energy which impacts the overall price of energy.
+	\item The Wind Speed will show a positive impact on the price because of the correlation between the two. Also the wind speed impacts the production of green energy which impacts the overall price of energy.
 	\item The Temperature might have a small impact on the price but there is nearly no correlation between the price and the temperature. If it should have an impact it is probably because of the correlation between the temperature and the demand thus indirect influencing the price.
 	\item The Hourly Time of Day is going to have an effect on the hourly predicted price. The reason being the correlation between the price and what time of day it is and because we are predicting the hourly price; which logically indicates that this parameter is important for such a prediction. 
-	\item The Day of the Week, The Month of the Year and The Seasons of the Year is expected to have an impact on the prediction. The impact are expected to get weaker as the inputs become more general e.g season of year; since our training dataset is based on 1/4 of a year. 
+	\item The Day of the Week, The Month of the Year and The Seasons of the Year is expected to have a positive impact on the prediction. The impact are expected to get smaller as the inputs become more general e.g season of year; since our training dataset is based on 1/4 of a year. 
 	\item Matrix representation will be better than single node representation of the seasonality. This is due to the fact that matrix is a more granulated input format than single node. This has also been discussed in section~\ref{sec:Matrix}.
 \end{itemize}
 
@@ -109,7 +109,7 @@ If we take a look at the top 20 best input combinations (shown in table~\ref{tab
 \label{fig:Windspeed_no_windspeed}
 \end{figure}
 
-The temperature is a less obvious candidate for the prediction of price since the Pearson's correlation between the two only are 0.17. Nevertheless it is showing up in 8/10 top combinations in table~\ref{table:Top20Prices} and this might be because of the correlation between temperature/demand which is -0.59. The temperature is scattered all over the 144 combinations and thus it is hard to say something concrete about this input variable. The best result without temperature is at place 4 in table~\ref{table:Top20Prices} and the same one with temperature is at place 13 with a difference between the two of 10.66\%. Graph~\ref{fig:temperature_comparison} shows that there is no significant difference between the two combinations. In both of them the ANN is overshooting the target	at different spots.
+The temperature is a less obvious candidate for the prediction of price since the Pearson's correlation between the two only are 0.17. Nevertheless it is showing up in 8/10 top combinations in table~\ref{table:Top20Prices} and this might be because of the correlation between temperature/demand which is -0.59. The temperature is scattered all over the 144 combinations and thus it is hard to say something concrete about this input variable. The best result without temperature is at place 4 in table~\ref{table:Top20Prices} and the same one with temperature is at place 13 with a difference between the two of 10.66\%. Graph~\ref{fig:temperature_comparison} shows that there is no significant difference between the two combinations. In both of them the ANN is overshooting the targetat different spots.
 
 \begin{figure}[h!]
 \centering
@@ -232,7 +232,17 @@ P & D & WS & T & ToD & DoW & MoY & SoY & MAE & Rank\\ [0.5ex] % inserts table
 %\end{table}
 
 \subsubsection{Conclusion}
+In this experiment we saw the following:
+\begin{itemize}
+	\item The wind speed clearly was a factor that influenced how well we were able to predict the price. The wind speed was in the best 70/72 combinations which are half of the experiments. We also saw that the wind speed helped the ANN to overshoot the curve in fewer of the predictions.
+	\item The temperature showed no real improvement but neither did it deteriorate the result. This was expected since there was nearly no correlation between the two section~\ref{sec:ElectricityPriceAnalysis}.
+	\item The Hourly Time of Day shows an improvement on the predictions. In the best half of the results we had 55/72 that included ToD. This result directly reflects what we anticipated. We also saw that the ToD allowed the ANN to make a better curve fit and helped the predictions to follow the curves all the way up and down instead of following an average between the top and bottom of the curve.
+	\item The Day of the Week seemed to have a positive effect on the predictions. Here it was not clear whether the matrix form was the best choice or the standard single input was the best. This stems from the fact that the biggest price difference in weekdays are between the regular weekdays and the weekend.
+	\item The Month of the Year and The Seasons of the Year seems to either have no effect or a small effect on the predictions. We discussed how the main purpose of these two input parameters was defeated because of the size of our dataset. They do nevertheless show up in most of the top 20 values. This shows us that they have a positive effect or at worst no effect at all. The only downside to this is the time consumption introduced; if they actually do not have any effect on the predictions.
+	\item Matrix representation seems to be the best choice in almost all the cases. The only case where it might be better without it is the weekdays; because of the aforementioned price distribution over weekdays.
 
+We also learned that the month of year input variable will have a positive effect on full year datasets as it balanced the error margin between a full year dataset and a quarter year dataset. Even though we saw no improvement from using a full year to train on.
+\end{itemize}
 
 \subsection{Experiment 2: Trimming}
 As described in section~\ref{sec:Trimming} trimming is a solution to extreme outliers and a way to streamline your data; thus making it easier for neural networks to predict. The art is to get a good balance between the how much of the dataset you remove and how much of an accuracy boost your predictions will get. If you trim parts of the dataset that is actually common data it will get impossible to predict a very high price since the neural network never sees those values.
@@ -300,6 +310,9 @@ In figure~\ref{fig:AllTrims} we see the dataset from figure~\ref{fig:1PTrim} wit
 \label{table:Top10Trimming} % is used to refer this table in the text
 \end{table}
 
+\subsubsection{Conclusion}
+In this experiment we saw how trimming can positively affect the predictions. We also discussed the trade offs in the trimming procedure as we lowered the possible outcomes of our predictions. This is a balance between improvement and the amount of prices we will not be able to predict. The 1\% trim showed us an improvement of 20.99\% and removed some extreme failed predictions where the ANN would overshoot the target by 800+. We also learned that higher trimming rates did not really improve the results very much thus making it easy for us to decide on a trimming rate of 1\%.
+
 \subsection{Experiment 3: Statistical strategies}
 This experiment was conducted to test the different statistical strategies that we described in section~\ref{sec:stratsForPrediction}. This includes Curve Analysis, Skewness, EWMA - Historical Volatility and Scatter. We took the three best results from experiment one and ran every combination of the statistical strategies on them. The experiment was conducted on the 1\% trimmed version of the 3 best results from experiment 1 - due to the improvements seen in experiment 2. Also we did a test on the most basic dataset we had available: Price and Consumption with no trimming. This was done to validate the impact of the different strategies before applying any other factors to the prediction.
 
@@ -323,19 +336,20 @@ The setup of the different strategies have been tested on the best result from e
 \begin{table}[h!]
 \centering  % used for centering table
 \resizebox{0.5\textwidth}{!}{
-	\begin{tabular}{|c|c|c|} % centered columns (7 columns)
+	\begin{tabular}{|c|c|c|c|c|} % centered columns (7 columns)
 	\hline
-	Smoothing factor & MAE & Deviation \\ [0.5ex] % inserts table 
+	Rank & Stack size & Smoothing factor & MAE & Deviation \\ [0.5ex] % inserts table 
 	\hline                   % inserts single horizontal line
-	0.3 & 44,69 & - \\ \hline
-	0.9 & 44,82 & 0.29\% \\ \hline
-	0.1 & 44,87 & 0.40\%\\ \hline
-	0.2 & 45,51 & 1.83\%\\ \hline
-	0.4 & 45,51 & 1.83\%\\ \hline
-	0.8 & 46,16 & 3.28\%\\ \hline
-	0.6 & 46,29 & 3.58\%\\ \hline
-	0.7 & 46,55 & 4.16\%\\ \hline
-	0.5 & 46,92 & 4.99\%\\ \hline
+	1 & 16 & 0.9 45.96 & - \\ \hline
+	2 & 12 & 0.1 46.13 & 0.38\% \\ \hline
+	3 & 20 & 0.9 46.47 & 1.11\% \\ \hline
+	4 & 8 & 0.9 46.55 & 1.28\% \\ \hline
+	5 & 20 & 0.5 46.56 & 1.31\% \\ \hline
+	6 & 24 & 0.4 46.58 & 1.36\% \\ \hline
+	7 & 20 & 0.7 46.59 & 1.37\% \\ \hline
+	8 & 12 & 0.9 46.61 & 1.41\% \\ \hline
+	9 & 24 & 0.8 46.78 & 1.79\% \\ \hline
+	10 & 24 & 0.5 46.88 & 2.0\% \\ \hline
 	\end{tabular}
 }
 \caption{Smoothing factor test} % title of Table
@@ -709,11 +723,37 @@ The last iterations we did was a clone of the experiments conducted in~\cite{sin
 
 \subsubsection{Conclusion}
 
-\subsubsection{Experiment 4: Black box optimization}
+
+\subsection{Experiment 4: Black box optimization}
+We end the experiments by showing the impacts of epochs used to train the network and the size of the training dataset. We also show how the time dimension of doing these tests are affected by these parameters. Black box optimization also covers the number of hidden layers and the neuron count in these. We chose not to do these experiments since we used a pruning algorithm to find the most optimal combination of neurons and layers for each input combination as described in section~\ref{sec:testProcedure} and in section~\ref{sec:pruning}.
+
 \subsubsection{Variables}
+All of these tests were conducted using the best combination seen in table ~\ref{table:Statistical1}. Giving us the following combination:
+\begin{itemize}
+	\item Price
+	\item Consumption
+	\item Wind Speed
+	\item Temperature
+	\item Time of Day (Matrix)
+	\item Day of Week (Matrix)
+	\item Season of Year (Matrix)
+	\item Skewness
+	\item EWMA
+\end{itemize}
+
+The following parameters were tested:
+
+\begin{itemize}
+	\item Epochs from 100 to 1600
+	\item Dataset sizes equivalent to 1/4, 1/2, 3/4 and a 1/1 year
+\end{itemize}
+
 \subsubsection{Hypothesis}
+We expect the results from these tests to show that the time used to make a years prediction will increase with the numbers of epochs and it will increase with the size of the dataset. We expect the best epochs to be in the lower end of the scale presented above. The best results from the dataset test is expected to be 1/4 year or 1/2 year sizes. These assumptions are based on what we described in the Forecasting Model chapter~\ref{ch:forecastingModel}.\todo{Soerg for at det giver mening i forhold til hvad vi har skrevet i det kapitel.}
+
 \subsubsection{Results}
-Dataset size:
+
+
 \begin{table}[h!]
 \centering  % used for centering table
 \resizebox{0.6\textwidth}{!}{
