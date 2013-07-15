@@ -1,15 +1,15 @@
-This section describes the experiments that uncovers the best combination of hidden layers, neurons and epochs as well as the different strategies. Based on the analysis of wind production from Section~\ref{sec:windPowerAnalysis} the network will try to uncover the best approach to predicting the wind power production. Furthermore, experiments are needed to investigate the influence of data manipulation and statistical inputs as presented in Section~\ref{sec:usingStatisticalInput}. All test results can be seen in Appendix~\ref{sec:windResultsAppendix} and have been carried out with normalization - relevant results will be shown here. 
+This section describes the experiments that uncover the best combination of inputs and epochs as well as the different strategies. Based on the analysis of wind production from Section~\ref{sec:windPowerAnalysis} the network will try to uncover the best approach to predicting the wind power production. Furthermore, experiments are needed to investigate the influence of data manipulation and statistical inputs as presented in Section~\ref{sec:usingStatisticalInput}. All test results can be seen in Appendix~\ref{sec:windResultsAppendix} and have been carried out with normalization - relevant results will be shown here. 
 
 \todo{DRAWING OF NETWORK}
 
-\subsection{Experiment Series One - Selection of input parameters}
-The first experiment series is an attempt to find the best constitution of network input parameters based on the analysis in Section~\ref{sec:windPowerAnalysis}. Since the co-relation between wind production and wind speed is very significant it will always be included as a core input parameter in all test combinations.
+\subsection{Experiment One - Selection of input parameters}
+The first experiment is an attempt to find the best constitution of network input parameters based on the analysis in Section~\ref{sec:windPowerAnalysis}. Since the co-relation between wind production and wind speed is significant it will be included as a core input parameter in all test combinations.
 
 \subsubsection{Hypothesis}
-The analysis in Section~\ref{sec:windPowerAnalysis} showed the co-relation between the different parameters and the wind power production. The following is expected based on the analysis:
+The analysis in Section~\ref{sec:windPowerAnalysis} uncovered the co-relation between the different parameters and the wind power production. The following is expected based on the analysis:
 
 \begin{enumerate}
-\item Wind speed is expected to be the most influential factor with consumption just behind it. Temperature is expected to being able to substitute consumption but without achieving as good accuracy. 
+\item Wind speed is expected to be the most influential factor with consumption just behind it. Temperature is expected have the potential to substitute consumption but without achieving as good accuracy. 
 \item Air density, time of day, month of year and last known production is expected to be of some influence.
 \item Wind direction is expected to be of very little influence.
 \end{enumerate}
@@ -30,7 +30,11 @@ The variables used in this experiment series:
 
 \subsubsection{Prediction - basic input parameters}
 \label{sec:predictionBasicInputParams}
-The experiments simulate predictions over the entire year of 2012.
+All results from the first experiment can be seen in Appendix~\ref{sec:simpleInputTest}. The results vary from the best MAE at 127,86 to the worst being 199,22. Top and bottom 10 is shown sorted in Table~\ref{table:windProdInputParamsTop10}. The appendix shows that when wind speed is used as the only input parameter it achieves 149,72 in MAE. This illustrates the expected relationship between wind speed and wind production. The experiment further indicates that time of day, air density and last production are significant. This correspond well with the analysis in Section~\ref{sec:windPowerAnalysis} where the relationship between wind production and these parameters are established. Last hours wind power production is represented in all of top 10 which was also expected from the analysis concerning wind production development in Section~\ref{sec:windProductionDev}. The production does not differ much from one hour to the next which is reflected in the last known production input parameter --- more sophisticated attempts with statistic will be in experiments to come. The development is also represented in the bottom which will be addressed when discussing month as input. What comes as a surprise is the under-representation of consumption in top 10 because the analysis showed a good co-relation. A possible explanation can be the substitution with temperature which highly influences consumption as discussed in the analysis section. Temperature is the significant factor in calculating air density since pressure is close to constant as described in Section~\ref{sec:airDensity} which can explain why rank top-3 is without consumption and why air density can substitute consumption.
+
+Wind Direction is represented four times in top 10. What is noticeable is the same combinations without wind direction is also represented. This can indicate theindifference of wind direction, e.g. \#2-\#3 and \#6-\#7 is very similar to each other. This is further backed up by the analysis which only showed a low co-relation.
+
+The contributory cause to the bad accuracy in the bottom is month and how it in general does not help the prediction when using it together with a dataset containing only 3 months. Month represents the seasonal perspective of the input parameters and is suppose to find the relationship between months and the production in general. Since the historical data used for prediction is only 3 months, it does not capture how the same month last year influenced the production. In the case of wind power prediction it seems to be creating more noise and thereby affect the prediction badly. A possible solution to obtain the seasonality aspect is presented in\cite{pjmForecast} where the Neural Network is trained with 45 days from before the day to be predicted, and 45 days before and after in the previous year. By using this approach the month parameter will reflect the influence of the months around you from the last year. This needs validation in an prediction for itself.
 
 \footnotesize
 \begin{center}
@@ -79,18 +83,12 @@ The experiments simulate predictions over the entire year of 2012.
 \end{center}
 \normalsize
 
-All results from the first experiment can be seen in Appendix~\ref{sec:simpleInputTest}. The results vary from the best MAE at 127,86 to the worst being 199,22. Top and bottom 10 is shown sorted in Table~\ref{table:windProdInputParamsTop10}. The appendix shows that when wind speed is used as the only input parameter the MAE is 149,72. This illustrates the expected relationship between wind speed and wind production. The experiment further indicates that time of day, air density and last production are significant. This correspond well with the analysis in Section~\ref{sec:windPowerAnalysis} where the relationship between wind production and the parameters are established. The analysis concerning wind production development is seen in the experiments where it is included it all of top 10. The production does not differ much from one hour to the next which is reflected in the last known production input parameter --- more sophisticated attempts with statistic will be in experiments to come. The development is also represented in the bottom which will be addressed when discussing month as input. What comes as a surprise is the under-representation of consumption in top 10 because the analysis showed a good co-relation. A possible explanation can be the substitution with temperature which highly influences consumption as discussed in the analysis section. Temperature is also the significant factor in calculating air density since pressure is close to constant as described in Section~\ref{sec:airDensity} --- this might explain why rank top-3 is without consumption and why air density can substitute consumption.
-
-Wind Direction is represented four times in top 10. What is noticeable is the same combinations without wind direction is also represented which indicates the indifference of wind direction, e.g. see \#2-\#3 and \#6-\#7 with only little difference between them. This is further backed up by the analysis which only showed a low co-relation. 
-
-The contributory cause to the bad accuracy in the bottom is month and how it in general does not help the prediction when using it together with a dataset containing only 3 months. Month represents the seasonal perspective of the input parameters and is suppose to find the relationship between months and the production in general. Since the historical data used for prediction is only 3 months, it does not capture how all the same month last year influenced the production. In the case of wind power prediction it seems to creating more noise and thereby affect the prediction badly. A possible solution to obtain the seasonality aspect is presented in\cite{pjmForecast} where the Neural Network is trained with 45 days from before the day to be predicted, and 45 days before and after in the previous year. By using this approach the month parameter will reflect the influence of the months around you from the last year. This needs validation in an prediction for itself.
-
 \subsubsection{Prediction - Seasonal aspect}
 \label{sec:predictionWindProdSeasonalExperiment}
-Experiment two will uncover and discuss the seasonal aspect when used as input parameter and how it relates to the size of the dataset. The experiment results can be seen in Appendix~\ref{sec:simpleInputTestSeason} and top-10 in Table~\ref{table:seasonalWindProdInputParamsTop10}. The results show a decrease in MAE which can be explained by the increased data size of the training set that makes it harder for the ANN to generalize. According to\cite{1} too large training sets should be avoided because it has a tendency to be overtrained --- this can be backed up by the close results in top-10 that only differs to a maximum of 1,12\%. The network generalizes on much more data and if some values only influence the wind production in smaller periods of the year it will be suffocated between the ones that are import over the entire year. Wind speed is significant over the entire year and by itself got a MAE of 149,72 as described in Section~\ref{sec:predictionBasicInputParams} and the answer could be that the network over-trains itself by dedicating to much responsibility to wind speed because it in general is the most important input. 
-Furthermore, the possible benefits from including the seasonal aspect when predicting wind production can not make up for the loss in accuracy by the increase in the size of training data. It is further seen that month is only represented once in top 10. To validate the decrease in accuracy the date has been a prediction has been conducted with a training set of an entire year and the result can be seen in Table~\ref{table:seasonWindProdInputParamsTop2WholeYear}. The MAE is around the same but instead it takes longer time to process when training on an entire year which makes the small dataset an even better choice --- processing time will be discussed in more details in experiments to come. The usage of only 3 months in the dataset can also be argued to contain the seasonal aspect for the hours to predict. The three months in the set will reflect the current season that you are in and therefore adding more data will only create more noise. When the month parameters is used on only three months it will only reflect how the impact of the past months but not the one that you are going into --- it will not be able to say anything about the beginning of a month because it has never seen such a month before. Furthermore, it is hard to generalize upon a few days (impossible the first day) in a month and therefore the input parameter will be highly influenced by the month before which can become problematic when seasons are shifting.
+This prediction based on the above discussion uncover and discuss the seasonal aspect when used as input parameter and how it relates to the size of the dataset. The experiment results can be seen in Appendix~\ref{sec:simpleInputTestSeason} and top-10 in Table~\ref{table:seasonalWindProdInputParamsTop10}. The results show a decrease in MAE compared to 3 month dataset which can be explained by the increased data size of the training set that makes it harder for the ANN to generalize. According to\cite{1} too large training sets should be avoided because it has a tendency to be overtrained --- this can be backed up by the close results in top-10 that only differs to a maximum of 1,12\%. The network generalizes on much more data and if some values only influence the wind production in smaller periods of the year it will be suffocated between the ones that are important over the entire year. Wind speed is significant over the entire year and by itself achieved a MAE of 149,72 as described in Section~\ref{sec:predictionBasicInputParams}. The network can over-train itself by dedicating to much responsibility to wind speed because it in general is the most important input. 
+Furthermore, the possible benefits from including the seasonal aspect when predicting wind production can not make up for the loss in accuracy by the increase in the size of training data. It is further seen that month is only represented once in top 10. To validate the decrease in accuracy the date has been predicted with a training set of an entire year and the result can be seen in Table~\ref{table:seasonWindProdInputParamsTop2WholeYear}. The MAE is around the same but instead it takes longer time to process when training on an entire year which makes the small dataset an even better choice --- processing time will be discussed in more details in experiments to come. The usage of only 3 months in the dataset can also be argued to contain the seasonal aspect for the hours to predict without having month as a input. The three months in the set will reflect the current season that you are in and therefore adding the month as input will only create more noise. When the month parameter is used as input on only three months it will only reflect how the impact of the past months but not the one that you are going into --- it won't be able to say anything about the beginning of a month because it has never seen such a month before. Furthermore, it is hard to generalize upon a few days (impossible the first day) in a month and therefore the input parameter will be highly influenced by the month before which can become problematic when seasons are shifting.
 
-It needs to be made clear that it is one input parameter of the entire network. The above discussion illustrates that the small dataset itself contains the seasonality aspect since the network trains and generalizes only upon the current season --- it knows of nothing more and for this reason the month parameter will be omitted in the prediction of wind production. It can be further backed up by Table~\ref{table:windProdInputParamsTop10} where only one with month as input is represented but all of bottom 10 is with. 
+It needs to be made clear that it is one input parameter of the entire network. The above discussion illustrates that the small dataset itself contains the seasonality aspect since the network trains and generalizes only upon the current season --- the month parameter will add only noise to this generalization in shifting seasons and therefore the parameter will be omitted in the prediction of wind production. It can be further backed up by Table~\ref{table:windProdInputParamsTop10} where only one with month as input is represented but all of bottom 10 is with. 
 
 In experiments concerning prediction of wind production the month input parameter will be left out.  
 
@@ -155,7 +153,7 @@ In experiments concerning prediction of wind production the month input paramete
 
 \subsubsection{Best prediction graph}
 \label{sec:bestInputCombiGraph}
-The first 175 hours of the best prediction from Table~\ref{table:windProdInputParamsTop10} can be seen in Figure~\ref{fig:bestInputParameterPrediction}. It can be observed that the prediction follows the trend of the actual wind production. The challenge is the prediction taking time to identify shifting trends and how much the trend is increasing or decreasing at that time. From hour 24-48 and 120-160 (see Figure~\ref{fig:bestInputCombi120-148}) the prediction is behind the actual slope and continues to under-shoot because it did not identify it from the beginning. Hours between 90-110 (see zoomed in Figure~\ref{fig:bestInputCombi96-120}) illustrates how the prediction does not detect to which extend the wind production is decreasing at that time and how it results in a significant overshoot when detecting the coming rising trend. The problem arises due to 24-hour-ahead prediction since every hour is based on each other. If one hour misses its target the next hour most likely will as well because it uses that prediction as input. The statistical approach described in Section~\ref{sec:usingStatisticalInput} can possible help in these cases by taking current trend as input into consideration. Experiments will take up this approach for comparison. The graph in Figure~\ref{fig:bestInputParameterLowNumbers} shows the ability to predict low numbers and follow the trend back up again.
+The first 175 hours of the best prediction from Table~\ref{table:windProdInputParamsTop10} can be seen in Figure~\ref{fig:bestInputParameterPrediction}. It can be observed that the prediction follows the trend of the actual wind production. The challenge is the time it takes to identify shifting trends and how much the trend is increasing or decreasing at that particular time. From hour 24-48 and 120-160 (see Figure~\ref{fig:bestInputCombi120-148}) the prediction is behind the actual slope and continues to under-shoot because it did not identify it from the beginning. Hours between 90-110 (see zoomed in Figure~\ref{fig:bestInputCombi96-120}) illustrates how the prediction does not detect to which extend the wind production is decreasing at that time and how it results in a significant overshoot when detecting the coming rising trend. The problems arise due to 24-hour-ahead prediction since every hour is based on the other predicted hours. If one hour misses its target there is a possibility for the next to do as well because it uses that prediction as input. The calculated approach described in Section~\ref{sec:usingStatisticalInput} can possible help in these cases by calculating trend or slope and use it as input to add further characteristics of the curve. Experiments will take up this approach for comparison. The graph in Figure~\ref{fig:bestInputParameterLowNumbers} shows the ability to predict low numbers and follow the trend back up again.
 
 \begin{figure}[h!]
 \centering
@@ -191,7 +189,7 @@ All results of the first experiment can be seen in Appendix~\ref{sec:windResults
 \begin{enumerate}
 \item Wind speed showed as expected to have very high significance when predicting the wind power production. Consumption was not represented in top-3 even though it showed very good co-relation in the analysis. The good relationship between temperature and consumption is described in Section~\ref{sec:consumptionWindProduction} which can explain why consumption in top 3 is omitted and substituted with either air density or temperature. The analysis in Section~\ref{sec:airDensity} describes how air density is calculated with temperature as the most significant factor since pressure is close to constant in the dataset.   
 \item Last known production is highly represented in both top-10 and bottom-10. It is important when put together with the right combination but whenever in combination with month of year it worsens. Month did not help the prediction even though the dataset was increased to better incorporate the seasonality aspect. Air density and time of day both showed to be highly represented in top-10 and on both on top 3 together with wind speed and last known production.
-\item Wind direction was expected little influence bot showed itself four times in top-10. It is assumed that direction is of some importance but not much based on the exact same constitution of input parameters just without wind direction achieved close to the same result.
+\item Wind direction was expected little influence bot showed itself four times in top-10. It is assumed that direction is of some importance but not much based on the exact same constitution of input parameters just without wind direction achieved close to same result.
 \end{enumerate}
 
 The experiments to come will be based on input combinations from the top 3 from Table~\ref{table:windProdInputParamsTop10}. The inputs are:
@@ -203,19 +201,17 @@ The experiments to come will be based on input combinations from the top 3 from 
 \item Last known production;
 \item Time of day;
 \end{itemize}
-
-\todo{Talk about the network size}
-
+\newpage
 \subsection{Experiment Two - Data Manipulation}
 \label{sec:windProdExperimentTwo}
-Experiment two tries to discover the best ways to represent the input data. The need for manipulating the data can arise if irregularities exist that cannot be predicted or simply to adjust the data to better fit the inner workings of the neural network. The 3 approaches to data manipulation used in this thesis is normalization, trimming and using a matrix as input. The necessity is described in more detail in Section~\ref{sec:DataManipulation}. Normalization is necessary for all input and was also used in experiment one. Trimming is used to trim away irregularities if such exist but it does not apply for when predicting wind power production \todo{create this in the analysis}. The purpose of the experiments in series two is to turn inputs into a matrix whenever it makes sense. As described in Section~\ref{sec:Matrix} one input parameter is split into a input parameter for all of its possible values. Each value then has a weight that is adjusting itself according to the error as illustrated in Section~\ref{sec:annSection}. This is of course only an option if all values are known in advance and of a manageable size. When considering wind production forecasting this is valid for hours of the day, month and wind speed. Only wind speed and time of day will be tested here due to the omitting of the month parameter in experiment series one.
+Experiment two tries to discover the best way to represent the input data. The need for manipulating the data can arise if irregularities exist that cannot be predicted or simply to adjust the data to better fit the inner workings of the neural network. The 3 approaches to data manipulation tested in the thesis is normalization, trimming and using a matrix as input. The necessity is described in more detail in Section~\ref{sec:DataManipulation}. Normalization is necessary for all input and is used in all experiments because the tanh function is used as activation function. Trimming is used to trim away irregularities if such exist but it does not apply for when predicting wind power production (see Section~\ref{sec:windProductionDev}). The purpose of experiment two is to turn inputs into a matrix whenever it makes sense. As described in Section~\ref{sec:Matrix} one input parameter is split into a input parameter for all of its possible values. Each value then has a weight that is adjusted according to the error as illustrated in Section~\ref{sec:annSection}. This is of course only an option if all values are known in advance and of a manageable size. When considering wind production forecasting this is valid for hours of the day, month and wind speed. Only wind speed and time of day will be tested here due to the omitting of the month parameter in experiment one. 
 
 \subsubsection{Hypothesis} 
 The matrix manipulation can be applied when values are of a manageable size as discussed in Section~\ref{sec:Matrix}. Based on those discussions the following is expected: 
 
 \begin{enumerate}
 \item According to the discussions matrix makes the most sense when values are equally distributed. This apply for time of day and therefore it is expected to see an improvement when matrix is applied here
-\item Values are not equally distributed for wind speed and the expectation is instead a worsening in the prediction when applying matrix here.  
+\item Values are not equally distributed for wind speed and the expectation is instead a worsening in the prediction when applying matrix here.
 \end{enumerate}
 
 \subsubsection{Variables}
@@ -232,9 +228,9 @@ The variables used in this experiment series:
 \end{itemize}
 
 \subsubsection{Prediction - Applying matrix}
-The decrease in accuracy when using wind speed as a matrix can be seen in Table~\ref{windProdInputParamsTop10WithMatrix}. None of the best results contain wind speed as matrix and only differ 3,02\% from the top result whereas the results with wind speed as matrix lies between 7,49\% and 23,14\%. The best result is the same as in Table~\ref{table:windProdInputParamsTop10} but number \#2 and \#3 has switched places but the difference between them is still not really significant. All in top-3 improved with an average improvement of 1,3\%. The significance of time of day is seen in Section~\ref{sec:greenTOD} and the improvement was expected to be somewhat higher since the matrix should make it more expressive. Figure~\ref{fig:hourly_wind_production} shows a difference in average production from 750 during the night to around 925 during the day. The difference between the minimum production hour and the maximum is 16,2\% which might allow the one input parameter to generalize almost as good as the matrix implementation. If the difference in production between the hours of the day were bigger, lets say 900, the one parameter would still have to reflect the maximum and minimum in the same weight. This would be a problem if the majority were high and trying to predict a production represented in the minimum hour. The matrix implementation would instead consider each value by itself and have no impact on one another. This scenario i illustrated in the analysis of price in Section~\ref{sec:seasonality} where Figure~\ref{fig:price_over_weekdays} shows a 42,4\% difference between the minimum price hour to the maximum price hour. The expectation is to see a better improvement when applying matrix to price. 
+The decrease in accuracy when using wind speed as a matrix can be seen in Table~\ref{windProdInputParamsTop10WithMatrix}. None of the best results contain wind speed as matrix and they only differ 3,02\% from the top result whereas the results with wind speed as matrix lies between 7,49\% and 23,14\%. The best result is the same as in Table~\ref{table:windProdInputParamsTop10} but number \#2 and \#3 has switched places but the difference between them is still not significant. All in top-3 improved with an average improvement of 1,3\%. The significance of time of day is seen in Section~\ref{sec:greenTOD} and the improvement was expected to be somewhat higher since the matrix should make it more expressive. Figure~\ref{fig:hourly_wind_production} shows a difference in average production from 750 during the night to around 925 during the day. The difference between the minimum production hour and the maximum is 16,2\% which might allow the one input parameter to generalize almost as good as the matrix implementation. Also the these numbers are for the entire year and since the training set in this case is only 3 month the difference between min and max will be even lower. If the difference in production between the hours of the day were bigger, lets say 900, the one parameter would still have to reflect the maximum and minimum in the same weight. This would be a problem if the majority were high and trying to predict a production represented in the minimum hour. The matrix implementation would instead consider each value by itself and have no impact on one another and is therefore expected to perform better. This scenario is illustrated in the analysis of price in Section~\ref{sec:seasonality} where Figure~\ref{fig:price_over_weekdays} shows a 42,4\% difference between the minimum price hour to the maximum price hour. The expectation is to see a better improvement when applying matrix to price because if this. 
 
-Wind speeds are represented by 41 different values in our data set which can explain the decrease in accuracy. Instead of having only one input to represent each of the values, the matrix turned into 41 inputs for every single value. The purpose is to have a weight that tells exactly how much the specific wind speed in general influence the wind production to predict. The network will do so by adjusting a weight for the different wind speeds in the matrix whenever they are seen. As described in Section~\ref{sec:Matrix} a problem arise if some values does not exist or are under-represented. This will cause that specific value to be under-expressed because the weight has only been adjusted a few times or not at all. The seasonal differences in wind power production is described in Section~\ref{sec:windProdSeasonality} and since wind production follows wind speed it can be considered very likely that the training set of only 3 months does not cover all wind speeds for all predictions.
+Wind speeds are represented by 41 different values in our data set which can explain the decrease in accuracy. Instead of having only one input to represent each of the values, the matrix turned into 41 inputs for every single value. The purpose is to have a weight that tells exactly how much the specific wind speed in general influence the wind production to predict. The network will do so by adjusting a weight for the different wind speeds in the matrix whenever they are seen. As described in Section~\ref{sec:Matrix} a problem arise if some values does not exist or are under-represented. This will cause that specific value to be under-expressed because the weight has only been adjusted a few times or not at all. The seasonal differences in wind power production is described in Section~\ref{sec:windProdSeasonality} and since wind production follows wind speed the training set of only 3 months does not cover all wind speeds. Many wind speed will therefore be under-represented when using wind speed as matrix. This is also backed up by the results.
 
 \begin{center}
 \begin{longtable}{|c|c|c|c|c|c|c|c|c|c|c|}
@@ -278,7 +274,7 @@ The prediction in Figure~\ref{fig:bestMatrixGraph} is much similar to what was s
 \end{figure}   
 
 \subsubsection{Conclusion}
-Matrix has been applied to time of day and wind speeds. Experiments have been conducted to find where matrix is best applicable.
+Matrix has been applied to time of day and wind speed. Experiments have been conducted to find where matrix is best applicable.
 
 \begin{enumerate}
 \item When applying matrix to time of day there is a slight improvement and it outperformed all predictions with wind speed as matrix. The time of day with matrix predictions are all better than their corresponding prediction in Table~\ref{table:windProdInputParamsTop10}. The improvement is in average only 1,3\% which is not as significant as expected and it can therefore be argued if matrix is worth the enlargement in input parameters when predicting wind power production. Trade-offs must be made in relation to the time to process and the achieved improvement. The trade-off between time and inputs will be discussed further in a later experiment 
@@ -287,15 +283,17 @@ Matrix has been applied to time of day and wind speeds. Experiments have been co
 
 The improvement by applying matrix to time of day is considered enough for next experiment under the circumstances of our test procedure from Section~\ref{sec:testProcedure}. Wind speed as matrix will be omitted.
 
-\subsection{Experiment Series Three - Calculated Inputs}
-The experiments here will be focusing on the concepts described in Section~\ref{sec:usingStatisticalInput}. The importance of the current wind production development is described in Section~\ref{sec:windProductionDev} and it describes how the wind production has high volatility and follow certain tendencies. The purpose is to add inputs that in some way analyse productions from immediate past hours to help the existing generalization approach its target more accurately in a specific hour. We therefore see it as independent from the input analysis since it will help the best of the input combinations to perform better. All of the approaches takes outset in previous hours so the first step is to find the best number of previous hours to calculate upon. Secondly, they must be tested in combination with each other to find the constitution. The different approaches are historical volatility, skewness, simple curve analysis and inclusion of previous productions as input. 
+\newpage
+
+\subsection{Experiment Three - Calculated Inputs}
+The experiments here will be focusing on the concepts described in Section~\ref{sec:usingStatisticalInput}. The importance of the current wind production development is described in Section~\ref{sec:windProductionDev} and it describes how the wind production has high volatility and follow certain tendencies. The purpose is to add inputs that in some way analyse productions from immediate past hours to help the existing generalization approach its target more accurately in a specific hour. We therefore see it as independent from the input analysis since it will help the best of the input combinations to perform better. All of the approaches take outset in previous hours so the first step is to find the best number of previous hours to calculate upon. Secondly, they must be tested in combination with each other to find the constitution. The different approaches are historical volatility, skewness, simple curve analysis and inclusion of previous productions as input. 
 
 \subsubsection{Hypothesis} 
 It is the hypothesis that the different approaches will help the neural network approach its target better by adding knowledge about the current trend for every hour. It leads to: 
 
 \begin{enumerate}
 \item Wind production is volatile and therefore it is expected that the historical volatility will help the generalization to approach its target.
-\item Section~\ref{sec:windProductionDev} talks about the need for identifying the development of the curve. Beside from historical volatility it comes in 3 different approaches: 1) skewness; 2) curve and 3) previous productions as input. The expectation is to see a slight increase in performance when these are applied.
+\item Section~\ref{sec:windProductionDev} explains the need for identifying the development of the curve. Beside from historical volatility it comes in 3 different approaches: 1) skewness; 2) curve and 3) previous productions as input. The expectation is to see a slight increase in performance when these are applied.
 \item It is the expectation to achieve better accuracy when combining the different approaches.
 \end{enumerate}
 
@@ -316,7 +314,7 @@ The variables used in this experiment series:
 \end{itemize}
 
 \subsubsection{Prediction - Historical Volatility}
-Historical Volatility is presented in Section~\ref{sec:usingStatisticalInput}. The purpose is to calculate the historical volatility from one hour to a predefined number of previous hours, e.g. every hour in the training set will calculate the historical volatility from for instance 20 hours just before itself (except from the 20 first hours). The volatility calculation will be based on EWMA from Section~\ref{sec:ewmaVolatility} which requires a smoothing factor between 0-1 that needs to be found through experiments. The experiment will be conducted for smoothing factors between 0,1 and 0,9 on hours between 4-24. When the best rate with the best number of hours has been established for the dataset it will be tested on top-3 from Table~\ref{table:theWindProdInputParamsTop10WithMatrix}.
+Historical Volatility is presented in Section~\ref{sec:usingStatisticalInput}. The purpose is to calculate the historical volatility for one hour based on a predefined number of previous hours, e.g. every hour in the training set will calculate the historical volatility from for instance 20 hours just before it (except from the 20 first hours). The volatility calculation will be based on EWMA from Section~\ref{sec:ewmaVolatility} which requires a smoothing factor between 0-1 that needs to be found through experiments. The experiment will be conducted for smoothing factors between 0,1 and 0,9 on hours between 4-24. When the best rate with the best number of hours has been established for the dataset it will be tested on top-3 from Table~\ref{table:theWindProdInputParamsTop10WithMatrix}.
 
 \footnotesize
 \begin{center}
@@ -352,7 +350,7 @@ Historical Volatility is presented in Section~\ref{sec:usingStatisticalInput}. T
 \end{center}
 \normalsize
 
-All combinations of smoothing factor and previous hours can be seen in Appendix~\ref{sec:historicalVolatiltiyResultsAppendix} --- only top 10 is shown here. The results in Table~\ref{table:historicalVoltalityHours} show that a smoothing factor of 0,70 calculated on the 6 previous hours in the best choice. The expectation was to get a low smoothing factor due to the fluctuations in the wind power production as described in Section~\ref{sec:ewmaVolatility}. The reason for the higher factor is that the number of previous hours is too small to reflect the changes in the training set. We can see from the graph in Figure~\ref{fig:bestVolatilityVsMatrixGraph} that the curves are much similar which is expected since the volatility approach is an augmentation of the best prediction with matrix. One noticeable difference is that the volatility under-shoots  its targets in the bottom of all the curves compared to the matrix approach in both Figure~\ref{fig:bestVolatilityVsMatrixGraph} and~\ref{fig:bestVolatilityVsMatrixGraph350-525}. It moves more rapidly from top to bottom. The addition of historical volatility is more clear in Figure~\ref{fig:bestVolatilityVsMatrixGraph350-525} where it in the top of the curve in hours 415 and 480 is capable of predicting all the way to the top compared to without volatility indicated by the blue line. 
+All combinations of smoothing factor and previous hours can be seen in Appendix~\ref{sec:historicalVolatiltiyResultsAppendix} --- only top 10 is shown here. The results in Table~\ref{table:historicalVoltalityHours} show that a smoothing factor of 0,70 calculated on the 6 previous hours is the best choice. The expectation was to get a low smoothing factor due to the fluctuations in the wind power production as described in Section~\ref{sec:ewmaVolatility}. The reason for the higher factor is that the number of previous hours is too small to reflect the many changes in the entire training set. We can see from the graph in Figure~\ref{fig:bestVolatilityVsMatrixGraph} that the curves are much similar to the curves without volatility which is expected since the volatility approach is an augmentation of the best prediction with matrix. A noticeable difference is that the volatility under-shoots  its targets in the bottom of all the curves compared to the matrix approach in both Figure~\ref{fig:bestVolatilityVsMatrixGraph} and~\ref{fig:bestVolatilityVsMatrixGraph350-525}. It moves more rapidly from top to bottom. Another thing worth mentioning from Figure~\ref{fig:bestVolatilityVsMatrixGraph350-525} is how the addition of historical volatility is capable of predicting all the way to the top in 415 and 480 compared to the standard matrix prediction indicated by the blue line.
 
 \begin{figure}[h!]
 \centering
@@ -369,7 +367,7 @@ All combinations of smoothing factor and previous hours can be seen in Appendix~
 \end{figure} 
 
 \subsubsection{Prediction - Skewness}
-Skewness is a calculation of how much a distribution leans to one side of the mean \todo{write some about it in the statistics section}. What is important to identify is how many previous hours to include in the calculation of the skew in order to get the best picture of what side the curve is currently leaning towards. Table~\ref{table:skewnessHours} shows results where the best fit is found to be 16 hours. This will be basis for further testing when trying to use the methods in combination to see if any of them can augment each other. At first glance skewness does not seem to improve much but it will need testing when put together with the other calculations.
+Skewness is a calculation of how much a distribution leans to one side of the mean \todo{write some about it in the statistics section}. What is important to identify is again how many previous hours to include in the calculation of the skew in order to get the best picture of what side the curve is currently leaning towards. Table~\ref{table:skewnessHours} shows results where the best fit is found to be 16 hours. This will be basis for further testing when trying to use the methods in combination to see if any of them can augment each other. At first glance skewness does not seem to improve much but it will need testing when put together with the other calculations.
 
 \begin{center}
 \begin{longtable}{|c|c|}
@@ -401,7 +399,7 @@ Skewness is a calculation of how much a distribution leans to one side of the me
 \end{longtable}
 \end{center}
 
-Figure~\ref{fig:bestSkewnessGraph} shows the first 175 hours when using skewness as input compared to standard matrix when predicting. The matrix with skewness is much similar to the one without. 
+Figure~\ref{fig:bestSkewnessGraph} shows the first 175 hours when using skewness as input compared to standard matrix when predicting. The matrix with skewness is much similar to the one without and will not be discussed in further detail. 
 
 \begin{figure}[h!]
 \centering
@@ -411,7 +409,7 @@ Figure~\ref{fig:bestSkewnessGraph} shows the first 175 hours when using skewness
 \end{figure}    
 
 \subsubsection{Prediction - Curve Analysis}
-Curve analysis covers basic slope calculation of the curve. The intention is to get a notion of how much the previous productions has been going upwards before the current hour. The purpose is to capture how the slopes in general relate to the wind power production --- does a very steep slope in general affect the production to go up or not? Table~\ref{table:curveAnalysisHours} shows that the curve analysis does not work as intended. Its impact on the first 175 hours can be seen in Figure~\ref{fig:basicCurveAnalysisGrapho}. The best result from Table~\ref{table:curveAnalysisHours} calculates the slope from the previous 20 hours and the hours from 48-70 illustrates that it has a hard time identifying when to stop moving up since it has been moving up for so long. The 24-ahead prediction starts at 48 just before the drop and since the curve analysis is based on the last 20 hours it does not identify the shift --- it has a steep slope and points the overall generalization upwards. The opposite happens around hour 70-80 where it does not know when to stop. This is a difference from the matrix without calculated inputs which is indicated by the blue line --- the prediction only follows the meteorological factors and how they relate to the production.
+Curve analysis covers basic slope calculation of the curve. The intention is to get a notion of how much the previous productions have been going upwards before a particular hour. It captures how the slopes in general relate to the wind power production --- does a very steep slope in general affect the production to go up or not? Table~\ref{table:curveAnalysisHours} shows that the curve analysis does not work as intended. Its impact on the first 175 hours can be seen in Figure~\ref{fig:basicCurveAnalysisGrapho}. The best result from Table~\ref{table:curveAnalysisHours} calculates the slope from the previous 20 hours and the hours from 48-70 illustrates that it has a hard time identifying when to stop moving up since it has been moving up for so long. The 24-ahead prediction starts at 48 just before the drop and since the curve analysis is based on the last 20 hours it does not identify the shift --- it has a steep slope and points the overall generalization upwards since steep slopes in most cases result in ascending curves except when at the very top of one. The opposite happens around hour 70-80 where it does not know when to stop. This is a difference from the matrix without calculated inputs which is indicated by the blue line --- the prediction only follows the meteorological factors and how they relate to the production.
 
 \begin{center}
 \begin{longtable}{|c|c|}
@@ -450,10 +448,8 @@ Curve analysis covers basic slope calculation of the curve. The intention is to 
 \label{fig:basicCurveAnalysisGrapho}
 \end{figure}   
 
-\subsubsection{Inclusion of previous productions} 
-
 \subsubsection{Combining the approaches}
-Experiments with combinations of the approaches have been performed to investigate whether or not any of them augment each other. Furthermore, adding historical productions as input as presented in Section~\ref{sec:scatterPaper} has been tried. The approach adds 3 inputs for the production from one day ago, 3 inputs from the production one week ago, one input from the production two weeks ago, one input from the production three weeks ago and one last input from four weeks ago. The purpose is to capture the price development over time. Experiment results from each approach is in Table~\ref{table:comparisonStatistics} where the historical volatility with a smoothing factor of 0,30 and skewness outperforms the other approaches. 
+Experiments with combinations of the approaches have been performed to investigate whether or not any of them augment each other. Furthermore, adding historical productions as input as presented in Section~\ref{sec:scatterPaper} has been tried. The approach adds 3 inputs for the production from one day ago, 3 inputs from the production one week ago, one input from the production two weeks ago, one input from the production three weeks ago and one last input from four weeks ago. The purpose is to capture the price development over time instead of calculating it. Experiment results from each approach is in Table~\ref{table:comparisonStatistics} where the historical volatility with a smoothing factor of 0,70 and 6 previous hours outperforms the other approaches. 
 
 \begin{center}
 \begin{longtable}{|c|c|}
@@ -481,7 +477,7 @@ Curve Analysis with 20 hours & 133.27 \\ \hline
 \end{longtable}
 \end{center}
 
-A combination of the different calculated approaches is illustrated in Table~\ref{table:idealCombinationStatistic}. Skewness and curve in combination with each other achieves the best result but does not improve the results from Table~\ref{table:theWindProdInputParamsTop10WithMatrix}. The problem is most likely that the analysis of the curve gets to high priority in the generalization when trying to predict 24-ahead. When trying to predict a scenario totally different from what has just been seen the calculated inputs will pull the generalization in the direction of the previous which we can see from Figure~\ref{fig:bestStatisticalApproachGraph}. Without the calculated inputs the generalization relies heavily on wind speed which was established in the analysis in Section~\ref{sec:windPowerAnalysis} but this will be contradicted by the calculated inputs that believe the curve to be heading in another direction. The prediction relies heavily on where to predict from. The best of the calculated approaches based on the above results are volatility as only input with a MAE of 121,81.
+Skewness and curve in combination with each other achieves the best result but does not improve the results from Table~\ref{table:theWindProdInputParamsTop10WithMatrix}. The problem is most likely that the analysis of the curve gets to high priority in the generalization when trying to predict 24-ahead. When trying to predict a scenario totally different from what has just been seen, the calculated inputs will pull the generalization in the direction of the previous which we can see from Figure~\ref{fig:bestStatisticalApproachGraph}. Without the calculated inputs the generalization relies heavily on wind speed which was established in the analysis in Section~\ref{sec:windPowerAnalysis} but this will be contradicted by the calculated inputs that believe the curve to be heading in another direction because we are at the edge. The prediction relies heavily on where to predict from. The best of the calculated approaches based on the above results are volatility as only input with a MAE of 121,81.
 
 \begin{figure}[h!]
 \centering
@@ -489,7 +485,6 @@ A combination of the different calculated approaches is illustrated in Table~\re
 \caption{Wind production prediction for hours 120-144 in 2012 with historical volatility}
 \label{fig:bestStatisticalApproachGraph}
 \end{figure} 
-
 
 \begin{center}
 \begin{longtable}{|c|c|c|c|c|c|}
@@ -524,37 +519,35 @@ A combination of the different calculated approaches is illustrated in Table~\re
 \end{longtable}
 \end{center}
 
-Table~\ref{table:topFromMatrixWithStatistics} shows volatility applied on the top 3 input combinations with matrix from Table~\ref{table:theWindProdInputParamsTop10WithMatrix}. It is first of all noticeable that the top 3 positions are the same as in all of the combination tests. Secondly, the results are in general improved. The best ranked from ~\ref{table:idealCombinationStatistic} is the same as the best ranked here but number switched place which indicates a slight advantage by using wind direction instead of without it. The results emphasize the best input combinations.     
+Table~\ref{table:topFromMatrixWithStatistics} shows volatility applied on the top 3 input combinations with matrix from Table~\ref{table:theWindProdInputParamsTop10WithMatrix}. It is first of all noticeable that the top 3 positions are the same as in all of the combination tests. Secondly, the results are in general improved. The best ranked from ~\ref{table:idealCombinationStatistic} is the same as the best ranked here. The results emphasize the best input combinations and the improvement by adding volatility as input.     
 
-\footnotesize
 \begin{center}
-\begin{longtable}{|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+\begin{longtable}{|c|c|c|c|c|c|c|c|c|c|c|}
 \hline
-\textbf{WS} & \textbf{AD} & \textbf{C} & \textbf{T} & \textbf{WD} & \textbf{L-P} & \textbf{ToD} & \textbf{Vola} & \textbf{Skew} & \textbf{Scat} & \textbf{Curve} & \textbf{MAE} & \textbf{\% Deviation} \\
+\textbf{WS} & \textbf{AD} & \textbf{C} & \textbf{T} & \textbf{WD} & \textbf{L-P} & \textbf{ToD} & \textbf{MAE} & \textbf{\% from \#1} &  \textbf{H1} & \textbf{H2}  \\
 \hline
 \endfirsthead
-\multicolumn{13}{c}%
+\multicolumn{11}{c}%
 {\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
 \hline
-\textbf{WS} & \textbf{AD} & \textbf{C} & \textbf{T} & \textbf{WD} & \textbf{L-P} & \textbf{ToD} & \textbf{V} & \textbf{S} & \textbf{Sc} & \textbf{C} & \textbf{MAE} & \textbf{\% Deviation} \\
+\textbf{WS} & \textbf{AD} & \textbf{C} & \textbf{T} & \textbf{WD} & \textbf{L-P} & \textbf{ToD} & \textbf{MAE} & \textbf{\% from \#1} &  \textbf{H1} & \textbf{H2}  \\
 \hline
 \endhead
-\hline \multicolumn{13}{r}{\textit{Continued on next page}} \\
+\hline \multicolumn{11}{r}{\textit{Continued on next page}} \\
 \endfoot
 \hline
 \endlastfoot
 \arrayrulecolor{light-gray}
- \x &  &  &  \x &  &  \x &  \x (m) & \x &  &  & & 121,81 & 0,0\% \\ \hline
- \x &  \x &  &  &  \x &  \x & \x (m) & \x &  &  &  & 125,15 & 2,74\% \\ \hline
- \x &  \x &  &  &  &  \x & \x (m) & \x &  &  &  & 128,67 & 5,63\% \\ \hline
-\caption{Top 3 tested with the two ideal statistics setting}
+ \x &  &  &  \x &  &  \x &  \x (m) & 121,81 & 0,0\% & 16 & 13 \\ \hline
+ \x &  \x &  &  &  &  \x &  \x (m) & 125,15 & 2,74\% & 9 & 13 \\ \hline
+ \x &  \x &  &  &  \x &  \x & \x (m) & 128,67 & 5,63\% & 12 & 15 \\ \hline
+\caption{Matrix test}
 \label{table:topFromMatrixWithStatistics}
 \end{longtable}
 \end{center}
-\normalsize
 
 \subsubsection{Best prediction graph}
-The best prediction graphs can be seen in Figures~\ref{fig:bestVolatilityVsMatrixGraph} and~\ref{fig:bestVolatilityVsMatrixGraph350-525}. The curve analysis prediction clearly showed the problem when predicting 24-step-ahead. This is somewhat expected since every predicted hour uses the previous prediction as input and is therefore dependent on one another. It is not the same as the 24th hour is always the worst because the prediction can correct itself during the 24 hours which is also seen in Figure~\ref{fig:bestVolatility120to144} since it corrects itself even though the volatility predicting under-shoots in the beginning. The figure also shows that the addition of volatility moves faster from top to bottom and is more accurate in high numbers than low. This is also seen in Figure~\ref{fig:bestVolatility408to432}. Since MAE is the error measure better accuracy in the high numbers will contribute to a better mae even though the low numbers are worsened. It is a trade-off between the desire to predict low or high wind power productions but here we strive to lower the overall MAE of the predictions.
+The best prediction graphs can be seen in Figures~\ref{fig:bestVolatilityVsMatrixGraph} and~\ref{fig:bestVolatilityVsMatrixGraph350-525}. The curve prediction showed the problem when predicting 24-step-ahead. This is somewhat expected since every predicted hour uses the previous prediction as input and is therefore dependent on one another. It is not the same as the 24th hour is always the worst because the prediction can correct itself during the 24 hours which is also seen in Figure~\ref{fig:bestVolatility120to144} even though the volatility predicting under-shoots in the beginning. The figure also shows that the addition of volatility moves faster from top to bottom and is more accurate in high numbers than low. This is also seen in Figure~\ref{fig:bestVolatility408to432}. Since MAE is the error measure better accuracy in the high numbers will contribute to a better average MAE even though the low numbers are worsened. It is a trade-off between the desire to predict low or high wind power productions but here we strive to lower the overall MAE of the predictions.
 
 \begin{figure}[h!]
 \centering
@@ -574,67 +567,26 @@ The best prediction graphs can be seen in Figures~\ref{fig:bestVolatilityVsMatri
 Various calculated inputs have been used as input in an attempt to augment the existing generalization based on the meteorological factors. 
 
 \begin{enumerate}
-\item Historical volatility by itself showed to be the best calculated input approach with a smoothing factor of 0,70 and based on 6 previous hours. The prediction curve moved more rapidly than without any calculated inputs and showed to be better in the higher numbers than low which was what contributed to the overall decrease in MAE. Trade-offs must be made in relation to the specific task but in this thesis any decrease in MAE will be considered an improvement.
-\item The use of scatter and curve resulted in a worsening in MAE. Curve as input was analysed in some detail and the most obvious problem was related to the 24-step-ahead forecasting. When left before a situation very different from what has been seen lately in the training set the curve approach showed difficulties, e.g. very high slope and then trying to predict something that is falling resulted in the curve input pulling the generalization up because the a steep slope in the training set in general results in a rising curve. Skewness showed similar results to prediction without any calculated inputs.
-\item It was expected that the statistical approaches in combination could augment each other because they specialize in different areas. This was proven wrong and the results significantly worse than the best without any calculated inputs. The calculated features will be given to high priority when they are combined and since we can't control where to predict from it can cause problems when left to predict from the top of a curve. 
+\item Historical volatility by itself showed to be the best calculated input approach with a smoothing factor of 0,70 based on 6 previous hours. The prediction curve moved more rapidly than without any calculated inputs and showed to be better in the higher numbers than low which is what contributes to the overall decrease in MAE. Trade-offs must be made in relation to the specific task but in this thesis the decrease in MAE when using historical volatility will be considered an improvement.
+\item The use of scatter and curve resulted in a worsening in MAE. Curve as input was analysed in some detail and the most obvious problem was related to the 24-step-ahead forecasting. When left before a situation very different from what has been seen lately in the training set the curve approach showed difficulties, e.g. trying to predict from the edge of a very steep slope resulted in the curve input pulling the generalization up because a steep slope in general in the training set results in a rising curve. Skewness showed similar results to prediction without any calculated inputs and was therefore not further analysed.
+\item It was expected that the statistical approaches in combination could augment each other because they specialize in different areas. This was proven wrong and the results got significantly worse than the best without any calculated inputs. The calculated features are given to high priority when combined and since it cannot be controlled where to predict from it can cause problems when for instance left to predict from the edge of a curve. 
 \end{enumerate}
 
-\todo{better with or without trimming?}
-
-\subsection{Experiment Four - Extra Prediction Strategies}
-This experiment applies different strategies for comparison with the statistical strategy already applied. The strategies are similar days and attempting to re-calculate the predicted value for better accuracy. The approaches are described in Section~\ref{sec:stratsForPrediction}.
+\subsection{Experiment Four - Black Box Optimization}
+The purpose of experiment four is to find the best number of epochs and dataset size for training.
 
 \subsubsection{Hypothesis}
-It is expected that the application of the approaches will help the neural network predict more accurate.
 
 \begin{enumerate}
-\item Wind power production relies heavily on the weather. The first hypothesis is that the use of similar weather days in the training set can improve accuracy slightly because the wind power production heavily relies on the weather.
-\item Re-calculating the prediction works like a second opinion and the expectation is to see a improvement when applied to the existing network.
+\item It is the assumption that too many epochs will result in an over-fitting over the network and therefore a worse prediction. Too few epochs will be under-fit and also a bad prediction.
+\item It is expected that a too big or small dataset will result in worse predictions. Too little data will be hard to generalize upon and too much data can bring too much noise.
 \end{enumerate}
-
-\subsubsection{Prediction - Similar Days and re-calculation}
-
-This was seen in the applying of matrix for wind speeds in Section~\ref{sec:windProdExperimentTwo}. Some periods can be with only a few small or big values and then the network will have a hard time predicting values if we are moving into a periods with a lot --- like in the matrix impl. Another problem is that you are basically chopping up the curves under or above a predefined number (98 or 2 percentile) (or this is a problem at all?). Another thing is the decrease in performance because you have to train and instantiate the number of new networks. Trade-off.
-
-\begin{center}
-\begin{longtable}{|c|c|}
-\hline
-\textbf{Strategy} & \textbf{MAE} \\
-\hline
-\endfirsthead
-\multicolumn{2}{c}%
-{\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
-\hline
-\textbf{Strategy} & \textbf{MAE} \\
-\hline
-\endhead
-\hline \multicolumn{2}{r}{\textit{Continued on next page}} \\
-\endfoot
-\hline
-\endlastfoot
-\arrayrulecolor{light-gray}
-Small and Big ANN strategy & 190.01 \\ \hline
-Small and big with Similar Days & 137.61 \\ \hline
-Just similar days and ideal inputs & 138.93 \\ \hline
-Standard back propagation & 142.07 \\ \hline
-\caption{Strategies}
-\label{table:strategiesOnIdeal}
-\end{longtable}
-\end{center}
-
-The small and big ann is so close to the result with the strategy. It is hard to say if it is improved. The reason lays in the relatively small interval they are focusing on (Small being from 0-60 and big being 1950-maximum). To see the real potential in this approach more intervals need to be included and more testing is needed. \todo{hmm, try on only big because that should be the obvious result in MAE}.
-
-\todo{fix table so that it makes more sense}
-Problems with similar days is that it does not see the whole picture. The problem arises when only a few similar days exist in the last 3 months \todo{show}. Then it will be hard to generalize upon, especially if all other days are pulling the production in a other direction than the similar days. The similar days approach should be tested on an entire year.
-
-
-\subsection{Experiment Five - Black Box Optimization}
-The purpose of experiment four is to find the best number of epochs and dataset for training.
-
-\subsubsection{Hypothesis}
 
 \subsubsection{Prediction - Epochs}
 
 \subsubsection{Prediction - Dataset size}
+
+\subsubsection{Hidden Layers and Neurons}
+Done by pruning. Is it necessary to say something about the network size or can we rely on the literature telling us that pruning is a tool to find the best network? \todo{?????}
 
 \subsubsection{Conclusion}
