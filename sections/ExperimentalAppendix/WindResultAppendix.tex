@@ -326,6 +326,97 @@ M = Time of Day as matrix
  \x &  &  &  \x &  \x &  &  \x &  & 163.34 & 14.32\% & 15 & 19 \\ \hline
  \x &  &  \x &  \x &  \x &  \x &  &  & 165.37 & 15.74\% & 13 & 18 \\ \hline
 \end{longtable}
-\label{table:windProdInputParams}
+\label{table:windProdInputParamsSeasonal}
+\end{center}
+\normalsize
+
+\subsubsection{Historical volatility results}
+\label{sec:historicalVolatiltiyResultsAppendix}
+Historical volatility results with all combinations of previous hours between 4-24 and different smoothing factors.
+
+\footnotesize
+\begin{center}
+\begin{longtable}{|c|c|c|c|}
+\caption{Wind Production Input Parameter Test}\\
+\hline
+\textbf{Previous Hours} & \textbf{Smoothing factor} & \textbf{MAE} & \textbf{\% Deviation} \\
+\hline
+\endfirsthead
+\multicolumn{4}{c}%
+{\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
+\hline
+\textbf{Previous Hours} & \textbf{Smoothing factor} & \textbf{MAE} & \textbf{\% Deviation} \\
+\hline
+\endhead
+\hline \multicolumn{4}{r}{\textit{Continued on next page}} \\
+\endfoot
+\hline
+\endlastfoot
+\arrayrulecolor{light-gray}
+6 & 0,70 & 121,81 & 0,0\% \\ \hline
+20 & 0,80 & 122,9 & 0,89\% \\ \hline
+24 & 0,60 & 123,13 & 1,08\% \\ \hline
+24 & 0,80 & 124,02 & 1,81\% \\ \hline
+16 & 0,20 & 125,65 & 3,15\% \\ \hline
+12 & 0,30 & 127,0 & 4,26\% \\ \hline
+24 & 0,70 & 127,06 & 4,31\% \\ \hline
+16 & 0, 60 & 127,38 & 4,57\% \\ \hline
+24 & 0,40 & 127,51 & 4,68\% \\ \hline
+16 & 0,90 & 127,77 & 4,89\% \\ \hline
+16 & 0,30 & 127,86 & 4,97\% \\ \hline
+4 & 0,60 & 128,49 & 5,48\% \\ \hline
+4 & 0,10 & 128,51 & 5,5\% \\ \hline
+20 & 0,50 & 129,36 & 6,2\% \\ \hline
+8 & 0,10 & 130,06 & 6,77\% \\ \hline
+24 & 0,20 & 131,05 & 7,59\% \\ \hline
+12 & 0,90 & 131,87 & 8,26\% \\ \hline
+20 & 0,10 & 132,63 & 8,88\% \\ \hline
+20 & 0,30 & 133,32 & 9,45\% \\ \hline
+6 & 0,20 & 133,67 & 9,74\% \\ \hline
+4 & 0,30 & 133,84 & 9,88\% \\ \hline
+12 & 0,60 & 134,02 & 10,02\% \\ \hline
+4 & 0,20 & 134,18 & 10,16\% \\ \hline
+16 & 0,40 & 134,28 & 10,24\% \\ \hline
+4 & 0,40 & 134,71 & 10,59\% \\ \hline
+12 & 0,40 & 135,05 & 10,87\% \\ \hline
+16 & 0,80 & 135,14 & 10,94\% \\ \hline
+20 & 0,20 & 135,3 & 11,07\% \\ \hline
+12 & 0,50 & 135,42 & 11,17\% \\ \hline
+24 & 0,90 & 135,71 & 11,41\% \\ \hline
+16 & 0,50 & 136,44 & 12,01\% \\ \hline
+4 & 0,50 & 136,58 & 12,13\% \\ \hline
+6 & 0,30 & 136,6 & 12,14\% \\ \hline
+20 & 0,70 & 136,63 & 12,17\% \\ \hline
+20 & 0,60 & 136,86 & 12,36\% \\ \hline
+12 & 0,20 & 136,98 & 12,45\% \\ \hline
+6 & 0,10 & 137,16 & 12,6\% \\ \hline
+24 & 0,10 & 137,34 & 12,75\% \\ \hline
+6 & 0,50 & 137,45 & 12,84\% \\ \hline
+24 & 0,50 & 137,91 & 13,22\% \\ \hline
+20 & 0,90 & 137,92 & 13,23\% \\ \hline
+8 & 0,20 & 138,26 & 13,5\% \\ \hline
+8 & 0,40 & 138,69 & 13,86\% \\ \hline
+6 & 0,60 & 138,87 & 14,01\% \\ \hline
+8 & 0,50 & 138,93 & 14,05\% \\ \hline
+8 & 0,60 & 139,2 & 14,28\% \\ \hline
+8 & 0,90 & 139,84 & 14,8\% \\ \hline
+8 & 0,70 & 140,01 & 14,94\% \\ \hline
+24 & 0,30 & 140,45 & 15,3\% \\ \hline
+6 & 0,70 & 141,3 & 16,0\% \\ \hline
+8 & 0,30 & 141,6 & 16,25\% \\ \hline
+4 & 0,70 & 142,19 & 16,73\% \\ \hline
+12 & 0,80 & 142,2 & 16,74\% \\ \hline
+6 & 0,40 & 142,98 & 17,38\% \\ \hline
+6 & 0,80 & 143,21 & 17,57\% \\ \hline
+20 & 0,40 & 143,59 & 17,88\% \\ \hline
+8 & 0,80 & 143,62 & 17,9\% \\ \hline
+12 & 0,10 & 144,37 & 18,52\% \\ \hline
+16 & 0,70 & 144,43 & 18,57\% \\ \hline
+16 & 0,10 & 146,77 & 20,49\% \\ \hline
+4 & 0,80 & 146,9 & 20,6\% \\ \hline
+6 & 0,90 & 147,48 & 21,07\% \\ \hline
+4 & 0,90 & 151,15 & 24,09\% \\ \hline
+\end{longtable}
+\label{table:historicalVolatilityAppendixTable}
 \end{center}
 \normalsize
