@@ -208,28 +208,28 @@ In experiments concerning prediction of wind production the month input paramete
 \label{sec:bestInputCombiGraph}
 The first 175 hours of the best prediction from Table~\ref{table:windProdInputParamsTop10} can be seen in Figure~\ref{fig:bestInputParameterPrediction}. It can be observed that the prediction follows the trend of the actual wind production. The challenge is the time it takes to identify shifting trends and how much the trend is increasing or decreasing at that particular time. From hour 24-48 and 120-160 (see Figure~\ref{fig:bestInputCombi120-148}) the prediction is behind the actual slope and continues to under-shoot because it did not identify it from the beginning. Hours between 90-110 (see zoomed in Figure~\ref{fig:bestInputCombi96-120}) illustrates how the prediction does not detect to which extend the wind production is decreasing at that time and how it results in a significant overshoot when detecting the coming rising trend. The problems arise due to 24-hour-ahead prediction since every hour is based on the other predicted hours. If one hour misses its target there is a possibility for the next to do as well because it uses that prediction as input. The calculated approach described in Section~\ref{sec:usingStatisticalInput} can possible help in these cases by calculating trend or slope and use it as input to add further characteristics of the curve. Experiments will take up this approach for comparison. The graph in Figure~\ref{fig:bestInputParameterLowNumbers} shows the ability to predict low numbers and follow the trend back up again.
 
-\begin{figure}[h!]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.99\linewidth]{billeder/bestInputParameterPrediction.png}
 \caption{Wind production prediction for 0-175 hours in 2012 with the best combination}
 \label{fig:bestInputParameterPrediction}
 \end{figure} 
 
-\begin{figure}[h!]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.99\linewidth]{billeder/bestInputCombi120-148.png}
 \caption{Wind production prediction for 24 hours between 120 and 148}
 \label{fig:bestInputCombi120-148}
 \end{figure} 
 
-\begin{figure}[h!]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.99\linewidth]{billeder/bestInputCombi96-120.png}
 \caption{Wind production prediction for 24 hours between 96 and 120}
 \label{fig:bestInputCombi96-120}
 \end{figure}   
 
-\begin{figure}[h!]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.99\linewidth]{billeder/bestInputParameterLowNumbers.png}
 \caption{Wind production prediction for 5000-5175 hours in 2012 with the best combination}
@@ -319,7 +319,7 @@ Wind speeds are represented by 41 different values in our data set which can exp
 \subsubsection{Best prediction graph}
 The prediction in Figure~\ref{fig:bestMatrixGraph} is much similar to what was seen in the best prediction from experiment one which is obvious from the 3 lines. See Section~\ref{sec:bestInputCombiGraph}. 
 
-\begin{figure}[h!]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.99\linewidth]{billeder/bestMatrixGraph.png}
 \caption{Wind production prediction for 175 hours in 2012 for the best matrix experiment}
@@ -405,14 +405,14 @@ Historical Volatility is presented in Section~\ref{sec:usingStatisticalInput}. T
 
 All combinations of smoothing factor and previous hours can be seen in Appendix~\ref{sec:historicalVolatiltiyResultsAppendix} --- only top 10 is shown here. The results in Table~\ref{table:historicalVoltalityHours} show that a smoothing factor of 0,70 calculated on the 6 previous hours is the best choice. The expectation was to get a low smoothing factor due to the fluctuations in the wind power production as described in Section~\ref{sec:ewmaVolatility}. The reason for the higher factor is that the number of previous hours is too small to reflect the many changes in the entire training set. We can see from the graph in Figure~\ref{fig:bestVolatilityVsMatrixGraph} that the curves are much similar to the curves without volatility which is expected since the volatility approach is an augmentation of the best prediction with matrix. A noticeable difference is that the volatility under-shoots  its targets in the bottom of all the curves compared to the matrix approach in both Figure~\ref{fig:bestVolatilityVsMatrixGraph} and~\ref{fig:bestVolatilityVsMatrixGraph350-525}. It moves more rapidly from top to bottom. Another thing worth mentioning from Figure~\ref{fig:bestVolatilityVsMatrixGraph350-525} is how the addition of historical volatility is capable of predicting all the way to the top in 415 and 480 compared to the standard matrix prediction indicated by the blue line.
 
-\begin{figure}[h!]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.99\linewidth]{billeder/bestVolatilityVsMatrixGraph.png}
 \caption{Wind production prediction for hours 0-175 in 2012 with historical volatility as input}
 \label{fig:bestVolatilityVsMatrixGraph}
 \end{figure} 
 
-\begin{figure}[h!]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.99\linewidth]{billeder/bestVolatilityVsMatrixGraph350-525.png}
 \caption{Wind production prediction for hours 350-525 hours in 2012 with historical volatility as input}
@@ -454,7 +454,7 @@ Skewness is a calculation of how much a distribution leans to one side of the me
 
 Figure~\ref{fig:bestSkewnessGraph} shows the first 175 hours when using skewness as input compared to standard matrix when predicting. The matrix with skewness is much similar to the one without and will not be discussed in further detail. 
 
-\begin{figure}[h!]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.99\linewidth]{billeder/bestSkewnessGraph.png}
 \caption{Wind production prediction for 175 hours in 2012 with skewness as input}
@@ -496,14 +496,14 @@ Curve analysis covers basic slope calculation of the curve. The intention is to 
 \end{longtable}
 \end{center}
 
-\begin{figure}[h!]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.99\linewidth]{billeder/curveAnalysisWindProduction.png}
 \caption{Wind production prediction for 175 hours in 2012 with curve analysis}
 \label{fig:basicCurveAnalysisGrapho}
 \end{figure} 
 
-\begin{figure}[h!]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.99\linewidth]{billeder/curveAnalysisWindProduction.png}
 \caption{Wind production prediction for 175 hours in 2012 with curve analysis}
@@ -541,7 +541,7 @@ Curve Analysis with 20 hours & 133.27 \\ \hline
 
 Skewness and curve in combination with each other achieves the best result but does not improve the results from Table~\ref{table:theWindProdInputParamsTop10WithMatrix}. The problem is most likely that the analysis of the curve gets to high priority in the generalization when trying to predict 24-ahead. When trying to predict a scenario totally different from what has just been seen, the calculated inputs will pull the generalization in the direction of the previous which we can see from Figure~\ref{fig:bestStatisticalApproachGraph}. Without the calculated inputs the generalization relies heavily on wind speed which was established in the analysis in Section~\ref{sec:windPowerAnalysis} but this will be contradicted by the calculated inputs that believe the curve to be heading in another direction because we are at the edge. The prediction relies heavily on where to predict from. The best of the calculated approaches based on the above results are volatility as only input with a MAE of 121,81.
 
-\begin{figure}[h!]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.99\linewidth]{billeder/bestStatisticalApproachGraph.png}
 \caption{Wind production prediction for hours 120-144 in 2012 with historical volatility}
@@ -611,14 +611,14 @@ Table~\ref{table:topFromMatrixWithStatistics} shows volatility applied on the to
 \subsubsection{Best prediction graph}
 The best prediction graphs can be seen in Figures~\ref{fig:bestVolatilityVsMatrixGraph} and~\ref{fig:bestVolatilityVsMatrixGraph350-525}. The curve prediction showed the problem when predicting 24-step-ahead. This is somewhat expected since every predicted hour uses the previous prediction as input and is therefore dependent on one another. It is not the same as the 24th hour is always the worst because the prediction can correct itself during the 24 hours which is also seen in Figure~\ref{fig:bestVolatility120to144} even though the volatility predicting under-shoots in the beginning. The figure also shows that the addition of volatility moves faster from top to bottom and is more accurate in high numbers than low. This is also seen in Figure~\ref{fig:bestVolatility408to432}. Since MAE is the error measure better accuracy in the high numbers will contribute to a better average MAE even though the low numbers are worsened. It is a trade-off between the desire to predict low or high wind power productions but here we strive to lower the overall MAE of the predictions.
 
-\begin{figure}[h!]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.99\linewidth]{billeder/bestVolatility120to144.png}
 \caption{Wind production prediction for hours 120-144 in 2012 with historical volatility}
 \label{fig:bestVolatility120to144}
 \end{figure} 
 
-\begin{figure}[h!]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.99\linewidth]{billeder/bestVolatility408to432.png}
 \caption{Wind production prediction for hours 408-432 in 2012 with historical volatility}
