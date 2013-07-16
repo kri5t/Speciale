@@ -1,4 +1,3 @@
-\subsection{Experimental results}
 This section contains experimental results from the experiment conducted to find the best possible price predicting solution. The results are divided into 4 experiments. The first experiment finds the best combination of input parameters for the network. These input parameters count meteorological, social and seasonal factors - which we identified in the analysis section~\ref{sec:Price}. The next experiment identifies the need for trimming and reasons to why it is needed in this particular dataset. The third experiment tests different statistical strategies to incorporate immediate historical curve analysis in the dataset. This includes scatter, curve behavior analysis, skewness analysis and historical EWMA(Exponentially-Weighted Moving Average). The fourth experiment takes care of the Artificial Neural Network parameters. This includes black-box optimization of epochs and the size of the dataset.
 
 \subsection{Experiment 1: Inputs}
@@ -244,6 +243,7 @@ In this experiment we saw the following:
 We also learned that the month of year input variable will have a positive effect on full year datasets as it balanced the error margin between a full year dataset and a quarter year dataset. Even though we saw no improvement from using a full year to train on.
 \end{itemize}
 
+\newpage
 \subsection{Experiment 2: Trimming}
 As described in section~\ref{sec:Trimming} trimming is a solution to extreme outliers and a way to streamline your data; thus making it easier for neural networks to predict. The art is to get a good balance between the how much of the dataset you remove and how much of an accuracy boost your predictions will get. If you trim parts of the dataset that is actually common data it will get impossible to predict a very high price since the neural network never sees those values.
 
@@ -313,13 +313,14 @@ In figure~\ref{fig:AllTrims} we see the dataset from figure~\ref{fig:1PTrim} wit
 \subsubsection{Conclusion}
 In this experiment we saw how trimming can positively affect the predictions. We also discussed the trade offs in the trimming procedure as we lowered the possible outcomes of our predictions. This is a balance between improvement and the amount of prices we will not be able to predict. The 1\% trim showed us an improvement of 20.99\% and removed some extreme failed predictions where the ANN would overshoot the target by 800+. We also learned that higher trimming rates did not really improve the results very much thus making it easy for us to decide on a trimming rate of 1\%.
 
+\newpage
 \subsection{Experiment 3: Statistical strategies}
 This experiment was conducted to test the different statistical strategies that we described in section~\ref{sec:stratsForPrediction}. This includes Curve Analysis, Skewness, EWMA - Historical Volatility and Scatter. We took the three best results from experiment one and ran every combination of the statistical strategies on them. The experiment was conducted on the 1\% trimmed version of the 3 best results from experiment 1 - due to the improvements seen in experiment 2. Also we did a test on the most basic dataset we had available: Price and Consumption with no trimming. This was done to validate the impact of the different strategies before applying any other factors to the prediction.
 
 \subsubsection{Hypothesis}
 In this experiment we applied different statistical approaches to the neural network. This was done to give some knowledge about the prior trend when trying to predict the next 24 hours. This experiment is expected to show an improvement in the curve fitting thus giving us a better MAE.
 
-Also we conducted a trial to test the effect of these strategies on the vanilla dataset and we expect these predictions to improve a good deal thus making up for some of the other factors not included e.g. Wind Speed, Temperature, Time of Day etc.
+Also we conducted a trial to test the effect of these strategies on a vanilla dataset(Consumption and last know price with no trim) and we expect these predictions to improve a good deal with strategies applied thus making up for some of the other factors not included e.g. Wind Speed, Temperature, Time of Day etc.
 
 \subsubsection{Variables}
 In this experiment we had 4 variables that we tested:
@@ -340,23 +341,24 @@ The setup of the different strategies have been tested on the best result from e
 	\hline
 	Rank & Stack size & Smoothing factor & MAE & Deviation \\ [0.5ex] % inserts table 
 	\hline                   % inserts single horizontal line
-	1 & 16 & 0.9 45.96 & - \\ \hline
-	2 & 12 & 0.1 46.13 & 0.38\% \\ \hline
-	3 & 20 & 0.9 46.47 & 1.11\% \\ \hline
-	4 & 8 & 0.9 46.55 & 1.28\% \\ \hline
-	5 & 20 & 0.5 46.56 & 1.31\% \\ \hline
-	6 & 24 & 0.4 46.58 & 1.36\% \\ \hline
-	7 & 20 & 0.7 46.59 & 1.37\% \\ \hline
-	8 & 12 & 0.9 46.61 & 1.41\% \\ \hline
-	9 & 24 & 0.8 46.78 & 1.79\% \\ \hline
-	10 & 24 & 0.5 46.88 & 2.0\% \\ \hline
+	1 & 16 & 0.9 & 45.96 & - \\ \hline
+	2 & 12 & 0.1 & 46.13 & 0.38\% \\ \hline
+	3 & 20 & 0.9 & 46.47 & 1.11\% \\ \hline
+	4 & 8 & 0.9 & 46.55 & 1.28\% \\ \hline
+	5 & 20 & 0.5 & 46.56 & 1.31\% \\ \hline
+	6 & 24 & 0.4 & 46.58 & 1.36\% \\ \hline
+	7 & 20 & 0.7 & 46.59 & 1.37\% \\ \hline
+	8 & 12 & 0.9 & 46.61 & 1.41\% \\ \hline
+	9 & 24 & 0.8 & 46.78 & 1.79\% \\ \hline
+	10 & 24 & 0.5 & 46.88 & 2.0\% \\ \hline
 	\end{tabular}
 }
 \caption{Smoothing factor test} % title of Table
 \label{table:SmoothingFactorTest} % is used to refer this table in the text
 \end{table}
 
-The EWMA is used to calculate the volatility of the curve. The electricity price is highly volatile and therefore we anticipate that knowledge about the historical volatility will help the predictions. In the EWMA we have a smoothing factor which indicates how sensitive the strategy will be towards fluctuations in the curve. A lower smoothing factor will allow for more rapid changes and vice versa. In table ~\ref{table:SmoothingFactorTest} we see that the best result is a smoothing factor of 0.3.
+The EWMA is used to calculate the volatility of the curve. The electricity price is highly volatile and therefore we anticipate that knowledge about the historical volatility will help the predictions. In the EWMA we have a smoothing factor which indicates how sensitive the strategy will be towards fluctuations in the curve. A lower smoothing factor will allow for more rapid changes and vice versa. In table ~\ref{table:SmoothingFactorTest} we see that the best result is a smoothing factor of 0.9 and a stack size of 16.
+\todo{Skriv i forhold til stack size}
 
 
 \subsubsection{Skewness}
@@ -444,17 +446,17 @@ We ran 3 experiments reflecting the top 3 results from experiment 1. Before the 
 	15 &       & \x    & \x    & \x    & 48.45 & 6.83\% \\ \hline
 	\end{tabular}
 }
-\caption{Trims} % title of Table
+\caption{Statistical results} % title of Table
 \label{table:Statistical1} % is used to refer this table in the text
 \end{table}
 
-The first run shown in table~\ref{table:Statistical1} shows no big improvements between the different strategies but they neither do they show an improvement compared to the results from experiment 2 - this combination gave us 47,21 in MAE. Compared to the best result from table~\ref{table:Statistical1} that is only an improvement of 4.10\%.
+The first run shown in table~\ref{table:Statistical1} shows no big improvements between the different strategies but neither do they show an improvement compared to the results from experiment 2 - this combination gave us 47,21 in MAE. Compared to the best result from table~\ref{table:Statistical1} that is only an improvement of 4.10\%.
 
-In figure~\ref{fig:X2_X3_3800_4000} we see how the ANN has trouble predicting the unusual low values. This is the same for the experiment 2 prediction as it is for the experiment 3 prediction. The case we see in figure~\ref{fig:X2_X3_3800_4000} is what we hoped for the statistical features to help the ANN to be better at predicting; since it has gained some knowledge about the immediate past. Experiment 3 also introduces more jagged curves where is jumps up and down a lot compared to the prediction from experiment 2 - which has smoother curves. This is because of the statistical features that adds values that are interpreted into either a rising or a falling curve. Where as the prediction from experiment 2 has no such input values and relies only on the interaction between the quantifiable parameters from experiment 1.
+In figure~\ref{fig:X2_X3_3800_4000} we see how the ANN has trouble predicting the unusual low values. This is the same for the experiment 2 prediction as it is for the experiment 3 prediction. The case we see in figure~\ref{fig:X2_X3_3800_4000} is what we hoped the statistical features would help the ANN to be better at predicting; since it has gained some knowledge about the immediate past. Experiment 3 also introduces more jagged curves where it fluctuates up and down a lot compared to the prediction from experiment 2 - which has smoother curves. This is because of the statistical features that add values that are interpreted into either a rising or a falling curve. Compared to the prediction from experiment 2 it does not have this knowledge and only relies on the interaction between the quantifiable parameters from experiment 1.
 
-If we apply all of the statistical features to the prediction we get figure~\ref{fig:X2_X3_AllParameters_3800_4000} where we can see that it actually is able to drop to the unusually low values. On the other hand it has trouble rising from the low values which introduces just as a big an error as the first one did. This is due to the fact that with all applied statistical features it will follow the curve better but at the same time the history has to great of an influence on the predictions thus making it unable to rise/fall fast enough to follow the curve.
+If we apply all of the statistical features to the prediction we get figure~\ref{fig:X2_X3_AllParameters_3800_4000}. In this figure we can see that it actually is able to drop to the lowest values in the dataset. On the other hand it has trouble rising from the low values which reintroduces the error but in the top of the dataset. This is due to the fact that with all applied statistical features it will follow the curve better but at the same time the historical trend of the curve has to great of an influence on the predictions thus making it unable to rise/fall fast enough to follow the curve.
 
-Another problem with the statistical features is that making predictions with an ANN is about generalizing the inputs to reflect a mathematical function. If the ANN does not see enough examples of the statistical features throughout the training set it will not be able to make this generalization and thus not be able to use it efficiently in the predictions of the next 24 hours. If the first prediction in the next 24 hours is off (compared to the actual prices) the statistical features can help elevate/decrease the error since the last known price is added to the calculation of these features(This can be seen in figure~\ref{fig:X2_X3_3816_3840} and in ~\ref{fig:X3_Price_Consump_Worst}). Also the statistical features are more or less unique throughout the whole year since the price does not follow a specific pattern that makes it harder to generalize the statistical inputs in the price prediction.
+Another problem with the statistical features are that making predictions with an ANN is about generalizing the inputs to reflect a mathematical function. If the ANN does not see enough examples of the statistical features throughout the training dataset it will not be able to make this generalization and thus not be able to use it efficiently in the predictions of the next 24 hours. If the first prediction in the next 24 hours is wrong (compared to the ideal prices) the statistical features can help elevate/decrease the error since the last known price is added to the calculation of these features(This can be seen in figure~\ref{fig:X2_X3_3816_3840} and in ~\ref{fig:X3_Price_Consump_Worst}). Also the statistical features are more or less unique throughout the whole year since the price does not follow a specific pattern that makes it harder to generalize the statistical inputs in the price prediction. \todo{Print alle values omkring statistical features. Sammenhold dem med price og andre parametre og se om der er en tendens eller om det er totalt random. Dataset analysis}
 
 
 The results in table~\ref{table:Statistical2} and ~\ref{table:Statistical3} are control groups to show that it is not a single combination that has no benefit from the statistical features and that other combinations does not benefit from them either.
@@ -490,7 +492,6 @@ The results in table~\ref{table:Statistical2} and ~\ref{table:Statistical3} are 
 \caption{Activation functions}
 \label{fig:test}
 \end{figure}
-
 
 \begin{itemize}
 	\item Price
@@ -571,7 +572,7 @@ To test the benefit of the statistical features on a vanilla dataset (that only 
 
 Test \#1 shown in table~\ref{table:price_consumption_x3} shows the statistical features applied on a dataset without trimming. The original test from experiment 1 can be seen in the price results appendix ~\ref{sec:priceResultAppendix} \#106 and gave us an MAE of 89. If we compare it to this test we see and improvement of 21.24\%. The most notable trend in the results in table~\ref{table:price_consumption_x3} is that nearly all of the scatter prices are the top results. That is also the case for the results in table~\ref{table:price_consumption_x3_1pTrim} (Same experiment with 1\% trim).
 
-The most noteworthy are that the two are very similar and the one with trimming is actually worse when the EWMA strategy is applied. When we moved from experiment 1 to experiment 2 we saw that the ANN became more accurate when we trimmed away the largest spikes; this does not seem to be the case here. From this we can conclude that trimming has no effect on the dataset if all the other input variables are not included. In figure~\ref{fig:X3_Price_Consump_NoTrim} and ~\ref{fig:X3_Price_Consump_1pTrim} we see the similarities between the 1\% trim and the no trim predictions. In figure ~\ref{fig:X3_Price_Consump_Worst} we see the same segment of the prediction as the other two but this one is with Curve, Skew, EWMA and 1\% trim. In the table ~\ref{table:price_consumption_x3} clearly see that it is way inferior. This is because the strategies applied accounts for to much of the prediction and it confuses more than it helps.
+The most noteworthy are that the two are very similar and the one with trimming is actually worse when the EWMA strategy is applied. When we moved from experiment 1 to experiment 2 we saw that the ANN became more accurate when we trimmed away the largest spikes; this does not seem to be the case here. From this we can conclude that trimming has no effect on the dataset if all the other input variables are not included. In figure~\ref{fig:X3_Price_Consump_NoTrim} and ~\ref{fig:X3_Price_Consump_1pTrim} we see the similarities between the 1\% trim and the no-trim predictions. In figure ~\ref{fig:X3_Price_Consump_Worst} we see the same segment of the prediction as the other two but this one is with Curve, Skew, EWMA and 1\% trim. In the table ~\ref{table:price_consumption_x3} clearly see that it is way inferior. This is because the strategies applied accounts for to many of the inputs and it confuses more than it helps.
 
 \begin{figure}[h!]
 \centering
@@ -661,7 +662,7 @@ The most noteworthy are that the two are very similar and the one with trimming 
 \label{table:price_consumption_x3_1pTrim} % is used to refer this table in the text
 \end{table}
 
-The last iterations we did was a clone of the experiments conducted in~\cite{singhal2011electricity}. This includes price, consumption, time of day, day of week and scatter. We did the prediction both with 1\% and no trim as they did in the text (no spikes, small spikes and large spikes). The results can be seen in table ~\ref{table:scatter_text_no_trim} and ~\ref{table:scatter_text_1p_trim}. The results with trimming and the best strategies gives us a result of 52.04 MAE which is 14.75\% worse than the best result from table~\ref{table:Statistical1} and the results without trimming is 71.51 MAE which is 25.19\% worse than the best result from table~\ref{table:Top20Prices} in experiment 1. We cannot compare the results directly to the ones they present in the paper because they only present a prediction of 48 hours and they do not tell us whether this is on unseen data or it is on the same dataset as they trained. And we do not know whether they simulate the full 48 hour prediction or they do it 1-hour at a time. Nevertheless we did our own version and it seems to perform well and we also copied their scatter strategy.
+The last iterations we did was a clone of the experiments conducted in~\cite{singhal2011electricity}. This setup includes price, consumption, time of day, day of week and scatter. We did the prediction both with 1\% and no trim as they did in the text (no spikes, small spikes and large spikes). The results can be seen in table ~\ref{table:scatter_text_no_trim} and ~\ref{table:scatter_text_1p_trim}. The results with trimming and the best strategies gives us a result of 52.04 MAE which is 14.75\% worse than the best result from table~\ref{table:Statistical1} and the results without trimming is 71.51 MAE which is 25.19\% worse than the best result from table~\ref{table:Top20Prices} in experiment 1. We cannot compare the results directly to the ones they present in the paper because they only present a prediction of 48 hours and they do not tell us whether this is on unseen data or it is on the same dataset as they trained on. Neither do we know whether they simulate the full 48 hour prediction or they do it 1-hour at a time.
 
 \begin{itemize}
 	\item Price
@@ -722,8 +723,9 @@ The last iterations we did was a clone of the experiments conducted in~\cite{sin
 \end{table}
 
 \subsubsection{Conclusion}
+The strategies applied in this experiment does not help our best result from experiment 1 with 1\% trim applied. The strategies applied to the most simple dataset (price, consumption) helps it to get as good as the same prediction but with a dataset consisting of price, consumption, wind speed, temperature, time of day, day of week and season of year. The problem with this is that it does not allow us to further increase the performance by trimming the dataset and thus not be able to get better predictions. We also tested a setup from paper~\cite{singhal2011electricity} which was not superior over our setup. Overall we can conclude that the strategies does in worst case give the same result as before and might add a very insignificant improvement. The same time they add more overhead when calculating the predictions and might not be worth the time doing.
 
-
+\newpage
 \subsection{Experiment 4: Black box optimization}
 We end the experiments by showing the impacts of epochs used to train the network and the size of the training dataset. We also show how the time dimension of doing these tests are affected by these parameters. Black box optimization also covers the number of hidden layers and the neuron count in these. We chose not to do these experiments since we used a pruning algorithm to find the most optimal combination of neurons and layers for each input combination as described in section~\ref{sec:testProcedure} and in section~\ref{sec:pruning}.
 
@@ -801,3 +803,51 @@ We expect the results from these tests to show that the time used to make a year
 \end{table}
 
 \subsubsection{Conclusion}
+
+
+\todo{LAV TREND ANALYSE, LAV PRICE og CONSuMPTION graf}
+
+\newpage
+\subsection{Experiment 5: Step-ahead forecasting}
+\subsubsection{Variables}
+
+\subsubsection{Hypothesis}
+
+\subsubsection{Results}
+
+\begin{table}[h!]
+\centering  % used for centering table
+\resizebox{0.6\textwidth}{!}{
+	\begin{tabular}{|c|c|c|c|c|c|} % centered columns (7 columns)		
+	\hline
+	Epochs & Time & H1 & H2 & MAE & \% Deviation\\ [0.5ex] % inserts table 
+	\hline 
+	1 & 1 &  15.13 & - \\ \hline
+	2 & 2 &  28.29 & 87.04\% \\ \hline
+	3 & 3 &  31.85 & 110.56\% \\ \hline
+	4 & 4 &  34.68 & 129.25\% \\ \hline
+	5 & 5 &  37.54 & 148.14\% \\ \hline
+	6 & 6 &  39.69 & 162.42\% \\ \hline
+	7 & 7 &  40.53 & 167.91\% \\ \hline
+	8 & 8 &  42.23 & 179.18\% \\ \hline
+	9 & 9 &  43.45 & 187.23\% \\ \hline
+	10 & 10 &  44.10 & 191.53\% \\ \hline
+	11 & 14 &  45.48 & 200.64\% \\ \hline
+	12 & 11 &  45.73 & 202.31\% \\ \hline
+	13 & 13 &  46.19 & 205.33\% \\ \hline
+	14 & 12 &  46.67 & 208.5\% \\ \hline
+	15 & 16 &  47.76 & 215.72\% \\ \hline
+	16 & 15 &  48.05 & 217.62\% \\ \hline
+	17 & 21 &  48.21 & 218.68\% \\ \hline
+	18 & 19 &  48.69 & 221.86\% \\ \hline
+	19 & 17 &  48.69 & 221.88\% \\ \hline
+	20 & 18 &  49.00 & 223.91\% \\ \hline
+	21 & 20 &  49.31 & 225.96\% \\ \hline
+	22 & 22 &  49.75 & 228.91\% \\ \hline
+	23 & 23 &  50.01 & 230.64\% \\ \hline
+	24 & 24 &  50.87 & 236.28\% \\ \hline
+	\end{tabular}
+}
+\caption{Trims} % title of Table
+\label{table:Dataset} % is used to refer this table in the text
+\end{table}
