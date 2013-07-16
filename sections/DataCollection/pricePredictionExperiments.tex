@@ -44,7 +44,7 @@ This is the first and most comprehensive of the tests conducted for price predic
 
 \subsubsection{Results}
 
-\begin{table}[h!]
+\begin{table}[H]
 \centering  % used for centering table
 \resizebox{\textwidth}{!}{
 \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|} % centered columns (7 columns)
@@ -101,7 +101,7 @@ This is the first and most comprehensive of the tests conducted for price predic
 
 If we take a look at the top 20 best input combinations (shown in table~\ref{table:Top20Prices}) we see some clear trends. We will start analyzing the data from left to right. The price and demand are static as mentioned earlier since they are fundamental market forces and thus not a changing factor in this analysis. The next input parameter is the Wind Speed. We see that every input combination in the top 20 includes the wind production and it is therefore a must for the prediction of the energy prices. The 72 first inputs(the 50\% best results) contains only two combinations that does not have wind speed in them. Also we saw in section~\ref{sec:windPowerAnalysis}(table~\ref{table:pearsonCoeficientWindProduction}) that the Wind Speed heavily influences the green energy production and thus influencing the energy prices. If we remove wind speed from the \#1 combination it ends up at place 70 which are 37.55\% worse than the best result. In graph~\ref{fig:Windspeed_no_windspeed} we see that the prediction without wind speed has a tendency to overshoot more than the one with wind speed does which over a whole year sums up to a significant difference. \todo{Vis hele grafen i bilaget?}
 
-\begin{figure}[h!]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.85\linewidth,natwidth=898,natheight=587]{billeder/PriceExperimentalAnalysis/X1_windspeed_vs_no_windspeed.png}
 \caption{\#1 forecast from table~\ref{table:Top20Prices} with and without wind speed}
@@ -110,7 +110,7 @@ If we take a look at the top 20 best input combinations (shown in table~\ref{tab
 
 The temperature is a less obvious candidate for the prediction of price since the Pearson's correlation between the two only are 0.17. Nevertheless it is showing up in 8/10 top combinations in table~\ref{table:Top20Prices} and this might be because of the correlation between temperature/demand which is -0.59. The temperature is scattered all over the 144 combinations and thus it is hard to say something concrete about this input variable. The best result without temperature is at place 4 in table~\ref{table:Top20Prices} and the same one with temperature is at place 13 with a difference between the two of 10.66\%. Graph~\ref{fig:temperature_comparison} shows that there is no significant difference between the two combinations. In both of them the ANN is overshooting the targetat different spots.
 
-\begin{figure}[h!]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.85\linewidth,natwidth=898,natheight=587]{billeder/PriceExperimentalAnalysis/temperatureComparison.png}
 \caption{\#4 forecast from table~\ref{table:Top20Prices} with and without temperature}
@@ -119,7 +119,7 @@ The temperature is a less obvious candidate for the prediction of price since th
 
 The Hourly Time of Day (ToD) is included in every single combination in the top 20. This clearly shows that this input parameter is important for the prediction of the price. This is kind of obvious since what we are predicting is the hourly price. In section~\ref{sec:seasonality}(figure~\ref{fig:price_per_hour}) we saw that the price varied from 190 to 335 which strengthens the importance of the relationship between time of day and the price. Also the top 7 all have the ToD on matrix form which indicates that this is the best way of representing the ToD. The comparison between \#1 prediction with Time of Day and the one without \#55 we see a difference of 31.85\% and we did a graph comparison of the two shown in figure~\ref{fig:dowComparison}. Here we see that the one with ToD (\#1) are better at following the curve compared to the prediction without Time of Day. The prediction without Time of Day seems to follow an average between the high and low spikes instead of following the curve up and down. This makes sense since the ToD interprets into what hours have high prices and which that have low prices.
 
-\begin{figure}[h!]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.85\linewidth,natwidth=898,natheight=587]{billeder/PriceExperimentalAnalysis/dowComparison.png}
 \caption{\#1 forecast from table~\ref{table:Top20Prices} with and without Time of Day}
@@ -136,7 +136,7 @@ In the Wind Production Experiments section~\ref{sec:windProductionExperiments} w
 
 \todo{Referer til Brians. Han har allrede skrevet om Matrix i forhold til at hans ikke virker specielt overbevisende, men at det i mit virker meget bedre. Diskuter.}
 
-\begin{table}[h!]
+\begin{table}[H]
 \centering  % used for centering table
 \resizebox{\textwidth}{!}{
 \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|} % centered columns (7 columns)
@@ -170,7 +170,7 @@ Table~\ref{table:Top20Prices} shows us the top 20 MAE from the experiment with a
 
 First we conducted an experiment containing a training set with a full year (to test the effect of seasonality on a full year) we included the rest of the parameters equal to rank \#1 in table~\ref{table:Top20Prices} and shifted the seasonality. The results can be seen in table~\ref{table:1YearTrain} where we can see the full effect of seasonality over a year. The table clearly shows that the MoY combination is the best of the three. If we compare the results to the results from table~\ref{table:Top20Prices} it shows us that with monthly seasonality the neural network will be able to do the same predictions as the predictions that only have a training set of 3 months. With the possibility of over training in too large datasets(see paper~\cite{1}) and that the neural network takes longer time training on a larger dataset. We can conclude that the smaller dataset of 3 months are better to use than the full year (We will elaborate on this in experiment X)\todo{Saet rigtigt experiment}. Further more we have to test if seasonality being an input parameter makes sense when our dataset is only 3 months big.
 
-\begin{table}[h!]
+\begin{table}[H]
 \centering  % used for centering table
 \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|} % centered columns (7 columns)
 \hline
@@ -184,7 +184,7 @@ P & D & WS & T & ToD & DoW & MoY & SoY & MAE & Rank\\ [0.5ex] % inserts table
 \label{table:1YearTrain} % is used to refer this table in the text
 \end{table}
 
-%\begin{table}[h!]
+%\begin{table}[H]
 %\centering  % used for centering table
 %\resizebox{\textwidth}{!}{
 %	\begin{tabular}{|c|c|c|c|c|c| c c c c c} % centered columns (7 columns)
@@ -206,7 +206,7 @@ P & D & WS & T & ToD & DoW & MoY & SoY & MAE & Rank\\ [0.5ex] % inserts table
 %\caption{Average MAE of ten runs per entry} % title of Table
 %\label{table:Top10Average} % is used to refer this table in the text
 %\end{table}
-%\begin{table}[h!]
+%\begin{table}[H]
 %\centering  % used for centering table
 %\resizebox{\textwidth}{!}{
 %\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|} % centered columns (7 columns)
@@ -259,7 +259,7 @@ This experiment is conducted to show the effect of trimming on a dataset. By rem
 
 As we can see in figure~\ref{fig:NoTrim} (where no trimming was applied) the predicted values some times goes way out of line and hits the very maximum(about 1500) also when the actual value is nothing near that. This is due to the seldom occurrence of these high prices that the neural network is never able to get a full connection between these prices and the input parameters. Another reason for this to happen is that it is extremely hard to predict such sudden and very high fluctuations in price; thus removing these will not give us a performance hit, since we would not be able to predict them anyways and they just add the possibility of errors in the rest of the predictions.
 
-\begin{figure}[h!]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.85\linewidth,natwidth=898,natheight=587]{billeder/PriceExperimentalAnalysis/NoTrimming.jpg}
 \caption{The \#1 forecast with no trimming of the dataset}
@@ -268,7 +268,7 @@ As we can see in figure~\ref{fig:NoTrim} (where no trimming was applied) the pre
 
 If we take a look at the same dataset but this time with a 1\% high and low trim (2\% in total) in figure~\ref{fig:1PTrim}; we clearly see that the actual prices in the beginning aren't spiking as heavily as they did in figure~\ref{fig:NoTrim}. This of course prevents us from predicting these high spikes but if we take a look at the rest of the set we see that the 5 faulty spikes have gone as well. This shows the trade off between being able to predict the outliers and the errors they introduce.
 
-\begin{figure}[h!]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.85\linewidth,natwidth=898,natheight=587]{billeder/PriceExperimentalAnalysis/1PTrim.jpg}
 \caption{The \#1 forecast with 1\% trimming in both ends of the dataset}
@@ -277,7 +277,7 @@ If we take a look at the same dataset but this time with a 1\% high and low trim
 
 In figure~\ref{fig:AllTrims} we see the dataset from figure~\ref{fig:1PTrim} with 1\% trim. The lines shows how much would be cut of if we applied 2\%(Purple), 3\%(Red), 4\%(Black) and 5\%(Blue) trimming. Here we clearly see that it is removing data - that is part of the norm - from the set. With every percent we go up we remove 363 entries so at 5\% trim (top and bottom) we will be removing 1815 entries from our dataset. This will result in us never being able to predict values higher or lower than the bars. We are of course not interested in that as most of the values we trim from 2\% and up are part of a more normalized dataset. Also the improvements we see from 1\% trim to 5\% trim is 12.97\% which is pretty insignificant compared to the 1815 cases that we will be unable to predict.
 
-\begin{figure}[h!]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.85\linewidth,natwidth=898,natheight=587]{billeder/PriceExperimentalAnalysis/restOfTrims.jpg}
 \caption{The \#1 forecast with 2\%(Purple), 3\%(Red), 4\%(Black) and 5\%(Blue) trimming in both ends of the dataset}
@@ -287,7 +287,7 @@ In figure~\ref{fig:AllTrims} we see the dataset from figure~\ref{fig:1PTrim} wit
 \todo{Skriv om tabellen. Vis sammenhaeng i forhold til 1815 entries vil mistes paa baggrund af en forbedring paa kun 8 MAE i bedste tilfaelde.}
 
 
-\begin{table}[h!]
+\begin{table}[H]
 \centering  % used for centering table
 \resizebox{0.6\textwidth}{!}{
 	\begin{tabular}{|c|c|c|c|c|c|} % centered columns (7 columns)
@@ -334,7 +334,7 @@ In this experiment we had 4 variables that we tested:
 The setup of the different strategies have been tested on the best result from experiment 1.
 
 \subsubsection{EWMA}
-\begin{table}[h!]
+\begin{table}[H]
 \centering  % used for centering table
 \resizebox{0.5\textwidth}{!}{
 	\begin{tabular}{|c|c|c|c|c|} % centered columns (7 columns)
@@ -362,7 +362,7 @@ The EWMA is used to calculate the volatility of the curve. The electricity price
 
 
 \subsubsection{Skewness}
-\begin{table}[h!]
+\begin{table}[H]
 \centering  % used for centering table
 \resizebox{0.5\textwidth}{!}{
 	\begin{tabular}{|c|c|c|} % centered columns (7 columns)
@@ -386,7 +386,7 @@ The EWMA is used to calculate the volatility of the curve. The electricity price
 The skewness denotes whether an observation falls to the left or the right of the median as described in section~\ref{sec:skewness}. This is used to determine in what direction the graph is currently moving thus giving us information about the trend. We experimented with how many historical prices we had to include in the calculation of the skewness and ended up with 4 being the best even though they are very close.
 
 \subsubsection{Curve behavior}
-\begin{table}[h!]
+\begin{table}[H]
 \centering  % used for centering table
 \resizebox{0.5\textwidth}{!}{
 	\begin{tabular}{|c|c|c|} % centered columns (7 columns)
@@ -422,7 +422,7 @@ We ran 3 experiments reflecting the top 3 results from experiment 1. Before the 
 	\item Season of Year (Matrix)
 \end{itemize}
 
-\begin{table}[h!]
+\begin{table}[H]
 \centering  % used for centering table
 \resizebox{0.7\textwidth}{!}{
 	\begin{tabular}{|c|c|c|c|c|c|c|} 
@@ -461,14 +461,14 @@ Another problem with the statistical features are that making predictions with a
 
 The results in table~\ref{table:Statistical2} and ~\ref{table:Statistical3} are control groups to show that it is not a single combination that has no benefit from the statistical features and that other combinations does not benefit from them either.
 
-\begin{figure}[h!]
+\begin{figure}[H]
 \centering
 \includegraphics[width=\linewidth,natwidth=898,natheight=587]{billeder/PriceExperimentalAnalysis/X2_X3_3800_4000.png}
 \caption{A comparison of \#1 forecast from experiment 2 and 3. This segment is from the middle of the year. (Skew, EWMA)}
 \label{fig:X2_X3_3800_4000}
 \end{figure}
 
-\begin{figure}[h!]
+\begin{figure}[H]
 \centering
 \includegraphics[width=\linewidth,natwidth=898,natheight=587]{billeder/PriceExperimentalAnalysis/X2_X3_AllFeatures_3800_4000.png}
 \caption{A comparison of \#1 forecast from experiment 2 and 3. This segment is from the middle of the year. All features applied(Skew, Curve, EWMA, Scatter).}
@@ -503,7 +503,7 @@ The results in table~\ref{table:Statistical2} and ~\ref{table:Statistical3} are 
 	\item Season of Year (Matrix)
 \end{itemize}
 
-\begin{table}[h!]
+\begin{table}[H]
 \centering  % used for centering table
 \resizebox{0.7\textwidth}{!}{
 	\begin{tabular}{|c|c|c|c|c|c|c|} 
@@ -540,7 +540,7 @@ The results in table~\ref{table:Statistical2} and ~\ref{table:Statistical3} are 
 	\item Month of Year (Matrix)
 \end{itemize}
 
-\begin{table}[h!]
+\begin{table}[H]
 \centering  % used for centering table
 \resizebox{0.7\textwidth}{!}{
 	\begin{tabular}{|c|c|c|c|c|c|c|}
@@ -574,21 +574,21 @@ Test \#1 shown in table~\ref{table:price_consumption_x3} shows the statistical f
 
 The most noteworthy are that the two are very similar and the one with trimming is actually worse when the EWMA strategy is applied. When we moved from experiment 1 to experiment 2 we saw that the ANN became more accurate when we trimmed away the largest spikes; this does not seem to be the case here. From this we can conclude that trimming has no effect on the dataset if all the other input variables are not included. In figure~\ref{fig:X3_Price_Consump_NoTrim} and ~\ref{fig:X3_Price_Consump_1pTrim} we see the similarities between the 1\% trim and the no-trim predictions. In figure ~\ref{fig:X3_Price_Consump_Worst} we see the same segment of the prediction as the other two but this one is with Curve, Skew, EWMA and 1\% trim. In the table ~\ref{table:price_consumption_x3} clearly see that it is way inferior. This is because the strategies applied accounts for to many of the inputs and it confuses more than it helps.
 
-\begin{figure}[h!]
+\begin{figure}[H]
 \centering
 \includegraphics[width=\linewidth,natwidth=898,natheight=587]{billeder/PriceExperimentalAnalysis/X3_Price_Consump_1pTrim.png}
 \caption{Price and consumption with scatter and 1\% trim.)}
 \label{fig:X3_Price_Consump_1pTrim}
 \end{figure}
 
-\begin{figure}[h!]
+\begin{figure}[H]
 \centering
 \includegraphics[width=\linewidth,natwidth=898,natheight=587]{billeder/PriceExperimentalAnalysis/X3_Price_Consump_NoTrim.png}
 \caption{Price and consumption with scatter and no trim.}
 \label{fig:X3_Price_Consump_NoTrim}
 \end{figure}
 
-\begin{figure}[h!]
+\begin{figure}[H]
 \centering
 \includegraphics[width=\linewidth,natwidth=898,natheight=587]{billeder/PriceExperimentalAnalysis/X3_Price_Consump_Worst.png}
 \caption{Price and consumption with Curve, Skew, EWMA and 1\% trim.}
@@ -601,7 +601,7 @@ The most noteworthy are that the two are very similar and the one with trimming 
 	\item With no trimming
 \end{itemize}
 
-\begin{table}[h!]
+\begin{table}[H]
 \centering  % used for centering table
 \resizebox{0.7\textwidth}{!}{
 	\begin{tabular}{|c|c|c|c|c|c|c|} % centered columns (7 columns)
@@ -634,7 +634,7 @@ The most noteworthy are that the two are very similar and the one with trimming 
 	\item Consumption
 	\item With 1\% trimming
 \end{itemize}
-\begin{table}[h!]
+\begin{table}[H]
 \centering  % used for centering table
 \resizebox{0.7\textwidth}{!}{
 	\begin{tabular}{|c|c|c|c|c|c|c|} % centered columns (7 columns)
@@ -671,7 +671,7 @@ The last iterations we did was a clone of the experiments conducted in~\cite{sin
 	\item Day of Week
 	\item With no trimming
 \end{itemize}
-\begin{table}[h!]
+\begin{table}[H]
 \centering  % used for centering table
 \resizebox{0.7\textwidth}{!}{
 	\begin{tabular}{|c|c|c|c|c|c|c|} % centered columns (7 columns)
@@ -700,7 +700,7 @@ The last iterations we did was a clone of the experiments conducted in~\cite{sin
 	\item Day of Week
 	\item With no trimming
 \end{itemize}
-\begin{table}[h!]
+\begin{table}[H]
 \centering  % used for centering table
 \resizebox{0.7\textwidth}{!}{
 	\begin{tabular}{|c|c|c|c|c|c|c|} % centered columns (7 columns)
@@ -756,7 +756,7 @@ We expect the results from these tests to show that the time used to make a year
 \subsubsection{Results}
 
 
-\begin{table}[h!]
+\begin{table}[H]
 \centering  % used for centering table
 \resizebox{0.6\textwidth}{!}{
 	\begin{tabular}{|c|c|c|c|c|c|} % centered columns (7 columns)
@@ -773,7 +773,7 @@ We expect the results from these tests to show that the time used to make a year
 \label{table:Dataset} % is used to refer this table in the text
 \end{table}
 
-\begin{table}[h!]
+\begin{table}[H]
 \centering  % used for centering table
 \resizebox{0.6\textwidth}{!}{
 	\begin{tabular}{|c|c|c|c|c|c|} % centered columns (7 columns)		
@@ -815,7 +815,7 @@ We expect the results from these tests to show that the time used to make a year
 
 \subsubsection{Results}
 
-\begin{table}[h!]
+\begin{table}[H]
 \centering  % used for centering table
 \resizebox{0.6\textwidth}{!}{
 	\begin{tabular}{|c|c|c|c|c|c|} % centered columns (7 columns)		
