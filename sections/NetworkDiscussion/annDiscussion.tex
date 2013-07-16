@@ -1,19 +1,28 @@
 This section discusses the results based on both electricity prices and wind production.
 
-\todo{discuss how the applying of calculated inputs kind of "disturbs" the generalization function}
+\subsection{Wind production vs. electricity price experiments}
+NOTE FORM FOR DISCUSSION (NOT YET FINISHED):
 
-\subsection{The importance of the underlying data}
+\begin{enumerate}
+\item Seasonality is significant in both. Size of training set is the same due  to this fact. Less is better in both cases because they posses same characteristics in relation to volatility, seasonality and are both highly related to the electricity market seen in the co-relation to consumption.
+\item Matrix is in both cases an improvement. Time of day matrix has been applied on both but the improvement is much more apparent in the electricity price forecast. The reason must be found in the co-relation between time of day and electricity price being much more significant due to the consumer market. Time of day in relation to wind power production is much more random since the production follows wind speed more directly. We can't control the weather. 
+\item Trimming is most applicable when irregularities exist in the dataset that cannot be predicted. Wind power production showed no such irregularities and trimming it would make these values impossible to predict. Electricity prices on the other hand showed unpredictable values \todo{ref to drawing of trimming in both cases}. The overall prediction improved with 20\% with trimming applied.
+\item Calculated inputs were applied in both predictions and showed slight improvements. In electricty price prediction the small improvement was seen with curve, skewness and volatility as input but saw no difference when applying scatter\todo{see section}. The best result was the combination of skew and volatility but significantly better than the other combinations. In the case prediction of wind power production the use of volatility was the only one showing an improvement. What can be concluded here is how adding more characteristics about the movement of the curve can help the generalization of the network to approach its target even though only slightly. Further analysis and experimentation with other methods could possibly lead to better performance \todo{ref to alternatives in economics}.
+\item Black box showed in both cases what was expected of it. The best set-up must be found through experiments and testing. Fine-tuning the network is done by testing different epochs and size of data. It also revealed the expected over- and under-fitting when either using too many epochs or too few. To much data can also result in overtraining since the network cannot generalize beyond a certain amount of data --- the right amount must be found in experiments. 
+\item The step-ahead forecasting showed how the less hours to predict the better mae. In electricity prices the error is linear to the number of steps to predict until a certain point (around 8) where it flattens out. It is necessary to identify a technique to reduce the elevation of errors from step to step. The problem as significant in wind power production because it heavily relies on wind speed and can follow it whereas the price relies greatly on the last known price --- thus making it more likely to elevate the error. 
+\end{enumerate}
+
+\todo{compare matrix between price and production. It is obvious that the bigger difference between high and low during the day makes the benefits from matrix more clear for price than for production}.
+
+\subsection{The importance of DATA ANALYSIS}
 The strength of the prediction is very much dependent on the quality of the underlying data. As described in Section~\ref{sec:dataCollection} the data must satisfy certain criteria before it can be used as input and output in the Artificial Neural Network. It must be trustworthy and contain hourly observations for our specific purpose, e.g. day-ahead prediction based on a dataset that consists of hourly observations. All calculations in the ANN are based on this data which makes it of utmost importance for the output, the forecast.
 
-
 \subsubsection{Input parameters}
-\todo{this section is pretty obvious when looking at our analysis. You need to establish relationship between the output and the input parameters}
+The most basic foundation for the Artificial Neural Network is the input parameters. The need for identifying what influences the value to predict is the first step when predicting. The analysis of both electricity price and wind production in Section\todo{analysis section} together with the experiments show how the combination of the right parameters is the core to a good prediction. The analysis section establishes the co-relation between input/output which is then validated through the experiments. Analysis of the network is complex due to the black box nature of ANNs. It finds connections and combinations of input that you cant statistically or logically foresee \todo{exemplify}.
 
-\todo{analysis of the network is very hard due to the black box. It finds connections that you cant foresee. "Its own life".}
+It is obvious from the two predictions that the same calculated input does not apply for both. Curve is bas for wind power production whereas it has no effect on the price prediction.\todo{write more}
 
-\todo{data set and manipulation will always differ from task to task. Look at wind prediction vs. price. Volatility, skew ect. is different}
 
-\todo{USE THE MODEL FROM UNCERTAIN INFORMATION}
 
 \todo{A VERY DEEP UNDERSTANDING OF THE INPUT IS NEEDED --- talk about that}
 \todo{discuss that we are not using predicted weather data}
@@ -21,26 +30,21 @@ The strength of the prediction is very much dependent on the quality of the unde
 \subsubsection{Data Manipulation - k}
 De andre tekster undlader i stor omfang at snakke om input i forhold til konkret data, trimming og manipulation af det konkrete data. Sammenstil det med vores eget. Reflekter og konkluder.
 
-== the best possible prediction. Hvad er med til at give det ebdsre result.
+== the best possible prediction. Hvad er med til at give det bedste result.
 
-all our findings apply on both systems (green/price). It emphasizes the need for manipulation of data in all networks even though different measures to be met.
+The experiments emphasize the need for manipulation of data before predicting. Not necessarily in the way but data always needs to be pre-processed. 
 
 \subsection{ANNs ability to predict}
 
 
-\todo{Neural works as basis for a decision support system. If ANN can predict can it then be used in the real life? Discussion about how this is related the text where the results are ambiguous }
+Neural works as basis for a decision support system. If ANN can predict can it then be used in the real life? Discussion about how this is related the text where the results are ambiguous 
 Artificial Neural Networks can it itself be considered as a Optimization Based Support Model which is described in Section \todo{section and discuss further}. The trust of the forecast is critical and especially when dealing with ANNs because they are a black box. 
 
-\todo{discuss this in relation to DSS and how it relates to it. It is here important to emphasize that in order to use this a lot of things around it has to be build. When used in a real life setting the user just need to know the input, a high level description of what happens and then the output}
-
-\subsection{Comparison with other results}
-\todo{compare matrix between price and production. It is obvious that the bigger difference between high and low during the day makes the benefits from matrix more clear for price than for production}.
-
-\subsection{LITTERATURE?}
-\todo{related to neural networks and what it is also used for and why this is a good approach here}
-\todo{relate it to machine learning and why this fits our problem}
+Discuss this in relation to DSS and how it relates to it. It is here important to emphasize that in order to use this a lot of things around it has to be build. When used in a real life setting the user just need to know the input, a high level description of what happens and then the output.
+This is not a one-click solution and it requires a lot of configuration \todo{vi har masser skrevet om dette, ref, trade-offs, small / big values. Step-ahead forecasting, trimming, size}. The system is for experts and they can base there prediction on there own experience --- for instance an expert might now that high prices now together with the current market won't most likely won't result in lower prices, therefore the system does not need to consider low values. High configurable but still easy-to-use.
 
 \subsection{Testing}
+REALLY IMPORTANT. TIME CONSUMING.
 \todo{talk about how testing is time consuming. All tests run for long time}
 
 \todo{the results are not definitive but what we can do is see tendencies in what parameters really matter.}
@@ -48,11 +52,19 @@ Artificial Neural Networks can it itself be considered as a Optimization Based S
 \todo{ideal world endless test --> neural network requires a lot of testing}
 
 
+\subsection{Comparison with other results}
+?????
 
+\subsection{LITTERATURE?}
+USE MAIN CONCEPTS TO DISCUSS RESULTS!
+\todo{related to neural networks and what it is also used for and why this is a good approach here}
+\todo{relate it to machine learning and why this fits our problem}
 \todo{what makes this ai or machine learning}
 
+\subsection{Future work}
+this section will discuss what can be done in relation to strategies or other attempts to improve accuracy of the predictions.
 
-\subsection{Recalculate}
+\subsubsection{Recalculate}
 POTENTIAL STRATEGY
 The re-calculation concept works by letting other neural networks re-calculate the prediction from the original network. The purpose is to identify places where the generalization function has problems and then divide it into new neural networks that only have the purpose of focusing on these problematic situations. For simplicity we are going to apply this to the small numbers and big numbers of the dataset. We will define what is small and big by taking the 2 and 98 percentile. Whenever the "original" network predicts something in or close to the big or small interval then the responsibility of that prediction is forwarded to one of the two. It works like a second opinion but here the network has been specialized to only focus on a specific part of the dataset instead of everything\todo{give example of corrections}. It creates a normalization function on a smaller dataset and the idea is to leave out a lot of unnecessary information. It does not need to account for anything other than its interval in the generalization function so it should be able to predict its target group better. We let the original network decide if it actually thinks we are in the low numbers --- if we are then we can possibly make that prediction even more accurate. These thoughts could basically we applied on all other parts of possible wind production values. 
 
@@ -62,3 +74,5 @@ Problem can occur if the intervals are too small which will cause the dataset to
 The similar days approach is described in Section~\ref{sec:sdmApproach} and addresses what to include in the dataset based on parameters. Wind power production follows wind speed and the expectation is that if filtering out days with completely different wind speeds and productions then a better accuracy can be obtained. The similar days analysis will take all wind speeds from the hours to predict and find all days within this interval plus/minus one in each end, e.g. an interval of wind speeds between 4-9 would result in similar days between 3-10. There is a potential for not getting the entire picture when using similar days. It can be related to the discussion about wind speed as matrix and how some values are under-represented in the dataset. In could happens in shifting seasons that wind speeds are never seen before and therefore run into a dataset without many hours. In those cases the entire dataset is used instead. The analysis in Section~\ref{sec:windProdSeasonality} describes the difference from season to season.
 
 We can see from Table~\ref{table:theSimilarDaysApproach3monthTable} that the results are much equal to the best input combination from Table~\ref{table:windProdInputParamsTop10}. The purpose of the similar days is to filter out unnecessary noise from the dataset but since the dataset is of a manageable size and in itself contain a seasonal aspect it does not filter out many values as seen in the table. When applying it on an entire year more values are filtered out but it cannot make up for the increase in dataset as seen in Table~\ref{table:theSimilarDaysApproachYearTable}.
+
+\todo{USE THE MODEL FROM UNCERTAIN INFORMATION}
