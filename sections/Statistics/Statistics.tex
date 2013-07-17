@@ -14,6 +14,7 @@ Where $p_i$ is the predicted value and $a_i$ is the actual value.
 \todo{Skal formateres ordentligt}
 %\subsubsection{RMSE - Root Mean Squared Error}
 \subsubsection{MAE - Mean Absolute Error}
+\label{sec:maeStatistics}
 The Mean Absolute Error denotes the mean of the differences between the predicted values and the actual values. This gives us an indication of how much the algorithm on average misses the target price as a value and not percent. This value is relative to the dataset and if you increase all your numbers with a factor of 10 so will the MAE thus making it very hard to compare to MAEs for other systems. The good thing about the MAE is that it is not a percentage and thus it will not get bigger if the values we predict are low (See MPE - Mean Percentage Error). That way we eliminate the problem with low values giving bigger error margins than high values even when they miss the target by the same value. It is calculated by:
 
  $ \frac{1}{n}\sum_{i=1}^{n}|p_i-a_i| $

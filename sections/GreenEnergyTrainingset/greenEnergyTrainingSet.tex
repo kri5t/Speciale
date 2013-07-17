@@ -224,9 +224,11 @@ Low margin: & 13.5 & 2.7 & 1930.5 \\ [1ex] % [1ex] adds vertical space
 \label{table:similarHoursLimitsWindProd} % is used to refer this table in the text
 \end{table}
 
-Figure~\ref{fig:windHourDevelopment400Hours} does not show any need for trimming when predicting wind production. The curve of wind production does not contain any cases that are unpredictable, e.g productions that suddenly drops without any intermediary steps. 
+Figure~\ref{fig:windHourDevelopment400Hours} does not show any need for trimming when predicting wind production over an entire year. The curve of wind production does not contain any cases that are unpredictable, e.g productions that suddenly drops without any intermediary steps. 
 
-Different percentage of trims for an entire year can be seen in Figure~\ref{fig:windProductionTrimming}. The cutting of productions will result in the network being able to predict those specific values. This is valid if the values are out of the ordinary or unpredictable which is not the case for the wind power production. The curve contains only one irregular drop in the hours between 1200-1300 where the production suddenly drops to zero. The rest of the curve does not make sudden jumps and it follows intermediary steps or trends. When predicting wind power production for an entire year trimming should be omitted. It will be discussed later if it in the hands of a trader could make sense to trim data based on expertise, e.g. the trader knows the production from the last hour to 300 and due to the knowledge about trend choose to trim the training dataset above 1800 because experience tells that it does not reach this height and thereby possibly remove noise.
+Different percentage of trims for an entire year can be seen in Figure~\ref{fig:windProductionTrimming}. The cutting of productions will result in the network being able to predict those specific values when they are seen during the year to predict. This is valid if the values are out of the ordinary or unpredictable which is not the case for the wind power production. The curve contains only one irregular drop in the hours between 1200-1300 where the production suddenly drops to zero. The rest of the curve does not make sudden jumps and it follows intermediary steps or trends. When predicting wind power production for an entire year trimming should be omitted. It will be discussed later if it in the hands of a trader could make sense to trim data based on expertise, e.g. the trader knows the production from the last hour to 300 and due to the knowledge about trend choose to trim away the training dataset above 1800 because experience tells that it most likely does not reach this height. Trimming will only make sense if the predictions achieve better accuracy on the same values as the prediction values without trimming.
+
+\table{show how many is trimmed at every level}
 
 \begin{figure}[H]
 \centering
@@ -242,10 +244,6 @@ Different percentage of trims for an entire year can be seen in Figure~\ref{fig:
 
 \todo{calculate the skew, volatility, curve and see if they are related}
 
-\todo{GENERATION HOURS}
-
 \subsection{Conclusion}
 The above analysis has clarified to what extend the different parameters effect the wind production. Not surprisingly wind speed has the greatest influence and wind production followed same trends, but also consumption has shown to have a good co-relation with the production which tells us about a link to the electricity market. The wind production vary from hour to hour which makes the time of day a significant factor. The wind production is decreased significantly during winter so the season will also need to be included in test. The analysis of the wind production development showed the need for including past productions for better knowing the movements to come.
 The air density is according to its formula proportional to wind production and it showed a co-relation of 0,28 in average. The current wind direction and wind production showed a co-relation but further validation needs to be carried out in experiments.
-
-\todo{the wind speed does not map directly to wind production --- it makes sense because we find the co-relation in the last 3 months}
