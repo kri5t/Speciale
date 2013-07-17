@@ -3,7 +3,7 @@ The stock price movements have similarities with electricity prices in terms of 
 A day-ahead forecasting algorithm that predicts electricity prices in the market based on Artificial Neural Network (ANN) and Similar Days Method (SDM) is described in \cite{pjmForecast}. The purpose is to give close estimates for several days to come. The estimates can be used by electricity traders in their decision making but also by transmission companies for different purposes. The companies can use it for scheduling a short-term generator outage in order to predict where it is most inexpensive. It can also be used by actual producers of energy to strategically bid into the market to increase prices. The price estimate itself plays a huge role in decision making in all of these examples.
 
 The combination of ANN and SDM is an attempt to simplify the ANN and make the prediction more accurate. The SDM technique averages five days that are similar to the corresponding forecast day. This makes the algorithm consider the influence of the most similar days and their price development compared to the day we wish to forecast. An actual forecast can be seen in figure ~\ref{fig:actualForecastMay13}.
-\begin{figure}[h!]
+\begin{figure}[!ht]
 \centering
 \includegraphics[width=0.8\linewidth,natwidth=898,natheight=587]{billeder/SDMANNAccuracy.png}
 \caption{Actual day-ahead forecast from Saturday, May 13, 2006 \cite{pjmForecast}}
