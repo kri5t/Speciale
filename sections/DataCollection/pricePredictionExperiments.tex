@@ -7,7 +7,7 @@ This section is based on the input parameters that we identified in section~\ref
 Experiment 1 is based on a dataset consisting of the last 3 months averaging to 2189 hours. We use 200 epochs for each training iteration.
 
 The parameters being examined in this test are the following:
-\begin{itemize}
+\begin{enumerate}
 	\item Last Hours Price (P)
 	\item The Demand (D)
 	\item Wind Speed(WS)
@@ -16,12 +16,12 @@ The parameters being examined in this test are the following:
 	\item The Day of the Week(DoW)
 	\item The Month of the Year(MoY)
 	\item The Season of the Year(SoY)
-\end{itemize}
+\end{enumerate}
 
 The (M) is for Matrix input and states if the input in the time-related rows(ToD, WoD, MoY, SoY) are represented as a matrix.
 
 The table~\ref{table:Top20Prices} contains the following information as well:
-\begin{itemize}
+\begin{enumerate}
 	\item Number in table (\#)
 	\item First hidden layer neuron count (N1)
 	\item Second hidden layer neuron count (N2)
@@ -30,17 +30,17 @@ The table~\ref{table:Top20Prices} contains the following information as well:
 	\item The Day of the Week(DoW)
 	\item The Month of the Year(MoY)
 	\item The Season of the Year(SoY)
-\end{itemize}
+\end{enumerate}
 
 \subsubsection{Hypothesis}
 This is the first and most comprehensive of the tests conducted for price prediction. In this experiment we want to test all the different combinations of the parameters. We expect to see a better curve-fit as we include more variables and more complex variables. In regard to the dataset analysis in section~\ref{sec:ElectricityPriceAnalysis} we see the connection between the aforementioned variables and the price (that we are trying to predict). We have the following expectations based on the dataset analysis:
-\begin{itemize}
+\begin{enumerate}
 	\item The Wind Speed will show a positive impact on the price because of the correlation between the two. Also the wind speed impacts the production of green energy which impacts the overall price of energy.
 	\item The Temperature might have a small impact on the price but there is nearly no correlation between the price and the temperature. If it should have an impact it is probably because of the correlation between the temperature and the demand thus indirect influencing the price.
 	\item The Hourly Time of Day is going to have an effect on the hourly predicted price. The reason being the correlation between the price and what time of day it is and because we are predicting the hourly price; which logically indicates that this parameter is important for such a prediction. 
 	\item The Day of the Week, The Month of the Year and The Seasons of the Year is expected to have a positive impact on the prediction. The impact are expected to get smaller as the inputs become more general e.g season of year; since our training dataset is based on 1/4 of a year. 
 	\item Matrix representation will be better than single node representation of the seasonality. This is due to the fact that matrix is a more granulated input format than single node. This has also been discussed in section~\ref{sec:Matrix}.
-\end{itemize}
+\end{enumerate}
 
 \subsubsection{Results}
 
@@ -103,7 +103,7 @@ If we take a look at the top 20 best input combinations (shown in table~\ref{tab
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\linewidth,natwidth=898,natheight=587]{billeder/PriceExperimentalAnalysis/X1_windspeed_vs_no_windspeed.png}
+\includegraphics[width=\linewidth,natwidth=898,natheight=587]{billeder/PriceExperimentalAnalysis/X1_windspeed_vs_no_windspeed.png}
 \caption{\#1 forecast from table~\ref{table:Top20Prices} with and without wind speed}
 \label{fig:Windspeed_no_windspeed}
 \end{figure}
@@ -112,7 +112,7 @@ The temperature is a less obvious candidate for the prediction of price since th
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\linewidth,natwidth=898,natheight=587]{billeder/PriceExperimentalAnalysis/temperatureComparison.png}
+\includegraphics[width=\linewidth,natwidth=898,natheight=587]{billeder/PriceExperimentalAnalysis/temperatureComparison.png}
 \caption{\#4 forecast from table~\ref{table:Top20Prices} with and without temperature}
 \label{fig:temperature_comparison}
 \end{figure}
@@ -121,7 +121,7 @@ The Hourly Time of Day (ToD) is included in every single combination in the top 
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\linewidth,natwidth=898,natheight=587]{billeder/PriceExperimentalAnalysis/dowComparison.png}
+\includegraphics[width=\linewidth,natwidth=898,natheight=587]{billeder/PriceExperimentalAnalysis/dowComparison.png}
 \caption{\#1 forecast from table~\ref{table:Top20Prices} with and without Time of Day}
 \label{fig:dowComparison}
 \end{figure}
@@ -261,7 +261,7 @@ As we can see in figure~\ref{fig:NoTrim} (where no trimming was applied) the pre
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\linewidth,natwidth=898,natheight=587]{billeder/PriceExperimentalAnalysis/NoTrimming.jpg}
+\includegraphics[width=\linewidth,natwidth=898,natheight=587]{billeder/PriceExperimentalAnalysis/NoTrimming.png}
 \caption{The \#1 forecast with no trimming of the dataset}
 \label{fig:NoTrim}
 \end{figure}
@@ -270,7 +270,7 @@ If we take a look at the same dataset but this time with a 1\% high and low trim
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\linewidth,natwidth=898,natheight=587]{billeder/PriceExperimentalAnalysis/1PTrim.jpg}
+\includegraphics[width=\linewidth,natwidth=898,natheight=587]{billeder/PriceExperimentalAnalysis/1PTrim.png}
 \caption{The \#1 forecast with 1\% trimming in both ends of the dataset}
 \label{fig:1PTrim}
 \end{figure}
@@ -279,7 +279,7 @@ In figure~\ref{fig:AllTrims} we see the dataset from figure~\ref{fig:1PTrim} wit
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\linewidth,natwidth=898,natheight=587]{billeder/PriceExperimentalAnalysis/restOfTrims.jpg}
+\includegraphics[width=\linewidth,natwidth=898,natheight=587]{billeder/PriceExperimentalAnalysis/restOfTrims.png}
 \caption{The \#1 forecast with 2\%(Purple), 3\%(Red), 4\%(Black) and 5\%(Blue) trimming in both ends of the dataset}
 \label{fig:AllTrims}
 \end{figure}
@@ -452,12 +452,20 @@ We ran 3 experiments reflecting the top 3 results from experiment 1. Before the 
 
 The first run shown in table~\ref{table:Statistical1} shows no big improvements between the different strategies but neither do they show an improvement compared to the results from experiment 2 - this combination gave us 47,21 in MAE. Compared to the best result from table~\ref{table:Statistical1} that is only an improvement of 4.10\%.
 
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth,natwidth=898,natheight=587]{billeder/PriceExperimentalAnalysis/X3_Nr1_Best_skew_historical.png}
+\caption{A comparison of \#1 forecast from experiment 2 and 3. This segment is from the middle of the year. (Skew, EWMA)}
+\label{fig:X3_Best_With_MAE}
+\end{figure}
+
 In figure~\ref{fig:X2_X3_3800_4000} we see how the ANN has trouble predicting the unusual low values. This is the same for the experiment 2 prediction as it is for the experiment 3 prediction. The case we see in figure~\ref{fig:X2_X3_3800_4000} is what we hoped the statistical features would help the ANN to be better at predicting; since it has gained some knowledge about the immediate past. Experiment 3 also introduces more jagged curves where it fluctuates up and down a lot compared to the prediction from experiment 2 - which has smoother curves. This is because of the statistical features that add values that are interpreted into either a rising or a falling curve. Compared to the prediction from experiment 2 it does not have this knowledge and only relies on the interaction between the quantifiable parameters from experiment 1.
 
 If we apply all of the statistical features to the prediction we get figure~\ref{fig:X2_X3_AllParameters_3800_4000}. In this figure we can see that it actually is able to drop to the lowest values in the dataset. On the other hand it has trouble rising from the low values which reintroduces the error but in the top of the dataset. This is due to the fact that with all applied statistical features it will follow the curve better but at the same time the historical trend of the curve has to great of an influence on the predictions thus making it unable to rise/fall fast enough to follow the curve.
 
 Another problem with the statistical features are that making predictions with an ANN is about generalizing the inputs to reflect a mathematical function. If the ANN does not see enough examples of the statistical features throughout the training dataset it will not be able to make this generalization and thus not be able to use it efficiently in the predictions of the next 24 hours. If the first prediction in the next 24 hours is wrong (compared to the ideal prices) the statistical features can help elevate/decrease the error since the last known price is added to the calculation of these features(This can be seen in figure~\ref{fig:X2_X3_3816_3840} and in ~\ref{fig:X3_Price_Consump_Worst}). Also the statistical features are more or less unique throughout the whole year since the price does not follow a specific pattern that makes it harder to generalize the statistical inputs in the price prediction. \todo{Print alle values omkring statistical features. Sammenhold dem med price og andre parametre og se om der er en tendens eller om det er totalt random. Dataset analysis}
 
+\todo{Calculated inputs skal staa i forhold til Scatter. Scatter goer den det selv. Calculated der hjaelper vi den.}
 
 The results in table~\ref{table:Statistical2} and ~\ref{table:Statistical3} are control groups to show that it is not a single combination that has no benefit from the statistical features and that other combinations does not benefit from them either.
 
@@ -477,17 +485,17 @@ The results in table~\ref{table:Statistical2} and ~\ref{table:Statistical3} are 
 
 \begin{figure}[H]
 \centering
-\begin{subfigure}{.45\textwidth}
+\begin{subfigure}{.5\textwidth}
   \centering
 	\includegraphics[width=\linewidth,natwidth=898,natheight=587]{billeder/PriceExperimentalAnalysis/X2_X3_3816_3840.png}
 	\caption{A comparison of \#1 forecast from experiment 2 and 3. This is 24 hours from the middle of the year. (Skew, EWMA)}
 	\label{fig:X2_X3_3816_3840}
 \end{subfigure}%
-\begin{subfigure}{.45\textwidth}
+\begin{subfigure}{.5\textwidth}
   \centering
 	\includegraphics[width=\linewidth,natwidth=898,natheight=587]{billeder/PriceExperimentalAnalysis/X2_X3_3816_3840_1hourAhead.png}
 	\caption{1 Hour Ahead of \#1 forecast from experiment 3. This is 24 hours from the middle of the year. (Skew, EWMA)}
-	\label{fig:X2_X3_3816_3840}
+	\label{fig:X2_X3_3816_3840_1hourahead}
 \end{subfigure}
 \caption{Activation functions}
 \label{fig:test}
@@ -770,36 +778,38 @@ We expect the results from these tests to show that the time used to make a year
 	\end{tabular}
 }
 \caption{Trims} % title of Table
-\label{table:Dataset} % is used to refer this table in the text
+\label{table:Dataset_size} % is used to refer this table in the text
 \end{table}
 
 \begin{table}[H]
 \centering  % used for centering table
 \resizebox{0.6\textwidth}{!}{
-	\begin{tabular}{|c|c|c|c|c|c|} % centered columns (7 columns)		
+	\begin{tabular}{|c|c|c|c|c|c|c|} % centered columns (7 columns)		
 	\hline
-	Epochs & Time & H1 & H2 & MAE & \% Deviation\\ [0.5ex] % inserts table 
+	\# & Epochs & Time & H1 & H2 & MAE & \% Deviation\\ [0.5ex] % inserts table 
 	\hline                  % inserts single horizontal line
-	500 & 450.19 & 12 & 11 & 45.17 & - \\ \hline
-	600 & 375.02 & 7 & 11 & 46.14 & 2.16\% \\ \hline
-	900 & 415.28 & 8 & 3 & 47.32 & 4.77\% \\ \hline
-	1100 & 566.83 & 10 & 5 & 47.40 & 4.95\% \\ \hline
-	200 & 264.03 & 14 & 8 & 47.92 & 6.09\% \\ \hline
-	100 & 213.95 & 14 & 11 & 48.13 & 6.55\% \\ \hline
-	1600 & 807.21 & 6 & 17 & 48.23 & 6.78\% \\ \hline
-	300 & 315.01 & 14 & 10 & 48.41 & 7.17\% \\ \hline
-	1200 & 676.83 & 10 & 9 & 48.74 & 7.91\% \\ \hline
-	400 & 345.01 & 12 & 8 & 49.37 & 9.3\% \\ \hline
-	800 & 518.7 & 8 & 16 & 50.15 & 11.02\% \\ \hline
-	1000 & 612.22 & 8 & 18 & 50.67 & 12.19\% \\ \hline
-	1300 & 877.29 & 13 & 13 & 50.78 & 12.42\% \\ \hline
-	1500 & 691.92 & 7 & 8 & 50.82 & 12.52\% \\ \hline
-	700 & 471.98 & 7 & 20 & 52.26 & 15.7\% \\ \hline
-	1400 & 978.75 & 12 & 18 & 54.41 & 20.46\% \\ \hline
+	1 & 500 & 450.19 & 12 & 11 & 45.17 & - \\ \hline
+	2 & 600 & 375.02 & 7 & 11 & 46.14 & 2.16\% \\ \hline
+	3 & 900 & 415.28 & 8 & 3 & 47.32 & 4.77\% \\ \hline
+	4 & 1100 & 566.83 & 10 & 5 & 47.40 & 4.95\% \\ \hline
+	5 & 200 & 264.03 & 14 & 8 & 47.92 & 6.09\% \\ \hline
+	6 & 100 & 213.95 & 14 & 11 & 48.13 & 6.55\% \\ \hline
+	7 & 1600 & 807.21 & 6 & 17 & 48.23 & 6.78\% \\ \hline
+	8 & 300 & 315.01 & 14 & 10 & 48.41 & 7.17\% \\ \hline
+	9 & 1200 & 676.83 & 10 & 9 & 48.74 & 7.91\% \\ \hline
+	10 & 400 & 345.01 & 12 & 8 & 49.37 & 9.3\% \\ \hline
+	11 & 800 & 518.7 & 8 & 16 & 50.15 & 11.02\% \\ \hline
+	12 & 1000 & 612.22 & 8 & 18 & 50.67 & 12.19\% \\ \hline
+	13 & 1300 & 877.29 & 13 & 13 & 50.78 & 12.42\% \\ \hline
+	14 & 1500 & 691.92 & 7 & 8 & 50.82 & 12.52\% \\ \hline
+	15 & 700 & 471.98 & 7 & 20 & 52.26 & 15.7\% \\ \hline
+	16 & 1400 & 978.75 & 12 & 18 & 54.41 & 20.46\% \\ \hline
+	17 & 10 & 177.02 & 14 & 6 & 58.75 & 30.07\% \\ \hline
+	18 & 40 & 1021.64 & 5 & 1 & 0.00 & 0.0\% \\ \hline
 	\end{tabular}
 }
 \caption{Trims} % title of Table
-\label{table:Dataset} % is used to refer this table in the text
+\label{table:Epochs} % is used to refer this table in the text
 \end{table}
 
 \subsubsection{Conclusion}
@@ -849,5 +859,7 @@ We expect the results from these tests to show that the time used to make a year
 	\end{tabular}
 }
 \caption{Trims} % title of Table
-\label{table:Dataset} % is used to refer this table in the text
+\label{table:XHoursAhead} % is used to refer this table in the text
 \end{table}
+
+\todo{Conclusion, concluding remarks. Table der viser udviklingen}
