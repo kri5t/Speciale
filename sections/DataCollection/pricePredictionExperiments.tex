@@ -701,13 +701,7 @@ The last iterations we did was a clone of the experiments conducted in~\cite{sin
 \label{table:scatter_text_no_trim} % is used to refer this table in the text
 \end{table}
 
-\begin{itemize}
-	\item Price
-	\item Consumption
-	\item Time of Day
-	\item Day of Week
-	\item With no trimming
-\end{itemize}
+Variables: Price, Consumption, Time of Day, Day of Week and	With no trimming
 \begin{table}[H]
 \centering  % used for centering table
 \resizebox{0.7\textwidth}{!}{
@@ -875,27 +869,32 @@ In table~\ref{table:XHoursAhead} we see the results from this experiment. The MA
 \resizebox{0.6\textwidth}{!}{
 	\begin{tabular}{|c|c|c|c|c|c|} % centered columns (7 columns)		
 	\hline
-	\# & Epochs & Time & H1 & H2 & MAE & \% Deviation\\ [0.5ex] % inserts table 
+	\# & HoursAhead & H1 & H2 & MAE & \% Deviation\\ [0.5ex] % inserts table 
 	\hline 
-	1 & 500 & 450.19 & 12 & 11 & 45.17 & - \\ \hline
-	2 & 600 & 375.02 & 7 & 11 & 46.14 & 2.16\% \\ \hline
-	3 & 900 & 415.28 & 8 & 3 & 47.32 & 4.77\% \\ \hline
-	4 & 1100 & 566.83 & 10 & 5 & 47.40 & 4.95\% \\ \hline
-	5 & 200 & 264.03 & 14 & 8 & 47.92 & 6.09\% \\ \hline
-	6 & 100 & 213.95 & 14 & 11 & 48.13 & 6.55\% \\ \hline
-	7 & 1600 & 807.21 & 6 & 17 & 48.23 & 6.78\% \\ \hline
-	8 & 300 & 315.01 & 14 & 10 & 48.41 & 7.17\% \\ \hline
-	9 & 1200 & 676.83 & 10 & 9 & 48.74 & 7.91\% \\ \hline
-	10 & 400 & 345.01 & 12 & 8 & 49.37 & 9.3\% \\ \hline
-	11 & 800 & 518.7 & 8 & 16 & 50.15 & 11.02\% \\ \hline
-	12 & 1000 & 612.22 & 8 & 18 & 50.67 & 12.19\% \\ \hline
-	13 & 1300 & 877.29 & 13 & 13 & 50.78 & 12.42\% \\ \hline
-	14 & 1500 & 691.92 & 7 & 8 & 50.82 & 12.52\% \\ \hline
-	15 & 40 & 212.7 & 17 & 10 & 52.06 & 15.26\% \\ \hline
-	16 & 700 & 471.98 & 7 & 20 & 52.26 & 15.7\% \\ \hline
-	17 & 1400 & 978.75 & 12 & 18 & 54.41 & 20.46\% \\ \hline
-	18 & 10 & 177.02 & 14 & 6 & 58.75 & 30.07\% \\ \hline
-	19 & 1 & 168.82 & 15 & 10 & 122.50 & 171.2\% \\ \hline
+	1 & 2 & 5 & 1 & 28.29 & - \\ \hline
+	2 & 3 & 5 & 1 & 31.85 & 12.58\% \\ \hline
+	3 & 1 & 5 & 1 & 34.03 & 20.29\% \\ \hline
+	4 & 4 & 5 & 1 & 34.68 & 22.57\% \\ \hline
+	5 & 5 & 5 & 1 & 37.54 & 32.67\% \\ \hline
+	6 & 6 & 5 & 1 & 39.69 & 40.3\% \\ \hline
+	7 & 7 & 5 & 1 & 40.53 & 43.24\% \\ \hline
+	8 & 8 & 5 & 1 & 42.23 & 49.27\% \\ \hline
+	9 & 9 & 5 & 1 & 43.45 & 53.57\% \\ \hline
+	10 & 10 & 5 & 1 & 44.10 & 55.86\% \\ \hline
+	11 & 14 & 5 & 1 & 45.48 & 60.74\% \\ \hline
+	12 & 11 & 5 & 1 & 45.73 & 61.63\% \\ \hline
+	13 & 13 & 5 & 1 & 46.19 & 63.24\% \\ \hline
+	14 & 12 & 5 & 1 & 46.67 & 64.94\% \\ \hline
+	15 & 16 & 5 & 1 & 47.76 & 68.8\% \\ \hline
+	16 & 15 & 5 & 1 & 48.05 & 69.82\% \\ \hline
+	17 & 21 & 5 & 1 & 48.21 & 70.38\% \\ \hline
+	18 & 19 & 5 & 1 & 48.69 & 72.08\% \\ \hline
+	19 & 17 & 5 & 1 & 48.69 & 72.09\% \\ \hline
+	20 & 18 & 5 & 1 & 49.00 & 73.18\% \\ \hline
+	21 & 20 & 5 & 1 & 49.31 & 74.27\% \\ \hline
+	22 & 22 & 5 & 1 & 49.75 & 75.85\% \\ \hline
+	23 & 23 & 5 & 1 & 50.01 & 76.78\% \\ \hline
+	24 & 24 & 5 & 1 & 50.87 & 79.79\% \\ \hline
 	\end{tabular}
 }
 \caption{Trims} % title of Table
@@ -905,7 +904,7 @@ In table~\ref{table:XHoursAhead} we see the results from this experiment. The MA
 \begin{table}[H]
 \centering  % used for centering table
 \resizebox{0.6\textwidth}{!}{
-	\begin{tabular}{|c|c|c|c|c|c|} % centered columns (7 columns)		
+	\begin{tabular}{|c|c|c|c|c|c|c|} % centered columns (7 columns)		
 	\hline
 	\# & Offset & Time & H1 & H2 & MAE & \% Deviation\\ [0.5ex] % inserts table 
 	\hline 
