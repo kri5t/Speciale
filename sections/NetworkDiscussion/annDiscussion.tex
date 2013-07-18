@@ -12,6 +12,10 @@ NOTE FORM FOR DISCUSSION (NOT YET FINISHED):
 \item The step-ahead forecasting showed how the less hours to predict the better mae. In electricity prices the error is linear to the number of steps to predict until a certain point (around 8) where it flattens out. It is necessary to identify a technique to reduce the elevation of errors from step to step. The problem as significant in wind power production because it heavily relies on wind speed and can follow it whereas the price relies greatly on the last known price --- thus making it more likely to elevate the error. 
 \end{enumerate}
 
+\todo{discuss how different starting points in both cases affected the predictions. Nobody else discusses that the predictions heavily depends on the starting point. We still believe the results to be correct since they were compared based on the same starting points and therefore predicted the same hours}
+
+\todo{discuss reconfigurability of the system when used in real life setting}
+
 \todo{compare matrix between price and production. It is obvious that the bigger difference between high and low during the day makes the benefits from matrix more clear for price than for production}.
 
 \subsection{The importance of DATA ANALYSIS}
@@ -74,3 +78,9 @@ The similar days approach is described in Section~\ref{sec:sdmApproach} and addr
 We can see from Table~\ref{table:theSimilarDaysApproach3monthTable} that the results are much equal to the best input combination from Table~\ref{table:windProdInputParamsTop10}. The purpose of the similar days is to filter out unnecessary noise from the dataset but since the dataset is of a manageable size and in itself contain a seasonal aspect it does not filter out many values as seen in the table. When applying it on an entire year more values are filtered out but it cannot make up for the increase in dataset as seen in Table~\ref{table:theSimilarDaysApproachYearTable}.
 
 \todo{USE THE MODEL FROM UNCERTAIN INFORMATION}
+
+\todo{discuss how the two predictions are related which is seen by the connection between wind speed and price and the 'Day-Ahead Electricity Prices in Denmark: The Impact for Wind Power Forecasts}
+
+\todo{discusss why wind power production variations (as described in the introduction) was not used in electricity price}
+
+\todo{relate to why we can do this without expert help but the next step to integrate a fully working dss would require expert to know what to do configurable}

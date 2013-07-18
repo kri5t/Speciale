@@ -83,7 +83,7 @@ The contributory cause to the bad accuracy in the bottom is month and how it in 
 \end{center}
 \normalsize
 
-Table~\ref{table:predictionMAEUnseenVsTrainingSet} emphasize the importance of predicting on unseen data. The MAE is the same in the bottom 10 as in top 10. The network must be able to predict on cases that are not seen before.
+Table~\ref{table:predictionMAEUnseenVsTrainingSet} emphasize the importance of predicting on data that has never seen before. The network must give accurate outputs for the unseen data \cite{1}. The MAE is the same in the bottom 10 as in top 10. The network must be able to predict on cases that are not seen before.
 
 \footnotesize
 \begin{center}
@@ -312,6 +312,9 @@ Wind speeds are represented by 41 different values in our data set which can exp
 \end{longtable}
 \end{center}
 
+\subsubsection{Prediction - Trimming}
+\todo{make it}
+
 \subsubsection{Best prediction graph}
 The prediction in Figure~\ref{fig:bestMatrixGraph} is much similar to what was seen in the best prediction from experiment one which is obvious from the 3 lines. See Section~\ref{sec:bestInputCombiGraph}. 
 
@@ -504,11 +507,8 @@ The experiment covers basic slope calculation of the curve. The intention is to 
 \label{fig:curveOneAheadvs24Ahead}
 \end{figure}   
 
-
-
-
-
 \subsubsection{Combining the approaches}
+\label{sec:combiningTheApproachesWP}
 Experiments with combinations of the approaches have been performed to investigate whether or not any of them augment each other. Furthermore, adding historical productions as input has been tried as presented in Section~\ref{sec:scatterPaper} and discussed in Section~\ref{sec:scatterStrategy}. The approach adds 3 inputs for the production from one day ago, 3 inputs from the production one week ago, one input from the production two weeks ago, one input from the production three weeks ago and one last input from four weeks ago. The purpose is letting the network itself capture the price development over time instead of calculating it beforehand. Experiment results from each approach is in Table~\ref{table:comparisonStatistics} where the historical volatility with a smoothing factor of 0,70 and 6 previous hours outperforms the other approaches. 
 
 \begin{center}
@@ -720,7 +720,6 @@ The number of epochs influence the prediction significantly which is established
 \subsubsection{Prediction - Dataset size}
 The size of the dataset has already been discussed during the initial experiments with the best combination of input parameters. Too large training sets can result in over-training as described in\cite{1}, e.g. the dataset contains a lot of different cases and because of that has difficulties when predicting the unseen data of only 24 hours. The over-training consists in the network generalizing upon all cases which can become noise when trying to predict only one of these cases. This corresponds well with wind power production and its high volatility and seasonal. This must be differentiated with overfitting with too many epochs where weights are being adjusted to the same training set over and over again whereas it in the case of data size simply "knows to much" because too much data makes it hard to generalize. If a training set contains many of the same cases the over-training will be much similar to the one with epochs since it will see the same case over and over again. The weights will be adjusted to that same case again and again and a lower number of epochs are needed. The training set must not be too small because it needs enough cases to generalize upon. Different training set sizes have been tried and the results can be seen in Table~\ref{table:bestPredictionDatasetSizeTest}. The result is as expected since both the small and big datasets are outperformed by the 3 month.
 
-
 \begin{center}
 \begin{longtable}{|c|c|c|c|}
 \hline
@@ -762,36 +761,144 @@ Different training set sizes and epochs have been tested and used for prediction
 \end{enumerate}
 
 \subsection{Experiment Five - Step-ahead forecasting}
-The purpose is to identify the error in different step-ahead forecasts from 1 hour to 24 hour. In step-ahead forecasting in this thesis every step is dependent on the prediction from the step just before it.
+The purpose is to identify the error in different step-ahead forecasts from 1 hour to 24 hour. In step-ahead forecasting every step is dependent on the prediction from the step just before it but for wind power production that does not necessarily mean that many steps will be the worst since it follows wind speed significantly which will make it possible to correct during the prediction.
 
 \subsubsection{Hypothesis}
-It is expected to see an improved error the fewer steps is included in the step-ahead forecasting. The more steps the higher probability of missing a target.
+It is expected to see an improved error when very few steps is included in the step-ahead forecasting. When the number of steps reach a certain point the results is expected to become more random.
 
 \subsubsection{Prediction}
+Table~\ref{table:stepAheadForecastingWindProduction} shows the results from the step-ahead testing. It is clear that low numbers until 9 is significantly better than the rest. The expectation was to see a more random distribution when reaching a certain point but there is a clear tendency in the high numbers in the button and low numbers in the top. The obvious problem with the results is that they are all predicting the same year and therefore predicting from different places in relation to the number of steps. It will results in the results being incomparable since the prediction starting point is not the same which heavily affects the predictions as discussed in Section~\ref{sec:combiningTheApproachesWP}. This problem becomes more clear when looking at Figure~\ref{fig:best22vsbest24Ahead} where it is obvious that 22-step-ahead starts much differently than 24-step-ahead in Figure~\ref{best24AheadPredictionWithLines}. It has huge effect on the prediction which would also apply in a real life setting. It could again be a discussion about reconfigurability of the ann when used in a decision making setting. The experience of the user comes into place in these predictions because it greatly influences the result where to start from. This is further backed up by Table~\ref{table:stepAheadForecastingWindProduction}.
+
+\begin{center}
+\begin{longtable}{|c|c|c}
+\hline
+\textbf{Steps ahead} & \textbf{MAE}& \textbf{\% Deviation}  \\
+\hline
+\endfirsthead
+\multicolumn{3}{c}%
+{\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
+\hline
+\textbf{Steps ahead} & \textbf{MAE} & \textbf{\% Deviation} \\
+\hline
+\endhead
+\hline \multicolumn{3}{r}{\textit{Continued on next page}} \\
+\endfoot
+\hline
+\endlastfoot
+\arrayrulecolor{light-gray}
+1 & 51,5 & 0,0\%  \\ \hline
+2 & 65,91 & 27,98\%  \\ \hline
+3 & 78,94 & 53,28\%  \\ \hline
+4 & 91,87 & 78,39\%  \\ \hline
+6 & 100,66 & 95,46\%  \\ \hline
+5 & 103,58 & 101,13\%  \\ \hline
+9 & 110,47 & 114,5\%  \\ \hline
+7 & 110,53 & 114,62\%  \\ \hline
+11 & 116,88 & 126,95\%  \\ \hline
+8 & 121,62 & 136,16\%  \\ \hline
+24 & 122,51 & 137,88\%  \\ \hline
+17 & 125,87 & 144,41\%  \\ \hline
+19 & 129,88 & 152,19\%  \\ \hline
+23 & 130,85 & 154,08\%  \\ \hline
+15 & 132,94 & 158,14\%  \\ \hline
+16 & 134,37 & 160,91\%  \\ \hline
+10 & 134,5 & 161,17\%  \\ \hline
+14 & 136,6 & 165,24\%  \\ \hline
+12 & 137,09 & 166,19\%  \\ \hline
+20 & 137,79 & 167,55\%  \\ \hline
+13 & 138,11 & 168,17\%  \\ \hline
+18 & 138,97 & 169,84\%  \\ \hline
+21 & 140,8 & 173,4\% \\ \hline
+22 & 146,28 & 184,04\% \\ \hline
+\caption{Step-ahead prediction from 1-24}
+\label{table:stepAheadForecastingWindProduction}
+\end{longtable}
+\end{center}
+
+\begin{center}
+\begin{longtable}{|c|c|c|}
+\hline
+\textbf{Starting point} & \textbf{MAE} & \textbf{\% Deviation} \\
+\hline
+\endfirsthead
+\multicolumn{3}{c}%
+{\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
+\hline
+\textbf{Steps ahead} & \textbf{MAE} & \textbf{\% Deviation} \\
+\hline
+\endhead
+\hline \multicolumn{3}{r}{\textit{Continued on next page}} \\
+\endfoot
+\hline
+\endlastfoot
+\arrayrulecolor{light-gray}
+16 & 121,73 & 0,0\%  \\ \hline
+1 (x) & 123,25 & 1,25\%  \\ \hline
+8 & 124,06 & 1,91\%  \\ \hline
+7 & 124,52 & 2,29\%  \\ \hline
+14 & 126,12 & 3,67\%  \\ \hline
+13 & 127,49 & 4,73\%  \\ \hline
+22 & 129,94 & 6,74\%  \\ \hline
+17 & 130,49 & 7,2\%  \\ \hline
+5 & 139,56 & 14,65\%  \\ \hline
+24 & 139,79 & 14,84\%  \\ \hline
+12 & 140,15 & 15,13\%  \\ \hline
+3 & 140,23 & 15,2\%  \\ \hline
+2 & 140,57 & 15,48\%  \\ \hline
+19 & 140,62 & 15,52\%  \\ \hline
+20 & 140,68 & 15,57\%  \\ \hline
+10 & 140,85 & 15,71\%  \\ \hline
+21 & 141,19 & 15,99\%  \\ \hline
+18 & 141,2 & 15,99\%  \\ \hline
+4 & 141,51 & 16,25\%  \\ \hline
+23 & 142,01 & 16,66\%  \\ \hline
+15 & 143,08 & 17,54\%  \\ \hline
+11 & 143,74 & 18,08\%  \\ \hline
+6 & 144,04 & 18,33\%  \\ \hline
+9 & 151,36 & 24,34\%  \\ \hline
+\caption{Step-ahead prediction from 1-24}
+\label{table:stepAheadForecastingWindProduction}
+\end{longtable}
+\end{center}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.99\linewidth]{billeder/best22vsbest24Ahead.png}
+\caption{22-step-ahead forecast}
+\label{fig:best22vsbest24Ahead}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.99\linewidth]{billeder/best24AheadPredictionWithLines.png}
+\caption{24-step-ahead forecast}
+\label{fig:best24AheadPredictionWithLines}
+\end{figure} 
 
 \subsubsection{Conclusion}
 
-\subsection{Conclusion Remarks}
+\subsection{Concluding Remarks}
 Experiments have been conducted to identify the best combination of inputs as well as the impact of data manipulation, calculated inputs and black box optimization. Each experiment concludes on its findings in relation to experiments before it and expectations from the wind power production analysis. Table~\ref{table:comparisonOfResultsWindProduction} shows the overall improvement of 5,35\% from the first experiment to the last. Experiment five is left out because it cannot be compared with the other since it predicts different number of hours. The last two steps are almost similar. A short summary follows here. 
 
 \begin{enumerate}
 \item First experiment showed the importance of the correct input parameters used in the Artificial Neural Network. Temperature, last known production, wind speed and time of day was the best combination. Furthermore, too large datasets seriously decreased the accuracy due to over-training of the network.
-\item Experiment two showed a slight increase (1,3\%) in accuracy when applying matrix on time of day. Trimming makes less sense in a prediction simulation over an entire since no completely unpredictable values exist in the wind power production training set. It was concluded that trimming experiments should be conducted because it can make sense in individual predictions where trimming can help approach by trimming away outer values.
+\item Experiment two showed a slight increase (1,3\%) in accuracy when applying matrix on time of day. Trimming makes less sense in a prediction simulation over an entire since no completely unpredictable values exist in the wind power production training set. The predictions with trimming showed a decrease in accuracy compared to without trimming.
 \item Third experiment tried different approaches to calculated inputs in relation to letting the network itself calculate statistics by adding various previous productions --- the approaches are slope calculation, skewness and volatility. The best of the approaches were volatility which obtained an increase of 3,52\% in relation to the prediction just without it.
 \item The purpose of the fourth experiment was to identify the correct number of epochs and validate the correct size of the training set. The best size was 3 month of data and with 2-300 epochs. The experiment also illustrated how the network can easily be under- or overfitted with too many or few epochs, or be under- or overtrained  according to the size of the training set.
-\item The fifth experiment regarding step-ahead forecasting illustrated how the error can be elevated due to how subsequent steps depend on the prediction from its predecessor.
+\item The fifth experiment regarding step-ahead forecasting illustrated how the error can be elevated due to how subsequent steps depend on the prediction from its predecessor. This experiment also uncovered the huge difference in starting points of the prediction. The results varied all the way from 121,73 to 151,36 in MAE. The best best configuration of input parameters, epochs and size of data is still considered to be the best since all experiments had the same starting point and therefore predicted the same hours in all steps. This will be discussed further.
 \end{enumerate}
 
+\footnotesize
 \begin{center}
 \begin{longtable}{|c|c|c|c|c|}
 \hline
-\textbf{Best input combi} & \textbf{Best input with matrix} & \textbf{Best volatility} & \textbf{All time best} & \textbf{Overall improvement} \\
+\textbf{Exp: 1} & \textbf{Exp: 2} & \textbf{Exp: 3} & \textbf{Exp: 4} & \textbf{Overall improvement} \\
 \hline
 \endfirsthead
 \multicolumn{5}{c}%
 {\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
 \hline
-\textbf{Best input combi} & \textbf{Best input with matrix} & \textbf{Best volatility} & \textbf{All time best} & \textbf{Overall improvement} \\
+\textbf{Exp: 1} & \textbf{Exp: 2} & \textbf{Exp: 3} & \textbf{Exp: 4} & \textbf{Overall improvement} \\
 \hline
 \endhead
 \hline \multicolumn{5}{r}{\textit{Continued on next page}} \\
@@ -804,3 +911,4 @@ Experiments have been conducted to identify the best combination of inputs as we
 \label{table:comparisonOfResultsWindProduction}
 \end{longtable}
 \end{center}
+\normalsize
