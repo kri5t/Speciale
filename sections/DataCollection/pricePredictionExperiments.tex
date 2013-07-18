@@ -412,16 +412,7 @@ The curve behavior analysis is conducted to tell us something about the gradient
 \subsubsection{Results}
 We ran 3 experiments reflecting the top 3 results from experiment 1. Before the results of the experiments we list the input parameters that we use the strategies on. 
 
-\begin{itemize}
-	\item Price
-	\item Consumption
-	\item Wind Speed
-	\item Temperature
-	\item Time of Day (Matrix)
-	\item Day of Week (Matrix)
-	\item Season of Year (Matrix)
-\end{itemize}
-
+Variables: Price, Consumption, Wind Speed, Temperature, Time of Day (Matrix), Day of Week (Matrix) and Season of Year (Matrix)
 \begin{table}[H]
 \centering  % used for centering table
 \resizebox{0.7\textwidth}{!}{
@@ -501,16 +492,7 @@ The results in table~\ref{table:Statistical2} and ~\ref{table:Statistical3} are 
 \label{fig:1hourAhead}
 \end{figure}
 
-\begin{itemize}
-	\item Price
-	\item Consumption
-	\item Wind Speed
-	\item Temperature
-	\item Time of Day (Matrix)
-	\item Day of Week
-	\item Season of Year (Matrix)
-\end{itemize}
-
+Variables: Price, Consumption, Wind Speed, Temperature, Time of Day (Matrix), Day of Week and Season of Year (Matrix)
 \begin{table}[H]
 \centering  % used for centering table
 \resizebox{0.7\textwidth}{!}{
@@ -539,15 +521,7 @@ The results in table~\ref{table:Statistical2} and ~\ref{table:Statistical3} are 
 \label{table:Statistical2} % is used to refer this table in the text
 \end{table}
 
-\begin{itemize}
-	\item Price
-	\item Consumption
-	\item Wind Speed
-	\item Temperature
-	\item Time of Day (Matrix)
-	\item Month of Year (Matrix)
-\end{itemize}
-
+Variables: Price, Consumption, Wind Speed, Temperature, Time of Day (Matrix) and Month of Year (Matrix)
 \begin{table}[H]
 \centering  % used for centering table
 \resizebox{0.7\textwidth}{!}{
@@ -603,10 +577,7 @@ The most noteworthy are that the two are very similar and the one with trimming 
 \label{fig:X3_Price_Consump_Worst}
 \end{figure}
 
-\begin{itemize}
-	\item Price
-	\item Consumption
-	\item With no trimming
+Variables: Price, Consumption and With no trimming
 \end{itemize}
 
 \begin{table}[H]
@@ -638,9 +609,7 @@ The most noteworthy are that the two are very similar and the one with trimming 
 \end{table}
 
 \begin{itemize}
-	\item Price
-	\item Consumption
-	\item With 1\% trimming
+	Variables: Price, Consumption and With 1\% trimming
 \end{itemize}
 \begin{table}[H]
 \centering  % used for centering table
@@ -672,13 +641,7 @@ The most noteworthy are that the two are very similar and the one with trimming 
 
 The last iterations we did was a clone of the experiments conducted in~\cite{singhal2011electricity}. This setup includes price, consumption, time of day, day of week and scatter. We did the prediction both with 1\% and no trim as they did in the text (no spikes, small spikes and large spikes). The results can be seen in table ~\ref{table:scatter_text_no_trim} and ~\ref{table:scatter_text_1p_trim}. The results with trimming and the best strategies gives us a result of 52.04 MAE which is 14.75\% worse than the best result from table~\ref{table:Statistical1} and the results without trimming is 71.51 MAE which is 25.19\% worse than the best result from table~\ref{table:Top20Prices} in experiment 1. We cannot compare the results directly to the ones they present in the paper because they only present a prediction of 48 hours and they do not tell us whether this is on unseen data or it is on the same dataset as they trained on. Neither do we know whether they simulate the full 48 hour prediction or they do it 1-hour at a time.
 
-\begin{itemize}
-	\item Price
-	\item Consumption
-	\item Time of Day
-	\item Day of Week
-	\item With no trimming
-\end{itemize}
+Variables: Price, Consumption, Time of Day, Day of Week and With no trimming
 \begin{table}[H]
 \centering  % used for centering table
 \resizebox{0.7\textwidth}{!}{
