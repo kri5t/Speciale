@@ -848,6 +848,8 @@ The following parameters were tested:
 \subsubsection{Hypothesis}
 In this experiment we anticipate to see a decrease in MAE as we increase the number of hours the ANN has to predict. The reason for this is the elevation of the error when we add more hours to predict ahead. The elevation comes from the last known price which will be the last predicted price from hour 2 and onwards thus elevating the error. The prediction of price relies in a great extend on the last-known price and therefore it will have a significant effect on the price.
 
+We also expect to see that the MAE will change when we shift the offsets. The offsets decide where the first and (in most cases) best prediction will start. If these first predictions hit good spots where the error margin will not rise as fast as other spots around it, then we will see a lower MAE.
+
 \subsubsection{Results}
 In table~\ref{table:XHoursAhead} we see the results from this experiment. The MAE is linear with the number of hours ahead during the first 10 predictions. From there it gets a bit more random which gives the worst result but 22, 23 and 24 again follows a linear pattern. From around 10 hours ahead the increase in MAE seems to be slowing down. This is because it is not only the last known price that dictates what the new prediction will be. The other input parameters (wind speed, time of day etc.) will also influence the price. So when we hit a certain point in the prediction (which seems to be around 10 predictions ahead) the other input parameters will prevent the elevation of errors further. This can be seen in figure~\ref{fig:24HoursAhead_elevationOfError} where the black lines denotes 24 hours. We see in the 24 hours prediction (with the black box overlay) how the error is rising but when the prices start to fall so does the prediction. If it had been the last known price that dictated the next prediction then the predictions would have kept rising and so would the MAE. This is why we see that the MAE stagnates at about 10 hours ahead and above.
 
@@ -913,7 +915,7 @@ In the 10 hours ahead predict seen in figure~\ref{fig:10HoursAhead} we again see
 \label{table:XHoursAhead} % is used to refer this table in the text
 \end{table}
 
-In table~\ref{table:XHoursAhead} we see the results from the sliding window test. The entry with offset 0 is the same setup as prior experiments. The rest shows the difference in MAE when we shift where the 24 hours ahead predictions begin. We cover all possible offsets by doing 0-23 thus covering every offset from the first 24 hour prediction and onwards. From this experiment we show how much the right offset means for the total MAE in a years prediction. The biggest difference are between offset 4 and offset 7 with a difference of 15,04\%. These differences are connected to the elevation of error we talked about in the last result. If we hit the right spots where the elevation of error are not going to have a big impact this will lower the overall MAE thus giving us a better result. 
+In table~\ref{table:XHoursAhead} we see the results from the sliding window test. The entry with offset 0 is the same setup as prior experiments. The rest shows the difference in MAE when we shift where the 24 hours ahead predictions begin. We cover all possible offsets by doing 0-23 thus covering every offset from the first 24 hour prediction and onwards. From this experiment we show how much the right offset means for the total MAE in a years prediction. The biggest difference are between offset 4 and offset 7 with a difference of 15,04\%. These differences are connected to the elevation of error we talked about in the last result. If we hit the right spots where the elevation of error are not going to have a big impact this will lower the overall MAE thus giving us a better result.  
 
 \begin{table}[H]
 \centering  % used for centering table
@@ -951,6 +953,14 @@ In table~\ref{table:XHoursAhead} we see the results from the sliding window test
 \caption{Trims} % title of Table
 \label{table:XHoursAhead} % is used to refer this table in the text
 \end{table}
+
+\subsubsection{Conclusion}
+In the hours ahead prediction we saw that the error margin was rising up until 10 hours ahead and from there only increasing slightly. This is because of the error margin not escalating infinitely but at some point will adapt to the changes in the other parameters pulling it in the right direction thus stopping the error from elevating further.
+
+The offsets showed us a difference of 15,04\% from the best to the worst starting point. This difference in MAE is present because of how good a starting point the prediction will hit in general. The starting point is where the errors will start originating from; so if we can make the first prediction better the rest will in general also be better since we use the history of the curve to predict the next hourly price.
+
+\subsection{Concluding remarks}
+
 \todo{Conclusion, concluding remarks. Table der viser udviklingen}
 
 \todo{LAV TREND ANALYSE, LAV PRICE og CONSuMPTION graf}
