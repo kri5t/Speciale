@@ -44,6 +44,7 @@ This is the first and most comprehensive of the tests conducted for price predic
 \end{enumerate}
 
 \subsubsection{Results}
+We present the results from this experiment in table~\ref{table:Top20Prices}. The input parameters will be analyzed one by one in the next subsections. After that we will talk about some of the problems with some of these input parameters.
 
 \begin{table}[H]
 \centering  % used for centering table
@@ -357,6 +358,9 @@ In this experiment we had 4 variables that we tested:
 The setup of the different strategies have been tested on the best result from experiment one.
 
 \subsubsection{EWMA}
+The EWMA is used to calculate the volatility of the curve. The electricity price is highly volatile and therefore we anticipate that knowledge about the historical volatility will help the predictions. In the EWMA we have a smoothing factor which indicates how sensitive the strategy will be towards fluctuations in the curve. A lower smoothing factor will allow for more rapid changes and vice versa. In table ~\ref{table:SmoothingFactorTest} we see that the best result is a smoothing factor of 0.9 and a stack size of 16.
+\todo{Skriv i forhold til stack size}
+
 \begin{table}[H]
 \centering  % used for centering table
 \resizebox{0.5\textwidth}{!}{
@@ -380,11 +384,9 @@ The setup of the different strategies have been tested on the best result from e
 \label{table:SmoothingFactorTest} % is used to refer this table in the text
 \end{table}
 
-The EWMA is used to calculate the volatility of the curve. The electricity price is highly volatile and therefore we anticipate that knowledge about the historical volatility will help the predictions. In the EWMA we have a smoothing factor which indicates how sensitive the strategy will be towards fluctuations in the curve. A lower smoothing factor will allow for more rapid changes and vice versa. In table ~\ref{table:SmoothingFactorTest} we see that the best result is a smoothing factor of 0.9 and a stack size of 16.
-\todo{Skriv i forhold til stack size}
-
-
 \subsubsection{Skewness}
+The skewness denotes whether an observation falls to the left or the right of the median as described in section~\ref{sec:skewness}. This is used to determine in what direction the graph is currently moving thus giving us information about the trend. We experimented with how many historical prices we had to include in the calculation of the skewness and ended up with 4 being the best even though they are very close.
+
 \begin{table}[H]
 \centering  % used for centering table
 \resizebox{0.5\textwidth}{!}{
@@ -406,9 +408,9 @@ The EWMA is used to calculate the volatility of the curve. The electricity price
 \label{table:SkewnessTest} % is used to refer this table in the text
 \end{table}
 
-The skewness denotes whether an observation falls to the left or the right of the median as described in section~\ref{sec:skewness}. This is used to determine in what direction the graph is currently moving thus giving us information about the trend. We experimented with how many historical prices we had to include in the calculation of the skewness and ended up with 4 being the best even though they are very close.
-
 \subsubsection{Slope calculation}
+The slope calculation is conducted to tell us something about the gradient of the current curve as described in section~\ref{sec:curveAnalysis}. We examine here how many historical prices should be included in the curve gradient analysis to say something about what direction (up, down or steady) the curve is heading. The test shows us that a stack size of 4 prices is the best but again they are not differing much.
+
 \begin{table}[H]
 \centering  % used for centering table
 \resizebox{0.5\textwidth}{!}{
@@ -429,8 +431,6 @@ The skewness denotes whether an observation falls to the left or the right of th
 \caption{Slope calculation stack size} % title of Table
 \label{table:CurveTest} % is used to refer this table in the text
 \end{table}
-
-The slope calculation is conducted to tell us something about the gradient of the current curve as described in section~\ref{sec:curveAnalysis}. We examine here how many historical prices should be included in the curve gradient analysis to say something about what direction (up, down or steady) the curve is heading. The test shows us that a stack size of 4 prices is the best but again they are not differing much.
 
 \subsubsection{Results}
 We ran 3 experiments reflecting the top 3 results from experiment one. Before the results of the experiments we list the input parameters that we use the strategies on. 
@@ -469,7 +469,7 @@ The first run shown in table~\ref{table:Statistical1} shows no big improvements 
 \begin{figure}[H]
 \centering
 \includegraphics[width=\linewidth]{billeder/PriceExperimentalAnalysis/X3_Nr1_Best_skew_historical.png}
-\caption{\#1 forecast from experiment three. Shows how well it follows the curve. The black curve in the bottom is the average error for each prediction.}
+\caption{\#1 forecast from experiment three. Shows how well it follows the curve. The black curve in the bottom is the error for each prediction.}
 \label{fig:X3_Best_With_MAE}
 \end{figure}
 
@@ -749,12 +749,14 @@ We expect the results from these tests to show that the time used to make a year
 \subsubsection{Results}
 The results from table~\ref{table:Dataset_size} shows the impact of increasing the size of the training dataset. The influence of increasing the size shows a deviation of 7,19\%. It shows that the best result are the size equivalent to half a year. The second best are the 1 year prediction which might be because we included the seasonal parameters as we showed in experiment one; where the addition of the Month of Year(MoY) parameter increased the performance of a one year training set. The one we have used throughout the preceding results are the third best and gave a result that was 6,46\% worse than the best thus we might be able to increase some of the scores from earlier experiments if we use a dataset consisting of data from half a year. Another interesting point here is how the time to a prediction increases linearly with the amount of entries in the dataset - from 232 seconds(3.9 minutes) to 844 seconds(14.1 minutes). The increase in time are worth mentioning since we are doing hourly based calculations. If a fast prediction is needed a trader might chose a faster method with a loss in performance.
 
+\todo{Write something about under- and overtraining. Does not seem to be the case here.}
+
 \begin{table}[H]
 \centering  % used for centering table
-\resizebox{0.6\textwidth}{!}{
+\resizebox{0.8\textwidth}{!}{
 	\begin{tabular}{|c|c|c|c|c|c|} % centered columns (7 columns)
 	\hline
-	Entries & Time & H1 & H2 & MAE & \% ranking\\ [0.5ex] % inserts table 
+	Entries & Time(seconds) & H1 & H2 & MAE & \% ranking\\ [0.5ex] % inserts table 
 	\hline                  % inserts single horizontal line
 	4378 & 397,28 & 6  & 11 & 46,34 & - \\ \hline
 	8756 & 844,68 & 12 & 5  & 47,82 & 3,19\% \\ \hline
@@ -762,11 +764,13 @@ The results from table~\ref{table:Dataset_size} shows the impact of increasing t
 	6567 & 677,33 & 14 & 6  & 49,67 & 7,19\% \\ \hline
 	\end{tabular}
 }
-\caption{Trims} % title of Table
+\caption{The results from the dataset size test.} % title of Table
 \label{table:Dataset_size} % is used to refer this table in the text
 \end{table}
 
-In table~\ref{table:Epochs} we see the effects of epochs used when training the network. We see a tendency that values between 100 and 1000 are the best number of epochs to use in this network. 40 epochs also perform very well which are a bit surprising since the number of epochs used to train the network reflects how many iterations the network undergoes to find the best match between the weights. 40 epochs seems like a small number of iterations and we thought that it might have been more random. The random can be seen in 1 epoch training(\#27 in ~\ref{table:Epochs}) where the network gets one attempt to correct the weights and find a generalization of the parameters (which would be a lucky guess if that happened). The 1 epoch run can be seen in figure~\ref{fig:1epoch}. Another thing to notice here are the time used to run the pruning algorithm and predict the next years data. We can see how the time rises when the number of epochs rises. Also the number of neurons in each layer have an influence on the time used to do the predictions (more neurons equals more time used).
+In table~\ref{table:Epochs} we see the effects of epochs used when training the network. We see a tendency that values between 100 and 1000 are the best number of epochs to use in this network. 40 epochs also perform very well which are a bit surprising since the number of epochs used to train the network reflects how many iterations the network undergoes to find the best match between the weights. The under fitting of the weights can be seen in 1 epoch training(\#27 in ~\ref{table:Epochs}) where the network gets one attempt to correct the weights and find a generalization of the parameters (which would be a lucky guess if that happened). The 1 epoch run can be seen in figure~\ref{fig:1epoch}. We also see over fitting of the dataset when running more than 1800 epochs the performance drops at least 10.26\% and gets worse with more epochs. Another thing to notice here are the time used to run the pruning algorithm and predict the next years data. We can see how the time rises when the number of epochs rises. Also the number of neurons in each layer have an influence on the time used to do the predictions (more neurons equals more time used).
+
+\todo{Time perspective not that relevant when we are talking 24 hours ahead because we are not predicting a full year every time we run it thus making the difference in time very insignificant.}
 
 \begin{figure}[H]
 \centering
@@ -811,7 +815,7 @@ In table~\ref{table:Epochs} we see the effects of epochs used when training the 
 	27 & 1    &168.82  & 15 & 10 & 122.50 & 171.2\% \\ \hline
 	\end{tabular}
 }
-\caption{Trims} % title of Table
+\caption{The results from the epochs experiment.} % title of Table
 \label{table:Epochs} % is used to refer this table in the text
 \end{table}
 
@@ -911,7 +915,7 @@ In the 10 hours ahead predict seen in figure~\ref{fig:10HoursAhead} we again see
 	24 & 24 & 5 & 1 & 50,87 & 129,48\% \\ \hline
 	\end{tabular}
 }
-\caption{} % title of Table
+\caption{The results from the hours ahead predictions.} % title of Table
 \label{table:XHoursAhead} % is used to refer this table in the text
 \end{table}
 
@@ -922,7 +926,7 @@ In table~\ref{table:XHoursAhead} we see the results from the sliding window test
 \resizebox{0.8\textwidth}{!}{
 	\begin{tabular}{|c|c|c|c|c|c|c|} % centered columns (7 columns)		
 	\hline
-	\# & Offset & Time & H1 & H2 & MAE & \% ranking\\ [0.5ex] % inserts table 
+	\# & Offset & Time(seconds) & H1 & H2 & MAE & \% ranking\\ [0.5ex] % inserts table 
 	\hline 
 	1  & 4  & 370,54 & 9  & 12 & 46,63 & - \\ \hline
 	2  & 0  & 333,96 & 8  & 10 & 47,07 & 0,95\% \\ \hline
@@ -950,8 +954,8 @@ In table~\ref{table:XHoursAhead} we see the results from the sliding window test
 	24 & 7  & 410,11 & 9  & 18 & 53,64 & 15,04\% \\ \hline
 	\end{tabular}
 }
-\caption{Trims} % title of Table
-\label{table:XHoursAhead} % is used to refer this table in the text
+\caption{The difference in MAE depending on the starting offset} % title of Table
+\label{table:Offsets} % is used to refer this table in the text
 \end{table}
 
 \subsubsection{Conclusion}
@@ -959,8 +963,30 @@ In the hours ahead prediction we saw that the error margin was rising up until 1
 
 The offsets showed us a difference of 15,04\% from the best to the worst starting point. This difference in MAE is present because of how good a starting point the prediction will hit in general. The starting point is where the errors will start originating from; so if we can make the first prediction better the rest will in general also be better since we use the history of the curve to predict the next hourly price.
 
+\newpage
 \subsection{Concluding remarks}
+We conducted a series of experiments where we tested the parameters we identified in the electricity price analysis section ~\ref{sec:ElectricityPriceAnalysis}. We have shown the results from 5 aspects of the price predicting artificial neural network we created. We presented how the different parameters and setups changes the output and accuracy of the ANN. In table~\ref{table:OverallImprovement} the best results from the experiments are presented and the overall improvement have been calculated to be 26.62\% from the initial tests to the best result in exp 3.
 
-\todo{Conclusion, concluding remarks. Table der viser udviklingen}
+\begin{table}[H]
+\centering  % used for centering table
+\resizebox{0.8\textwidth}{!}{
+	\begin{tabular}{|c|c|c|c|c|} % centered columns (7 columns)		
+	\hline
+	Exp 1 & Exp 2 & Exp 3 & Exp 4 & Overall improvement\\ [0.5ex] % inserts table 
+	\hline 
+	57.12 & 47,21 & 45,11 & 45.17 & 26.62\% \\ \hline
+	\end{tabular}
+}
+\caption{The best results from the experiments and the overall improvement.} % title of Table
+\label{table:OverallImprovement} % is used to refer this table in the text
+\end{table}
+
+\begin{enumerate}
+	\item Experiment one: This experiment showed how the different input parameters influenced the accuracy of the ANN and how important it is to select the right inputs. We also experimented with the format of the inputs; which we either represented as a matrix or a single input node. The best combination from this test is what we based the rest of the tests on. The best test result gave us the combination of last known price, consumption, wind speed, temperature, the time of the day, the day of the week and the season of the year.
+	\item Experiment two: We experimented with trimming and showed the benefits from trimming the dataset and the possible loss of accuracy on the upper and lower bound of the dataset. It only makes sense to trim the top and bottom of the dataset if extreme outliers are apparent in the dataset. We saw in the wind production experiment two~\ref{sec:windProdExperimentTwo} how trimming the dataset can have a negative effect on the outcome if the dataset does not contain extreme outliers. Trimming improved the price prediction by 20.99\% compared to the results from experiment one.
+	\item Experiment three: This experiment shows the effect of adding calculated inputs to the ANN and how it improves the predictions. The calculated inputs improved the prediction of the results by 4.65\% and contained the EWMA and the skewness inputs. We also tested scattered prices where the ANN on its own makes the connections between the historical prices and the output these were only effective on the simplest of the datasets (price and consumption) but did not have any effect on the best combination from experiment one.
+	\item Experiment four: Here we tested different black box optimizations such as number of epochs used to train the network and size of the dataset. The best result here gave us 45,17 which were 0.13\% worse than experiment three but this is probably because of the randomness factor that will always have and influence when working with predictions.
+	\item Experiment five: Shows how the ANN is affected by changing the number of hours ahead it has to predict. The error margin increases quite a lot when we add more hours ahead to predict. This is because of the dependency on the last hours price; which for each hour predicted might add more error to the calculations. We also showed the influence of what offset we start the predictions from. This shows that a good starting position can improve the results by 15.04\% from the worst to the best starting offset.
+\end{enumerate}
 
 \todo{LAV TREND ANALYSE, LAV PRICE og CONSuMPTION graf}
