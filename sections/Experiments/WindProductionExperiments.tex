@@ -418,6 +418,7 @@ The variables used in this experiment series:
 \end{itemize}
 
 \subsubsection{Prediction - Historical Volatility}
+\label{sec:predictionHistVol}
 Historical Volatility is presented in Section~\ref{sec:usingStatisticalInput}. The purpose is to calculate the historical volatility for one hour based on a predefined number of previous hours, e.g. every hour in the training set will calculate the historical volatility from for instance 20 hours just before it (except from the 20 first hours). The volatility calculation will be based on EWMA from Section~\ref{sec:ewmaVolatility} which requires a smoothing factor between 0-1 that needs to be found through experiments. The experiment will be conducted for smoothing factors between 0,1 and 0,9 on hours between 4-24. When the best rate with the best number of hours has been established for the dataset it will be tested on top-3 from Table~\ref{table:theWindProdInputParamsTop10WithMatrix}. The improvement is 3,52\% better than the best prediction without it. 
 
 \footnotesize
@@ -454,7 +455,7 @@ Historical Volatility is presented in Section~\ref{sec:usingStatisticalInput}. T
 \end{center}
 \normalsize
 
-All combinations of smoothing factor and previous hours can be seen in Appendix~\ref{sec:historicalVolatiltiyResultsAppendix} --- only top 10 is shown here. The results in Table~\ref{table:historicalVoltalityHours} show that a smoothing factor of 0,70 calculated on the 6 previous hours is the best choice. The expectation was to get a low smoothing factor due to the fluctuations in the wind power production as described in Section~\ref{sec:ewmaVolatility}. The reason for the higher factor is that the number of previous hours is too small to reflect the many changes in the entire training set. We can see from the graph in Figure~\ref{fig:bestVolatilityVsMatrixGraph} that the curves are much similar to the curves without volatility which is expected since the volatility approach is an augmentation of the best prediction with matrix. A noticeable difference is that the volatility under-shoots  its targets in the bottom of many curves compared to the matrix approach in both Figure~\ref{fig:bestVolatilityVsMatrixGraph} and~\ref{fig:bestVolatilityVsMatrixGraph350-525}. It moves more rapidly from top to bottom. Another thing worth mentioning from Figure~\ref{fig:bestVolatilityVsMatrixGraph350-525} is how the addition of historical volatility is capable of predicting all the way to the top in 415 and 480 compared to the standard matrix prediction indicated by the blue line.
+All combinations of smoothing factor and previous hours can be seen in Appendix~\ref{sec:historicalVolatiltiyResultsAppendix} --- only top 10 is shown here. The results in Table~\ref{table:historicalVoltalityHours} show that a smoothing factor of 0,70 calculated on the 6 previous hours is the best choice. The expectation was to get a low smoothing factor due to the fluctuations in the wind power production as described in Section~\ref{sec:ewmaVolatility}. The reason for the higher factor can be explained with the number of previous hours being too small to reflect the many changes. We can see from the graph in Figure~\ref{fig:bestVolatilityVsMatrixGraph} that the curves are much similar to the curves without volatility which is expected since the volatility approach is an augmentation of the best prediction with matrix. A noticeable difference is that the volatility under-shoots its targets in the bottom of many curves compared to the matrix approach in both Figure~\ref{fig:bestVolatilityVsMatrixGraph} and~\ref{fig:bestVolatilityVsMatrixGraph350-525}. It moves more rapidly from top to bottom. Another thing worth mentioning from Figure~\ref{fig:bestVolatilityVsMatrixGraph350-525} is how the addition of historical volatility is capable of predicting all the way to the top in 415 and 480 compared to the standard matrix prediction indicated by the blue line. The under- and overshooting compared to the matrix only prediction is also verified in Figure~\ref{volatilityBest700-1000}.
 
 \begin{figure}[H]
 \centering
@@ -469,6 +470,15 @@ All combinations of smoothing factor and previous hours can be seen in Appendix~
 \caption{Wind production prediction for hours 350-525 hours in 2012 with historical volatility as input}
 \label{fig:bestVolatilityVsMatrixGraph350-525}
 \end{figure} 
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.99\linewidth]{billeder/volatilityBest700-1000.png}
+\caption{Wind production prediction for hours 700-1000 hours in 2012 with historical volatility as input}
+\label{fig:volatilityBest700-1000}
+\end{figure} 
+
+
 
 \subsubsection{Prediction - Skewness}
 Skewness is a calculation of how much a distribution leans to one side of the mean which is described in more detail in Section~\ref{sec:skewness}. What is important to identify is again how many previous hours to include in the calculation of the skew in order to get the best picture of what side the curve is currently leaning towards. Table~\ref{table:skewnessHours} shows results where the best fit is found to be 16 hours. This will be basis for further testing when trying to use the methods in combination to see if any of them can augment each other. At first glance skewness does not seem to improve much but it will need testing when put together with the other calculations.
@@ -659,7 +669,7 @@ Table~\ref{table:topFromMatrixWithStatistics} shows volatility applied on the to
 \end{center}
 
 \subsubsection{Best prediction graph}
-The best prediction graphs can be seen in Figures~\ref{fig:bestVolatilityVsMatrixGraph} and~\ref{fig:bestVolatilityVsMatrixGraph350-525}. The curve prediction showed the problem when predicting 24-step-ahead. This is somewhat expected since every predicted hour uses the previous prediction as input and is therefore dependent on one another. It is not the same as the 24th hour is always the worst because the prediction can correct itself during the 24 hours which is also seen in Figure~\ref{fig:bestVolatility120to144} even though the volatility predicting under-shoots in the beginning. The figure also shows that the addition of volatility moves faster from top to bottom and is more accurate in high numbers than low. This is also seen in Figure~\ref{fig:bestVolatility408to432}. Since MAE is the error measure better accuracy in the high numbers will contribute to a better average MAE even though the low numbers are worsened. It is a trade-off between the desire to predict low or high wind power productions but here we strive to lower the overall MAE of the predictions.
+Section~\ref{sec:predictionHistVol} covers a more thorough analysis and the best prediction graphs can be seen in Figures~\ref{fig:bestVolatilityVsMatrixGraph} and~\ref{fig:bestVolatilityVsMatrixGraph350-525}. The curve prediction showed the problem when predicting 24-step-ahead. This is somewhat expected since every predicted hour uses the previous prediction as input and is therefore dependent on one another. It is not the same as the 24th hour is always the worst because the prediction can correct itself during the 24 hours which is also seen in Figure~\ref{fig:bestVolatility120to144} even though the volatility predicting under-shoots in the beginning. The figure also shows that the addition of volatility moves faster from top to bottom and is more accurate in high numbers than low. This is also seen in Figure~\ref{fig:bestVolatility408to432}. Since MAE is the error measure better accuracy in the high numbers will contribute to a better average MAE even though the low numbers are worsened. It is a trade-off between the desire to predict low or high wind power productions but here we strive to lower the overall MAE of the predictions.
 
 \begin{figure}[H]
 \centering
@@ -686,7 +696,7 @@ Various calculated inputs have been used as input in an attempt to augment the e
 
 \newpage
 
-\subsection{Experiment Four - Black Box Optimization}
+\subsection{Experiment Four: Black Box Optimization}
 The purpose of experiment four is to find the best number of epochs and dataset size for training. Black box optimization is a way of fine-tuning the network to obtain the best possible prediction.
 
 \subsubsection{Hypothesis}
@@ -863,6 +873,8 @@ Table~\ref{table:stepAheadForecastingWindProduction} shows the results from the 
 \end{longtable}
 \end{center}
 
+All starting positions have been tried in Table~\ref{table:stepAheadForecastingWindProductionStartingPositions} and it supports what was concluded from Table~\ref{table:stepAheadForecastingWindProduction}. The position that has always been used is marked with an x. It is obvious here that the exact same prediction applied at various starting points differs much in accuracy. 
+
 \begin{center}
 \begin{longtable}{|c|c|c|}
 \hline
@@ -904,8 +916,8 @@ Table~\ref{table:stepAheadForecastingWindProduction} shows the results from the 
 11 & 143,74 & 18,08\%  \\ \hline
 6 & 144,04 & 18,33\%  \\ \hline
 9 & 151,36 & 24,34\%  \\ \hline
-\caption{Step-ahead prediction from 1-24}
-\label{table:stepAheadForecastingWindProduction}
+\caption{24-step-aheads forecast covering all starting positions}
+\label{table:stepAheadForecastingWindProductionStartingPositions}
 \end{longtable}
 \end{center}
 
@@ -924,6 +936,7 @@ Table~\ref{table:stepAheadForecastingWindProduction} shows the results from the 
 \end{figure} 
 
 \subsubsection{Conclusion}
+The expectation was to see an improvement in MAE when predicting fewer hours which was seen in Table~\ref{table:stepAheadForecastingWindProduction}. It also showed that at some point the fewer hours is not necessarily better because they start at different positions and the prediction can correct itself the further it gets. The starting position has a huge impact on the accuracy of the prediction which was illustrated in the comparison between 22- and 24-step-ahead forecasts. It was further backed up by trying out all starting points with 24-step-ahead forecasting.
 
 \subsection{Concluding Remarks}
 Experiments have been conducted to identify the best combination of inputs as well as the impact of data manipulation, calculated inputs and black box optimization. Each experiment concludes on its findings in relation to experiments before it and expectations from the wind power production analysis. Table~\ref{table:comparisonOfResultsWindProduction} shows the overall improvement of 5,35\% from the first experiment to the last. Experiment five is left out because it cannot be compared with the other since it predicts different number of hours. The last two steps are almost similar. A short summary follows here. 
