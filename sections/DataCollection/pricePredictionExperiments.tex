@@ -913,6 +913,8 @@ In the 10 hours ahead predict seen in figure~\ref{fig:10HoursAhead} we again see
 \label{table:XHoursAhead} % is used to refer this table in the text
 \end{table}
 
+In table~\ref{table:XHoursAhead} we see the results from the sliding window test. The entry with offset 0 is the same setup as prior experiments. The rest shows the difference in MAE when we shift where the 24 hours ahead predictions begin. We cover all possible offsets by doing 0-23 thus covering every offset from the first 24 hour prediction and onwards. From this experiment we show how much the right offset means for the total MAE in a years prediction. The biggest difference are between offset 4 and offset 7 with a difference of 15,04\%. These differences are connected to the elevation of error we talked about in the last result. If we hit the right spots where the elevation of error are not going to have a big impact this will lower the overall MAE thus giving us a better result. 
+
 \begin{table}[H]
 \centering  % used for centering table
 \resizebox{0.8\textwidth}{!}{
@@ -920,30 +922,30 @@ In the 10 hours ahead predict seen in figure~\ref{fig:10HoursAhead} we again see
 	\hline
 	\# & Offset & Time & H1 & H2 & MAE & \% ranking\\ [0.5ex] % inserts table 
 	\hline 
-	1  & 4  & 370.54 & 9  & 12 & 46.63 & - \\ \hline
-	2  & 0  & 333.96 & 8  & 10 & 47.07 & 0.95\% \\ \hline
-	3  & 8  & 364.68 & 8  & 12 & 47.29 & 1.41\% \\ \hline
-	4  & 11 & 351.22 & 9  & 8  & 47.35 & 1.54\% \\ \hline
-	5  & 14 & 358.79 & 8  & 11 & 47.45 & 1.75\% \\ \hline
-	6  & 10 & 385.88 & 10 & 11 & 47.46 & 1.79\% \\ \hline
-	7  & 21 & 339.93 & 8  & 9  & 47.58 & 2.04\% \\ \hline
-	8  & 17 & 380.54 & 11 & 9  & 47.90 & 2.72\% \\ \hline
-	9  & 1  & 345.99 & 7  & 15 & 48.11 & 3.18\% \\ \hline
-	10 & 2  & 352.35 & 12 & 5  & 49.06 & 5.2\% \\ \hline
-	11 & 12 & 406.33 & 13 & 11 & 49.09 & 5.28\% \\ \hline
-	12 & 9  & 311.51 & 6  & 7  & 49.15 & 5.4\% \\ \hline
-	13 & 13 & 410.08 & 13 & 11 & 49.84 & 6.87\% \\ \hline
-	14 & 3  & 417.93 & 14 & 12 & 50.06 & 7.36\% \\ \hline
-	15 & 19 & 404.45 & 11 & 12 & 50.87 & 9.1\% \\ \hline
-	16 & 5  & 387.61 & 12 & 9  & 51.07 & 9.53\% \\ \hline
-	17 & 20 & 404.6  & 7  & 24 & 51.41 & 10.25\% \\ \hline
-	18 & 15 & 395.16 & 11 & 11 & 51.82 & 11.14\% \\ \hline
-	19 & 16 & 409.38 & 13 & 10 & 51.91 & 11.32\% \\ \hline
-	20 & 6  & 408.67 & 16 & 6  & 51.93 & 11.37\% \\ \hline
-	21 & 22 & 448.74 & 17 & 9  & 52.00 & 11.52\% \\ \hline
-	22 & 18 & 433.96 & 9  & 21 & 52.25 & 12.05\% \\ \hline
-	23 & 23 & 349.56 & 8  & 10 & 53.02 & 13.7\% \\ \hline
-	24 & 7  & 410.11 & 9  & 18 & 53.64 & 15.04\% \\ \hline
+	1  & 4  & 370,54 & 9  & 12 & 46,63 & - \\ \hline
+	2  & 0  & 333,96 & 8  & 10 & 47,07 & 0,95\% \\ \hline
+	3  & 8  & 364,68 & 8  & 12 & 47,29 & 1,41\% \\ \hline
+	4  & 11 & 351,22 & 9  & 8  & 47,35 & 1,54\% \\ \hline
+	5  & 14 & 358,79 & 8  & 11 & 47,45 & 1,75\% \\ \hline
+	6  & 10 & 385,88 & 10 & 11 & 47,46 & 1,79\% \\ \hline
+	7  & 21 & 339,93 & 8  & 9  & 47,58 & 2,04\% \\ \hline
+	8  & 17 & 380,54 & 11 & 9  & 47,90 & 2,72\% \\ \hline
+	9  & 1  & 345,99 & 7  & 15 & 48,11 & 3,18\% \\ \hline
+	10 & 2  & 352,35 & 12 & 5  & 49,06 & 5,2\% \\ \hline
+	11 & 12 & 406,33 & 13 & 11 & 49,09 & 5,28\% \\ \hline
+	12 & 9  & 311,51 & 6  & 7  & 49,15 & 5,4\% \\ \hline
+	13 & 13 & 410,08 & 13 & 11 & 49,84 & 6,87\% \\ \hline
+	14 & 3  & 417,93 & 14 & 12 & 50,06 & 7,36\% \\ \hline
+	15 & 19 & 404,45 & 11 & 12 & 50,87 & 9,1\% \\ \hline
+	16 & 5  & 387,61 & 12 & 9  & 51,07 & 9,53\% \\ \hline
+	17 & 20 & 404,6  & 7  & 24 & 51,41 & 10,25\% \\ \hline
+	18 & 15 & 395,16 & 11 & 11 & 51,82 & 11,14\% \\ \hline
+	19 & 16 & 409,38 & 13 & 10 & 51,91 & 11,32\% \\ \hline
+	20 & 6  & 408,67 & 16 & 6  & 51,93 & 11,37\% \\ \hline
+	21 & 22 & 448,74 & 17 & 9  & 52,00 & 11,52\% \\ \hline
+	22 & 18 & 433,96 & 9  & 21 & 52,25 & 12,05\% \\ \hline
+	23 & 23 & 349,56 & 8  & 10 & 53,02 & 13,7\% \\ \hline
+	24 & 7  & 410,11 & 9  & 18 & 53,64 & 15,04\% \\ \hline
 	\end{tabular}
 }
 \caption{Trims} % title of Table
