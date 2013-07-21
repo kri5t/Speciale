@@ -818,7 +818,7 @@ In table~\ref{table:Epochs} we see the effects of epochs used when training the 
 \subsubsection{Conclusion}
 From this experiment we see that the optimal (for this input combination) training dataset size is half a year of data. We see an improvement of 6,46\% compared to the dataset size we have used in the prior experiments thus a better result from those experiments are expected if we use half a year of data instead of just a quarter of a year. The time consumed with this increase in the dataset would have doubled the time we used to conduct the trials. The time used to predict a full year are very close to a 1-to-1 correlation with the size of the dataset.
 
-The epochs used to train the network shows that values in the hundreds (100-900) dominate the top 10 results in~\ref{table:Epochs}. The best result is 500 epochs and shows an improvement over 200 epochs of 6.09\% which we used in prior experiments. These results also show how the time increases when the number of epochs increases. This increase is not as apparent as it is in the dataset size experiments - this is because of the very different neuron counts in the hidden layers which also influences the time it takes to conduct one experimental iteration. We still see a tendency where higher number of epochs results in more time consumed doing the experiment.
+The epochs used to train the network shows that values in the hundreds (100-900) dominate the top 10 results in~\ref{table:Epochs}. The best result is 500 epochs and shows an improvement over 200 epochs of 6.09\% which we used in prior experiments. These results also show how the time increases when the number of epochs increases. This increase is not as apparent as it is in the dataset size experiments - this is because of the different neuron counts in the hidden layers which also influences the time it takes to conduct one experimental iteration. We still see a tendency where higher number of epochs results in more time consumed doing the experiment.
 
 \newpage
 \subsection{Experiment five: Step-ahead forecasting}
@@ -858,7 +858,7 @@ In table~\ref{table:XHoursAhead} we see the results from this experiment. The MA
 \label{fig:24HoursAhead_elevationOfError}
 \end{figure}
 
-In the 2 hours ahead prediction seen in figure~\ref{fig:2HoursAhead} we see how well the predictions are when we only predict 2 hours ahead. This is due to the limitation of the elevation of error which happens when we only have 1 hour dependent on an earlier prediction. In the 10 hours ahead predict seen in figure~\ref{fig:10HoursAhead} we again see how the elevation happens. The black lines in the figure shows when we shift from one prediction cycle of 10 hours to the next. It is very clear in the figure how the predictions are corrected to fit the curve better every time we reset the prediction. From the beginning of every prediction cycle the next result will be based on correct data thus not relying on a potentially faulty prediction done earlier in the cycle.
+In the 2 hours ahead prediction seen in figure~\ref{fig:2HoursAhead} we see how well the predictions are when we only predict 2 hours ahead. This is due to the limitation of the elevation of error which happens when we only have 1 hour dependent on an earlier prediction.
 
 \begin{figure}[H]
 \centering
@@ -866,6 +866,8 @@ In the 2 hours ahead prediction seen in figure~\ref{fig:2HoursAhead} we see how 
 \caption{Prediction of 2 hours ahead}
 \label{fig:2HoursAhead}
 \end{figure}
+
+In the 10 hours ahead predict seen in figure~\ref{fig:10HoursAhead} we again see how the elevation happens. The black lines in the figure shows when we shift from one prediction cycle of 10 hours to the next. It is very clear in the figure how the predictions are corrected to fit the curve better every time we reset the prediction. From the beginning of every prediction cycle the next result will be based on correct data thus not relying on a potentially faulty prediction done earlier in the cycle.
 
 \begin{figure}[H]
 \centering
@@ -907,7 +909,7 @@ In the 2 hours ahead prediction seen in figure~\ref{fig:2HoursAhead} we see how 
 	24 & 24 & 5 & 1 & 50,87 & 129,48\% \\ \hline
 	\end{tabular}
 }
-\caption{Trims} % title of Table
+\caption{} % title of Table
 \label{table:XHoursAhead} % is used to refer this table in the text
 \end{table}
 
