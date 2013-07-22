@@ -206,6 +206,41 @@ P & D & WS & T & ToD & DoW & MoY & SoY & MAE & \% ranking\\ [0.5ex] % inserts ta
 \label{table:1YearTrain} % is used to refer this table in the text
 \end{table}
 
+\begin{table}[H]
+\centering  % used for centering table
+\resizebox{0.8\textwidth}{!}{
+\begin{tabular}{|c|c|c|} % centered columns (7 columns)
+	\hline
+	{\#} & MAE(Training dataset) & MAE(Unseen dataset) \\ [0.5ex] % inserts table 
+	%heading
+	\hline 
+	1  &   20.9 & 57.12 \\ \hline
+	2  &   29.61 & 58.09 \\ \hline
+	3  &   25.49 & 58.79 \\ \hline
+	4  &   18.94 & 60.14 \\ \hline
+	5  &   31.1 & 62.19 \\ \hline
+	6  &   22.97 & 62.26 \\ \hline
+	7  &   20.64 & 62.84 \\ \hline
+	8  &   23.87 & 63.94 \\ \hline
+	9  &   17.76 & 64.19 \\ \hline
+	10 &   19.79 & 64.72 \\ \hline
+	11 &   20.85 & 65.07 \\ \hline
+	12 &   25.71 & 65.95 \\ \hline
+	13 &   30.02 & 66.55 \\ \hline
+	14 &   31.32 & 67.21 \\ \hline
+	15 &   31.8 & 67.88 \\ \hline
+	16 &   23.11 & 68.21 \\ \hline
+	17 &   30.39 & 68.34 \\ \hline
+	18 &   40.54 & 68.35 \\ \hline
+	19 &   29.4 & 68.43 \\ \hline
+	20 &   34.38 & 68.45 \\ \hline
+	\end{tabular}
+}
+\caption{The MAE of the training dataset compared to the MAE of the unseen dataset.} % title of Table
+\label{table:unseenAndSeen} % is used to refer this table in the text
+\end{table}
+
+\todo{Skriv noget omkring~\ref{table:unseenAndSeen}}
 %\begin{table}[H]
 %\centering  % used for centering table
 %\resizebox{\textwidth}{!}{
@@ -885,7 +920,7 @@ In the 10 hours ahead predict seen in figure~\ref{fig:10HoursAhead} we again see
 \begin{table}[H]
 \centering  % used for centering table
 \resizebox{0.8\textwidth}{!}{
-	\begin{tabular}{|c|c|c|c|c|c|} % centered columns (7 columns)		
+	\begin{tabular}{|c|c|c|c|c|c|c|} % centered columns (7 columns)		
 	\hline
 	\# & Hours ahead & Time(seconds) & H1 & H2 & MAE & \% ranking\\ [0.5ex] % inserts table 
 	\hline  
