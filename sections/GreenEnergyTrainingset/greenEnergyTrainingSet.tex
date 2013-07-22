@@ -21,12 +21,12 @@ Wind Direction & 0.21 \\ [1ex] % [1ex] adds vertical space
 \label{table:pearsonCoeficientWindProduction} % is used to refer this table in the text
 \end{table}
 
-It is obvious from Table~\ref{table:pearsonCoeficientWindProduction} that consumption and wind speed are the most direct influential factors. The consumption or demand can become a problem because it also needs to be predicted and if this prediction shows to be inaccurate then it will add the error to the wind production forecast.  (ADD MORE LIKE DENSITY, DEW POINT, HUMIDITY, TIME OF DAY, ECT).
+It is obvious from Table~\ref{table:pearsonCoeficientWindProduction} that consumption and wind speed are the most direct influential factors. The consumption or demand can become a problem because it also needs to be predicted and if this prediction shows to be inaccurate then it will add the error to the wind production forecast. Demand is not predicted and we consider it to be out of scope and must therefore rely in others to do the most actual demand prediction.
 
 \subsection{Meteorological factors}
 
 \subsubsection{Wind Speed}
-Wind speed is directly proportional to wind production as described in Section~\ref{sec:windmillPlacement} \todo{discuss reliability of the formula}. This relationship between hourly wind speed and hourly wind power production of DK1 is seen in Figure~\ref{fig:windVsProd}. The graph clearly shows the expected impact of wind speed on the wind energy production. The established Pearson co-relation between wind production and wind speed is further seen in Figure~\ref{fig:windSpeedWindProductionPlot} where the wind production follows the same trend as wind speed except from the hours 70-80. 
+Wind speed is directly proportional to wind production as described in Section~\ref{sec:windmillPlacement} \todo{discuss reliability of the formula}. This relationship between hourly wind speed and hourly wind power production of DK1 is seen in Figure~\ref{fig:windVsProd}. The graph clearly shows the expected impact of wind speed on the wind energy production. The established Pearson co-relation between wind production and wind speed is further seen in Figure~\ref{fig:windSpeedWindProductionPlot} where the wind production follows the same trend as wind speed for the beginning of 2012. The hours are representative for the whole year \todo{ref to appendix} which is also backed up by the good co-relation. 
 
 \begin{figure}[H]
 \centering
@@ -38,7 +38,7 @@ Wind speed is directly proportional to wind production as described in Section~\
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.99\linewidth,natwidth=898,natheight=587]{billeder/WindSpeedVsProduction.png}
-\caption{Wind speed vs. wind production in 2012}
+\caption{Wind speed vs. wind production in beginning 2012}
 \label{fig:windVsProd}
 \end{figure}
 
@@ -134,20 +134,13 @@ Wind Speed & 0.20 \\ [1ex] % [1ex] adds vertical space
 
 \subsubsection{Consumption}
 \label{sec:consumptionWindProduction}
-It is expected that the wind power available on the energy market will be low at times with low consumption, e.g if no energy is needed the wind power can't be sold.  This relationship is shown in Figure~\ref{fig:consumptionVsWindProduction}. This also tells us that the wind production is connected to the market and cannot be deduced only from meteorological factors. The wind production follows the trend of the market which is observable from Figure~\ref{fig:windProductionAndConsumptionPlot}. The first 300 hours show a great co-relation whereas 3-500 is a whole other story. This can become problematic when trying to predict the production.
+It is expected that the wind power available on the energy market will be low at times with low consumption, e.g if no energy is needed the wind power can't be sold.  This relationship is shown in Figure~\ref{fig:consumptionVsWindProduction}. This also tells us that the wind production is connected to the market and cannot be deduced only from meteorological factors.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.99\linewidth,natwidth=898,natheight=587]{billeder/consumptionVsWindProduction.png}
 \caption{Consumption vs. Wind Production in 2012}
 \label{fig:consumptionVsWindProduction}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.99\linewidth,natwidth=898,natheight=587]{billeder/windProductionAndConsumptionPlot.png}
-\caption{Consumption vs. Wind Production in 2012}
-\label{fig:windProductionAndConsumptionPlot}
 \end{figure}
 
 It can be a disadvantage to use consumption as input since we will rely on predictions from nordpool spot - it is out of scope for this thesis to predict it in its own Neural Network. Following section~\ref{sec:ElectricityDemand} the demand is much controlled my the meteorological factors which can make it sufficient to include these as a substitute for the actual demand. The temperature impact on demand can be seen in Figure~\ref{fig:consump_temp_green}. We will compare the two approaches in experiments to come.
@@ -192,7 +185,7 @@ The wind follows the seasons and the production follows the wind. The wind produ
 \label{sec:windProductionDev}
 The above analysis shows the wind production development to be much dependent on wind speed and air density together with the general trend on the market. 
 
-The high volatility in the wind production is very clear when considering the development curve in Figure~\ref{fig:windHourDevelopment400Hours}. This is not a problem if the correlation between the input parameters result in a low number of output possibilities because the generalization of the ANN then would be enough. This is not the case for our input parameters for wind productions and an example of such can be seen in Figure ~\ref{fig:inputParameterDistribution} where outputs for similar inputs are shown --- the input limits can be seen in Table~\ref{table:similarHoursLimitsWindProd}. The generalization would lean towards 898-1048 but if the last wind production was 1198 and the tendency rising then the prediction would be better off guessing above or around 1198. This can be further supported by Figure~\ref{fig:windHourDevelopment400Hours} which illustrates the tendency of the production curve and the need to consider the immediate past because of its significance for the movements to come. Identifying these tendencies in every hour could possibly help the network to predict the wind production more accurately. The network already captures the trend of the entire training set but the more input parameters adding extra information about the individual hours the more accuracy could possibly be obtained. The point here is to give extra input information about the hours and the concept is discussed in more detail in Section~\ref{sec:usingStatisticalInput}. The simplest way to include information about the past is to include the production from past hours and let the network itself calculate the impact of former prices. Figure~\ref{fig:windHourDevelopment400Hours} shows that the production does not differ much from one hour to the next so by including the last known hour, the prediction could more accurately tell where it should place itself within the interval. The statistics could then further strengthen this by analysing how if we should move or down and how much.
+The high volatility in the wind production is very clear when considering the development curve in Figure~\ref{fig:windHourDevelopment400Hours}. This is not a problem if the correlation between the input parameters result in a low number of output possibilities because the generalization of the ANN then would be enough. This is not the case for our input parameters for wind productions and an example of such can be seen in Figure ~\ref{fig:inputParameterDistribution} where outputs for similar inputs are shown --- the input limits can be seen in Table~\ref{table:similarHoursLimitsWindProd}. The generalization would lean towards 898-1048 but if the last wind production was 1198 and the tendency rising then the prediction would be better off guessing above or around 1198. This can be further supported by Figure~\ref{fig:windHourDevelopment400Hours} which illustrates the tendency of the production curve and the need to consider the immediate past because of its significance for the movements to come. Identifying these tendencies in every hour could possibly help the network to predict the wind production more accurately. The network already captures the trend of the entire training set but the more input parameters adding extra information about the individual hours the more accuracy could possibly be obtained. The point here is to give extra input information about the hours and the concept is discussed in more detail in Section~\ref{sec:usingStatisticalInput}. The simplest way to include information about the past is to include the production from past hours and let the network itself calculate the impact of former prices. Figure~\ref{fig:windHourDevelopment400Hours} shows that the production does not differ much from one hour to the next so by including the last known hour, the prediction could more accurately tell where it should place itself within the interval \todo{appendix that shit}. The statistics could then further strengthen this by analysing how if we should move or down and how much.
 
 \begin{figure}[H]
 \centering
