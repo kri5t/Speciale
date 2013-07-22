@@ -117,11 +117,9 @@ Next we have the Day of the Week (DoW) parameter. This parameter are present in 
 The last two parameters - Month of Year(MoY) and Season of Year (SoY) - are codependent and will be covered together. As mentioned before they cover the same information and we therefore only need one of them at any time \todo{Lav forsoeg der viser at det ikke giver mening at have baade MoY og SoY paa samme tid.}. The values are present in 9/10 of the best combinations in ~\ref{table:Top20Prices}. This is an indicator that the seasonality in the form of MoY and SoY plays a role in predicting the electricity price. Also we saw in the analysis in section~\ref{sec:seasonality}(figure~\ref{fig:monthlyAveragePrice} and ~\ref{fig:seasons}) that the price changes with seasonality and that it especially was more expensive in the winther than the rest of the year.
 
 \subsubsection{Matrix}
-The matrix representation in the top 20 is the most common representation of the seasonal inputs (ToD, DoW, MoY and SoY) - with only 3/20 containing no matrix at all. The matrix format was expected to give a better result based on what we discussed in the matrix section~\ref{sec:Matrix}. The 3 combinations that does not contain a matrix representation are already present in the top 20 as pure matrix form. This might be the combination of inputs variables that are a good since both the matrix form and the non-matrix form are represented in the top 20 best combinations.
+The matrix representation in the top 20 is the most common representation of the seasonal inputs (ToD, DoW, MoY and SoY) - with only 3/20 containing no matrix at all. The matrix format was expected to give a better result based on what we discussed in the matrix section~\ref{sec:Matrix}. The 3 combinations that does not contain a matrix representation are already present in the top 20 as pure matrix form. This can be the combination of inputs variables that are good since both the matrix form and the non-matrix form are represented in the top 20 best combinations.
 
 In the Wind Production Experiments section~\ref{sec:windProductionExperiments} we conducted a separate experiment for the matrix analysis. We did a combined experiment in this section because we had 4 different parameters that can be represented as a matrix thus giving us a lot of different combinations. We also wanted to test all of the different combinations of matrix and non-matrix inputs because a mixed combination might render a better solution e.g. the season of year shifts so rarely it might be a better representation (together with the other parameters) on non-matrix form. Also there might be combinations with the rest of the inputs that work better with the matrix-format than others.
-
-\todo{Referer til Brians. Han har allrede skrevet om Matrix i forhold til at hans ikke virker specielt overbevisende, men at det i mit virker meget bedre. Diskuter.}
 
 \begin{table}[H]
 \centering  % used for centering table
@@ -206,6 +204,41 @@ P & D & WS & T & ToD & DoW & MoY & SoY & MAE & \% ranking\\ [0.5ex] % inserts ta
 \label{table:1YearTrain} % is used to refer this table in the text
 \end{table}
 
+\begin{table}[H]
+\centering  % used for centering table
+\resizebox{0.8\textwidth}{!}{
+\begin{tabular}{|c|c|c|} % centered columns (7 columns)
+	\hline
+	{\#} & MAE(Training dataset) & MAE(Unseen dataset) \\ [0.5ex] % inserts table 
+	%heading
+	\hline 
+	1  &   20.9 & 57.12 \\ \hline
+	2  &   29.61 & 58.09 \\ \hline
+	3  &   25.49 & 58.79 \\ \hline
+	4  &   18.94 & 60.14 \\ \hline
+	5  &   31.1 & 62.19 \\ \hline
+	6  &   22.97 & 62.26 \\ \hline
+	7  &   20.64 & 62.84 \\ \hline
+	8  &   23.87 & 63.94 \\ \hline
+	9  &   17.76 & 64.19 \\ \hline
+	10 &   19.79 & 64.72 \\ \hline
+	11 &   20.85 & 65.07 \\ \hline
+	12 &   25.71 & 65.95 \\ \hline
+	13 &   30.02 & 66.55 \\ \hline
+	14 &   31.32 & 67.21 \\ \hline
+	15 &   31.8 & 67.88 \\ \hline
+	16 &   23.11 & 68.21 \\ \hline
+	17 &   30.39 & 68.34 \\ \hline
+	18 &   40.54 & 68.35 \\ \hline
+	19 &   29.4 & 68.43 \\ \hline
+	20 &   34.38 & 68.45 \\ \hline
+	\end{tabular}
+}
+\caption{The MAE of the training dataset compared to the MAE of the unseen dataset.} % title of Table
+\label{table:unseenAndSeen} % is used to refer this table in the text
+\end{table}
+
+\todo{Skriv noget omkring~\ref{table:unseenAndSeen}}
 %\begin{table}[H]
 %\centering  % used for centering table
 %\resizebox{\textwidth}{!}{
@@ -260,7 +293,7 @@ In this experiment we saw the following:
 	\item The Hourly Time of Day shows an improvement on the predictions. In the best half of the results we had 55/72 that included ToD. This result directly reflects what we anticipated. We also saw that the ToD allowed the ANN to make a better curve fit and helped the predictions to follow the curves all the way up and down instead of following an average between the top and bottom of the curve.
 	\item The Day of the Week seemed to have a positive effect on the predictions. Here it was not clear whether the matrix form was the best choice or the standard single input was the best. This stems from the fact that the biggest price difference in weekdays are between the regular weekdays and the weekend.
 	\item The Month of the Year and The Seasons of the Year seems to either have no effect or a small effect on the predictions. We discussed how the main purpose of these two input parameters was defeated because of the size of our dataset. They do nevertheless show up in most of the top 20 values. This shows us that they have a positive effect or at worst no effect at all. The only downside to this is the time consumption introduced; if they actually do not have any effect on the predictions.
-	\item Matrix representation seems to be the best choice in almost all the cases. The only case where it might be better without it is the weekdays; because of the aforementioned price distribution over weekdays.
+	\item Matrix representation seems to be the best choice in almost all the cases. The matrix format is not by default an improvement but has to be evaluated with the rest of the input parameters to see if matrix is better. One of the cases where it might be better without it is the weekdays; because of the aforementioned price distribution over weekdays.
 
 We also learned that the month of year input variable will have a positive effect on full year datasets as it balanced the error margin between a full year dataset and a quarter year dataset. Even though we saw no improvement from using a full year to train on.
 \end{itemize}
@@ -885,34 +918,34 @@ In the 10 hours ahead predict seen in figure~\ref{fig:10HoursAhead} we again see
 \begin{table}[H]
 \centering  % used for centering table
 \resizebox{0.8\textwidth}{!}{
-	\begin{tabular}{|c|c|c|c|c|c|} % centered columns (7 columns)		
+	\begin{tabular}{|c|c|c|c|c|c|c|} % centered columns (7 columns)		
 	\hline
-	\# & Hours ahead & H1 & H2 & MAE & \% ranking\\ [0.5ex] % inserts table 
+	\# & Hours ahead & Time(seconds) & H1 & H2 & MAE & \% ranking\\ [0.5ex] % inserts table 
 	\hline  
-	1  & 1  & 5 & 1 & 22,17 & - \\ \hline
-	2  & 2  & 5 & 1 & 28,29 & 27,64\% \\ \hline
-	3  & 3  & 5 & 1 & 31,85 & 43,69\% \\ \hline
-	4  & 4  & 5 & 1 & 34,68 & 56,44\% \\ \hline
-	5  & 5  & 5 & 1 & 37,54 & 69,33\% \\ \hline
-	6  & 6  & 5 & 1 & 39,69 & 79,08\% \\ \hline
-	7  & 7  & 5 & 1 & 40,53 & 82,82\% \\ \hline
-	8  & 8  & 5 & 1 & 42,23 & 90,52\% \\ \hline
-	9  & 9  & 5 & 1 & 43,45 & 96,01\% \\ \hline
-	10 & 10 & 5 & 1 & 44,10 & 98,94\% \\ \hline
-	11 & 14 & 5 & 1 & 45,48 & 105,16\% \\ \hline
-	12 & 11 & 5 & 1 & 45,73 & 106,3\% \\ \hline
-	13 & 13 & 5 & 1 & 46,19 & 108,36\% \\ \hline
-	14 & 12 & 5 & 1 & 46,67 & 110,52\% \\ \hline
-	15 & 16 & 5 & 1 & 47,76 & 115,45\% \\ \hline
-	16 & 15 & 5 & 1 & 48,05 & 116,75\% \\ \hline
-	17 & 21 & 5 & 1 & 48,21 & 117,47\% \\ \hline
-	18 & 19 & 5 & 1 & 48,69 & 119,64\% \\ \hline
-	19 & 17 & 5 & 1 & 48,69 & 119,65\% \\ \hline
-	20 & 18 & 5 & 1 & 49,00 & 121,04\% \\ \hline
-	21 & 20 & 5 & 1 & 49,31 & 122,44\% \\ \hline
-	22 & 22 & 5 & 1 & 49,75 & 124,45\% \\ \hline
-	23 & 23 & 5 & 1 & 50,01 & 125,63\% \\ \hline
-	24 & 24 & 5 & 1 & 50,87 & 129,48\% \\ \hline
+	1  & 1  & 6790.62 & 12 & 10 & 27.87 & - \\ \hline
+	2  & 2  & 3434.57 & 11 & 13 & 32.93 & 18.16\% \\ \hline
+	3  & 4  & 1845.25 & 9  & 21 & 36.41 & 30.65\% \\ \hline
+	4  & 3  & 2353.55 & 12 & 10 & 37.00 & 32.74\% \\ \hline
+	5  & 5  & 1253.11 & 5  & 16 & 37.79 & 35.58\% \\ \hline
+	6  & 7  & 963.92  & 10 & 6  & 38.84 & 39.37\% \\ \hline
+	7  & 8  & 739.69  & 5  & 8  & 39.04 & 40.07\% \\ \hline
+	8  & 11 & 623.99  & 5  & 15 & 41.52 & 48.96\% \\ \hline
+	9  & 14 & 603.52  & 11 & 12 & 44.40 & 59.31\% \\ \hline
+	10 & 12 & 607.08  & 6  & 13 & 45.02 & 61.51\% \\ \hline
+	11 & 18 & 426.92  & 5  & 18 & 45.05 & 61.65\% \\ \hline
+	12 & 6  & 1336.42 & 12 & 12 & 45.47 & 63.14\% \\ \hline
+	13 & 13 & 551.3   & 8  & 9  & 45.83 & 64.42\% \\ \hline
+	14 & 24 & 320.58  & 5  & 8  & 46.59 & 67.15\% \\ \hline
+	15 & 9  & 844.39  & 12 & 5  & 46.72 & 67.60\% \\ \hline
+	16 & 10 & 871.05  & 10 & 18 & 47.66 & 70.99\% \\ \hline
+	17 & 21 & 446.34  & 8  & 18 & 48.09 & 72.52\% \\ \hline
+	18 & 22 & 470.77  & 13 & 15 & 48.62 & 74.44\% \\ \hline
+	19 & 17 & 584.8   & 13 & 15 & 49.13 & 76.28\% \\ \hline
+	20 & 19 & 502.59  & 9  & 21 & 49.90 & 79.03\% \\ \hline
+	21 & 23 & 429.65  & 17 & 4  & 50.62 & 81.63\% \\ \hline
+	22 & 15 & 687.82  & 20 & 10 & 50.66 & 81.75\% \\ \hline
+	23 & 16 & 534.67  & 10 & 12 & 50.84 & 82.39\% \\ \hline
+	24 & 20 & 509.61  & 10 & 21 & 51.55 & 84.96\% \\ \hline
 	\end{tabular}
 }
 \caption{The results from the hours ahead predictions.} % title of Table
