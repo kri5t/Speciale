@@ -692,8 +692,9 @@ Variables: Price, Consumption and With 1\% trimming
 \label{table:price_consumption_x3_1pTrim} % is used to refer this table in the text
 \end{table}
 
-\subsubsection{Clone experiment from literature}
+\subsubsection{Clone scatter experiment from literature}
 The last iterations we did was a clone of the experiments conducted in~\cite{singhal2011electricity}. This setup includes price, consumption, time of day, day of week and scatter. We did the prediction both with 1\% and no trim as they did in the text (no spikes, small spikes and large spikes). The results can be seen in table ~\ref{table:scatter_text_no_trim} and ~\ref{table:scatter_text_1p_trim}. The results with trimming and the best strategies gives us a result of 52.04 MAE which is 14.75\% worse than the best result from table~\ref{table:Statistical1} and the results without trimming is 71.51 MAE which is 25.19\% worse than the best result from table~\ref{table:Top20Prices} in experiment one. We cannot compare the results directly to the ones they present in the paper because they only present a prediction of 48 hours and they do not tell us whether this is on unseen data or it is on the same dataset as they trained on. Neither do we know whether they simulate the full 48 hour prediction or they do it 1-hour at a time.
+\todo{Write: Difficult to compare results since there is not enough information about their experimental setup thus leaving some of the dataset manipulation to guesswork.}
 
 Variables: Price, Consumption, Time of Day, Day of Week and With no trimming
 \begin{table}[H]
