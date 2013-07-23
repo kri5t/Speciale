@@ -1,3 +1,40 @@
+Artificial Neural Network as a technology for prediction in the electricity market is much dependent on the analysis and experiments surrounding it. The above discussions highlight the need for analysing and documenting characteristics of what is to be predicted by the ANN. Machine Learning is data-driven\cite{18} and the analysis together with experiments point out the influential input parameters to include in the dataset that is the basis for the data-driven learning. The analysis will identify the input parameters to test and the experiments will either reject or verify what came out of the analysis. The result will be the best network setting along with a common understanding of exactly why these input parameters did the job for this market and why others did not. In continuation of this lies the need for transparency when using ANNs since omitting it will make it difficult to draw on the experience of others and make comparisons between systems due to the black box nature of the technology. Section~\ref{sec:inputParameterDiscussion} discuss the difference in experimental setups from publication to publication and how it becomes difficult to imitate when the information about it is incomplete. Based on this discussion and the comparison conducted in the experiment from Section~\ref{sec:priceExperimentThree} we argue that such comparisons isn't even fair due to the lack of documentation regarding analysis, dataset and experiments. An example of a meaningful price parameter in the Danish electricity market which does not apply for all markets is wind speed due to the huge amount of wind mills in Denmark. This parameter shows a co-relation of 0,28 (Section~\ref{sec:Price}) and it is clear from the analysis why it has been included in the experiments where the influence is verified even to a greater extend than expected --- predicting the prices in a country without many wind mills should probably not expect the same benefits when using our setup with wind speed which should be apparent from the analysis in Section~\ref{sec:priceWeatherInfluence}. Another example exist for wind power where demand is analysed to greatly influence the production but is instead substituted with air density in the best prediction due to air density being calculated with temperature and pressure. Temperature highly influence demand and because pressure is close to constant the air density express temperature (see Section~\ref{sec:predictionBasicInputParams}). If not documented properly the use of these input parameters are unclear and it would require investigation and assumptions by others to replicate, and the overall benefits obtained in or experiments will most likely \emph{not} be the same when used in markets with different properties. It emphasizes what have been said earlier, namely that documentation is necessary to make comparisons possible and just but at the same time to identify the best possible setting yourself. 
+
+
+
+
+\subsubsection{Trustworthiness}
+This leads to the trustworthiness of the experiments conducted. Section~\ref{sec:inputParameterDiscussion} emphasize and discuss the necessity of simulating predictions for at least a year to strengthen result. The year contains many different days and the seasons have different conditions, e.g. winter calls for heating and a lot of indoor activity whereas the summer is equal to holiday and being outdoor which is obviously reflected in the prices seen in Section~\ref{sec:seasonality}. The changes are also apparent for wind power but mostly due to the changes in weather conditions during the year (see Section~\ref{sec:windProdSeasonality}). We have shown examples of articles predicting only individual days or weeks and argue it to be sufficient in the discussion in Section~\ref{sec:inputParameterDiscussion}. We consider it necessary to simulate whole years predictions for all experiments so that all conditional changes of every season are included and reflected in the results. Our results showed a great variation in result according the starting point of the prediction which also emphasizes that different scenarios result in different results and must therefore be covered during testing. This discussion was elaborated in Section~\ref{sec:stepAheadForecastingDiscussion} where.... \todo{something} 
+
+Trimming\todo{section}
+
+\todo{have we tested enough --- the time it takes to do all testing. You need to be smaaart --- use intuition}
+
+TODO: talk about how testing is time consuming. All tests run for long time
+
+TODO: the results are not definitive but what we can do is see tendencies in what parameters really matter.
+
+TODO: ideal world endless test --> neural network requires a lot of testing
+
+The above discussion comply well with the fact that machine learning is not technical bot also intuition, creativity and black art\cite{18}. For instance a great deal of intuition and creativity goes into designing the experiments. Everything cannot be tested and you must rely on intuition to include the all situations necessary for testing, and the creativity resides in how to actually do it. Furthermore, the different inputs can be represented in various ways that calls for creativity --- represent input as a matrix, calculate slope or volatility and represent the seasonal aspect as month or summer/winter/spring/fall. The ANN being black art or a black box requires intuition in itself since we cannot foresee the outcome. When analysing prediction results from the experiments we rely on the analysis but also our intuition, especially in cases where things are not as expected. We must assume based on the analysis and our intuition that this was what happened. It is again an argument for analysis and experiments to be documented for both yourself and the sake of transparency.
+
+
+
+
+\todo{black art --> different results on same data every time. Don't know how the relationship is found}
+
+
+
+
+
+Of course networks is much more --- black box. trial error.
+
+
+
+An Artificial Neural Network is as good as the underlying data. 
+
+
+
 Neural works as basis for a decision support system. If ANN can predict can it then be used in the real life? Discussion about how this is related the text where the results are ambiguous 
 Artificial Neural Networks can it itself be considered as a Optimization Based Support Model which is described in Section \todo{section and discuss further}. The trust of the forecast is critical and especially when dealing with ANNs because they are a black box. 
 
