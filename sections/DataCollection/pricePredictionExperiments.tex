@@ -1,4 +1,5 @@
 This section contains experimental results from the experiment conducted to find the best possible price predicting solution. The results are divided into 4 experiments. The first experiment finds the best combination of input parameters for the network. These input parameters count meteorological, social and seasonal factors - which we identified in the analysis section~\ref{sec:Price}. The next experiment identifies the need for trimming and reasons to why it is needed in this particular dataset. The third experiment tests how different calculated inputs can include the immediate historical curve behavior in the dataset. This includes scatter, slope calculation, skewness analysis and historical EWMA(Exponentially-Weighted Moving Average). The fourth experiment takes care of the Artificial Neural Network parameters. This includes black-box optimization of epochs and the size of the dataset.
+\todo{Omskriv intro. Referer til tekster evt. Singhal.}
 
 \subsection{Experiment one: Inputs}
 \label{sec:priceExperimentOne}
@@ -26,6 +27,7 @@ The table~\ref{table:Top20Prices} contains the following information as well:
 	\item Number in table (\#)
 	\item First hidden layer neuron count (H1)
 	\item Second hidden layer neuron count (H2)
+	\item How many percent follows the curve movement in the correct direction (\% CD)
 	\item \% ranking from first entry (Dev)
 	\item Mean Average Error (MAE)
 	\item The Day of the Week(DoW)
@@ -49,31 +51,31 @@ We present the results from this experiment in table~\ref{table:Top20Prices}. Th
 \begin{table}[H]
 \centering  % used for centering table
 \resizebox{\textwidth}{!}{
-\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|} % centered columns (7 columns)
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|} % centered columns (7 columns)
 \hline
-{\#} & P & D & WS & T & ToD & DoW & MoY & SoY & H1 & H2 & MAE & {\%} ranking\\ [0.5ex] % inserts table 
+{\#} & P & D & WS & T & ToD & DoW & MoY & SoY & \% CD & H1 & H2 & MAE & {\%} ranking\\ [0.5ex] % inserts table 
 %heading
 \hline                  % inserts single horizontal line
-1  &  \x    & \x    & \x    & \x    & \x\m  & \x\m  &       & \x\m  & 7  & 8  & 57.12 &  - \\ \hline
-2  &  \x    & \x    & \x    & \x    & \x\m  & \x    &       & \x\m  & 5  & 9  & 58.09 & 1.7\% \\ \hline
-3  &  \x    & \x    & \x    & \x    & \x\m  &       & \x\m  &       & 6  & 11 & 58.79 & 2.92\% \\ \hline
-4  &  \x    & \x    & \x    &       & \x\m  & \x\m  & \x\m  &       & 9  & 3  & 60.14 & 5.29\% \\ \hline
-5  &  \x    & \x    & \x    & \x    & \x\m  & \x    &       &       & 16 & 8  & 62.19 & 8.88\% \\ \hline
-6  &  \x    & \x    & \x    & \x    & \x\m  &       &       & \x\m  & 6  & 5  & 62.26 & 9.0\% \\ \hline
-7  &  \x    & \x    & \x    & \x    & \x\m  & \x    & \x\m  &       & 5  & 8  & 62.84 & 10.01\% \\ \hline
-8  &  \x    & \x    & \x    & \x    & \x    & \x    &       & \x\m  & 5  & 0  & 63.94 & 11.94\% \\ \hline
-9  &  \x    & \x    & \x    & \x    & \x    & \x\m  & \x\m  &       & 5  & 4  & 64.19 & 12.38\% \\ \hline
-10 &  \x    & \x    & \x    &       & \x\m  & \x    & \x\m  &       & 6  & 8  & 64.72 & 13.31\% \\ \hline
-11 &  \x    & \x    & \x    &       & \x    & \x    & \x\m  &       & 5  & 5  & 65.07 & 13.92\% \\ \hline
-12 &  \x    & \x    & \x    & \x    & \x\m  & \x\m  &       &       & 6  & 6  & 65.95 & 15.46\% \\ \hline
-13 &  \x    & \x    & \x    & \x    & \x\m  & \x\m  & \x\m  &       & 7  & 12 & 66.55 & 16.51\% \\ \hline
-14 &  \x    & \x    & \x    &       & \x    &       &       & \x\m  & 7  & 0  & 67.21 & 17.66\% \\ \hline
-15 &  \x    & \x    & \x    & \x    & \x    & \x    &       &       & 5  & 0  & 67.88 & 18.84\% \\ \hline
-16 &  \x    & \x    & \x    &       & \x    & \x    &       & \x    & 6  & 0  & 68.21 & 19.42\% \\ \hline
-17 &  \x    & \x    & \x    &       & \x\m  & \x\m  &       &       & 8  & 6  & 68.34 & 19.64\% \\ \hline
-18 &  \x    & \x    & \x    &       & \x\m  &       &       & \x\m  & 7  & 4  & 68.35 & 19.66\% \\ \hline
-19 &  \x    & \x    & \x    & \x    & \x    & \x    & \x    &       & 6  & 0  & 68.43 & 19.8\% \\ \hline
-20 &  \x    & \x    & \x    & \x    & \x    &       &       & \x\m  & 5  & 0  & 68.45 & 19.84\% \\ \hline
+1  &  \x    & \x    & \x    & \x    & \x\m  & \x\m  &       & \x\m  & 66.8\% &  7  & 8  & 57.12 & - \\ \hline
+2  &  \x    & \x    & \x    & \x    & \x\m  & \x    &       & \x\m  & 67.9\% &  5  & 9  & 58.09 & 1.7\% \\ \hline
+3  &  \x    & \x    & \x    & \x    & \x\m  &       & \x\m  &       & 66.5\% &  6  & 11 & 58.79 & 2.92\% \\ \hline
+4  &  \x    & \x    & \x    &       & \x\m  & \x\m  & \x\m  &       & 66.5\% &  9  & 3  & 60.14 & 5.29\% \\ \hline
+5  &  \x    & \x    & \x    & \x    & \x\m  & \x    &       &       & 66.9\% &  16 & 8  & 62.19 & 8.88\% \\ \hline
+6  &  \x    & \x    & \x    & \x    & \x\m  &       &       & \x\m  & 67.2\% &  6  & 5  & 62.26 & 9.0\% \\ \hline
+7  &  \x    & \x    & \x    & \x    & \x\m  & \x    & \x\m  &       & 67.0\% &  5  & 8  & 62.84 & 10.01\% \\ \hline
+8  &  \x    & \x    & \x    & \x    & \x    & \x    &       & \x\m  & 62.9\% &  5  & 0  & 63.94 & 11.94\% \\ \hline
+9  &  \x    & \x    & \x    & \x    & \x    & \x\m  & \x\m  &       & 62.2\% &  5  & 4  & 64.19 & 12.38\% \\ \hline
+10 &  \x    & \x    & \x    &       & \x\m  & \x    & \x\m  &       & 67.4\% &  6  & 8  & 64.72 & 13.31\% \\ \hline
+11 &  \x    & \x    & \x    &       & \x    & \x    & \x\m  &       & 63.3\% &  5  & 5  & 65.07 & 13.92\% \\ \hline
+12 &  \x    & \x    & \x    & \x    & \x\m  & \x\m  &       &       & 67.0\% &  6  & 6  & 65.95 & 15.46\% \\ \hline
+13 &  \x    & \x    & \x    & \x    & \x\m  & \x\m  & \x\m  &       & 66.8\% &  7  & 12 & 66.55 & 16.51\% \\ \hline
+14 &  \x    & \x    & \x    &       & \x    &       &       & \x\m  & 62.4\% &  7  & 0  & 67.21 & 17.66\% \\ \hline
+15 &  \x    & \x    & \x    & \x    & \x    & \x    &       &       & 62.6\% &  5  & 0  & 67.88 & 18.84\% \\ \hline
+16 &  \x    & \x    & \x    &       & \x    & \x    &       & \x    & 62.0\% &  6  & 0  & 68.21 & 19.42\% \\ \hline
+17 &  \x    & \x    & \x    &       & \x\m  & \x\m  &       &       & 67.2\% &  8  & 6  & 68.34 & 19.64\% \\ \hline
+18 &  \x    & \x    & \x    &       & \x\m  &       &       & \x\m  & 68.2\% &  7  & 4  & 68.35 & 19.66\% \\ \hline
+19 &  \x    & \x    & \x    & \x    & \x    & \x    & \x    &       & 62.2\% &  6  & 0  & 68.43 & 19.8\% \\ \hline
+20 &  \x    & \x    & \x    & \x    & \x    &       &       & \x\m  & 62.4\% &  5  & 0  & 68.45 & 19.84\% \\ \hline
 \end{tabular}
 }
 \caption{The top 20 results on training set 3 last months} % title of Table
@@ -121,25 +123,26 @@ The matrix representation in the top 20 is the most common representation of the
 
 In the Wind Production Experiments section~\ref{sec:windProductionExperiments} we conducted a separate experiment for the matrix analysis. We did a combined experiment in this section because we had 4 different parameters that can be represented as a matrix thus giving us a lot of different combinations. We also wanted to test all of the different combinations of matrix and non-matrix inputs because a mixed combination might render a better solution e.g. the season of year shifts so rarely it might be a better representation (together with the other parameters) on non-matrix form. Also there might be combinations with the rest of the inputs that work better with the matrix-format than others.
 
+\subsubsection{Bottom 10 predictions}
 \begin{table}[H]
 \centering  % used for centering table
 \resizebox{\textwidth}{!}{
-\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|} % centered columns (7 columns)
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|} % centered columns (7 columns)
 \hline
-P & D & WS & T & ToD & DoW & MoY & SoY & MAE & \% ranking\\ [0.5ex] % inserts table 
+{\#} & P & D & WS & T & ToD & DoW & MoY & SoY & \% CD & H1 & H2 & MAE & {\%} ranking\\ [0.5ex] % inserts table 
 %heading
-\hline                  % inserts single horizontal line
- \x    & \x    & \x    &       &       & \x\m  & \x\m  &       & 105.70 & \#134 \\ \hline
- \x    & \x    &       &       &       & \x\m  &       & \x\m  & 107.85 & \#135 \\ \hline
- \x    & \x    &       & \x    & \x    &       & \x    &       & 108.37 & \#136 \\ \hline
- \x    & \x    &       & \x    &       &       & \x    &       & 111.14 & \#137 \\ \hline
- \x    & \x    &       & \x    &       &       & \x\m  &       & 111.65 & \#138 \\ \hline
- \x    & \x    &       & \x    &       & \x\m  & \x\m  &       & 113.56 & \#139 \\ \hline
- \x    & \x    &       & \x    &       &       &       & \x    & 115.29 & \#140 \\ \hline
- \x    & \x    &       &       &       &       & \x\m  &       & 115.81 & \#141 \\ \hline
- \x    & \x    &       & \x    &       & \x\m  &       & \x\m  & 115.83 & \#142 \\ \hline
- \x    & \x    &       & \x    &       & \x    & \x    &       & 117.17 & \#143 \\ \hline
- \x    & \x    &       &       &       & \x\m  & \x\m  &       & 117.34 & \#144 \\ \hline
+\hline 
+134 &  \x    & \x    & \x    &       &       & \x\m  & \x\m  &       & 59.8\% &  5  & 0  & 105.70 & 85.05\% \\ \hline
+135 &  \x    & \x    &       &       &       & \x\m  &       & \x\m  & 51.4\% &  7  & 0  & 107.85 & 88.81\% \\ \hline
+136 &  \x    & \x    &       & \x    & \x    &       & \x    &       & 56.5\% &  5  & 0  & 108.37 & 89.72\% \\ \hline
+137 &  \x    & \x    &       & \x    &       &       & \x    &       & 54.4\% &  7  & 0  & 111.14 & 94.57\% \\ \hline
+138 &  \x    & \x    &       & \x    &       &       & \x\m  &       & 53.5\% &  8  & 0  & 111.65 & 95.47\% \\ \hline
+139 &  \x    & \x    &       & \x    &       & \x\m  & \x\m  &       & 52.9\% &  7  & 0  & 113.56 & 98.81\% \\ \hline
+140 &  \x    & \x    &       & \x    &       &       &       & \x    & 52.7\% &  8  & 0  & 115.29 & 101.84\% \\ \hline
+141 &  \x    & \x    &       &       &       &       & \x\m  &       & 53.0\% &  11 & 0  & 115.81 & 102.75\% \\ \hline
+142 &  \x    & \x    &       & \x    &       & \x\m  &       & \x\m  & 53.0\% &  5  & 0  & 115.83 & 102.78\% \\ \hline
+143 &  \x    & \x    &       & \x    &       & \x    & \x    &       & 53.2\% &  6  & 0  & 117.17 & 105.13\% \\ \hline
+144 &  \x    & \x    &       &       &       & \x\m  & \x\m  &       & 52.0\% &  7  & 0  & 117.34 & 105.43\% \\ \hline
 \end{tabular}
 }
 \caption{The bottom 10 input combinations for price prediction} % title of Table
@@ -148,6 +151,7 @@ P & D & WS & T & ToD & DoW & MoY & SoY & MAE & \% ranking\\ [0.5ex] % inserts ta
 
 If we take a look at the bottom 10 input combinations in terms of MAE we see some tendencies as well. We see that Wind Speed only appears in one of the combinations and so does the Time of Day(And not in the same combination). This further strengthens that these two variables are very important for the price prediction. We talked about matrix form earlier and its impact on the combinations. In the bottom 20 table we see that there is a lot of the combinations that contains variables on matrix form. This is because the Wind Speed and the Time of Day are the most influential parameters thus sending the combinations with these absent to the bottom of the chart. As these combinations also include matrix forms they will occur in the bottom top 20 thus not indicating that matrix form has no effect on the dataset.
 
+\subsubsection{Month and season analysis}
 \begin{table}[H]
 \centering  % used for centering table
 \resizebox{0.4\textwidth}{!}{
@@ -204,6 +208,7 @@ P & D & WS & T & ToD & DoW & MoY & SoY & MAE & \% ranking\\ [0.5ex] % inserts ta
 \label{table:1YearTrain} % is used to refer this table in the text
 \end{table}
 
+\subsubsection{Own set vs Unseen set}
 \begin{table}[H]
 \centering  % used for centering table
 \resizebox{0.8\textwidth}{!}{
@@ -212,26 +217,26 @@ P & D & WS & T & ToD & DoW & MoY & SoY & MAE & \% ranking\\ [0.5ex] % inserts ta
 	{\#} & MAE(Training dataset) & MAE(Unseen dataset) \\ [0.5ex] % inserts table 
 	%heading
 	\hline 
-	1  &   20.9 & 57.12 \\ \hline
-	2  &   29.61 & 58.09 \\ \hline
-	3  &   25.49 & 58.79 \\ \hline
-	4  &   18.94 & 60.14 \\ \hline
-	5  &   31.1 & 62.19 \\ \hline
-	6  &   22.97 & 62.26 \\ \hline
-	7  &   20.64 & 62.84 \\ \hline
-	8  &   23.87 & 63.94 \\ \hline
-	9  &   17.76 & 64.19 \\ \hline
-	10 &   19.79 & 64.72 \\ \hline
-	11 &   20.85 & 65.07 \\ \hline
-	12 &   25.71 & 65.95 \\ \hline
-	13 &   30.02 & 66.55 \\ \hline
-	14 &   31.32 & 67.21 \\ \hline
-	15 &   31.8 & 67.88 \\ \hline
-	16 &   23.11 & 68.21 \\ \hline
-	17 &   30.39 & 68.34 \\ \hline
-	18 &   40.54 & 68.35 \\ \hline
-	19 &   29.4 & 68.43 \\ \hline
-	20 &   34.38 & 68.45 \\ \hline
+	1  & 20.9 & 57.12 \\ \hline
+	2  & 29.61 & 58.09 \\ \hline
+	3  & 25.49 & 58.79 \\ \hline
+	4  & 18.94 & 60.14 \\ \hline
+	5  & 31.1 & 62.19 \\ \hline
+	6  & 22.97 & 62.26 \\ \hline
+	7  & 20.64 & 62.84 \\ \hline
+	8  & 23.87 & 63.94 \\ \hline
+	9  & 17.76 & 64.19 \\ \hline
+	10 & 19.79 & 64.72 \\ \hline
+	11 & 20.85 & 65.07 \\ \hline
+	12 & 25.71 & 65.95 \\ \hline
+	13 & 30.02 & 66.55 \\ \hline
+	14 & 31.32 & 67.21 \\ \hline
+	15 & 31.8 & 67.88 \\ \hline
+	16 & 23.11 & 68.21 \\ \hline
+	17 & 30.39 & 68.34 \\ \hline
+	18 & 40.54 & 68.35 \\ \hline
+	19 & 29.4 & 68.43 \\ \hline
+	20 & 34.38 & 68.45 \\ \hline
 	\end{tabular}
 }
 \caption{The MAE of the training dataset compared to the MAE of the unseen dataset.} % title of Table
@@ -346,25 +351,22 @@ In figure~\ref{fig:AllTrims} we see the dataset from figure~\ref{fig:1PTrim} wit
 \begin{table}[H]
 \centering  % used for centering table
 \resizebox{0.6\textwidth}{!}{
-	\begin{tabular}{|c|c|c|c|c|c|} % centered columns (7 columns)
+	\begin{tabular}{|c|c|c|c|c|} % centered columns (7 columns)
 	\hline
-	1PTrim & 2PTrim & 3PTrim & 4PTrim & 5PTrim & Number\\ [0.5ex] % inserts table 
+	\# & \% Trim & \% CD & MAE & \% Ranking\\ [0.5ex] % inserts table 
 	\hline                  % inserts single horizontal line
-	47,21 & 42,90 & 44,48 & 42,46 & 41,79 & \#1  \\ \hline
-	46,15 & 43,67 & 43,07 & 39,16 & 40,28 & \#2  \\ \hline
-	47,14 & 45,10 & 43,38 & 40,50 & 39,41 & \#3  \\ \hline
-	46,70 & 43,96 & 43,21 & 40,03 & 40,29 & \#4  \\ \hline
-	45,96 & 43,25 & 45,51 & 40,74 & 40,42 & \#5  \\ \hline
-	47,27 & 45,96 & 44,98 & 41,39 & 39,98 & \#6  \\ \hline
-	45,93 & 44,66 & 43,39 & 41,02 & 40,40 & \#7  \\ \hline
-	46,64 & 42,69 & 44,48 & 41,69 & 40,61 & \#8  \\ \hline
-	45,98 & 44,51 & 43,71 & 40,74 & 41,08 & \#9  \\ \hline
-	45,60 & 46,07 & 45,81 & 42,52 & 41,32 & \#10 \\ \hline
+	1  & 5 69.7 & 40.42 & - \\ \hline
+	2  & 4 70.0 & 40.74 & 0.8\% \\ \hline
+	3  & 2 70.5 & 43.25 & 7.0\% \\ \hline
+	4  & 3 69.5 & 45.51 & 12.59\% \\ \hline
+	5  & 1 70.0 & 45.96 & 13.7\% \\ \hline
 	\end{tabular}
 }
 \caption{Trims} % title of Table
 \label{table:Top10Trimming} % is used to refer this table in the text
 \end{table}
+
+\todo{Show how the same days play out with/without trimming}
 
 \subsubsection{Conclusion}
 In this experiment we saw how trimming can positively affect the predictions. We also discussed the trade offs in the trimming procedure as we lowered the possible outcomes of our predictions. This is a balance between improvement and the amount of prices we will not be able to predict. The 1\% trim showed us an improvement of 20.99\% and removed some extreme failed predictions where the ANN would overshoot the target by 800+. We also learned that higher trimming rates did not really improve the results very much thus making it easy for us to decide on a trimming rate of 1\%.
@@ -399,7 +401,7 @@ The EWMA is used to calculate the volatility of the curve. The electricity price
 \resizebox{0.5\textwidth}{!}{
 	\begin{tabular}{|c|c|c|c|c|} % centered columns (7 columns)
 	\hline
-	Rank & Stack size & Smoothing factor & MAE & \% ranking \\ [0.5ex] % inserts table 
+	\# & Stack size & Smoothing factor & MAE & \% ranking \\ [0.5ex] % inserts table 
 	\hline                   % inserts single horizontal line
 	1 & 16 & 0,9 & 45,96 & - \\ \hline
 	2 & 12 & 0,1 & 46,13 & 0,38\% \\ \hline
@@ -472,25 +474,25 @@ Variables: Price, Consumption, Wind Speed, Temperature, Time of Day (Matrix), Da
 \begin{table}[H]
 \centering  % used for centering table
 \resizebox{0.7\textwidth}{!}{
-	\begin{tabular}{|c|c|c|c|c|c|c|} 
+	\begin{tabular}{|c|c|c|c|c|c|c|c|} 
 	\hline
-	Rank & Curve & Skew & EWMA & Scatter & MAE & \% ranking\\ [0.5ex] % inserts table 
+	\# & Curve & Skew & EWMA & Scatter & \% CD & MAE & \% ranking\\ [0.5ex] % inserts table 
 	\hline                  % inserts single horizontal line
-	1  &       & \x    & \x    &       & 45,35 & - \\ \hline
-	2  & \x    & \x    & \x    &       & 45,76 & 0,91\% \\ \hline
-	3  & \x    &       &       & \x    & 45,83 & 1,06\% \\ \hline
-	4  & \x    &       &       &       & 46,10 & 1,66\% \\ \hline
-	5  & \x    & \x    &       &       & 46,40 & 2,32\% \\ \hline
-	6  & \x    &       & \x    &       & 46,47 & 2,48\% \\ \hline
-	7  &       & \x    &       &       & 46,53 & 2,6\% \\ \hline
-	8  &       &       & \x    &       & 46,53 & 2,61\% \\ \hline
-	9  &       &       & \x    & \x    & 46,72 & 3,03\% \\ \hline
-	10 &       &       &       & \x    & 46,88 & 3,38\% \\ \hline
-	11 & \x    & \x    & \x    & \x    & 47,40 & 4,54\% \\ \hline
-	12 &       & \x    &       & \x    & 47,65 & 5,09\% \\ \hline
-	13 & \x    &       & \x    & \x    & 47,82 & 5,46\% \\ \hline
-	14 & \x    & \x    &       & \x    & 47,96 & 5,76\% \\ \hline
-	15 &       & \x    & \x    & \x    & 48,45 & 6,83\% \\ \hline
+	1  &        & \x    & \x    &       & 66.4\% &  45.35 & - \\ \hline
+	2  &  \x    & \x    & \x    &       & 66.0\% &  45.76 & 0.91\% \\ \hline
+	3  &  \x    &       &       & \x    & 68.4\% &  45.83 & 1.06\% \\ \hline
+	4  &  \x    &       &       &       & 69.7\% &  46.10 & 1.66\% \\ \hline
+	5  &  \x    & \x    &       &       & 68.9\% &  46.40 & 2.32\% \\ \hline
+	6  &  \x    &       & \x    &       & 65.8\% &  46.47 & 2.48\% \\ \hline
+	7  &        & \x    &       &       & 69.4\% &  46.53 & 2.6\% \\ \hline
+	8  &        &       & \x    &       & 66.4\% &  46.53 & 2.61\% \\ \hline
+	9  &        &       & \x    & \x    & 66.1\% &  46.72 & 3.03\% \\ \hline
+	10 &        &       &       & \x    & 68.5\% &  46.88 & 3.38\% \\ \hline
+	11 &  \x    & \x    & \x    & \x    & 64.8\% &  47.40 & 4.54\% \\ \hline
+	12 &        & \x    &       & \x    & 68.5\% &  47.65 & 5.09\% \\ \hline
+	13 &  \x    &       & \x    & \x    & 65.3\% &  47.82 & 5.46\% \\ \hline
+	14 &  \x    & \x    &       & \x    & 67.0\% &  47.96 & 5.76\% \\ \hline
+	15 &        & \x    & \x    & \x    & 65.1\% &  48.45 & 6.83\% \\ \hline
 	\end{tabular}
 }
 \caption{Statistical results} % title of Table
@@ -552,25 +554,25 @@ Variables: Price, Consumption, Wind Speed, Temperature, Time of Day (Matrix), Da
 \begin{table}[H]
 \centering  % used for centering table
 \resizebox{0.7\textwidth}{!}{
-	\begin{tabular}{|c|c|c|c|c|c|c|} 
+	\begin{tabular}{|c|c|c|c|c|c|c|c|}
 	\hline
-	Rank & Curve & Skew & EWMA & Scatter & MAE & \% ranking\\ [0.5ex] % inserts table 
+	\# & Curve & Skew & EWMA & Scatter & \% CD & MAE & \% ranking\\ [0.5ex] % inserts table 
 	\hline                  % inserts single horizontal line
-	1  &       & \x    & \x    &       & 45,11 & - \\ \hline
-	2  &       &       & \x    &       & 45,24 & 0,28\% \\ \hline
-	3  & \x    & \x    & \x    &       & 45,43 & 0,7\% \\ \hline
-	4  & \x    &       &       &       & 45,53 & 0,92\% \\ \hline
-	5  & \x    & \x    &       & \x    & 46,45 & 2,98\% \\ \hline
-	6  & \x    & \x    &       &       & 46,56 & 3,2\% \\ \hline
-	7  &       &       & \x    & \x    & 46,76 & 3,65\% \\ \hline
-	8  & \x    &       & \x    &       & 46,87 & 3,9\% \\ \hline
-	9  &       & \x    & \x    & \x    & 47,25 & 4,73\% \\ \hline
-	10 &       & \x    &       &       & 47,88 & 6,14\% \\ \hline
-	11 &       &       &       & \x    & 47,88 & 6,14\% \\ \hline
-	12 & \x    & \x    & \x    & \x    & 48,01 & 6,43\% \\ \hline
-	13 & \x    &       & \x    & \x    & 48,13 & 6,68\% \\ \hline
-	14 &       & \x    &       & \x    & 48,40 & 7,3\% \\ \hline
-	15 & \x    &       &       & \x    & 49,68 & 10,12\% \\ \hline
+	1  &        & \x    & \x    &       & 67.0\% &  45.11 & - \\ \hline
+	2  &        &       & \x    &       & 66.5\% &  45.24 & 0.28\% \\ \hline
+	3  &  \x    & \x    & \x    &       & 66.0\% &  45.43 & 0.7\% \\ \hline
+	4  &  \x    &       &       &       & 69.2\% &  45.53 & 0.92\% \\ \hline
+	5  &  \x    & \x    &       & \x    & 68.5\% &  46.45 & 2.98\% \\ \hline
+	6  &  \x    & \x    &       &       & 69.3\% &  46.56 & 3.2\% \\ \hline
+	7  &        &       & \x    & \x    & 65.6\% &  46.76 & 3.65\% \\ \hline
+	8  &  \x    &       & \x    &       & 66.4\% &  46.87 & 3.9\% \\ \hline
+	9  &        & \x    & \x    & \x    & 65.4\% &  47.25 & 4.73\% \\ \hline
+	10 &        & \x    &       &       & 69.5\% &  47.88 & 6.14\% \\ \hline
+	11 &        &       &       & \x    & 68.2\% &  47.88 & 6.14\% \\ \hline
+	12 &  \x    & \x    & \x    & \x    & 65.6\% &  48.01 & 6.43\% \\ \hline
+	13 &  \x    &       & \x    & \x    & 65.4\% &  48.13 & 6.68\% \\ \hline
+	14 &        & \x    &       & \x    & 67.8\% &  48.40 & 7.3\% \\ \hline
+	15 &  \x    &       &       & \x    & 67.9\% &  49.68 & 10.12\% \\ \hline
 	\end{tabular}
 }
 \caption{Calculated inputs effect on result \#2 from experiment 1.} % title of Table
@@ -581,25 +583,25 @@ Variables: Price, Consumption, Wind Speed, Temperature, Time of Day (Matrix) and
 \begin{table}[H]
 \centering  % used for centering table
 \resizebox{0.7\textwidth}{!}{
-	\begin{tabular}{|c|c|c|c|c|c|c|}
+	\begin{tabular}{|c|c|c|c|c|c|c|c|}
 	\hline
-	Rank & Curve & Skew & EWMA & Scatter & MAE & \% ranking\\ [0.5ex] % inserts table 
+	\# & Curve & Skew & EWMA & Scatter & \% CD & MAE & \% ranking\\ [0.5ex] % inserts table 
 	\hline                  % inserts single horizontal line
-	1  &       &       & \x    & \x    & 45,14 & - \\ \hline
-	2  &       &       &       & \x    & 45,55 & 0,9\%  \\ \hline
-	3  &       & \x    &       &       & 45,56 & 0,92\% \\ \hline
-	4  &       & \x    &       & \x    & 45,60 & 1,02\% \\ \hline
-	5  & \x    &       & \x    &       & 45,91 & 1,7\%  \\ \hline
-	6  & \x    & \x    & \x    & \x    & 45,95 & 1,79\% \\ \hline
-	7  & \x    & \x    &       &       & 45,99 & 1,89\% \\ \hline
-	8  & \x    &       &       & \x    & 46,14 & 2,22\% \\ \hline
-	9  & \x    &       &       &       & 46,58 & 3,18\% \\ \hline
-	10 & \x    & \x    &       & \x    & 46,87 & 3,82\% \\ \hline
-	11 &       &       & \x    &       & 46,98 & 4,08\% \\ \hline
-	12 &       & \x    & \x    & \x    & 47,02 & 4,16\% \\ \hline
-	13 & \x    & \x    & \x    &       & 47,08 & 4,3\%  \\ \hline
-	14 & \x    &       & \x    & \x    & 47,94 & 6,2\%  \\ \hline
-	15 &       & \x    & \x    &       & 47,98 & 6,29\% \\ \hline
+	1  &        &       & \x    & \x    & 66.7\% &  45.14 & - \\ \hline
+	2  &        &       &       & \x    & 67.7\% &  45.55 & 0.9\% \\ \hline
+	3  &        & \x    &       &       & 69.6\% &  45.56 & 0.92\% \\ \hline
+	4  &        & \x    &       & \x    & 69.0\% &  45.60 & 1.02\% \\ \hline
+	5  &  \x    &       & \x    &       & 66.2\% &  45.91 & 1.7\% \\ \hline
+	6  &  \x    & \x    & \x    & \x    & 65.3\% &  45.95 & 1.79\% \\ \hline
+	7  &  \x    & \x    &       &       & 69.8\% &  45.99 & 1.89\% \\ \hline
+	8  &  \x    &       &       & \x    & 68.9\% &  46.14 & 2.22\% \\ \hline
+	9  &  \x    &       &       &       & 69.4\% &  46.58 & 3.18\% \\ \hline
+	10 &  \x    & \x    &       & \x    & 68.3\% &  46.87 & 3.82\% \\ \hline
+	11 &        &       & \x    &       & 67.4\% &  46.98 & 4.08\% \\ \hline
+	12 &        & \x    & \x    & \x    & 66.0\% &  47.02 & 4.16\% \\ \hline
+	13 &  \x    & \x    & \x    &       & 66.3\% &  47.08 & 4.3\% \\ \hline
+	14 &  \x    &       & \x    & \x    & 66.6\% &  47.94 & 6.2\% \\ \hline
+	15 &        & \x    & \x    &       & 66.9\% &  47.98 & 6.29\% \\ \hline
 	\end{tabular}
 }
 \caption{Calculated inputs effect on result \#3 from experiment 1.} % title of Table
@@ -638,25 +640,25 @@ Variables: Price, Consumption and With no trimming
 \begin{table}[H]
 \centering  % used for centering table
 \resizebox{0.7\textwidth}{!}{
-	\begin{tabular}{|c|c|c|c|c|c|c|} % centered columns (7 columns)
+	\begin{tabular}{|c|c|c|c|c|c|c|c|} % centered columns (7 columns)
 	\hline
-	Rank & Curve & Skew & EWMA & Scatter & MAE & \% ranking\\ [0.5ex] % inserts table 
+	\# & Curve & Skew & EWMA & Scatter & \% CD & MAE & \% ranking\\ [0.5ex] % inserts table 
 	\hline                  % inserts single horizontal line
-	1  &        &       &       & \x    & 73,43 & - \\ \hline
-	2  &  \x    &       &       & \x    & 76,45 & 4,11\%  \\ \hline
-	3  &        &       & \x    &       & 77,50 & 5,54\%  \\ \hline
-	4  &  \x    &       & \x    & \x    & 77,54 & 5,6\%   \\ \hline
-	5  &        & \x    &       & \x    & 79,17 & 7,82\%  \\ \hline
-	6  &        &       & \x    & \x    & 80,67 & 9,86\%  \\ \hline
-	7  &        & \x    & \x    & \x    & 80,85 & 10,11\% \\ \hline
-	8  &  \x    & \x    & \x    & \x    & 81,97 & 11,63\% \\ \hline
-	9  &        & \x    &       &       & 84,37 & 14,9\%  \\ \hline
-	10 &  \x    & \x    &       & \x    & 84,86 & 15,57\% \\ \hline
-	11 &  \x    & \x    & \x    &       & 86,49 & 17,79\% \\ \hline
-	12 &  \x    &       & \x    &       & 86,95 & 18,41\% \\ \hline
-	13 &        & \x    & \x    &       & 88,50 & 20,52\% \\ \hline
-	14 &  \x    &       &       &       & 89,26 & 21,57\% \\ \hline
-	15 &  \x    & \x    &       &       & 96,24 & 31,07\% \\ \hline
+	1  &        &       &       & \x    & 60.3\% &  73.43 & - \\ \hline
+	2  &  \x    &       &       & \x    & 60.5\% &  76.45 & 4.11\% \\ \hline
+	3  &        &       & \x    &       & 53.4\% &  77.50 & 5.54\% \\ \hline
+	4  &  \x    &       & \x    & \x    & 59.1\% &  77.54 & 5.6\% \\ \hline
+	5  &        & \x    &       & \x    & 60.7\% &  79.17 & 7.82\% \\ \hline
+	6  &        &       & \x    & \x    & 59.7\% &  80.67 & 9.86\% \\ \hline
+	7  &        & \x    & \x    & \x    & 58.7\% &  80.85 & 10.11\% \\ \hline
+	8  &  \x    & \x    & \x    & \x    & 58.6\% &  81.97 & 11.63\% \\ \hline
+	9  &        & \x    &       &       & 54.0\% &  84.37 & 14.9\% \\ \hline
+	10 &  \x    & \x    &       & \x    & 58.6\% &  84.86 & 15.57\% \\ \hline
+	11 &  \x    & \x    & \x    &       & 52.4\% &  86.49 & 17.79\% \\ \hline
+	12 &  \x    &       & \x    &       & 53.7\% &  86.95 & 18.41\% \\ \hline
+	13 &        & \x    & \x    &       & 52.9\% &  88.50 & 20.52\% \\ \hline
+	14 &  \x    &       &       &       & 53.6\% &  89.26 & 21.57\% \\ \hline
+	15 &  \x    & \x    &       &       & 53.0\% &  96.24 & 31.07\% \\ \hline
 	\end{tabular}
 }
 \caption{calculated inputs on Price \& Consumption with no trim.} % title of Table
@@ -667,51 +669,51 @@ Variables: Price, Consumption and With 1\% trimming
 \begin{table}[H]
 \centering  % used for centering table
 \resizebox{0.7\textwidth}{!}{
-	\begin{tabular}{|c|c|c|c|c|c|c|} % centered columns (7 columns)
+	\begin{tabular}{|c|c|c|c|c|c|c|c|} % centered columns (7 columns)
 	\hline
-	Rank & Curve & Skew & EWMA & Scatter & MAE & \% ranking\\ [0.5ex] % inserts table 
+	\# & Curve & Skew & EWMA & Scatter & \% CD & MAE & \% ranking\\ [0.5ex] % inserts table 
 	\hline                  % inserts single horizontal line
-	1  &        &       &       & \x    & 68,28  & - \\ \hline
-	2  &  \x    & \x    &       & \x    & 69,40  & 1,63\%  \\ \hline
-	3  &        & \x    &       & \x    & 70,17  & 2,77\%  \\ \hline
-	4  &  \x    &       &       & \x    & 70,28  & 2,93\%  \\ \hline
-	5  &        & \x    &       &       & 72,16  & 5,68\%  \\ \hline
-	6  &  \x    & \x    &       &       & 75,31  & 10,29\% \\ \hline
-	7  &  \x    &       &       &       & 77,14  & 12,97\% \\ \hline
-	8  &  \x    &       & \x    & \x    & 93,86  & 37,46\% \\ \hline
-	9  &  \x    & \x    & \x    & \x    & 94,21  & 37,98\% \\ \hline
-	10 &        &       & \x    & \x    & 95,02  & 39,17\% \\ \hline
-	11 &        & \x    & \x    & \x    & 97,79  & 43,22\% \\ \hline
-	12 &        &       & \x    &       & 111,91 & 63,9\%  \\ \hline
-	13 &        & \x    & \x    &       & 115,91 & 69,76\% \\ \hline
-	14 &  \x    &       & \x    &       & 116,83 & 71,11\% \\ \hline
-	15 &  \x    & \x    & \x    &       & 118,82 & 74,03\% \\ \hline
+	1  &        &       &       & \x    & 55.5\% &  68.28 & - \\ \hline
+	2  &  \x    & \x    &       & \x    & 56.0\% &  69.40 & 1.63\% \\ \hline
+	3  &        & \x    &       & \x    & 55.6\% &  70.17 & 2.77\% \\ \hline
+	4  &  \x    &       &       & \x    & 56.2\% &  70.28 & 2.93\% \\ \hline
+	5  &        & \x    &       &       & 52.4\% &  72.16 & 5.68\% \\ \hline
+	6  &  \x    & \x    &       &       & 52.1\% &  75.31 & 10.29\% \\ \hline
+	7  &  \x    &       &       &       & 51.1\% &  77.14 & 12.97\% \\ \hline
+	8  &  \x    &       & \x    & \x    & 52.7\% &  93.86 & 37.46\% \\ \hline
+	9  &  \x    & \x    & \x    & \x    & 53.2\% &  94.21 & 37.98\% \\ \hline
+	10 &        &       & \x    & \x    & 52.8\% &  95.02 & 39.17\% \\ \hline
+	11 &        & \x    & \x    & \x    & 51.7\% &  97.79 & 43.22\% \\ \hline
+	12 &        &       & \x    &       & 50.9\% &  111.91 & 63.9\% \\ \hline
+	13 &        & \x    & \x    &       & 49.9\% &  115.91 & 69.76\% \\ \hline
+	14 &  \x    &       & \x    &       & 50.4\% &  116.83 & 71.11\% \\ \hline
+	15 &  \x    & \x    & \x    &       & 49.9\% &  118.82 & 74.03\% \\ \hline
 	\end{tabular}
 }
 \caption{calculated inputs on Price \& Consumption with 1\% trim.} % title of Table
 \label{table:price_consumption_x3_1pTrim} % is used to refer this table in the text
 \end{table}
 
-\subsubsection{Clone experiment from literature}
+\subsubsection{Clone scatter experiment from literature}
 The last iterations we did was a clone of the experiments conducted in~\cite{singhal2011electricity}. This setup includes price, consumption, time of day, day of week and scatter. We did the prediction both with 1\% and no trim as they did in the text (no spikes, small spikes and large spikes). The results can be seen in table ~\ref{table:scatter_text_no_trim} and ~\ref{table:scatter_text_1p_trim}. The results with trimming and the best strategies gives us a result of 52.04 MAE which is 14.75\% worse than the best result from table~\ref{table:Statistical1} and the results without trimming is 71.51 MAE which is 25.19\% worse than the best result from table~\ref{table:Top20Prices} in experiment one. We cannot compare the results directly to the ones they present in the paper because they only present a prediction of 48 hours and they do not tell us whether this is on unseen data or it is on the same dataset as they trained on. Neither do we know whether they simulate the full 48 hour prediction or they do it 1-hour at a time.
+\todo{Write: Difficult to compare results since there is not enough information about their experimental setup thus leaving some of the dataset manipulation to guesswork.}
 
 Variables: Price, Consumption, Time of Day, Day of Week and With no trimming
 \begin{table}[H]
 \centering  % used for centering table
 \resizebox{0.7\textwidth}{!}{
-	\begin{tabular}{|c|c|c|c|c|c|c|} % centered columns (7 columns)
+	\begin{tabular}{|c|c|c|c|c|c|c|c|} % centered columns (7 columns)
 	\hline
-	Rank & Curve & Skew & EWMA & Scatter & MAE & \% ranking\\ [0.5ex] % inserts table 
+	\# & Curve & Skew & EWMA & Scatter & \% CD & MAE & \% ranking\\ [0.5ex] % inserts table 
 	\hline                  % inserts single horizontal line
-	1 &        & \x    &       & \x    & 71,51 & -       \\ \hline
-	2 &        &       & \x    & \x    & 73,17 & 2,33\%  \\ \hline
-	3 &        & \x    & \x    & \x    & 79,31 & 10,92\% \\ \hline
-	4 &        &       &       & \x    & 80,20 & 12,16\% \\ \hline
-	5 &  \x    & \x    & \x    & \x    & 82,03 & 14,73\% \\ \hline
-	6 &  \x    &       & \x    & \x    & 89,82 & 25,61\% \\ \hline
-	7 &  \x    &       &       & \x    & 94,26 & 31,83\% \\ \hline
-	8 &  \x    & \x    &       & \x    & 94,90 & 32,72\% \\ \hline
-
+	1  &        & \x    &       & \x    & 60.2\% &  71.51 & - \\ \hline
+	2  &        &       & \x    & \x    & 61.3\% &  73.17 & 2.33\% \\ \hline
+	3  &        & \x    & \x    & \x    & 61.1\% &  79.31 & 10.92\% \\ \hline
+	4  &        &       &       & \x    & 60.2\% &  80.20 & 12.16\% \\ \hline
+	5  &  \x    & \x    & \x    & \x    & 59.7\% &  82.03 & 14.73\% \\ \hline
+	6  &  \x    &       & \x    & \x    & 58.6\% &  89.82 & 25.61\% \\ \hline
+	7  &  \x    &       &       & \x    & 60.0\% &  94.26 & 31.83\% \\ \hline
+	8  &  \x    & \x    &       & \x    & 58.8\% &  94.90 & 32.72\% \\ \hline
 	\end{tabular}
 }
 \caption{Scatter text~\cite{singhal2011electricity} with other calculated inputs and no trim} % title of Table
@@ -722,19 +724,18 @@ Variables: Price, Consumption, Time of Day, Day of Week and	With no trimming
 \begin{table}[H]
 \centering  % used for centering table
 \resizebox{0.7\textwidth}{!}{
-	\begin{tabular}{|c|c|c|c|c|c|c|} % centered columns (7 columns)
+	\begin{tabular}{|c|c|c|c|c|c|c|c|} % centered columns (7 columns)
 	\hline
-	Rank & Curve & Skew & EWMA & Scatter & MAE & \% ranking\\ [0.5ex] % inserts table 
+	\# & Curve & Skew & EWMA & Scatter & \% CD & MAE & \% ranking\\ [0.5ex] % inserts table 
 	\hline                  % inserts single horizontal line
-	1 &  \x    & \x    &       & \x    & 52,04 & - \\ \hline
-	2 &  \x    &       & \x    & \x    & 52,12 & 0,15\% \\ \hline
-	3 &        & \x    & \x    & \x    & 53,22 & 2,27\% \\ \hline
-	4 &        & \x    &       & \x    & 54,02 & 3,8\% \\ \hline
-	5 &  \x    &       &       & \x    & 54,55 & 4,83\% \\ \hline
-	6 &        &       & \x    & \x    & 55,80 & 7,23\% \\ \hline
-	7 &        &       &       & \x    & 56,33 & 8,24\% \\ \hline
-	8 &  \x    & \x    & \x    & \x    & 61,92 & 18,99\% \\ \hline
-
+	1  &  \x    & \x    &       & \x    & 63.6\% &  52.04 & - \\ \hline
+	2  &  \x    &       & \x    & \x    & 65.8\% &  52.12 & 0.15\% \\ \hline
+	3  &        & \x    & \x    & \x    & 66.4\% &  53.22 & 2.27\% \\ \hline
+	4  &        & \x    &       & \x    & 63.7\% &  54.02 & 3.8\% \\ \hline
+	5  &  \x    &       &       & \x    & 66.8\% &  54.55 & 4.83\% \\ \hline
+	6  &        &       & \x    & \x    & 63.0\% &  55.80 & 7.23\% \\ \hline
+	7  &        &       &       & \x    & 64.0\% &  56.33 & 8.24\% \\ \hline
+	8  &  \x    & \x    & \x    & \x    & 59.2\% &  61.92 & 18.99\% \\ \hline
 	\end{tabular}
 }
 \caption{Scatter text~\cite{singhal2011electricity} with other calculated inputs and 1\% trim} % title of Table
@@ -742,7 +743,7 @@ Variables: Price, Consumption, Time of Day, Day of Week and	With no trimming
 \end{table}
 
 \subsubsection{Conclusion}
-The calculated inputs that we applied in this experiment did help the curve analysis but only slightly. The best improvement gave a result that was 4.10\% better than the same combination in experiment 2. The results also show that the calculated inputs will at worst just be the same as before. So if we apply them and they do not work then the result and MAE will not suffer from this.
+The calculated inputs that we applied in this experiment did help the curve analysis but only slightly. The best improvement gave a result that was 4.10\% better than the same combination in experiment two. The results also show that the calculated inputs will at worst just be the same as before. So if we apply them and they do not work then the result and MAE will not suffer from this.
 
 The results from the simple dataset (last known price and consumption) showed us that if we apply calculated inputs to this dataset it will improve quite a bit. The improvement makes it as good as the best combination from experiment one. The downside with this is that we are not able to improve it further. So it gets stuck with that error margin. We conducted the same trial with a 1 \% trimmed dataset and here we saw no improvement. It shows that our calculated inputs actually can improve some datasets but it does not improve our best combination.
 
@@ -787,14 +788,14 @@ The results from table~\ref{table:Dataset_size} shows the impact of increasing t
 \begin{table}[H]
 \centering  % used for centering table
 \resizebox{0.8\textwidth}{!}{
-	\begin{tabular}{|c|c|c|c|c|c|} % centered columns (7 columns)
+	\begin{tabular}{|c|c|c|c|c|c|c|c|} % centered columns (7 columns)
 	\hline
-	Entries & Time(seconds) & H1 & H2 & MAE & \% ranking\\ [0.5ex] % inserts table 
+	\# & Entries & Time(seconds) & H1 & H2 & \% CD & MAE & \% ranking\\ [0.5ex] % inserts table 
 	\hline                  % inserts single horizontal line
-	4378 & 397,28 & 6  & 11 & 46,34 & - \\ \hline
-	8756 & 844,68 & 12 & 5  & 47,82 & 3,19\% \\ \hline
-	2189 & 232,87 & 6  & 18 & 49,33 & 6,46\% \\ \hline
-	6567 & 677,33 & 14 & 6  & 49,67 & 7,19\% \\ \hline
+	1  & 4378 & 397.28 & 6  & 11 & 70.1 & 46.34 & - \\ \hline
+	2  & 0    & 844.68 & 12 & 5  & 70.7 & 47.82 & 3.19\% \\ \hline
+	3  & 6567 & 232.87 & 6  & 18 & 68.6 & 49.33 & 6.46\% \\ \hline
+	4  & 2189 & 677.33 & 14 & 6  & 67.3 & 49.67 & 7.19\% \\ \hline
 	\end{tabular}
 }
 \caption{The results from the dataset size test.} % title of Table
@@ -815,37 +816,37 @@ In table~\ref{table:Epochs} we see the effects of epochs used when training the 
 \begin{table}[H]
 \centering  % used for centering table
 \resizebox{0.8\textwidth}{!}{
-	\begin{tabular}{|c|c|c|c|c|c|c|} % centered columns (7 columns)		
+	\begin{tabular}{|c|c|c|c|c|c|c|c|} % centered columns (7 columns)		
 	\hline
-	\# & Epochs & Time(seconds) & H1 & H2 & MAE & \% ranking \\ [0.5ex] % inserts table 
+	\# & Epochs & Time(seconds) & H1 & H2 & \% CD & MAE & \% ranking \\ [0.5ex] % inserts table 
 	\hline                  % inserts single horizontal line
-	1  & 500  &450.19  & 12 & 11 & 45.17 & - \\ \hline
-	2  & 600  &375.02  & 7  & 11 & 46.14 & 2.16\% \\ \hline
-	3  & 900  &415.28  & 8  & 3  & 47.32 & 4.77\% \\ \hline
-	4  & 1100 &566.83  & 10 & 5  & 47.40 & 4.95\% \\ \hline
-	5  & 200  &264.03  & 14 & 8  & 47.92 & 6.09\% \\ \hline
-	6  & 100  &213.95  & 14 & 11 & 48.13 & 6.55\% \\ \hline
-	7  & 1600 &807.21  & 6  & 17 & 48.23 & 6.78\% \\ \hline
-	8  & 300  &315.01  & 14 & 10 & 48.41 & 7.17\% \\ \hline
-	9  & 1200 &676.83  & 10 & 9  & 48.74 & 7.91\% \\ \hline
-	10 & 40   &185.18  & 17 & 8  & 49.34 & 9.24\% \\ \hline
-	11 & 400  &345.01  & 12 & 8  & 49.37 & 9.3\% \\ \hline
-	12 & 1800 &1496.67 & 5  & 1  & 49.80 & 10.26\% \\ \hline
-	13 & 800  &518.7   & 8  & 16 & 50.15 & 11.02\% \\ \hline
-	14 & 1000 &612.22  & 8  & 18 & 50.67 & 12.19\% \\ \hline
-	15 & 1300 &877.29  & 13 & 13 & 50.78 & 12.42\% \\ \hline
-	16 & 1500 &691.92  & 7  & 8  & 50.82 & 12.52\% \\ \hline
-	17 & 2400 &2510.23 & 6  & 11 & 51.58 & 14.2\% \\ \hline
-	18 & 2200 &3296.05 & 10 & 25 & 51.72 & 14.5\% \\ \hline
-	19 & 3000 &3600.85 & 7  & 19 & 52.09 & 15.33\% \\ \hline
-	20 & 700  &471.98  & 7  & 20 & 52.26 & 15.7\% \\ \hline
-	21 & 2000 &3035.47 & 13 & 16 & 53.56 & 18.57\% \\ \hline
-	22 & 20   &175.38  & 19 & 8  & 53.69 & 18.87\% \\ \hline
-	23 & 1400 &978.75  & 12 & 18 & 54.41 & 20.46\% \\ \hline
-	24 & 2800 &3202.93 & 7  & 15 & 55.20 & 22.2\% \\ \hline
-	25 & 2600 &3286.09 & 11 & 9  & 57.69 & 27.73\% \\ \hline
-	26 & 10   &177.02  & 14 & 6  & 58.75 & 30.07\% \\ \hline
-	27 & 1    &168.82  & 15 & 10 & 122.50 & 171.2\% \\ \hline
+	1  & 500  & 450.19 & 12 & 11 & 67.1 & 45.17 & - \\ \hline
+	2  & 600  & 375.02 & 7  & 11 & 68.4 & 46.14 & 2.16\% \\ \hline
+	3  & 900  & 415.28 & 8  & 3  & 68.3 & 47.32 & 4.77\% \\ \hline
+	4  & 1100 & 566.83 & 10 & 5  & 67.4 & 47.40 & 4.95\% \\ \hline
+	5  & 200  & 264.03 & 14 & 8  & 66.1 & 47.92 & 6.09\% \\ \hline
+	6  & 100  & 213.95 & 14 & 11 & 65.8 & 48.13 & 6.55\% \\ \hline
+	7  & 1600 & 807.21 & 6  & 17 & 68.9 & 48.23 & 6.78\% \\ \hline
+	8  & 300  & 315.01 & 14 & 10 & 66.4 & 48.41 & 7.17\% \\ \hline
+	9  & 1200 & 676.83 & 10 & 9  & 66.8 & 48.74 & 7.91\% \\ \hline
+	10 & 40   & 185.18 & 17 & 8  & 64.8 & 49.34 & 9.24\% \\ \hline
+	11 & 400  & 345.01 & 12 & 8  & 67.1 & 49.37 & 9.3\% \\ \hline
+	12 & 1800 & 1496.67 & 5  & 1  & 70.1 & 49.80 & 10.26\% \\ \hline
+	13 & 800  & 518.7  & 8  & 16 & 66.8 & 50.15 & 11.02\% \\ \hline
+	14 & 1000 & 612.22 & 8  & 18 & 66.3 & 50.67 & 12.19\% \\ \hline
+	15 & 1300 & 877.29 & 13 & 13 & 66.0 & 50.78 & 12.42\% \\ \hline
+	16 & 1500 & 691.92 & 7  & 8  & 66.0 & 50.82 & 12.52\% \\ \hline
+	17 & 2400 & 2510.23 & 6  & 11 & 66.4 & 51.58 & 14.2\% \\ \hline
+	18 & 2200 & 3296.05 & 10 & 25 & 64.5 & 51.72 & 14.5\% \\ \hline
+	19 & 3000 & 3600.85 & 7  & 19 & 64.2 & 52.09 & 15.33\% \\ \hline
+	20 & 700  & 471.98 & 7  & 20 & 64.9 & 52.26 & 15.7\% \\ \hline
+	21 & 2000 & 3035.47 & 13 & 16 & 64.8 & 53.56 & 18.57\% \\ \hline
+	22 & 20   & 175.38 & 19 & 8  & 63.6 & 53.69 & 18.87\% \\ \hline
+	23 & 1400 & 978.75 & 12 & 18 & 64.8 & 54.41 & 20.46\% \\ \hline
+	24 & 2800 & 3202.93 & 7  & 15 & 63.4 & 55.20 & 22.2\% \\ \hline
+	25 & 2600 & 3286.09 & 11 & 9  & 65.2 & 57.69 & 27.73\% \\ \hline
+	26 & 10   & 177.02 & 14 & 6  & 60.4 & 58.75 & 30.07\% \\ \hline
+	27 & 1    & 168.82 & 15 & 10 & 50.3 & 122.50 & 171.2\% \\ \hline
 	\end{tabular}
 }
 \caption{The results from the epochs experiment.} % title of Table
