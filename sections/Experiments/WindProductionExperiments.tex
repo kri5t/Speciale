@@ -33,51 +33,53 @@ The variables used in this experiment series:
 \label{sec:predictionBasicInputParams}
 All results from the first experiment can be seen in Appendix~\ref{sec:simpleInputTest}. The results vary from the best MAE at 127,86 to the worst being 199,22. Top and bottom 10 is shown sorted in Table~\ref{table:windProdInputParamsTop10}. The appendix shows that when wind speed is used as the only input parameter it achieves 149,72 in MAE. This illustrates the expected relationship between wind speed and wind production. The experiment further indicates that time of day, air density and last production are significant. This correspond well with the analysis in Section~\ref{sec:windPowerAnalysis} where the relationship between wind production and these parameters are established. Last hours wind power production is represented in all of top 10 which was also expected from the analysis concerning wind production development in Section~\ref{sec:windProductionDev}. The production does not differ much from one hour to the next which is reflected in the last known production input parameter --- more sophisticated attempts with statistic will be in experiments to come. The development is also represented in the bottom which will be addressed when discussing month as input. What comes as a surprise is the under-representation of consumption in top 10 because the analysis showed a good co-relation. A possible explanation can be the substitution with temperature which highly influences consumption as discussed in the analysis section. Temperature is the significant factor in calculating air density since pressure is close to constant as described in Section~\ref{sec:airDensity} which can explain why rank top-3 is without consumption and why air density can substitute consumption.
 
+The \% CD in Table~\ref{table:windProdInputParamsTop10} is an indication of how many predicted hours was in correct direction compared to the actual direction. The percentage is stable throughout the table with values around 60-70\%. The correct direction percentage is around the same for the bottom 10. It indicates what have been discussed before, namely wind power production follows the trends of the wind speed and it is included in all of the predictions. This will be discussed further when looking at the actual prediction graph.
+
 Wind Direction is represented four times in top 10. What is noticeable is the same combinations without wind direction is also represented. This can suggest the indifference of wind direction, e.g. \#2-\#3 and \#6-\#7 is very similar to each other. This is further backed up by the analysis which only showed a low co-relation.
 
 The contributory cause to the bad accuracy in the bottom is month and how it in general does not help the prediction when using it together with a dataset containing only 3 months. Month represents the seasonal perspective of the input parameters and is suppose to find the relationship between months and the production in general. Since the historical data used for prediction is only 3 months, it does not capture how the same month last year influenced the production. In the case of wind power prediction it seems to be creating more noise and thereby affect the prediction badly. A possible solution to obtain the seasonality aspect is presented in\cite{pjmForecast} where the Neural Network is trained with 45 days from before the day to be predicted, and 45 days before and after in the previous year. By using this approach the month parameter will reflect the influence of the months around you from the last year. This will be validated in an prediction for itself in Section~\ref{sec:predictionWindProdSeasonalExperiment}.
 
 \footnotesize
 \begin{center}
-\begin{longtable}{|c|c|c|c|c|c|c|c|c|c|c|c|}
+\begin{longtable}{|c|c|c|c|c|c|c|c|c|c|c|c|c|}
 \hline
-\textbf{WS} & \textbf{AD} & \textbf{C} & \textbf{T} & \textbf{WD} & \textbf{L-P} & \textbf{Mo}& \textbf{ToD} & \textbf{MAE} & \textbf{\% Deviation} & \textbf{H1} & \textbf{H2} \\
+\textbf{WS} & \textbf{AD} & \textbf{C} & \textbf{T} & \textbf{WD} & \textbf{L-P} & \textbf{Mo}& \textbf{ToD} & \textbf{MAE} & \textbf{\% Deviation} & \textbf{H1} & \textbf{H2} & \textbf{\% CD}  \\
 \hline
 \endfirsthead
-\multicolumn{12}{c}%
+\multicolumn{13}{c}%
 {\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
 \hline
-\textbf{WS} & \textbf{AD} & \textbf{C} & \textbf{T} & \textbf{WD} & \textbf{L-P} & \textbf{Mo}& \textbf{ToD} & \textbf{MAE} & \textbf{\% Deviation} & \textbf{H1} & \textbf{H2} \\
+\textbf{WS} & \textbf{AD} & \textbf{C} & \textbf{T} & \textbf{WD} & \textbf{L-P} & \textbf{Mo}& \textbf{ToD} & \textbf{MAE} & \textbf{\% Deviation} & \textbf{H1} & \textbf{H2} & \textbf{\% CD} \\
 \hline
 \endhead
-\hline \multicolumn{12}{r}{\textit{Continued on next page}} \\
+\hline \multicolumn{13}{r}{\textit{Continued on next page}} \\
 \endfoot
 \hline
 \endlastfoot
 \arrayrulecolor{light-gray}
- \x &  &  &  \x &  &  \x &  &  \x & 127,86 & 0,0\% & 24 & 10 \\ \hline
- \x &  \x &  &  &  \x &  \x &  &  \x & 131,59 & 2,92\% & 17 & 10  \\ \hline
- \x &  \x &  &  &  &  \x &  &  \x & 131,89 & 3,15\% & 12 & 10 \\ \hline
- \x &  \x &  \x &  \x &  \x &  \x &  &  \x & 133,18 & 4,16\% & 22 & 10 \\ \hline
- \x &  \x &  \x &  \x &  \x &  \x &  &  & 133,77 & 4,62\% & 24 & 10  \\ \hline
- \x &  \x &  \x &  &  &  \x &  &  \x & 134,14 & 4,91\% & 19 & 10 \\ \hline
- \x &  \x &  \x &  &  \x &  \x &  &  \x & 135,4 & 5,9\% & 25 & 10  \\ \hline
- \x &  \x &  \x &  &  &  \x &  &  & 136,33 & 6,62\% & 15 & 10 \\ \hline
- \x &  \x &  &  &  &  \x &  \x &  \x & 136,65 & 6,87\% & 11 & 10 \\ \hline
- \x &  &  &  &  &  \x &  &  & 137,33 & 7,41\% & 1 & 00  \\ \hline
+ \x &  &  &  \x &  &  \x &  &  \x & 125,75 & 0,0\% & 19 & 13 & 73\% \\ \hline
+ \x &  \x &  &  &  \x &  \x &  &  \x & 131,59 & 4,64\% & 20 & 17 & 73\% \\ \hline
+ \x &  \x &  &  &  &  \x &  &  \x & 131,89 & 4,88\% & 16 & 20 & 73\% \\ \hline
+ \x &  \x &  \x &  \x &  \x &  \x &  &  \x & 133,18 & 5,91\% & 13 & 20 & 72\% \\ \hline
+ \x &  \x &  \x &  \x &  \x &  \x &  &  \x & 133,77 & 6,38\% & 16 & 17 & 73\% \\ \hline
+ \x &  \x &  \x &  &  &  \x &  &  \x & 134,14 & 6,67\% & 12 & 17 & 73\% \\ \hline
+ \x &  \x &  \x &  &  \x &  \x &  &  \x & 135,4 & 7,67\% & 6 & 13 & 72\% \\ \hline
+ \x &  \x &  \x &  &  &  \x &  &  \x & 136,33 & 8,41\% & 21 & 10 & 73\% \\ \hline
+ \x &  \x &  &  &  &  \x &  \x &  \x & 136,65 & 8,67\% & 5 & 24 & 73\% \\ \hline
+ \x &  &  &  &  &  \x &  &  \x & 137,33 & 9,21\% & 9 & 15 & 74\% \\ \hline
  . & . & . & . &  .  & . &  . & . & . & . \\ 
  . & . & . & . &  .  & . &  . & . & . & . \\ 
  . & . & . & . &  .  & . &  . & . & . & .\\ \hline
- \x &  \x &  &  \x &  &  \x &  \x &  & 170,93 & 33,69\% & 21 & 10  \\ \hline
- \x &  &  \x &  \x &  \x &  \x &  \x &  \x & 171,61 & 34,22\% & 23 & 10 \\ \hline
- \x &  &  \x &  \x &  &  \x &  \x &  & 172,72 & 35,09\% & 21 & 10 \\ \hline
- \x &  &  &  &  \x &  \x &  \x &  & 173,12 & 35,4\% & 17 & 10 \\ \hline
- \x &  &  \x &  \x &  &  \x &  \x &  \x & 173,65 & 35,81\% & 12 & 10  \\ \hline
- \x &  \x &  \x &  \x &  \x &  \x &  \x &  \x & 174,26 & 36,29\% & 17 & 10  \\ \hline
- \x &  \x &  &  \x &  &  \x &  \x &  \x & 174,55 & 36,52\% & 21 & 10  \\ \hline
- \x &  &  &  \x &  &  \x &  \x &  \x & 174,85 & 36,75\% & 18 & 10  \\ \hline
- \x &  \x &  \x &  &  \x &  \x &  \x &  & 180,89 & 41,48\% & 14 & 10  \\ \hline
- \x &  \x &  &  &  \x &  \x &  \x &  \x & 199,22 & 55,81\% & 22 & 10 \\ \hline
+ \x &  \x &  &  \x &  &  \x &  \x &  \x & 170,93 & 35,93\% & 9 & 18 & 71\% \\ \hline
+ \x &  &  \x &  \x &  \x &  \x &  \x &  \x & 171,61 & 36,47\% & 9 & 13 & 71\% \\ \hline
+ \x &  &  \x &  \x &  &  \x &  \x &  \x & 172,72 & 37,35\% & 14 & 15 & 71\% \\ \hline
+ \x &  &  &  &  \x &  \x &  \x &  \x & 173,12 & 37,67\% & 18 & 9 & 71\% \\ \hline
+ \x &  &  \x &  \x &  &  \x &  \x &  \x & 173,65 & 38,09\% & 13 & 17 & 69\% \\ \hline
+ \x &  \x &  \x &  \x &  \x &  \x &  \x &  \x & 174,26 & 38,58\% & 15 & 14 & 68\% \\ \hline
+ \x &  \x &  &  \x &  &  \x &  \x &  \x & 174,55 & 38,81\% & 3 & 17 & 71\% \\ \hline
+ \x &  &  &  \x &  &  \x &  \x &  \x & 174,85 & 39,05\% & 1 & 17 & 70\% \\ \hline
+ \x &  \x &  \x &  &  \x &  \x &  \x &  \x & 180,89 & 43,85\% & 20 & 11 & 68\% \\ \hline
+ \x &  \x &  &  &  \x &  \x &  \x &  \x & 199,22 & 58,43\% & 18 & 19 & 70\% \\ \hline
 \caption{Wind Production Input Parameter Test Top and bottom 10. It is based on 3 month of historical data and 200 epochs. It is an average of the prediction over 8000 hours}
 \label{table:windProdInputParamsTop10}
 \end{longtable}
@@ -144,32 +146,32 @@ In experiments concerning prediction of wind production the month input paramete
 
 \footnotesize
 \begin{center}
-\begin{longtable}{|c|c|c|c|c|c|c|c|c|c|c|c|}
+\begin{longtable}{|c|c|c|c|c|c|c|c|c|c|c|c|c|}
 \hline
-\textbf{WS} & \textbf{AD} & \textbf{C} & \textbf{T} & \textbf{WD} & \textbf{L-P} & \textbf{Mo}& \textbf{ToD} & \textbf{MAE} & \textbf{\% from \#1} & \textbf{H1} & \textbf{H2} \\
+\textbf{WS} & \textbf{AD} & \textbf{C} & \textbf{T} & \textbf{WD} & \textbf{L-P} & \textbf{Mo}& \textbf{ToD} & \textbf{MAE} & \textbf{\% from \#1} & \textbf{H1} & \textbf{H2} & \textbf{\% CD} \\
 \hline
 \endfirsthead
-\multicolumn{12}{c}%
+\multicolumn{13}{c}%
 {\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
 \hline
-\textbf{WS} & \textbf{AD} & \textbf{C} & \textbf{T} & \textbf{WD} & \textbf{L-P} & \textbf{Mo}& \textbf{ToD} & \textbf{MAE} & \textbf{\% from \#1} & \textbf{H1} & \textbf{H2} \\
+\textbf{WS} & \textbf{AD} & \textbf{C} & \textbf{T} & \textbf{WD} & \textbf{L-P} & \textbf{Mo}& \textbf{ToD} & \textbf{MAE} & \textbf{\% from \#1} & \textbf{H1} & \textbf{H2} & \textbf{\% CD} \\
 \hline
 \endhead
-\hline \multicolumn{12}{r}{\textit{Continued on next page}} \\
+\hline \multicolumn{13}{r}{\textit{Continued on next page}} \\
 \endfoot
 \hline
 \endlastfoot
 \arrayrulecolor{light-gray}
- \x &  \x &  \x &  &  \x &  \x &  &  \x & 142.88 & 0.0\% & 7 & 17 \\ \hline
- \x &  &  &  \x &  \x &  \x &  &  & 142.89 & 0.01\% & 14 & 11 \\ \hline
- \x &  \x &  &  &  \x &  \x &  &  \x & 143.37 & 0.34\% & 6 & 21 \\ \hline
- \x &  \x &  \x &  \x &  \x &  \x &  &  \x & 143.97 & 0.76\% & 8 & 25 \\ \hline
- \x &  &  &  &  &  \x &  &  \x & 143.98 & 0.77\% & 5 & 21 \\ \hline
- \x &  \x &  \x &  \x &  &  \x &  \x &  & 144.11 & 0.86\% & 6 & 17 \\ \hline
- \x &  \x &  &  &  &  \x &  &  & 144.12 & 0.87\% & 7 & 12 \\ \hline
- \x &  &  &  &  &  &  &  \x & 144.28 & 0.98\% & 12 & 17 \\ \hline
- \x &  &  \x &  &  \x &  \x &  &  & 144.42 & 1.08\% & 11 & 10 \\ \hline
- \x &  \x &  &  \x &  \x &  \x &  &  \x & 144.48 & 1.12\% & 4 & 17 \\ \hline
+ \x &  \x &  \x &  &  \x &  \x &  &  \x & 142,88 & 0,0\% & 7 & 17 & 73\% \\ \hline
+ \x &  &  &  \x &  \x &  \x &  &  \x & 142,89 & 0,01\% & 14 & 11 & 73\% \\ \hline
+ \x &  \x &  &  &  \x &  \x &  &  \x & 143,37 & 0,34\% & 3 & 21 & 73\% \\ \hline
+ \x &  \x &  \x &  \x &  \x &  \x &  &  \x & 143,97 & 0,76\% & 4 & 25 & 72\% \\ \hline
+ \x &  &  &  &  &  \x &  &  \x & 143,98 & 0,77\% & 2 & 21 & 72\% \\ \hline
+ \x &  \x &  \x &  \x &  &  \x &  \x &  \x & 144,11 & 0,86\% & 1 & 17 & 73\% \\ \hline
+ \x &  \x &  &  &  &  \x &  &  \x & 144,12 & 0,87\% & 7 & 12 & 73\% \\ \hline
+ \x &  &  &  &  &  &  &  \x & 144,28 & 0,98\% & 12 & 17 & 41\% \\ \hline
+ \x &  &  \x &  &  \x &  \x &  &  \x & 144,42 & 1,08\% & 11 & 10 & 72\% \\ \hline
+ \x &  \x &  &  \x &  \x &  \x &  &  \x & 144,48 & 1,12\% & 1 & 17 & 73\% \\ \hline
 \caption{Top 10 seasonal wind production test. It is based on 3 month of historical data and one month after from the previous year. It is run with 200 epochs and predicts 8000 hours in 2012}
 \label{table:seasonalWindProdInputParamsTop10}
 \end{longtable}
@@ -178,23 +180,23 @@ In experiments concerning prediction of wind production the month input paramete
 
 \footnotesize
 \begin{center}
-\begin{longtable}{|c|c|c|c|c|c|c|c|c|c|c|}
+\begin{longtable}{|c|c|c|c|c|c|c|c|c|c|c|c|}
 \hline
-\textbf{WS} & \textbf{AD} & \textbf{C} & \textbf{T} & \textbf{WD} & \textbf{L-P} & \textbf{Mo}& \textbf{ToD} & \textbf{MAE} & \textbf{H1} & \textbf{H2} \\
+\textbf{WS} & \textbf{AD} & \textbf{C} & \textbf{T} & \textbf{WD} & \textbf{L-P} & \textbf{Mo}& \textbf{ToD} & \textbf{MAE} & \textbf{H1} & \textbf{H2} & \textbf{\% CD}  \\
 \hline
 \endfirsthead
-\multicolumn{11}{c}%
+\multicolumn{12}{c}%
 {\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
 \hline
-\textbf{WS} & \textbf{AD} & \textbf{C} & \textbf{T} & \textbf{WD} & \textbf{L-P} & \textbf{Mo}& \textbf{ToD} & \textbf{MAE} & \textbf{H1} & \textbf{H2} \\
+\textbf{WS} & \textbf{AD} & \textbf{C} & \textbf{T} & \textbf{WD} & \textbf{L-P} & \textbf{Mo}& \textbf{ToD} & \textbf{MAE} & \textbf{H1} & \textbf{H2} & \textbf{\% CD} \\
 \hline
 \endhead
-\hline \multicolumn{11}{r}{\textit{Continued on next page}} \\
+\hline \multicolumn{12}{r}{\textit{Continued on next page}} \\
 \endfoot
 \hline
 \endlastfoot
 \arrayrulecolor{light-gray}
- \x &  \x &  \x &  \x &  &  \x &  \x &  & 147.98 & 6 & 22 \\ \hline
+ \x &  \x &  \x &  \x &  &  \x &  \x &  & 147,98 & 6 & 22 & 73\% \\ \hline
 \caption{Seasonal wind production test based on an entire year. It is run with 200 epochs and predicts 8000 hours in 2012}
 \label{table:seasonWindProdInputParamsTop2WholeYear}
 \end{longtable}
@@ -203,7 +205,9 @@ In experiments concerning prediction of wind production the month input paramete
 
 \subsubsection{Best prediction graph}
 \label{sec:bestInputCombiGraph}
-The first 175 hours of the best prediction from Table~\ref{table:windProdInputParamsTop10} can be seen in Figure~\ref{fig:bestInputParameterPrediction}. The hours have been pointed out because they illustrate situations and issues that are relevant for the analysis and general for the prediction - more graphs can be seen in Appendix~\ref{sec:bestCombiPredictionsGraphs}. It can be observed that the prediction follows the trend of the actual wind production. The graph show how the challenge is the time it takes to identify shifting trends and how much the trend is increasing or decreasing at that particular time. From hour 24-48 and 120-160 (see zoomed Figure~\ref{fig:bestInputCombi120-148}) the prediction is behind the actual slope and continues to under-shoot because it did not identify it from the beginning. Hours between 90-110 (see zoomed in Figure~\ref{fig:bestInputCombi96-120}) illustrates how the prediction does not detect to which extend the wind production is decreasing at that time and how it results in a significant overshoot when detecting the coming rising trend. The problems arise due to 24-hour-ahead prediction marked by the vertical lines in Figure~\ref{fig:bestInputParameterPrediction} since every hour is based on the previous predicted hours. If one hour misses its target there is a possibility for the next to do as well because it uses that prediction as input. The graphs show that the prediction can correct itself so that the error is not escalated to the last hour. This is due to the input parameters which highly affect the wind production so that it is adjusted according to when the curve starts a new trend. The calculated approach described in Section~\ref{sec:usingStatisticalInput} can possible help in these cases by calculating trend or slope and use it as input to add further characteristics of the curve. Experiments will take up this approach for comparison. The graph in Figure~\ref{fig:bestInputParameterLowNumbers} shows the ability to predict low numbers and follow the trend back up again when the wind power is not as volatile within the sliding window to predict as opposed to the low productions marked in the graph from Figure~\ref{fig:bestInputCombi4500-4700}. The graph in Figure~\ref{fig:bestInputParameterPrediction} visualizes the error of the individual predictions. The error follows the prediction curve which is expected due to the fact that the error measure is MAE and measures the difference between the predicted and ideal value --- the higher the value the higher probability of shooting past it. MPE would have to opposite effect since it calculates the difference in percentage which would result in lower values having higher errors, e.g. if the ideal is 10 and the predicted value is 20, which is close in an interval from 0-2800, the MPE would be 100\%. The measure is described in Section~\ref{sec:maeStatistics}.
+The first 175 hours of the best prediction from Table~\ref{table:windProdInputParamsTop10} can be seen in Figure~\ref{fig:bestInputParameterPrediction}. The hours have been pointed out because they illustrate situations and issues that are relevant for the analysis and general for the prediction - more graphs can be seen in Appendix~\ref{sec:bestCombiPredictionsGraphs}. It can be observed that the prediction follows the trend of the actual wind production which is also emphasized by the correct direction percentage of 73\%. The graph show how the challenge is the time it takes to identify shifting trends and how much the trend is increasing or decreasing at that particular time. From hour 24-48 and 120-160 (see zoomed Figure~\ref{fig:bestInputCombi120-148}) the prediction is behind the actual slope and continues to under-shoot because it did not identify it from the beginning. Hours between 90-110 (see zoomed in Figure~\ref{fig:bestInputCombi96-120}) illustrates how the prediction does not detect to which extend the wind production is decreasing at that time and how it results in a significant overshoot when detecting the coming rising trend. The problems arise due to 24-hour-ahead prediction marked by the vertical lines in Figure~\ref{fig:bestInputParameterPrediction} since every hour is based on the previous predicted hours. If one hour misses its target there is a possibility for the next to do as well because it uses that prediction as input. The graphs show that the prediction can correct itself so that the error is not escalated to the last hour. This is due to the input parameters which highly affect the wind production so that it is adjusted according to when the curve starts a new trend. The calculated approach described in Section~\ref{sec:usingStatisticalInput} can possible help in these cases by calculating trend or slope and use it as input to add further characteristics of the curve. Experiments will take up this approach for comparison. The graph in Figure~\ref{fig:bestInputParameterLowNumbers} shows the ability to predict low numbers and follow the trend back up again when the wind power is not as volatile within the sliding window to predict as opposed to the low productions marked in the graph from Figure~\ref{fig:bestInputCombi4500-4700}. The graph in Figure~\ref{fig:bestInputParameterPrediction} visualizes the error of the individual predictions. The error follows the prediction curve which is expected due to the fact that the error measure is MAE and measures the difference between the predicted and ideal value --- the higher the value the higher probability of shooting past it. MPE would have to opposite effect since it calculates the difference in percentage which would result in lower values having higher errors, e.g. if the ideal is 10 and the predicted value is 20, which is close in an interval from 0-2800, the MPE would be 100\%. The measure is described in Section~\ref{sec:maeStatistics}.
+
+The correct direction percentage for the best prediction is 73\%. When looking at the graph in Figure~\ref{fig:bestInputCombi4500} some of the obvious wrong directions can be observed in the two pink boxes. When the volatility of the productions are low or less significant then these trends are difficult to identify especially when numbers are smaller as seen Figure~\ref{fig:bestInputParameterLowNumbers} from hours 5000-5060.
 
 \begin{figure}[H]
 \centering
@@ -290,31 +294,31 @@ The decrease in accuracy when using wind speed as a matrix can be seen in Table~
 Wind speeds are represented by 41 different values in our data set which can explain the decrease in accuracy. Instead of having only one input to represent each of the values, the matrix turned into 41 inputs for every single value. The purpose is to have a weight that tells exactly how much the specific wind speed in general influence the wind production to predict. The network will do so by adjusting a weight for the different wind speeds in the matrix whenever they are seen. As described in Section~\ref{sec:Matrix} a problem arise if some values does not exist or are under-represented. This will cause that specific value to be under-expressed because the weight has only been adjusted a few times or not at all. The seasonal differences in wind power production is described in Section~\ref{sec:windProdSeasonality} and since wind production follows wind speed the training set of only 3 months does not cover all wind speeds. Many wind speed will therefore be under-represented when using wind speed as matrix. This is also backed up by the results.
 
 \begin{center}
-\begin{longtable}{|c|c|c|c|c|c|c|c|c|c|c|}
+\begin{longtable}{|c|c|c|c|c|c|c|c|c|c|c|c|}
 \hline
-\textbf{WS} & \textbf{AD} & \textbf{C} & \textbf{T} & \textbf{WD} & \textbf{L-P} & \textbf{ToD} & \textbf{MAE} & \textbf{\% from \#1} &  \textbf{H1} & \textbf{H2}  \\
+\textbf{WS} & \textbf{AD} & \textbf{C} & \textbf{T} & \textbf{WD} & \textbf{L-P} & \textbf{ToD} & \textbf{MAE} & \textbf{\% from \#1} &  \textbf{H1} & \textbf{H2} & \textbf{\% CD}   \\
 \hline
 \endfirsthead
-\multicolumn{11}{c}%
+\multicolumn{12}{c}%
 {\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
 \hline
-\textbf{WS} & \textbf{AD} & \textbf{C} & \textbf{T} & \textbf{WD} & \textbf{L-P} & \textbf{ToD} & \textbf{MAE} & \textbf{\% from \#1} &  \textbf{H1} & \textbf{H2}  \\
+\textbf{WS} & \textbf{AD} & \textbf{C} & \textbf{T} & \textbf{WD} & \textbf{L-P} & \textbf{ToD} & \textbf{MAE} & \textbf{\% from \#1} &  \textbf{H1} & \textbf{H2} & \textbf{\% CD}  \\
 \hline
 \endhead
-\hline \multicolumn{11}{r}{\textit{Continued on next page}} \\
+\hline \multicolumn{12}{r}{\textit{Continued on next page}} \\
 \endfoot
 \hline
 \endlastfoot
 \arrayrulecolor{light-gray}
- \x &  &  &  \x &  &  \x &  \x (m) & 126,25 & 0,0\% & 18 & 17 \\ \hline
- \x &  \x &  &  &  &  \x &  \x (m) & 127,95 & 1,35\% & 13 & 19 \\ \hline
- \x &  \x &  &  &  \x &  \x & \x (m) & 130,07 & 3,02\% & 2 & 23 \\ \hline
- \x (m) & &  &  \x &  &  \x &  \x (m) & 135,71 & 7,49\% & 13 & 16 \\ \hline
- \x (m) & \x &  &  &  \x &  \x &  \x & 144,44 & 14,41\% & 14 & 12 \\ \hline
-  \x (m) & \x &  &  &  &  \x &  \x & 147,63 & 17,12\% & 8 & 16 \\ \hline
- \x (m) & \x &  &  &  \x &  \x &  \x (m) & 149,18 & 18,16\% & 13 & 21 \\ \hline
- \x (m) & &  &  \x &  &  \x &  \x & 149,19 & 18,17\% & 10 & 22 \\ \hline
- \x (m) & \x &  &  &  &  \x &  \x (m) & 155,46 & 23,14\% & 16 & 13 \\ \hline
+ \x &  &  &  \x &  &  \x &  \x (m) & 126,25 & 0,0\% & 18 & 17 & 71\% \\ \hline
+ \x &  \x &  &  &  &  \x &  \x (m) & 127,95 & 1,35\% & 13 & 19 & 70\% \\ \hline
+ \x &  \x &  &  &  \x &  \x & \x (m) & 130,07 & 3,02\% & 2 & 23 & 69\% \\ \hline
+ \x (m) & &  &  \x &  &  \x &  \x (m) & 135,71 & 7,49\% & 13 & 16 & 67\% \\ \hline
+ \x (m) & \x &  &  &  \x &  \x &  \x & 144,44 & 14,41\% & 14 & 12 & 70\% \\ \hline
+  \x (m) & \x &  &  &  &  \x &  \x & 147,63 & 17,12\% & 8 & 16 & 70\%\\ \hline
+ \x (m) & \x &  &  &  \x &  \x &  \x (m) & 149,18 & 18,16\% & 13 & 21 & 62\% \\ \hline
+ \x (m) & &  &  \x &  &  \x &  \x & 149,19 & 18,17\% & 10 & 22 & 63\% \\ \hline
+ \x (m) & \x &  &  &  &  \x &  \x (m) & 155,46 & 23,14\% & 16 & 13 & 59\% \\ \hline
 \caption{Matrix test}
 \label{table:theWindProdInputParamsTop10WithMatrix}
 \end{longtable}
@@ -324,27 +328,27 @@ Wind speeds are represented by 41 different values in our data set which can exp
 The need for trimming exists if irregularities exist or you want to narrow the narrow down the dataset and focus the prediction. In wind power production such values do not exist in our dataset because we want to predict all values over the entire year. This does leave out the possibility that trimming could make the prediction more accurate on certain values outside of the trimmed values. This is disproved in the context of wind power in Table~\ref{table:trimmingOnBothSetsTable} where all types of trim results in a worsening in MAE. This indicates that values that are necessary for the generalization function to approach its target are removed during trimming. What can be seen though is that the more trim the better it becomes. Section~\ref{sec:windProductionDev} shows how the trimming would affect the dataset and it is clear that when values are removed it cuts directly in a curve. It results in the possibility of actually creating irregularities. This confirmed by comparing the graph in Figure~\ref{fig:fivePercentTrimPrediction} with the one in Figure~\ref{fig:bestInputPredictFrom0-400}. The curves are not as smooth which is obvious in most of the predicted hour but especially in 48-82 compared to the hours without trimming. It is not the exact same hours that are predicted but it shows how the graph is cut up and becomes more volatile and harder to predict.
 
 \begin{center}
-\begin{longtable}{|c|c|c|c|c|c|c|c|c|c|c|}
+\begin{longtable}{|c|c|c|c|c|c|}
 \hline
-\textbf{WS} & \textbf{AD} & \textbf{C} & \textbf{T} & \textbf{WD} & \textbf{L-P} & \textbf{ToD} & \textbf{MAE} & \textbf{\% from \#1} &  \textbf{H1} & \textbf{H2}  \\
+\textbf{Trim \%} & \textbf{MAE} & \textbf{\% Ranking} & \textbf{Min trim} & \textbf{Max trim} & \textbf{\% Correct Direction} \\
 \hline
 \endfirsthead
-\multicolumn{11}{c}%
+\multicolumn{6}{c}%
 {\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
 \hline
-\textbf{WS} & \textbf{AD} & \textbf{C} & \textbf{T} & \textbf{WD} & \textbf{L-P} & \textbf{ToD} & \textbf{MAE} & \textbf{\% from \#1} &  \textbf{H1} & \textbf{H2}  \\
+\textbf{Trim \%} & \textbf{MAE} & \textbf{\% Ranking} & \textbf{Min trim} & \textbf{Max trim} & \textbf{\% Correct Direction} \\
 \hline
 \endhead
-\hline \multicolumn{11}{r}{\textit{Continued on next page}} \\
+\hline \multicolumn{6}{r}{\textit{Continued on next page}} \\
 \endfoot
 \hline
 \endlastfoot
 \arrayrulecolor{light-gray}
-5\% & 128,91 & 0,0\% & 40 & 2018 \\ \hline  
-4\% & 130,94 & 1,57\% & 14 & 2076  \\ \hline  
-3\% & 134,19 & 4,1\% & 49 & 2154  \\ \hline 
-2\% & 136,27 & 5,71\% & 23 & 2270  \\ \hline  
-1\% & 138,19 & 7,2\% & 31 & 2416  \\ \hline 
+5\% & 128,91 & 0,0\% & 40 & 2018 & 69\% \\ \hline  
+4\% & 130,94 & 1,57\% & 14 & 2076 & 73\% \\ \hline  
+3\% & 134,19 & 4,1\% & 49 & 2154 & 72\%\\ \hline 
+2\% & 136,27 & 5,71\% & 23 & 2270 & 72\% \\ \hline  
+1\% & 138,19 & 7,2\% & 31 & 2416 & 72\%\\ \hline 
 \caption{Trimming from 1\% to 5\%}
 \label{table:trimmingOnBothSetsTable}
 \end{longtable}
@@ -421,33 +425,33 @@ Historical Volatility is presented in Section~\ref{sec:usingStatisticalInput}. T
 
 \footnotesize
 \begin{center}
-\begin{longtable}{|c|c|c|c|}
+\begin{longtable}{|c|c|c|c|c|}
 \caption{Wind Production Input Parameter Test}\\
 \hline
-\textbf{Previous Hours} & \textbf{Smoothing factor} & \textbf{MAE} & \textbf{\% Deviation} \\
+\textbf{Previous Hours} & \textbf{Smoothing factor} & \textbf{MAE} & \textbf{\% Deviation} & \textbf{\% Correct Direction} \\
 \hline
 \endfirsthead
-\multicolumn{4}{c}%
+\multicolumn{5}{c}%
 {\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
 \hline
-\textbf{Previous Hours} & \textbf{Smoothing factor} & \textbf{MAE} & \textbf{\% Deviation} \\
+\textbf{Previous Hours} & \textbf{Smoothing factor} & \textbf{MAE} & \textbf{\% Deviation} & \textbf{\% Correct Direction} \\
 \hline
 \endhead
-\hline \multicolumn{4}{r}{\textit{Continued on next page}} \\
+\hline \multicolumn{5}{r}{\textit{Continued on next page}} \\
 \endfoot
 \hline
 \endlastfoot
 \arrayrulecolor{light-gray}
-6 & 0,70 & 121,81 & 0,0\% \\ \hline
-20 & 0,80 & 122,9 & 0,89\% \\ \hline
-24 & 0,60 & 123,13 & 1,08\% \\ \hline
-24 & 0,80 & 124,02 & 1,81\% \\ \hline
-16 & 0,20 & 125,65 & 3,15\% \\ \hline
-12 & 0,30 & 127,0 & 4,26\% \\ \hline
-24 & 0,70 & 127,06 & 4,31\% \\ \hline
-16 & 0, 60 & 127,38 & 4,57\% \\ \hline
-24 & 0,40 & 127,51 & 4,68\% \\ \hline
-16 & 0,90 & 127,77 & 4,89\% \\ \hline
+6 & 0,70 & 121,81 & 0,0\% & 73\% \\ \hline
+20 & 0,80 & 122,9 & 0,89\% & 70\%  \\ \hline
+24 & 0,60 & 123,13 & 1,08\% & 71\& \\ \hline
+24 & 0,80 & 124,02 & 1,81\% & 70\% \\ \hline
+16 & 0,20 & 125,65 & 3,15\% & 69\% \\ \hline
+12 & 0,30 & 127,0 & 4,26\% & 70\% \\ \hline
+24 & 0,70 & 127,06 & 4,31\% & 69\% \\ \hline
+16 & 0, 60 & 127,38 & 4,57\% & 69\% \\ \hline
+24 & 0,40 & 127,51 & 4,68\% & 70\% \\ \hline
+16 & 0,90 & 127,77 & 4,89\% & 69\% \\ \hline
 \end{longtable}
 \label{table:historicalVoltalityHours}
 \end{center}
@@ -482,30 +486,30 @@ All combinations of smoothing factor and previous hours can be seen in Appendix~
 Skewness is a calculation of how much a distribution leans to one side of the mean which is described in more detail in Section~\ref{sec:skewness}. What is important to identify is again how many previous hours to include in the calculation of the skew in order to get the best picture of what side the curve is currently leaning towards. Table~\ref{table:skewnessHours} shows results where the best fit is found to be 16 hours. This will be basis for further testing when trying to use the methods in combination to see if any of them can augment each other. At first glance skewness does not seem to improve much but it will need testing when put together with the other calculations.
 
 \begin{center}
-\begin{longtable}{|c|c|}
+\begin{longtable}{|c|c|c|}
 \hline
-\textbf{Hours} & \textbf{MAE} \\
+\textbf{Hours} & \textbf{MAE} & \textbf{\% Correct Direction}\\
 \hline
 \endfirsthead
-\multicolumn{2}{c}%
+\multicolumn{3}{c}%
 {\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
 \hline
-\textbf{Hours} & \textbf{MAE}\\
+\textbf{Hours} & \textbf{MAE} & \textbf{\% Correct Direction}\\
 \hline
 \endhead
-\hline \multicolumn{2}{r}{\textit{Continued on next page}} \\
+\hline \multicolumn{3}{r}{\textit{Continued on next page}} \\
 \endfoot
 \hline
 \endlastfoot
 \arrayrulecolor{light-gray}
-16 & 125.85 \\ \hline
-4 & 127.52 \\ \hline
-24 & 129.63 \\ \hline
-8 & 131.18 \\ \hline
-12 & 131.26 \\ \hline
-6 & 131.51 \\ \hline
-20 & 134.81 \\ \hline
-2 & 139.33 \\ \hline
+16 & 125.85 & 69\% \\ \hline
+4 & 127.52 & 70\% \\ \hline
+24 & 129.63 & 69\% \\ \hline
+8 & 131.18 & 68\% \\ \hline
+12 & 131.26 & 68\% \\ \hline
+6 & 131.51 & 68\% \\ \hline
+20 & 134.81 & 67\% \\ \hline
+2 & 139.33 & 66\% \\ \hline
 \caption{Prediction With Skewness and different hours}
 \label{table:skewnessHours}
 \end{longtable}
@@ -525,30 +529,30 @@ Figure~\ref{fig:bestSkewnessGraph} shows the first 175 hours when using skewness
 The experiment covers basic slope calculation of the curve. The intention is to get a notion of how much the previous productions have been going upwards before a particular hour. It captures how the slopes in general relate to the wind power production --- does a very steep slope in general affect the production to go up or not? Table~\ref{table:curveAnalysisHours} shows that the slope calculation as input does not work as intended. Its impact on the first 175 hours can be seen in Figure~\ref{fig:basicCurveAnalysisGrapho}. The best result from Table~\ref{table:curveAnalysisHours} calculates the slope from the previous 20 hours and the hours from 48-70 illustrates in the graph that it has a hard time identifying when to stop moving up since it has been moving up for so long. The 24-ahead prediction starts at 48 just before the drop and since the slope calculation is based on the last 20 hours it does not identify the shift --- it has a steep slope and points the overall generalization upwards since steep slopes in most cases result in ascending curves except when at the very top of one. The opposite happens around hour 70-80 where it does not know when to stop. This is a difference from the matrix without calculated inputs which is indicated by the blue line --- the prediction only follows the meteorological factors and how they relate to the production. The 1-hour-ahead forecasting with curve has been performed and obtains a MAE of 56,6. The graph can be seen in Figure~\ref{fig:curveOneAheadvs24Ahead} where the curve fitting as expected is significantly better.
 
 \begin{center}
-\begin{longtable}{|c|c|}
+\begin{longtable}{|c|c|c|}
 \hline
-\textbf{Hours} & \textbf{MAE} \\
+\textbf{Hours} & \textbf{MAE} & \textbf{\% Correct Direction} \\
 \hline
 \endfirsthead
-\multicolumn{2}{c}%
+\multicolumn{3}{c}%
 {\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
 \hline
-\textbf{Hours} & \textbf{MAE} \\
+\textbf{Hours} & \textbf{MAE} & \textbf{\% Correct Direction} \\
 \hline
 \endhead
-\hline \multicolumn{2}{r}{\textit{Continued on next page}} \\
+\hline \multicolumn{3}{r}{\textit{Continued on next page}} \\
 \endfoot
 \hline
 \endlastfoot
 \arrayrulecolor{light-gray}
-20 & 133,27 \\ \hline
-16 & 133,52 \\ \hline
-12 & 137,05 \\ \hline
-8 & 140,0 \\ \hline
-24 & 146,5 \\ \hline
-6 & 148,5 \\ \hline
-2 & 151,62 \\ \hline
-4 & 161,12 \\ \hline
+20 & 133,27 & 68\% \\ \hline
+16 & 133,52 & 67\% \\ \hline
+12 & 137,05 & 67\% \\ \hline
+8 & 140,0 & 70\% \\ \hline
+24 & 146,5 & 66\% \\ \hline
+6 & 148,5 & 67\% \\ \hline
+2 & 151,62 & 67\% \\ \hline
+4 & 161,12 & 66\% \\ \hline
 \caption{Results for slope calculation as input on different previous hours}
 \label{table:curveAnalysisHours}
 \end{longtable}
@@ -573,26 +577,26 @@ The experiment covers basic slope calculation of the curve. The intention is to 
 Experiments with combinations of the approaches have been performed to investigate whether or not any of them augment each other. Furthermore, adding historical productions as input has been tried as presented in Section~\ref{sec:scatterPaper} and discussed in Section~\ref{sec:scatterStrategy}. The approach adds 3 inputs for the production from one day ago, 3 inputs from the production one week ago, one input from the production two weeks ago, one input from the production three weeks ago and one last input from four weeks ago. The purpose is letting the network itself capture the price development over time instead of calculating it beforehand. Experiment results from each approach is in Table~\ref{table:comparisonStatistics} where the historical volatility with a smoothing factor of 0,70 and 6 previous hours outperforms the other approaches. 
 
 \begin{center}
-\begin{longtable}{|c|c|}
+\begin{longtable}{|c|c|c|}
 \hline
-\textbf{Hours} & \textbf{MAE} \\
+\textbf{Type} & \textbf{MAE} & \textbf{\% Correct Direction} \\
 \hline
 \endfirsthead
-\multicolumn{2}{c}%
+\multicolumn{3}{c}%
 {\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
 \hline
-\textbf{Hours} & \textbf{MAE} \\
+\textbf{Type} & \textbf{MAE} & \textbf{\% Correct Direction} \\
 \hline
 \endhead
-\hline \multicolumn{2}{r}{\textit{Continued on next page}} \\
+\hline \multicolumn{3}{r}{\textit{Continued on next page}} \\
 \endfoot
 \hline
 \endlastfoot
 \arrayrulecolor{light-gray}
-Volatility, 0,70 as smoothing on 6 hours & 121,81 \\ \hline
-Skewness with 16 hours & 125.85 \\ \hline
-Scatter of prices & 134.7 \\ \hline
-Slope as input with 20 hours & 133.27 \\ \hline
+Volatility, 0,70 as smoothing on 6 hours & 121,81 & 73\% \\ \hline
+Skewness with 16 hours & 125.85 & 69\% \\ \hline
+Scatter of prices & 134.7 & 68\% \\ \hline
+Slope as input with 20 hours & 133.27 & 68\% \\ \hline
 \caption{Comparison of the approaches}
 \label{table:comparisonStatistics}
 \end{longtable}
@@ -608,33 +612,33 @@ Skewness and curve in combination with each other achieves the best result but d
 \end{figure} 
 
 \begin{center}
-\begin{longtable}{|c|c|c|c|c|c|}
+\begin{longtable}{|c|c|c|c|c|c|c|}
 \hline
-\textbf{Volatility} & \textbf{Skewness} & \textbf{Scatter} & \textbf{Curve} & \textbf{MAE} & \textbf{\% Deviation} \\
+\textbf{Volatility} & \textbf{Skewness} & \textbf{Scatter} & \textbf{Curve} & \textbf{MAE} & \textbf{\% Deviation} & \textbf{\% Correct Direction} \\
 \hline
 \endfirsthead
-\multicolumn{6}{c}%
+\multicolumn{7}{c}%
 {\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
 \hline
-\textbf{Volatility} & \textbf{Skewness} & \textbf{Scatter} & \textbf{Curve} & \textbf{MAE} & \textbf{\% Deviation} \\
+\textbf{Volatility} & \textbf{Skewness} & \textbf{Scatter} & \textbf{Curve} & \textbf{MAE} & \textbf{\% Deviation} & \textbf{\% Correct Direction} \\
 \hline
 \endhead
-\hline \multicolumn{6}{r}{\textit{Continued on next page}} \\
+\hline \multicolumn{7}{r}{\textit{Continued on next page}} \\
 \endfoot
 \hline
 \endlastfoot
 \arrayrulecolor{light-gray}
- &  \x &  &  \x & 131,69 & 0,0\% \\ \hline
- \x &  \x &  &  & 139,73 & 6,11\% \\ \hline
- \x &  \x &  \x &  & 144,33 & 9,6\% \\ \hline
- \x &  \x &  &  \x & 148,94 & 13,1\% \\ \hline
- \x &  &  \x &  & 149,31 & 13,38\% \\ \hline
- \x &  &  &  \x & 152,85 & 16,07\% \\ \hline
- &  \x &  \x &  & 155,74 & 18,26\% \\ \hline
- &  &  \x &  \x & 156,25 & 18,65\% \\ \hline
- &  \x &  \x &  \x & 157,69 & 19,74\% \\ \hline
- \x &  \x &  \x &  \x & 171,54 & 30,26\% \\ \hline
- \x &  &  \x &  \x & 173,69 & 31,89\% \\ \hline
+ &  \x &  &  \x & 131,69 & 0,0\% & 69\% \\ \hline
+ \x &  \x &  &  & 139,73 & 6,11\% & 72\% \\ \hline
+ \x &  \x &  \x &  & 144,33 & 9,6\% & 72\% \\ \hline
+ \x &  \x &  &  \x & 148,94 & 13,1\% & 72\% \\ \hline
+ \x &  &  \x &  & 149,31 & 13,38\% & 71\% \\ \hline
+ \x &  &  &  \x & 152,85 & 16,07\% & 71\% \\ \hline
+ &  \x &  \x &  & 155,74 & 18,26\% & 72\% \\ \hline
+ &  &  \x &  \x & 156,25 & 18,65\% & 72\% \\ \hline
+ &  \x &  \x &  \x & 157,69 & 19,74\% & 72\% \\ \hline
+ \x &  \x &  \x &  \x & 171,54 & 30,26\% & 71\% \\ \hline
+ \x &  &  \x &  \x & 173,69 & 31,89\% & 71\% \\ \hline
 \caption{All combinations of statistical features on the best from matrix}
 \label{table:idealCombinationStatistic}
 \end{longtable}
@@ -643,25 +647,25 @@ Skewness and curve in combination with each other achieves the best result but d
 Table~\ref{table:topFromMatrixWithStatistics} shows volatility applied on the top 3 input combinations with matrix from Table~\ref{table:theWindProdInputParamsTop10WithMatrix}. It is first of all noticeable that the top 3 positions are the same as in all of the combination tests. Secondly, the results are in general improved. The best ranked from ~\ref{table:idealCombinationStatistic} is the same as the best ranked here. The results emphasize the best input combinations and the improvement by adding volatility as input.     
 
 \begin{center}
-\begin{longtable}{|c|c|c|c|c|c|c|c|c|c|c|}
+\begin{longtable}{|c|c|c|c|c|c|c|c|c|c|c|c|}
 \hline
-\textbf{WS} & \textbf{AD} & \textbf{C} & \textbf{T} & \textbf{WD} & \textbf{L-P} & \textbf{ToD} & \textbf{MAE} & \textbf{\% from \#1} &  \textbf{H1} & \textbf{H2}  \\
+\textbf{WS} & \textbf{AD} & \textbf{C} & \textbf{T} & \textbf{WD} & \textbf{L-P} & \textbf{ToD} & \textbf{MAE} & \textbf{\% from \#1} &  \textbf{H1} & \textbf{H2}  & \textbf{\% CD} \\
 \hline
 \endfirsthead
-\multicolumn{11}{c}%
+\multicolumn{12}{c}%
 {\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
 \hline
-\textbf{WS} & \textbf{AD} & \textbf{C} & \textbf{T} & \textbf{WD} & \textbf{L-P} & \textbf{ToD} & \textbf{MAE} & \textbf{\% from \#1} &  \textbf{H1} & \textbf{H2}  \\
+\textbf{WS} & \textbf{AD} & \textbf{C} & \textbf{T} & \textbf{WD} & \textbf{L-P} & \textbf{ToD} & \textbf{MAE} & \textbf{\% from \#1} &  \textbf{H1} & \textbf{H2} & \textbf{\% CD} \\
 \hline
 \endhead
-\hline \multicolumn{11}{r}{\textit{Continued on next page}} \\
+\hline \multicolumn{12}{r}{\textit{Continued on next page}} \\
 \endfoot
 \hline
 \endlastfoot
 \arrayrulecolor{light-gray}
- \x &  &  &  \x &  &  \x &  \x (m) & 121,81 & 0,0\% & 16 & 13 \\ \hline
- \x &  \x &  &  &  &  \x &  \x (m) & 125,15 & 2,74\% & 9 & 13 \\ \hline
- \x &  \x &  &  &  \x &  \x & \x (m) & 128,67 & 5,63\% & 12 & 15 \\ \hline
+ \x &  &  &  \x &  &  \x &  \x (m) & 121,81 & 0,0\% & 16 & 13 & 73\& \\ \hline
+ \x &  \x &  &  &  &  \x &  \x (m) & 125,15 & 2,74\% & 9 & 13 & 70\%  \\ \hline
+ \x &  \x &  &  &  \x &  \x & \x (m) & 128,67 & 5,63\% & 12 & 15  & 72\%\\ \hline
 \caption{Volatility applied in top 3 from matrix}
 \label{table:topFromMatrixWithStatistics}
 \end{longtable}
@@ -724,83 +728,84 @@ The parameters are tested with the following configurations:
 \end{itemize}
 
 \subsubsection{Prediction - Epochs}
-The number of epochs influence the prediction significantly which is established in Table~\ref{table:bestPredictionEpochExperiment}. It is obvious that too few epochs will result in the network being "under-trained". It can be seen from 1 and 10 epochs that the initial random weights of the network has not yet been adjusted to reflect the training set and therefore predicts randomly. Furthermore, when the number of epochs reach above 2000 it achieves a worse MAE in general. The best result is obtained by 2-300 epochs but with 1200 right after. The results reflect how different epochs affect the production but also how the network can be under-trained or over-trained by either too many or too few epochs. It is obvious from the table that the time in seconds moves up with the number of epochs.
+The number of epochs influence the prediction significantly which is established in Table~\ref{table:bestPredictionEpochExperiment}. It is obvious that too few epochs will result in the network being "under-trained". It can be seen from 1 and 10 epochs that the initial random weights of the network has not yet been adjusted to reflect the training set and therefore predicts randomly. Furthermore, when the number of epochs reach above 2000 it achieves a worse MAE in general. The best result is obtained by 2-300 epochs but with 1200 right after. The results reflect how different epochs affect the production but also how the network can be under-trained or over-trained by either too many or too few epochs. It is obvious from the table that the time in seconds moves up with the number of epochs. Furthermore, the correct direction percentage has been stable in all of the experiments around 70\% but here it can be seen that training to few epochs will result in the percentage dropping significantly together with the worsening in MAE.
 
 
 \begin{center}
-\begin{longtable}{|c|c|c|c|}
+\begin{longtable}{|c|c|c|c|c|}
 \hline
-\textbf{Epochs} & \textbf{MAE} & \textbf{\% Deviation} & \textbf{Time (s)} \\
+\textbf{Epochs} & \textbf{MAE} & \textbf{\% Deviation} & \textbf{Time (s)} & \textbf{\% Correct Direction} \\
 \hline
 \endfirsthead
-\multicolumn{4}{c}%
+\multicolumn{5}{c}%
 {\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
 \hline
-\textbf{Epochs} & \textbf{MAE} & \textbf{\% Deviation} & \textbf{Time (s)} \\
+\textbf{Epochs} & \textbf{MAE} & \textbf{\% Deviation} & \textbf{Time (s)} & \textbf{\% Correct Direction} \\
 \hline
 \endhead
-\hline \multicolumn{4}{r}{\textit{Continued on next page}} \\
+\hline \multicolumn{5}{r}{\textit{Continued on next page}} \\
 \endfoot
 \hline
 \endlastfoot
 \arrayrulecolor{light-gray}
-300 & 121,02 & 0,0\% & 813 \\ \hline
-200 & 121,81 & 0,65\% & 631 \\ \hline
-1200 & 122,43 & 1,17\% & 1650 \\ \hline
-1400 & 125,63 & 3,81\% & 1720 \\ \hline
-400 & 125,96 & 4,08\% & 1208 \\ \hline
-1100 & 126,31 & 4,37\% & 1739 \\ \hline
-600 & 127,23 & 5,13\% & 1483 \\ \hline
-50 & 128,89 & 6,5\% & 580 \\ \hline
-1500 & 134,61 & 11,23\% & 2381 \\ \hline
-1300 & 137,84 & 13,9\% & 1981 \\ \hline
-700 & 139,45 & 15,23\% & 1152 \\ \hline
-1600 & 139,95 & 15,64\% & 1720 \\ \hline
-800 & 140,32 & 15,95\% & 966 \\ \hline
-500 & 140,49 & 16,09\% & 913 \\ \hline
-150 & 141,15 & 16,63\% & 669 \\ \hline
-900 & 142,34 & 17,62\% & 972 \\ \hline
-2200 & 143,1 & 18,24\% & 1812 \\ \hline
-2600 & 143,46 & 18,54\% & 3159 \\ \hline
-1800 & 143,82 & 18,84\% & 2085 \\ \hline
-2400 & 143,88 & 18,89\% & 2105 \\ \hline
-1000 & 145,14 & 19,93\% & 1101 \\ \hline
-40 & 148,21 & 22,47\% & 437 \\ \hline
-2800 & 153,19 & 26,58\% & 3159 \\ \hline
-2000 & 154,6 & 27,75\% & 2045 \\ \hline
-20 & 159,98 & 32,19\% & 441 \\ \hline
-10 & 644,72 & 432,74\% & 423 \\ \hline
-1 & 997,34 & 724,11\% & 464 \\ \hline
+300 & 121,02 & 0,0\% & 813 & 73\% \\ \hline
+200 & 121,81 & 0,65\% & 631 & 73\% \\ \hline
+1200 & 122,43 & 1,17\% & 1650 & 71\% \\ \hline
+1400 & 125,63 & 3,81\% & 1720 & 72\% \\ \hline
+400 & 125,96 & 4,08\% & 1208 & 70\% \\ \hline
+1100 & 126,31 & 4,37\% & 1739 & 71\% \\ \hline
+600 & 127,23 & 5,13\% & 1483 & 70\% \\ \hline
+50 & 128,89 & 6,5\% & 580 & 70\% \\ \hline
+1500 & 134,61 & 11,23\% & 2381 & 69\% \\ \hline
+3000 & 135,38 & 11,87\% & 3097 & 71\% \\ \hline
+1300 & 137,84 & 13,9\% & 1981 & 68\% \\ \hline
+700 & 139,45 & 15,23\% & 1152 & 73\% \\ \hline
+1600 & 139,95 & 15,64\% & 1720 & 72\% \\ \hline
+800 & 140,32 & 15,95\% & 966 & 72\% \\ \hline
+500 & 140,49 & 16,09\% & 913 & 72\% \\ \hline
+150 & 141,15 & 16,63\% & 669 & 72\% \\ \hline
+900 & 142,34 & 17,62\% & 972 & 72\% \\ \hline
+2200 & 143,1 & 18,24\% & 1812 & 72\% \\ \hline
+2600 & 143,46 & 18,54\% & 3159 & 72\% \\ \hline
+1800 & 143,82 & 18,84\% & 2085 & 72\% \\ \hline
+2400 & 143,88 & 18,89\% & 2105 & 72\% \\ \hline
+1000 & 145,14 & 19,93\% & 1101 & 71\% \\ \hline
+40 & 148,21 & 22,47\% & 437 & 71\% \\ \hline
+2800 & 153,19 & 26,58\% & 3159 & 72\% \\ \hline
+2000 & 154,6 & 27,75\% & 2045 & 71\% \\ \hline
+20 & 159,98 & 32,19\% & 441 & 66\% \\ \hline
+10 & 644,72 & 432,74\% & 423 & 45\% \\ \hline
+1 & 997,34 & 724,11\% & 464 & 50\% \\ \hline
 \caption{Best prediction with different epochs on same network (H1: 3 and H2: 17)}
 \label{table:bestPredictionEpochExperiment}
 \end{longtable}
 \end{center}
 
 \subsubsection{Prediction - Dataset size}
-The size of the dataset has already been discussed during the initial experiments with the best combination of input parameters. Too large training sets can result in over-training as described in\cite{1}, e.g. the dataset contains a lot of different cases and because of that has difficulties when predicting the unseen data of only 24 hours. The over-training consists in the network generalizing upon all cases which can become noise when trying to predict only one of these cases. This corresponds well with wind power production and its high volatility and seasonal. This must be differentiated with over-fitting with too many epochs where weights are being adjusted to the same training set over and over again whereas it in the case of data size simply "knows to much" because too much data makes it hard to generalize. Over-fitting is described in Section~\ref{sec:annSection}. If a training set contains many of the same cases the over-training will be much similar to the one with epochs since it will see the same case over and over again. The weights will be adjusted to that same case again and again and a lower number of epochs are needed. The training set must not be too small because it needs enough cases to generalize upon. Different training set sizes have been tried and the results can be seen in Table~\ref{table:bestPredictionDatasetSizeTest}. The result is as expected since both the small and big datasets are outperformed by the 3 month. Furthermore, time increases with the size of the data and the 2nd lowest is the best prediction.
+The size of the dataset has already been discussed during the initial experiments with the best combination of input parameters. Too large training sets can result in over-training as described in\cite{1}, e.g. the dataset contains a lot of different cases and because of that has difficulties when predicting the unseen data of only 24 hours. The over-training consists in the network generalizing upon all cases which can become noise when trying to predict only one of these cases. This corresponds well with wind power production and its high volatility and seasonal. This must be differentiated with over-fitting with too many epochs where weights are being adjusted to the same training set over and over again whereas it in the case of data size simply "knows to much" because too much data makes it hard to generalize. Over-fitting is described in Section~\ref{sec:annSection}. If a training set contains many of the same cases the over-training will be much similar to the one with epochs since it will see the same case over and over again. The weights will be adjusted to that same case again and again and a lower number of epochs are needed. The training set must not be too small because it needs enough cases to generalize upon. Different training set sizes have been tried and the results can be seen in Table~\ref{table:bestPredictionDatasetSizeTest}. The result is as expected since both the small and big datasets are outperformed by the 3 month --- the best have been run again and the new result is much equal to what we saw before. Furthermore, time increases with the size of the data and the 2nd lowest is the best prediction.
 
 \begin{center}
-\begin{longtable}{|c|c|c|c|}
+\begin{longtable}{|c|c|c|c|c|}
 \hline
-\textbf{Size} & \textbf{MAE} & \textbf{\% Deviation} & \textbf{Time (s)} \\
+\textbf{Size} & \textbf{MAE} & \textbf{\% Deviation} & \textbf{Time (s)} & \textbf{\% Correctio Direction} \\
 \hline
 \endfirsthead
-\multicolumn{4}{c}%
+\multicolumn{5}{c}%
 {\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
 \hline
-\textbf{Size} & \textbf{MAE} & \textbf{\% Deviation} & \textbf{Time (s)} \\
+\textbf{Size} & \textbf{MAE} & \textbf{\% Deviation} & \textbf{Time (s)} & \textbf{\% Correctio Direction} \\
 \hline
 \endhead
-\hline \multicolumn{4}{r}{\textit{Continued on next page}} \\
+\hline \multicolumn{5}{r}{\textit{Continued on next page}} \\
 \endfoot
 \hline
 \endlastfoot
 \arrayrulecolor{light-gray}
- 2200 &  122,65 & 0,0\% & 631 \\ \hline
- 8600 & 146,83 & 19,7\% & 1585 \\ \hline
- 4200 & 157,01 & 28,01\% & 855 \\ \hline
- 1000 & 164,73 & 34,31\% & 462 \\ \hline
- 6600 & 182,31 & 48,64\% & 908 \\ \hline
+ 2200 &  122,65 & 0,0\% & 631 & 72\% \\ \hline
+ 8600 & 146,83 & 19,7\% & 1585 & 72\% \\ \hline
+ 4200 & 157,01 & 28,01\% & 855 & 71\% \\ \hline
+ 1000 & 164,73 & 34,31\% & 462 & 70\% \\ \hline
+ 6600 & 182,31 & 48,64\% & 908 & 70\% \\ \hline
 \caption{Best prediction with different training set sizes}
 \label{table:bestPredictionDatasetSizeTest}
 \end{longtable}
@@ -828,46 +833,46 @@ It is expected to see an improved error when very few steps is included in the s
 Table~\ref{table:stepAheadForecastingWindProduction} shows the results from the step-ahead testing. It is clear that low numbers until 9 is significantly better than the rest. The expectation was to see a more random distribution when reaching a certain point but there is a clear tendency in the high numbers in the button and low numbers in the top. The obvious problem with the results is that they are all predicting the same year and therefore predicting from different places in relation to the number of steps. It will results in the results being incomparable since the prediction starting point is not the same which heavily affects the predictions as discussed in Section~\ref{sec:combiningTheApproachesWP}. This problem becomes more clear when looking at Figure~\ref{fig:best22vsbest24Ahead} where it is obvious that 22-step-ahead starts much differently than 24-step-ahead in Figure~\ref{best24AheadPredictionWithLines}. It has huge effect on the prediction which would also apply in a real life setting. It could again be a discussion about reconfigurability of the ann when used in a decision making setting. The experience of the user comes into place in these predictions because it greatly influences the result where to start from. This is further backed up by Table~\ref{table:stepAheadForecastingWindProduction}.
 
 \begin{center}
-\begin{longtable}{|c|c|c}
+\begin{longtable}{|c|c|c|c|}
 \hline
-\textbf{Steps ahead} & \textbf{MAE}& \textbf{\% Deviation}  \\
+\textbf{Steps ahead} & \textbf{MAE}& \textbf{\% Deviation} & \textbf{\% Correct Direction}  \\
 \hline
 \endfirsthead
-\multicolumn{3}{c}%
+\multicolumn{4}{c}%
 {\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
 \hline
-\textbf{Steps ahead} & \textbf{MAE} & \textbf{\% Deviation} \\
+\textbf{Steps ahead} & \textbf{MAE} & \textbf{\% Deviation} & \textbf{\% Correct Direction} \\
 \hline
 \endhead
-\hline \multicolumn{3}{r}{\textit{Continued on next page}} \\
+\hline \multicolumn{4}{r}{\textit{Continued on next page}} \\
 \endfoot
 \hline
 \endlastfoot
 \arrayrulecolor{light-gray}
-1 & 51,5 & 0,0\%  \\ \hline
-2 & 65,91 & 27,98\%  \\ \hline
-3 & 78,94 & 53,28\%  \\ \hline
-4 & 91,87 & 78,39\%  \\ \hline
-6 & 100,66 & 95,46\%  \\ \hline
-5 & 103,58 & 101,13\%  \\ \hline
-9 & 110,47 & 114,5\%  \\ \hline
-7 & 110,53 & 114,62\%  \\ \hline
-11 & 116,88 & 126,95\%  \\ \hline
-8 & 121,62 & 136,16\%  \\ \hline
-24 & 122,51 & 137,88\%  \\ \hline
-17 & 125,87 & 144,41\%  \\ \hline
-19 & 129,88 & 152,19\%  \\ \hline
-23 & 130,85 & 154,08\%  \\ \hline
-15 & 132,94 & 158,14\%  \\ \hline
-16 & 134,37 & 160,91\%  \\ \hline
-10 & 134,5 & 161,17\%  \\ \hline
-14 & 136,6 & 165,24\%  \\ \hline
-12 & 137,09 & 166,19\%  \\ \hline
-20 & 137,79 & 167,55\%  \\ \hline
-13 & 138,11 & 168,17\%  \\ \hline
-18 & 138,97 & 169,84\%  \\ \hline
-21 & 140,8 & 173,4\% \\ \hline
-22 & 146,28 & 184,04\% \\ \hline
+1 & 51,5 & 0,0\% & 74\%  \\ \hline
+2 & 65,91 & 27,98\% & 70\%  \\ \hline
+3 & 78,94 & 53,28\% & 71\%  \\ \hline
+4 & 91,87 & 78,39\% & 70\%  \\ \hline
+6 & 100,66 & 95,46\% & 70\%  \\ \hline
+5 & 103,58 & 101,13\% & 70\%  \\ \hline
+9 & 110,47 & 114,5\% & 72\%  \\ \hline
+7 & 110,53 & 114,62\% & 72\%  \\ \hline
+11 & 116,88 & 126,95\% & 70\%  \\ \hline
+8 & 121,62 & 136,16\% & 68\%  \\ \hline
+24 & 122,51 & 137,88\% & 73\%  \\ \hline
+17 & 125,87 & 144,41\% & 69\%  \\ \hline
+19 & 129,88 & 152,19\% & 69\%  \\ \hline
+23 & 130,85 & 154,08\% & 72\%  \\ \hline
+15 & 132,94 & 158,14\% & 72\%  \\ \hline
+16 & 134,37 & 160,91\% & 72\%  \\ \hline
+10 & 134,5 & 161,17\% & 73\%  \\ \hline
+14 & 136,6 & 165,24\% & 67\%  \\ \hline
+12 & 137,09 & 166,19\% & 67\%  \\ \hline
+20 & 137,79 & 167,55\% & 73\%  \\ \hline
+13 & 138,11 & 168,17\% & 72\%  \\ \hline
+18 & 138,97 & 169,84\% & 72\%  \\ \hline
+21 & 140,8 & 173,4\% & 68\% \\ \hline
+22 & 146,28 & 184,04\% 66\% \\ \hline
 \caption{Step-ahead prediction from 1-24}
 \label{table:stepAheadForecastingWindProduction}
 \end{longtable}
@@ -876,46 +881,46 @@ Table~\ref{table:stepAheadForecastingWindProduction} shows the results from the 
 All starting positions have been tried in Table~\ref{table:stepAheadForecastingWindProductionStartingPositions} and it supports what was concluded from Table~\ref{table:stepAheadForecastingWindProduction}. The position that has always been used is marked with an x. It is obvious here that the exact same prediction applied at various starting points differs much in accuracy. 
 
 \begin{center}
-\begin{longtable}{|c|c|c|}
+\begin{longtable}{|c|c|c|c|}
 \hline
-\textbf{Starting point} & \textbf{MAE} & \textbf{\% Deviation} \\
+\textbf{Starting point} & \textbf{MAE} & \textbf{\% Deviation} & \textbf{\% Correct Direction} \\
 \hline
 \endfirsthead
-\multicolumn{3}{c}%
+\multicolumn{4}{c}%
 {\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
 \hline
-\textbf{Steps ahead} & \textbf{MAE} & \textbf{\% Deviation} \\
+\textbf{Steps ahead} & \textbf{MAE} & \textbf{\% Deviation} & \textbf{\% Correct Direction} \\
 \hline
 \endhead
-\hline \multicolumn{3}{r}{\textit{Continued on next page}} \\
+\hline \multicolumn{4}{r}{\textit{Continued on next page}} \\
 \endfoot
 \hline
 \endlastfoot
 \arrayrulecolor{light-gray}
-16 & 121,73 & 0,0\%  \\ \hline
-1 (x) & 123,25 & 1,25\%  \\ \hline
-8 & 124,06 & 1,91\%  \\ \hline
-7 & 124,52 & 2,29\%  \\ \hline
-14 & 126,12 & 3,67\%  \\ \hline
-13 & 127,49 & 4,73\%  \\ \hline
-22 & 129,94 & 6,74\%  \\ \hline
-17 & 130,49 & 7,2\%  \\ \hline
-5 & 139,56 & 14,65\%  \\ \hline
-24 & 139,79 & 14,84\%  \\ \hline
-12 & 140,15 & 15,13\%  \\ \hline
-3 & 140,23 & 15,2\%  \\ \hline
-2 & 140,57 & 15,48\%  \\ \hline
-19 & 140,62 & 15,52\%  \\ \hline
-20 & 140,68 & 15,57\%  \\ \hline
-10 & 140,85 & 15,71\%  \\ \hline
-21 & 141,19 & 15,99\%  \\ \hline
-18 & 141,2 & 15,99\%  \\ \hline
-4 & 141,51 & 16,25\%  \\ \hline
-23 & 142,01 & 16,66\%  \\ \hline
-15 & 143,08 & 17,54\%  \\ \hline
-11 & 143,74 & 18,08\%  \\ \hline
-6 & 144,04 & 18,33\%  \\ \hline
-9 & 151,36 & 24,34\%  \\ \hline
+16 & 121,73 & 0,0\% & 73\%  \\ \hline
+1 (x) & 123,25 & 1,25\% & 73\%  \\ \hline
+8 & 124,06 & 1,91\% & 72\%  \\ \hline
+7 & 124,52 & 2,29\% & 70\%  \\ \hline
+14 & 126,12 & 3,67\% & 70\%  \\ \hline
+13 & 127,49 & 4,73\% & 70\%  \\ \hline
+22 & 129,94 & 6,74\% & 69\%  \\ \hline
+17 & 130,49 & 7,2\% & 70\%  \\ \hline
+5 & 139,56 & 14,65\% & 72\%  \\ \hline
+24 & 139,79 & 14,84\% & 72\%  \\ \hline
+12 & 140,15 & 15,13\% & 72\%  \\ \hline
+3 & 140,23 & 15,2\% & 72\%  \\ \hline
+2 & 140,57 & 15,48\% & 72\%  \\ \hline
+19 & 140,62 & 15,52\% & 72\%  \\ \hline
+20 & 140,68 & 15,57\% & 72\%  \\ \hline
+10 & 140,85 & 15,71\% & 72\%  \\ \hline
+21 & 141,19 & 15,99\% & 72\%  \\ \hline
+18 & 141,2 & 15,99\% & 72\%  \\ \hline
+4 & 141,51 & 16,25\% & 72\%  \\ \hline
+23 & 142,01 & 16,66\% & 72\%  \\ \hline
+15 & 143,08 & 17,54\% & 72\%  \\ \hline
+11 & 143,74 & 18,08\% & 72\%  \\ \hline
+6 & 144,04 & 18,33\% & 72\%  \\ \hline
+9 & 151,36 & 24,34\% & 71\%  \\ \hline
 \caption{24-step-aheads forecast covering all starting positions}
 \label{table:stepAheadForecastingWindProductionStartingPositions}
 \end{longtable}
@@ -939,7 +944,7 @@ All starting positions have been tried in Table~\ref{table:stepAheadForecastingW
 The expectation was to see an improvement in MAE when predicting fewer hours which was seen in Table~\ref{table:stepAheadForecastingWindProduction}. It also showed that at some point the fewer hours is not necessarily better because they start at different positions and the prediction can correct itself the further it gets. The starting position has a huge impact on the accuracy of the prediction which was illustrated in the comparison between 22- and 24-step-ahead forecasts. It was further backed up by trying out all starting points with 24-step-ahead forecasting.
 
 \subsection{Concluding Remarks}
-Experiments have been conducted to identify the best combination of inputs as well as the impact of data manipulation, calculated inputs and black box optimization. Each experiment concludes on its findings in relation to experiments before it and expectations from the wind power production analysis. Table~\ref{table:comparisonOfResultsWindProduction} shows the overall improvement of 5,35\% from the first experiment to the last. Experiment five is left out because it cannot be compared with the other since it predicts different number of hours. The last two steps are almost similar. A short summary follows here. 
+Experiments have been conducted to identify the best combination of inputs as well as the impact of data manipulation, calculated inputs and black box optimization. Each experiment concludes on its findings in relation to experiments before it and expectations from the wind power production analysis. Table~\ref{table:comparisonOfResultsWindProduction} shows the overall improvement of 5,35\% from the first experiment to the last. Experiment five is left out in this table because it cannot be compared with the other since it predicts different number of hours. What have been observed throughout all experiments is the stable percentage of around 70\% in predicting the correct direction. It has also been discussed that the stability here lies in the co-relation to wind speed which is included as input in all experiments. A short summary follows here. 
 
 \begin{enumerate}
 \item First experiment showed the importance of the correct input parameters used in the Artificial Neural Network. Temperature, last known production, wind speed and time of day was the best combination. Furthermore, too large datasets seriously decreased the accuracy due to over-training of the network.
