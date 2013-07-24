@@ -21,8 +21,12 @@ The Mean Absolute Error denotes the mean of the differences between the predicte
 
  Where $p_i$ if the predicted value and $a_i$ is the actual value.
 
-\subsubsection{MAD - Mean Absolute Deviation}
+\subsubsection{MAPE - Mean Absolute Percentage Error}
+The mean absolute percentage error denotes the difference between the predicted value ($p_i$) and the actual value ($a_i$) which are divided by the median($\tilde{a}$) over the whole dataset. Giving us the following formula:
 
+\begin{align*}
+\frac{1}{n}\sum_{i=1}^{n}\frac{|p_i-a_i|}{\tilde{a}}
+\end{align*}
 
 \subsubsection{PEARSONS} \label{sec:Pearsons}
 

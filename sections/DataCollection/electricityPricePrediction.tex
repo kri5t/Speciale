@@ -112,6 +112,8 @@ In \cite{singhal2011electricity} they describe the factors that influence the pr
 \end{itemize}
 All of these factors influence the price and makes it very volatile/spiky. These factors are very hard to account for (find information on) and are not included in our analysis but has to be kept in mind when trying to predict the prices. 
 
+Some of these factors will automatically be accounted for when we do the data analysis. They describe in \cite{yamin2004adaptive} that the behavior of the market participants (or the bidding strategies as they call it) are already a part of the training dataset thus already accounted for when we do the analysis of the data.
+
 Spikes are hard to predict and often impossible because of the limited occurrence of these (under 1\% in our dataset) and because they are so much higher than the rest of the max prices. Spikes can add an error factor to the dataset thus making it harder to predict the rest of the datasets values because the ANN will make adjustments for these high values. Trimming can be used to remove the majority of these datasets and have been used in \cite{singhal2011electricity} where they remove the prices above \$70 and also in \cite{yamin2004adaptive} where they trim the dataset if the price is above \$50. The trimming of course only makes sense to use if it actually improves the predictions. This has to be tested in our case to see if it makes an improvement or not.
 
 \begin{figure}[H]
@@ -150,7 +152,7 @@ In the same manner we can address the high-frequency spike prices that occurs in
 
 %------------------------------------------------------------------------------------------------------------------------------
 \subsection{Demand}
-Demand is directly connected to the energy prices (which comes as no suprise) since every market is driven by demand. Since demand is relative to the present time we are not able to use it directly as an input factor in the artificial neural network(ANN). We have a couple of choices here. We can take the demand from other instances like Nord Pool Spot; where they predict what the demand will be. We can compute the demand in artificial neural network and use the outputs as input for our price prediction ANN. At last we can try and substitute the demand input with the factors that plays a role in predicting the demand. The last two methods requires us to have an idea of what the input parameters for the prediction of demand is. As mentioned in related work we have seen a function that calculates the demand based on CDD(Cooling degree days), HDD(Heating degree days), ELD(Humidity), V$_w$ (Wind speed), M$_s$ (Sunshine), M$_r$ (Rainfall) \cite{19}. Based on this we will model the ANN to take the above mentioned factors as inputs.
+Demand is directly connected to the energy prices (which comes as no suprise) since every market is driven by demand \cite{singhal2011electricity}. Since demand is relative to the present time we are not able to use it directly as an input factor in the artificial neural network(ANN). We have a couple of choices here. We can take the demand from other instances like Nord Pool Spot; where they predict what the demand will be. We can compute the demand in artificial neural network and use the outputs as input for our price prediction ANN. At last we can try and substitute the demand input with the factors that plays a role in predicting the demand. The last two methods requires us to have an idea of what the input parameters for the prediction of demand is. As mentioned in related work we have seen a function that calculates the demand based on CDD(Cooling degree days), HDD(Heating degree days), ELD(Humidity), V$_w$ (Wind speed), M$_s$ (Sunshine), M$_r$ (Rainfall) \cite{19}. Based on this we will model the ANN to take the above mentioned factors as inputs.
 
 \begin{figure}[H]
 \centering
@@ -176,7 +178,6 @@ In figure ~\ref{fig:consump_price} we see the connection between energy price an
 \caption{Demand and temperature plot.}
 \label{fig:consump_temp}
 \end{figure}
-
 
 In figure ~\ref{fig:consump_temp} we see the connection between demand and temperature. The temperature itself has an influence when it is very cold or very warm. This connection is expressed as CDD(Cooling degree days) and HDD(Heating degree days). In figure ~\ref{fig:consump_temp} we see that if temperature decreases the demand will go up. This is because the people of Denmark use a lot of energy on heating their homes and lighting them (HDD) in the winter time. In \cite{19} they also describe CDD which indicates the need for cooling. In Denmark it is limited how high the temperature goes and how often we actually need to cool our homes see table~\ref{table:CDD_HDD}. The table shows that we only have two days that are characterized as cool degree days. On the other hand we have a lot of heating degree days where we need heating. As they are the majority of the days we will use temperature as a measure for this. CDD and HDD are normally calculated as an index for how much of a need there is for cooling or heating respectively. Here we just present what days are categorized as either and not the index.
 
