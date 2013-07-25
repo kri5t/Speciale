@@ -876,6 +876,38 @@ The size of the dataset has already been discussed during the initial experiment
 \subsubsection{Hidden Layers and Neurons}
 Done by pruning. Is it necessary to say something about the network size or can we rely on the literature telling us that pruning is a tool to find the best network?
 
+\subsubsection{Prediction Graphs}
+\label{sec:windPowerBestPredictionGraphs}
+The best prediction obtains a MAE of 121 with 300 epochs. Due to the random initialization of weights in the Artificial Neural Network the prediction will vary from time to time. Table~\ref{table:bestPredictionDatasetSizeTest} show how the best prediction changed to 122,65 but still fairly close to 121,02. The results are not 100\% definitive but they show clear tendencies in what works and what does not. The trade-off between time-constraints and an attempt to cover most scenarios as many times possible. A whole year (as used here) contains the different seasonal impacts but at the same time many similar days so that the same situations are predicted more than once. The figures~\ref{fig:bestWPPredictWinter}, ~\ref{fig:bestWPPredictSpring}, ~\ref{fig:bestPredictWPSummer} and ~\ref{fig:bestPredictWPFall} show examples of the behaviour in different seasons and how the prediction is able to handle them. One thing that is noticeable is during fall during the falling curve in 7150-7250 but this is expected due to the high volatility (as mentioned in Section~\ref{sec:bestInputCombiGraph} significant volatility makes it harder to predict). The graphs also shows the need for predicting a whole year due to the obvious differences in the wind power behaviour.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.99\linewidth]{billeder/bestPossiblePredictionWindProduction0-300.png}
+\caption{Best prediction for 300 hours of January (Winter)}
+\label{fig:bestWPPredictWinter}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.99\linewidth]{billeder/bestPossiblePredictionWindProduction2300-2600_April_Spring.png}
+\caption{Best prediction for 300 hours of April (Spring)}
+\label{fig:bestWPPredictSpring}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.99\linewidth]{billeder/bestPossiblePredictionWindProduction4400-4700-Summer.png}
+\caption{Best prediction for 300 hours of July (Summer)}
+\label{fig:bestPredictWPSummer}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.99\linewidth]{billeder/bestPossiblePredictionWindProduction7000-7300_Fall.png}
+\caption{Best prediction for 300 hours for Oct-Nov (Fall)}
+\label{fig:bestPredictWPFall}
+\end{figure}
+
 \subsubsection{Conclusion}
 Different training set sizes and epochs have been tested and used for prediction.
 
