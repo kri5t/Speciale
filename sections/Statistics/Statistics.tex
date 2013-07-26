@@ -3,34 +3,43 @@ This section described the statistical measures that will be used to determine a
 \subsubsection{MPE - Mean Percentage Error}
 The Mean Percentage Erorr is the mean of the percentage-wise error when comparing the predicted value to the actual value. This value gives us the error in percent relative to the actual value. This is a standard value that a lot of people understand by just looking at it and it gives a nice indication of how big the mean error over the whole set of predictions is. The problem with this value is that it is relative to the actual value so the same error seen as a number (e.g. 20kr) will give a big difference if it is close to the minimum values predicted and a small value if it is close to the maximum values predicted; but in both cases the guess with an erorr of 20 kr is equally good. As a mathematical example:
 
-Actual value = 1200; Predicted value = 1180; Difference = 20; Error = (20/1200)*100 = 1.67\% 
 
-Actual value = 60; Predicted value = 80; Difference = 20; Error = (20/60) = 33.33\%
+\begin{subequations}
+\begin{align}
+ \text{Value} = 1200 \\
+ \text{Predicted value} = 1180\\
+ \text{Difference} = 20\\
+ \text{Error} = (20/1200)*100 = 1.67\%
+\end{align}
+\end{subequations}
+\centerline{Actual value = 60; Predicted value = 80; Difference = 20; Error = (20/60) = 33.33\%}
+
 
 If we were to just look at the values they are fine; but when we have to compare them to how good a guess it was they are both equally good. This is a problem with the Mean Percentage Error (that the reader needs to bear in mind when reading) but it is included because of how easy it is to grasp for most people.
 It is calculated by the following:
-$ \frac{100\%}{n}\sum_{i=1}^{n}\frac{p_i - a_i}{a_i} $
-Where $p_i$ is the predicted value and $a_i$ is the actual value.
-\todo{Skal formateres ordentligt}
-%\subsubsection{RMSE - Root Mean Squared Error}
+
+\centerline{$ MPE = \frac{100\%}{n}\sum_{i=1}^{n}\frac{p_i - a_i}{a_i} $}
+
+\noindent{Where $p_i$ is the predicted value and $a_i$ is the actual value.}
+
 \subsubsection{MAE - Mean Absolute Error}
 \label{sec:maeStatistics}
 The Mean Absolute Error denotes the mean of the differences between the predicted values and the actual values. This gives us an indication of how much the algorithm on average misses the target price as a value and not percent. This value is relative to the dataset and if you increase all your numbers with a factor of 10 so will the MAE thus making it very hard to compare to MAEs for other systems. The good thing about the MAE is that it is not a percentage and thus it will not get bigger if the values we predict are low (See MPE - Mean Percentage Error). That way we eliminate the problem with low values giving bigger error margins than high values even when they miss the target by the same value. It is calculated by:
 
- $ \frac{1}{n}\sum_{i=1}^{n}|p_i-a_i| $
 
- Where $p_i$ if the predicted value and $a_i$ is the actual value.
+\centerline{$ MAE = \frac{1}{n}\sum_{i=1}^{n}|p_i-a_i| $}
+
+
+\noindent{Where $p_i$ is the predicted value and $a_i$ is the actual value.}
 
 \subsubsection{MAPE - Mean Absolute Percentage Error}
 The mean absolute percentage error denotes the difference between the predicted value ($p_i$) and the actual value ($a_i$) which are divided by the median($\tilde{a}$) over the whole dataset. Giving us the following formula:
 
-\begin{align*}
-\frac{1}{n}\sum_{i=1}^{n}\frac{|p_i-a_i|}{\tilde{a}}
-\end{align*}
+\centerline{$MAPE = \frac{1}{n}\sum_{i=1}^{n}\frac{|p_i-a_i|}{\tilde{a}}$}
 
-\todo{see ~\ref{yamin2004adaptive}}
+\noindent{Our MAPE is a slightly altered version compared to the standard version. The difference is we use the median instead of the average. We got this version from \ref{yamin2004adaptive} where they argue that the mean value is not as error-prone as the average value is towards extreme outliers. If the dataset either contains a lot of high values or low values the average will be pulled towards them; but the median will always stay in the middle regardless of extreme outliers. This measure is included instead of MPE because it does not have the same errors when comparing high values to low values - therefore it is a better measure for comparing two experiments.}
 
-\subsubsection{PEARSONS} \label{sec:Pearsons}
+\subsubsection{Pearsons} \label{sec:Pearsons}
 
 
 STATISTIKKER
