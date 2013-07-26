@@ -1,5 +1,7 @@
 This section contains experimental results from the experiment conducted to find the best possible price predicting solution. The experiments are based on the data which we analyzed in section \ref{sec:ElectricityPriceAnalysis}. The experiments are done to validate whether the assumptions about the input parameters are true when used in an artificial neural network. We also examine the best combinations to find the most optimal solution for price prediction. The results are divided into 5 experiments. The first experiment finds the best combination of input parameters for the network. These input parameters count meteorological, social and seasonal factors - which we identified in the analysis section~\ref{sec:Price}. The next experiment identifies the need for trimming and reasons to why it is needed in this particular dataset. The third experiment tests how different calculated inputs can include the immediate historical curve behavior in the dataset. This includes scatter, slope calculation, skewness analysis and historical EWMA(Exponentially-Weighted Moving Average). The fourth experiment takes care of the Artificial Neural Network parameters called black-box optimization. The last experiment shows the influence of offsets for the prediction and the effect of limiting the hours-ahead used in the predictions.
 
+The purpose is to approach the electricity price over a whole year. We want it to get as accurate as possible and therefore we have to test the best input parameters, preprocessing, calculated inputs and black box optimization. In every experiment we will test the hypothesis and  
+
 \todo{Read it and add comments about the Correct Direction \%}
 \todo{Add MAPE}
 \todo{yamin2004adaptive electricity price simulation}
@@ -320,6 +322,8 @@ In figure~\ref{fig:AllTrims} we see the dataset from figure~\ref{fig:1PTrim} wit
 \caption{Trims} % title of Table
 \label{table:Top10Trimming} % is used to refer this table in the text
 \end{table}
+
+\todo{Tjek resultat for trimming. Er det det rigtige?}
 
 \todo{Show how the same days play out with/without trimming}
 
