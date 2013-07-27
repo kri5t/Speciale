@@ -7,14 +7,14 @@ The Pearson Correlation Coefficient\footnote{\url{http://en.wikipedia.org/wiki/P
 
 \begin{table}[H]
 \centering  % used for centering table
-\begin{tabular}{c c} % centered columns (3 columns)
+\begin{tabular}{|c|c|} % centered columns (3 columns)
 Input factor & Pearson Correlation Coefficient \\ [0.5ex] % inserts table 
 %heading
 \hline                  % inserts single horizontal line
-Consumption & 0.61 \\ % inserting body of the table
-Wind Speed & 0.94 \\
-Temperature & -0.09 \\
-Wind Direction & 0.21 \\ [1ex] % [1ex] adds vertical space
+Consumption & 0.61 \\ \hline % inserting body of the table
+Wind Speed & 0.94 \\ \hline
+Temperature & -0.09 \\ \hline
+Wind Direction & 0.21 \\ \hline % [1ex] adds vertical space
 \hline %inserts single line
 \end{tabular}
 \caption{Table showing Pearson correlation coefficient between various factors and the wind production.} % title of Table
@@ -60,7 +60,7 @@ Air density depends directly on temperature and pressure which can be described 
 
 \begin{table}[H]
 \centering  % used for centering table
-\begin{tabular}{c c} % centered columns (3 columns)
+\begin{tabular}{|c|c|} % centered columns (3 columns)
 Wind Speed (mph) & Pearson Correlation Coefficient for Air Density \\ [0.5ex] % inserts table 
 %heading
 \hline                  % inserts single horizontal line
@@ -195,12 +195,12 @@ The high volatility in the wind production is very clear when considering the de
 
 \begin{table}[H]
 \centering  % used for centering table
-\begin{tabular}{c c c c} % centered columns (3 columns)
- & \#1 Windspeed & \#2 Temperature (Celsius) & \#3 Demand \\ [0.5ex] % inserts table 
+\begin{tabular}{|c|c|c|c|} % centered columns (3 columns)
+ & \#1 Windspeed & \#2 Temperature (Celsius) & \#3 Demand \\ \hline % inserts table 
 %heading
 \hline                  % inserts single horizontal line
-High margin: & 16.5 & 3.3 & 2359.5  \\
-Low margin: & 13.5 & 2.7 & 1930.5 \\ [1ex] % [1ex] adds vertical space
+High margin: & 16.5 & 3.3 & 2359.5  \\ \hline
+Low margin: & 13.5 & 2.7 & 1930.5 \\ \hline % [1ex] adds vertical space
 \hline %inserts single line
 \end{tabular}
 \caption{This is the high and low margins used for the the similar input to output distribution.} % title of Table
