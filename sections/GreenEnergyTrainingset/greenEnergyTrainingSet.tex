@@ -8,13 +8,14 @@ The Pearson Correlation Coefficient\footnote{\url{http://en.wikipedia.org/wiki/P
 \begin{table}[H]
 \centering  % used for centering table
 \begin{tabular}{|c|c|} % centered columns (3 columns)
-Input factor & Pearson Correlation Coefficient \\ [0.5ex] % inserts table 
+\hline
+Input factor & Pearson Correlation Coefficient \\ 
 %heading
 \hline                  % inserts single horizontal line
 Consumption & 0.61 \\ \hline % inserting body of the table
 Wind Speed & 0.94 \\ \hline
 Temperature & -0.09 \\ \hline
-Wind Direction & 0.21 \\ \hline % [1ex] adds vertical space
+Wind Direction & 0.21 \\
 \hline %inserts single line
 \end{tabular}
 \caption{Table showing Pearson correlation coefficient between various factors and the wind production.} % title of Table
@@ -61,7 +62,8 @@ Air density depends directly on temperature and pressure which can be described 
 \begin{table}[H]
 \centering  % used for centering table
 \begin{tabular}{|c|c|} % centered columns (3 columns)
-Wind Speed (mph) & Pearson Correlation Coefficient for Air Density \\ [0.5ex] % inserts table 
+\hline
+Wind Speed (mph) & Pearson Correlation Coefficient for Air Density \\ % inserts table 
 %heading
 \hline                  % inserts single horizontal line
 2 & 0,29\\ \hline
@@ -93,7 +95,7 @@ Wind Speed (mph) & Pearson Correlation Coefficient for Air Density \\ [0.5ex] % 
 28 & 0,87 \\ \hline
 29 & 0,61 \\ \hline
 30 & 0,76 \\ \hline  
-Average: & 0,28 \\ [1ex] % [1ex] adds vertical space      
+Average: & 0,28 \\ % [1ex] adds vertical space      
 \hline %inserts single line
 \end{tabular}
 \caption{Table showing Pearson correlation coefficient between the various wind speeds in the dataset and the air density.} % title of Table
@@ -105,12 +107,13 @@ Figure~\ref{fig:windDirVsProd} shows that the wind direction in general has an i
  
 \begin{table}[H]
 \centering  % used for centering table
-\begin{tabular}{c c} % centered columns (3 columns)
-Input factor & Pearson Correlation Coefficient \\ [0.5ex] % inserts table 
+\begin{tabular}{|c|c|} % centered columns (3 columns)
+\hline
+Input factor & Pearson Correlation Coefficient \\ % inserts table 
 %heading
 \hline                  % inserts single horizontal line
-Wind Production & 0.21 \\ % inserting body of the table
-Wind Speed & 0.20 \\ [1ex] % [1ex] adds vertical space
+Wind Production & 0.21 \\ \hline % inserting body of the table
+Wind Speed & 0.20 \\ \hline % [1ex] adds vertical space
 \hline %inserts single line
 \end{tabular}
 \caption{Table showing Pearson correlation coefficient between various factors and the wind direction.} % title of Table
