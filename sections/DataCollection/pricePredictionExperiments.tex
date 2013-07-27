@@ -1,8 +1,10 @@
 This section contains experimental results from the experiment conducted to find the best possible price predicting solution. The experiments are based on the data which we analyzed in section \ref{sec:ElectricityPriceAnalysis}. The experiments are done to validate whether the assumptions about the input parameters are true when used in an artificial neural network. We also examine the best combinations to find the most optimal solution for price prediction. The results are divided into 5 experiments. The first experiment finds the best combination of input parameters for the network. These input parameters count meteorological, social and seasonal factors - which we identified in the analysis section~\ref{sec:Price}. The next experiment identifies the need for trimming and reasons to why it is needed in this particular dataset. The third experiment tests how different calculated inputs can include the immediate historical curve behavior in the dataset. This includes scatter, slope calculation, skewness analysis and historical EWMA(Exponentially-Weighted Moving Average). The fourth experiment takes care of the Artificial Neural Network parameters called black-box optimization. The last experiment shows the influence of offsets for the prediction and the effect of limiting the hours-ahead used in the predictions.
 
+The purpose of these tests are to identify the best parameters, data manipulation, calculated inputs and black box optimizations. This is done through a series of tests that either validates or rejects the hypothesis set up in each experiment. We want to approach the target price but the main focus is to test what works and what does not work regarding the electricity price predictions. \todo{Kig lige paa det her i morgen.}
+
 \todo{Read it and add comments about the Correct Direction \%}
 \todo{Add MAPE}
-\todo{yamin2004adaptive electricity price simulation}
+%\todo{yamin2004adaptive electricity price simulation}
 
 \subsection{Experiment one: Inputs}
 \label{sec:priceExperimentOne}
@@ -86,7 +88,7 @@ We present the results from this experiment in table~\ref{table:Top20Prices}. Th
 \end{table}
 
 \subsubsection{Wind speed}
-If we take a look at the top 20 best input combinations (shown in table~\ref{table:Top20Prices}) we see some clear trends. We will start analyzing the data from left to right. The price and demand are static as mentioned earlier since they are fundamental market forces and thus not a changing factor in this analysis. The next input parameter is the Wind Speed. We see that every input combination in the top 20 includes the wind production and it is therefore a must for the prediction of the energy prices. The 72 first inputs(the 50\% best results) contains only two combinations that does not have wind speed in them. Also we saw in section~\ref{sec:windPowerAnalysis}(table~\ref{table:pearsonCoeficientWindProduction}) that the Wind Speed heavily influences the green energy production and thus influencing the energy prices. If we remove wind speed from the \#1 combination it ends up at place \#70 which are 37.55\% worse than the best result. In graph~\ref{fig:Windspeed_no_windspeed} we see that the prediction without wind speed has a tendency to overshoot more than the one with wind speed does. Over a whole year this sums up to a significant difference.
+If we take a look at the top 20 best input combinations (shown in table~\ref{table:Top20Prices}) we see some clear trends. We will start analyzing the data from left to right. The price and demand are static as mentioned earlier since they are fundamental market forces and thus not a changing factor in this analysis. The next input parameter is the Wind Speed. We see that every input combination in the top 20 includes the wind production and it is therefore a must for the prediction of the energy prices. The 72 first inputs(the 50\% best results) contains only two combinations that does not have wind speed in them. Also we saw in section~\ref{sec:windPowerAnalysis}(table~\ref{table:pearsonCoeficientWindProduction}) that the Wind Speed heavily influences the green energy production and thus influencing the energy prices. If we remove wind speed from the \#1 combination it ends up at place \#70 which are 37.55\% worse than the best result. In figure~\ref{fig:Windspeed_no_windspeed} we see that the prediction without wind speed has a tendency to overshoot more than the one with wind speed does(the dark over lays shows where it overshoots). Over a whole year this sums up to a significant difference.
 
 \begin{figure}[H]
 \centering
@@ -320,6 +322,8 @@ In figure~\ref{fig:AllTrims} we see the dataset from figure~\ref{fig:1PTrim} wit
 \caption{Trims} % title of Table
 \label{table:Top10Trimming} % is used to refer this table in the text
 \end{table}
+
+\todo{Tjek resultat for trimming. Er det det rigtige?}
 
 \todo{Show how the same days play out with/without trimming}
 
@@ -845,12 +849,12 @@ The following parameters were tested:
 \end{itemize}
 
 \subsubsection{Hypothesis}
-In this experiment we anticipate a decrease in MAE as we increase the number of hours the ANN has to predict. The reason for this is the elevation of the error when we add more hours to predict ahead. The elevation comes from the last known price which will be the last predicted price (from hour 2 and onwards) thus elevating the error. The prediction of price relies in a great extend on the last-known price (see \ref{sec:Price}) and therefore it will have a significant effect on the price.
+In this experiment we anticipate a decrease in MAE as we increase the number of hours the ANN has to predict. The reason for this is the elevation of error when we add more hours to predict ahead. The elevation comes from the last known price which will be the last predicted price (from hour 2 and onwards) thus elevating the error. The prediction of price relies in a great extend on the last-known price (see \ref{sec:Price}) and therefore it will have a significant effect on the price. We use the last-predicted price to simulate a real life setting where we have no idea what the next hours price will thus forcing us to rely on the last prediction when doing the next hour.
 
 We also expect to see that the MAE will change when we shift the offsets. The offsets decide where the first and (in most cases) best prediction will start. If these first predictions hit good spots where the error margin will not rise as fast as other spots around it, then we will see a lower MAE.
 
 \subsubsection{Results}
-In table~\ref{table:XHoursAhead} we see the results from this experiment. The MAE is linear with the number of hours ahead during the first 10 predictions. From there it is random which gives the worst result. From around 10 hours ahead the increase in MAE seems to be slowing down. This is because it is not only the last known price that dictates what the new prediction will be. The other input parameters (wind speed, time of day etc.) will also influence the price. So when we hit a certain point in the prediction (which seems to be around 10 predictions ahead) the other input parameters will prevent the elevation of errors further. This can be seen in figure~\ref{fig:24HoursAhead_elevationOfError} where the black lines denotes 24 hours. We see in the 24 hours prediction (with the black box overlay) how the error is rising but when the prices start to fall so does the prediction. If it had been the last known price that dictated the next prediction then the predictions would have kept rising and so would the MAE. This is why we see that the MAE stagnates at about 10 hours ahead and above.
+In table~\ref{table:XHoursAhead} we see the results from the hours ahead experiment. The MAE is linear with the number of hours ahead during the first 10 predictions. From there it is random what setup gives the worst result. From around 10 hours ahead the increase in MAE seems to be slowing down. This is because it is not only the last known price that dictates what the new prediction will be. The other input parameters (wind speed, time of day etc.) will also influence the price. So when we hit a certain point in the prediction (which seems to be around 10 predictions ahead) the other input parameters will prevent the elevation of errors further. This can be seen in figure~\ref{fig:24HoursAhead_elevationOfError} where the black lines denotes 24 hours forecasts. We see in the 24 hours prediction (with the black box overlay) how the error is rising but when the prices start to fall so does the prediction. If it had been the last known price that dictated the next prediction then the predictions would have kept rising and so would the MAE.
 
 \begin{figure}[H]
 \centering
@@ -914,7 +918,7 @@ In the 10 hours ahead predict seen in figure~\ref{fig:10HoursAhead} we again see
 \label{table:XHoursAhead} % is used to refer this table in the text
 \end{table}
 
-In table~\ref{table:XHoursAhead} we see the results from the sliding window test. The entry with offset 0 is the same setup as prior experiments. The rest shows the difference in MAE when we shift where the 24 hours ahead predictions begin. We cover all possible offsets by doing 0-23 thus covering every offset from the first 24 hour prediction and onwards. From this experiment we show how much the right offset means for the total MAE in a years prediction. The biggest difference are between offset 4 and offset 7 with a difference of 15,04\%. These differences are connected to the elevation of error we talked about in the last result. If we hit the right spots where the elevation of error are not going to have a big impact this will lower the overall MAE thus giving us a better result.  
+In table~\ref{table:Offsets} we see the results from the sliding window test. The entry with offset 0 is the same setup as prior experiments. The rest shows the difference in MAE when we shift where the 24 hours ahead predictions begin. We cover all possible offsets by doing 0-23 thus covering every offset from the first 24 hour prediction and onwards. From this experiment we show how much the right offset means for the total MAE in a years prediction. The biggest difference are between offset 4 and offset 7 with a difference of 15,04\%. These differences are connected to the elevation of error we talked about in the last result. If we hit the right spots where the elevation of error are not going to have a big impact this will lower the overall MAE thus giving us a better result.  
 
 \begin{table}[H]
 \centering  % used for centering table

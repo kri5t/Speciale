@@ -1,10 +1,11 @@
 This section described the statistical measures that will be used to determine accuracy of the predictions so that the outputs can be evaluated.
 
 \subsubsection{MPE - Mean Percentage Error}
-The Mean Percentage Erorr is the mean of the percentage-wise error when comparing the predicted value to the actual value. This value gives us the error in percent relative to the actual value. This is a standard value that a lot of people understand by just looking at it and it gives a nice indication of how big the mean error over the whole set of predictions is. The problem with this value is that it is relative to the actual value so the same error seen as a number (e.g. 20kr) will give a big difference if it is close to the minimum values predicted and a small value if it is close to the maximum values predicted; but in both cases the guess with an erorr of 20 kr is equally good. As a mathematical example:
+The \fnurl{Mean Percentage Error}{http://en.wikipedia.org/wiki/Mean_percentage_error} is the mean of the percentage-wise error when comparing the predicted value to the actual value. This value gives us the error in percent relative to the actual value. This is a standard value that a lot of people understand by just looking at it and it gives a nice indication of how big the mean error over the whole set of predictions is. The problem with this value is that it is relative to the actual value so the same error seen as a number (e.g. 20DKK) will give a big difference if it is close to the minimum values predicted and a small value if it is close to the maximum values predicted; but in both cases the guess with an error of 20 DKK is equally good. As a mathematical example:
 
 
 \begin{subequations}
+High values:
 \begin{align}
  \text{Value} = 1200 \\
  \text{Predicted value} = 1180\\
@@ -12,43 +13,56 @@ The Mean Percentage Erorr is the mean of the percentage-wise error when comparin
  \text{Error} = (20/1200)*100 = 1.67\%
 \end{align}
 \end{subequations}
-\centerline{Actual value = 60; Predicted value = 80; Difference = 20; Error = (20/60) = 33.33\%}
+
+\begin{subequations}
+Low values:
+\begin{align}
+ \text{Value} = 60 \\
+ \text{Predicted value} = 80\\
+ \text{Difference} = 20\\
+ \text{Error} = (20/60) = 33.33\%
+\end{align}
+\end{subequations}
 
 
-If we were to just look at the values they are fine; but when we have to compare them to how good a guess it was they are both equally good. This is a problem with the Mean Percentage Error (that the reader needs to bear in mind when reading) but it is included because of how easy it is to grasp for most people.
+\noindent If we were to just look at the values they are fine; but when we have to compare them they are very different now (even though we just argued they were both equal guesses). This is why we have not included it but instead will be using MAPE.
 It is calculated by the following:
-
-\centerline{$ MPE = \frac{100\%}{n}\sum_{i=1}^{n}\frac{p_i - a_i}{a_i} $}
-
+\begin{center}
+$ MPE = \frac{100\%}{n}\sum_{i=1}^{n}\frac{p_i - a_i}{a_i} $
+\end{center}
 \noindent{Where $p_i$ is the predicted value and $a_i$ is the actual value.}
 
 \subsubsection{MAE - Mean Absolute Error}
 \label{sec:maeStatistics}
-The Mean Absolute Error denotes the mean of the differences between the predicted values and the actual values. This gives us an indication of how much the algorithm on average misses the target price as a value and not percent. This value is relative to the dataset and if you increase all your numbers with a factor of 10 so will the MAE thus making it very hard to compare to MAEs for other systems. The good thing about the MAE is that it is not a percentage and thus it will not get bigger if the values we predict are low (See MPE - Mean Percentage Error). That way we eliminate the problem with low values giving bigger error margins than high values even when they miss the target by the same value. It is calculated by:
+The \fnurl{Mean Absolute Error}{http://en.wikipedia.org/wiki/Mean_absolute_error} denotes the mean of the differences between the predicted values and the actual values. This gives us an indication of how much the algorithm on average misses the target price as a value and not percent. This value is relative to the dataset and if you increase all your numbers with a factor of 10 so will the MAE thus making it very hard to compare to MAEs for other systems. The good thing about the MAE is that it is not a percentage and thus it will not get bigger if the values we predict are low (See MPE - Mean Percentage Error). That way we eliminate the problem with low values giving bigger error margins than high values even when they miss the target by the same value. It is calculated by:
 
-
-\centerline{$ MAE = \frac{1}{n}\sum_{i=1}^{n}|p_i-a_i| $}
-
+\begin{center}
+$MAE = \frac{1}{n}\sum_{i=1}^{n}|p_i-a_i|$
+\end{center}
 
 \noindent{Where $p_i$ is the predicted value and $a_i$ is the actual value.}
 
 \subsubsection{MAPE - Mean Absolute Percentage Error}
-The mean absolute percentage error denotes the difference between the predicted value ($p_i$) and the actual value ($a_i$) which are divided by the median($\tilde{a}$) over the whole dataset. Giving us the following formula:
-
-\centerline{$MAPE = \frac{1}{n}\sum_{i=1}^{n}\frac{|p_i-a_i|}{\tilde{a}}$}
-
-\noindent{Our MAPE is a slightly altered version compared to the standard version. The difference is we use the median instead of the average. We got this version from \ref{yamin2004adaptive} where they argue that the mean value is not as error-prone as the average value is towards extreme outliers. If the dataset either contains a lot of high values or low values the average will be pulled towards them; but the median will always stay in the middle regardless of extreme outliers. This measure is included instead of MPE because it does not have the same errors when comparing high values to low values - therefore it is a better measure for comparing two experiments.}
-
-\subsubsection{Pearsons} \label{sec:Pearsons}
+The \fnurl{Mean Absolute Percentage Error}{http://en.wikipedia.org/wiki/Mean_absolute_percentage_error} denotes the difference between the predicted value ($p_i$) and the actual value ($a_i$) which are divided by the median($\tilde{a}$) over the whole dataset. Giving us the following formula:
 
 
-STATISTIKKER
-	Data Cleaning:
-		Pearsons
-		Trimming
-		Percentile trimming
+\begin{center}
+$MAPE = \frac{1}{n}\sum_{i=1}^{n}\frac{|p_i-a_i|}{\tilde{a}}$
+\end{center}
 
-	Error evaluation:
-		Mean Average Error
-		Mean Squared Error
-		Root 
+\noindent Our MAPE is a slightly altered version compared to the standard version. The difference is we use the median instead of the average. We got this version from \cite{yamin2004adaptive} where they argue that the mean value is not as error-prone as the average value is towards extreme outliers. If the dataset either contains a lot of high values or low values the average will be pulled towards them; but the median will always stay in the middle regardless of extreme outliers. This measure is included instead of MPE because it does not have the same errors when comparing high values to low values - therefore it is a better measure for comparing two experiments.
+
+\subsubsection{Pearson Correlation Coefficient} \label{sec:Pearsons}
+The \fnurl{Pearson Correlation Coefficient}{http://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient}(PCC) is used to determine if there is a linear correlation between two datasets. The values derived from calculating the PCC will always return values between -1 and 1. If the value is either -1 or 1 this means we have a direct linear correlation between the two datasets. A negative value means the datasets a negative correlation between the two e.g. if one of the datasets rises the other drops. If the value is positive there is a normal correlation between the two e.g. if one rises the other rises as well. The PCC has to be interpreted when comparing two datasets e.g. a social sciences often interprets lower values as good correlations whereas exact sciences in most cases needs a high PCC value to establish the correlation. It all comes down to perspective. We will use the PCC as a measure to establish connections between input parameters and output parameters in our dataset analysis. It can be calculated by the following formula:
+
+\begin{center}
+$ r = \frac{1}{n-1}\sum_{i=1}^{n}(\frac{X_i-\overline{X}}{s_X})(\frac{Y_i-\overline{Y}}{s_Y})$
+\end{center}
+
+\noindent where 
+
+\begin{center}
+$ \frac{X_i-\overline{X}}{s_X}$,   $\overline{X} = \frac{1}{n}\sum_{i=1}^{n}X_i$,   and $s_X = \sqrt{\frac{1}{n-1}\sum_{i=1}^{n}(X_i-\overline{X})^2}$
+\end{center}
+
+\noindent are the standard score, sample mean, and sample standard deviation, respectively.
