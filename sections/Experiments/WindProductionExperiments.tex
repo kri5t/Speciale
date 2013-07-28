@@ -340,21 +340,19 @@ The variables used in this experiment series:
 \item Last known production (L-P).
 \end{itemize}
 
-\subsubsection{Prediction - Applying matrix}
-The decrease in accuracy when using wind speed as a matrix can be seen in Table~\ref{table:theWindProdInputParamsTop10WithMatrix}. None of the best results contain wind speed as matrix and they only differ 3,02\% from the top result whereas the results with wind speed as matrix lies between 7,49\% and 23,14\%. The best result is the same as in Table~\ref{table:windProdInputParamsTop10} but number \#2 and \#3 has switched places but the difference between them is still not significant. All in top-3 improved with an average improvement of 1,9\%. The significance of time of day is seen in Section~\ref{sec:greenTOD} and the improvement was expected to be somewhat higher since the matrix should make it more expressive. Figure~\ref{fig:hourly_wind_production} shows a difference in average production from 750 during the night to around 925 during the day. The difference between the minimum production hour and the maximum is 16,2\% which might allow the one input parameter to generalize almost as good as the matrix implementation. Also the these numbers are for the entire year and since the training set in this case is only 3 month the difference between min and max will be even lower. If the difference in production between the hours of the day were bigger, lets say 900, the one parameter would still have to reflect the maximum and minimum in the same weight. This would be a problem if the majority were high and trying to predict a production represented in the minimum hour. The matrix implementation would instead consider each value by itself and have no impact on one another and is therefore expected to perform better. This scenario is illustrated in the analysis of price in Section~\ref{sec:seasonality} where Figure~\ref{fig:price_over_weekdays} shows a 42,4\% difference between the minimum price hour to the maximum price hour. The expectation is to see a better improvement when applying matrix to price because if this. 
-
-Wind speeds are represented by 41 different values in our data set which can explain the decrease in accuracy. Instead of having only one input to represent each of the values, the matrix turned into 41 inputs for every single value. The purpose is to have a weight that tells exactly how much the specific wind speed in general influence the wind production to predict. The network will do so by adjusting a weight for the different wind speeds in the matrix whenever they are seen. As described in Section~\ref{sec:Matrix} a problem arise if some values does not exist or are under-represented. This will cause that specific value to be under-expressed because the weight has only been adjusted a few times or not at all. The seasonal differences in wind power production is described in Section~\ref{sec:windProdSeasonality} and since wind production follows wind speed the training set of only 3 months does not cover all wind speeds. Many wind speed will therefore be under-represented when using wind speed as matrix. This is also backed up by the results.
+\subsubsection{Applying matrix}
+The matrix implementation has been applied for wind speed and time of day. The results can be seen in Table~\ref{table:theWindProdInputParamsTop10WithMatrix}. The best results are all without wind speed as matrix and are fairly close to each other. All results with wind speed as matrix are significantly worse and it can already be conclude that wind speed is not applicable for matrix. Wind speeds are represented by 41 different values in our data set which are . Instead of having only one input to represent each of the values, the matrix turned into 41 inputs for every single value. The purpose is to have a weight that tells exactly how much the specific wind speed in general influence the wind production to predict. The network will do so by adjusting a weight for the different wind speeds in the matrix whenever they are seen. As described in Section~\ref{sec:Matrix} a problem arise if some values does not exist or are under-represented. This will cause that specific value to be under-expressed because the weight has only been adjusted a few times or not at all. The seasonal differences in wind power production is described in Section~\ref{sec:windProdSeasonality} and since wind production follows wind speed the training set of only 3 months does not cover all wind speeds. Many wind speed will therefore be under-represented when using wind speed as matrix. 
 
 \begin{center}
 \begin{longtable}{|c|c|c|c|c|c|c|c|c|c|c|c|}
 \hline
-\textbf{WS} & \textbf{AD} & \textbf{C} & \textbf{T} & \textbf{WD} & \textbf{L-P} & \textbf{ToD} & \textbf{MAE} & \textbf{\% from \#1} &  \textbf{H1} & \textbf{H2} & \textbf{\% CD}   \\
+\textbf{WS} & \textbf{AD} & \textbf{C} & \textbf{T} & \textbf{WD} & \textbf{L-P} & \textbf{ToD} & \textbf{MAE} & \textbf{\% Rank} &  \textbf{H1} & \textbf{H2} & \textbf{\% CD}   \\
 \hline
 \endfirsthead
 \multicolumn{12}{c}%
 {\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
 \hline
-\textbf{WS} & \textbf{AD} & \textbf{C} & \textbf{T} & \textbf{WD} & \textbf{L-P} & \textbf{ToD} & \textbf{MAE} & \textbf{\% from \#1} &  \textbf{H1} & \textbf{H2} & \textbf{\% CD}  \\
+\textbf{WS} & \textbf{AD} & \textbf{C} & \textbf{T} & \textbf{WD} & \textbf{L-P} & \textbf{ToD} & \textbf{MAE} & \textbf{\% Rank} &  \textbf{H1} & \textbf{H2} & \textbf{\% CD}  \\
 \hline
 \endhead
 \hline \multicolumn{12}{r}{\textit{Continued on next page}} \\
@@ -374,6 +372,10 @@ Wind speeds are represented by 41 different values in our data set which can exp
 \label{table:theWindProdInputParamsTop10WithMatrix}
 \end{longtable}
 \end{center}
+
+ The significance of time of day is seen in Section~\ref{sec:greenTOD} and the improvement was expected to be somewhat higher since the matrix should make it more expressive. The section shows how the average wind power varies from 750 during the night to around 925 during the day for an entire year. This is not a significant change and because we only train on 3 months of data this difference can be even smaller and therefore the one parameter can express it almost as good as the matrix implementation --- the reason is that all weights in the matrix is adjusted similarly to the one weight when using only one value to represent time of day. If the difference between night and day was more significant it would create more potential for accuracy due to the nature of the matrix. The matrix implementation records individual influences of all of its values so they do not influence each other and thereby letting --- this makes the most sense when there is a big difference between the values so that they do not affect each other badly which. This scenario is illustrated in the analysis of price in Section~\ref{sec:seasonality} where Figure~\ref{fig:price_over_weekdays} shows a 42,4\% difference between the minimum price hour to the maximum price hour. The expectation is to see a better improvement when applying matrix to price than wind power because of this. 
+
+Table~\ref{table:maeAndMAPEForMatrix} shows both MAE and MAPE for the results obtained here. The best result without wind speed as matrix and with time of day as matrix is the same as in Table~\ref{table:windProdInputParamsTop10} but number \#2 and \#3 has switched places but the difference between them is still not significant. Top-3 improved with a total average of 1,9\%.
 
 \begin{center}
 \begin{longtable}{|c|c|}
@@ -406,18 +408,18 @@ Wind speeds are represented by 41 different values in our data set which can exp
 \end{center}
 
 \subsubsection{Prediction - Trimming}
-The need for trimming exists if irregularities exist or you want to narrow the narrow down the dataset and focus the prediction. In wind power production such values do not exist in our dataset because we want to predict all values over the entire year. This does leave out the possibility that trimming could make the prediction more accurate on certain values outside of the trimmed values. This is disproved in the context of wind power in Table~\ref{table:trimmingOnBothSetsTable} where all types of trim results in a worsening in MAE. This indicates that values that are necessary for the generalization function to approach its target are removed during trimming. What can be seen though is that the more trim the better it becomes. Section~\ref{sec:windProductionDev} shows how the trimming would affect the dataset and it is clear that when values are removed it cuts directly in a curve. It results in the possibility of actually creating irregularities. This confirmed by comparing the graph in Figure~\ref{fig:fivePercentTrimPrediction} with the one in Figure~\ref{fig:bestInputPredictFrom0-400}. The curves are not as smooth which is obvious in most of the predicted hour but especially in 48-82 compared to the hours without trimming. It is not the exact same hours that are predicted but it shows how the graph is cut up and becomes more volatile and harder to predict.
+The need for trimming exists if irregularities exist or you want to narrow the narrow down the dataset and focus the prediction. In wind power production such values do not exist in our dataset and at the same we want to predict all values over the entire year. This does leave out the possibility that trimming could make the prediction more accurate on certain values outside of the trimmed values. This statement disproved in the context of wind power in Table~\ref{table:trimmingOnBothSetsTable} where all types of trim results in a worsening in MAE. This indicates that values that are necessary for the generalization function to approach its target are removed during trimming. What can be seen though is that the more trim the better the MAE becomes --- this is not necessarily a good sign since bigger values contribute to a bigger MAE.
 
 \begin{center}
 \begin{longtable}{|c|c|c|c|c|c|c|}
 \hline
-\textbf{Trim \%} & \textbf{MAPE}  & \textbf{MAE} & \textbf{\% Ranking} & \textbf{Min trim} & \textbf{Max trim} & \textbf{\% CD} \\
+\textbf{Trim \%} & \textbf{MAPE}  & \textbf{MAE} & \textbf{\% Rank} & \textbf{Min trim} & \textbf{Max trim} & \textbf{\% CD} \\
 \hline
 \endfirsthead
 \multicolumn{7}{c}%
 {\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
 \hline
-\textbf{Trim \%} & \textbf{MAPE} & \textbf{MAE} & \textbf{\% Ranking} & \textbf{Min trim} & \textbf{Max trim} & \textbf{\% CD} \\
+\textbf{Trim \%} & \textbf{MAPE} & \textbf{MAE} & \textbf{\% Rank} & \textbf{Min trim} & \textbf{Max trim} & \textbf{\% CD} \\
 \hline
 \endhead
 \hline \multicolumn{7}{r}{\textit{Continued on next page}} \\
@@ -434,6 +436,8 @@ The need for trimming exists if irregularities exist or you want to narrow the n
 \end{longtable}
 \end{center}
 \todo{make it}
+
+Section~\ref{sec:windProductionDev} discuss how trimming would affect the dataset and it is clear that when values are removed it cuts directly in a curve. It results in the possibility of actually creating irregularities instead of removing them. This confirmed by comparing the graph in Figure~\ref{fig:fivePercentTrimPrediction} (with trimming) with the one in Figure~\ref{fig:bestInputPredictFrom0-400} (without trimming). The curves are not as smooth with trimming applied which is apparent when looking at the hours from 48-82 in both graphs. The one without trimming shows how the graph looked before trimming and it is clear the by applying trimming the graph has become more volatile and thereby harder to predict.
 
 \begin{figure}[H]
 \centering
@@ -499,22 +503,21 @@ The variables used in this experiment series:
 \item Previous productions as input (Scatter/Sc)
 \end{itemize}
 
-\subsubsection{Prediction - Historical Volatility}
+\subsubsection{Historical Volatility}
 \label{sec:predictionHistVol}
-Historical Volatility is presented in Section~\ref{sec:usingStatisticalInput}. The purpose is to calculate the historical volatility for one hour based on a predefined number of previous hours, e.g. every hour in the training set will calculate the historical volatility from for instance 20 hours just before it (except from the 20 first hours). The volatility calculation will be based on EWMA from Section~\ref{sec:ewmaVolatility} which requires a smoothing factor between 0-1 that needs to be found through experiments. The experiment will be conducted for smoothing factors between 0,1 and 0,9 on hours between 4-24. When the best rate with the best number of hours has been established for the dataset it will be tested on top-3 from Table~\ref{table:theWindProdInputParamsTop10WithMatrix}. The improvement is 3,52\% better than the best prediction without it. 
+Historical Volatility is presented in Section~\ref{sec:usingStatisticalInput}. The purpose is to calculate the historical volatility for one hour based on a predefined number of previous hours, e.g. every hour in the training set will calculate the historical volatility from for instance 20 hours just before it (except from the first 20 hours). The volatility calculation will be based on EWMA from Section~\ref{sec:ewmaVolatility} which requires a smoothing factor between 0-1 that needs to be found through experiments. The experiment has been conducted for smoothing factors between 0,1 and 0,9 on hours between 4-24. The best established rate with the best number of hours for the dataset is tested on top-3 from Table~\ref{table:theWindProdInputParamsTop10WithMatrix}.
 
 \footnotesize
 \begin{center}
 \begin{longtable}{|c|c|c|c|c|c|}
-\caption{Wind Production Input Parameter Test}\\
 \hline
-\textbf{Previous Hours} & \textbf{Smoothing factor}& \textbf{MAPE} & \textbf{MAE} & \textbf{\% Deviation} & \textbf{\% Correct Direction} \\
+\textbf{Previous Hours} & \textbf{Smoothing factor}& \textbf{MAPE} & \textbf{MAE} & \textbf{\% Deviation} & \textbf{\% CD} \\
 \hline
 \endfirsthead
 \multicolumn{6}{c}%
 {\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
 \hline
-\textbf{Previous Hours} & \textbf{Smoothing factor}& \textbf{MAPE} & \textbf{MAE} & \textbf{\% Deviation} & \textbf{\% Correct Direction} \\
+\textbf{Previous Hours} & \textbf{Smoothing factor}& \textbf{MAPE} & \textbf{MAE} & \textbf{\% Deviation} & \textbf{\% CD} \\
 \hline
 \endhead
 \hline \multicolumn{6}{r}{\textit{Continued on next page}} \\
@@ -531,12 +534,13 @@ Historical Volatility is presented in Section~\ref{sec:usingStatisticalInput}. T
 16 & 0,60 & 19,11\% & 127,38 & 4,57\% & 69\% \\ \hline
 24 & 0,40 & 19,13\% & 127,51 & 4,68\% & 70\% \\ \hline
 16 & 0,90 & 19,17\% & 127,77 & 4,89\% & 69\% \\ \hline
+\caption{Historical volatility on different hours and with different smoothing factors}
 \end{longtable}
 \label{table:historicalVoltalityHours}
 \end{center}
 \normalsize
 
-All combinations of smoothing factor and previous hours can be seen in Appendix~\ref{sec:historicalVolatiltiyResultsAppendix} --- only top 10 is shown here. The results in Table~\ref{table:historicalVoltalityHours} show that a smoothing factor of 0,70 calculated on the 6 previous hours is the best choice. The expectation was to get a low smoothing factor due to the fluctuations in the wind power production as described in Section~\ref{sec:ewmaVolatility}. The reason for the higher factor can be explained with the number of previous hours being too small to reflect the many changes. We can see from the graph in Figure~\ref{fig:bestVolatilityVsMatrixGraph} that the curves are much similar to the curves without volatility which is expected since the volatility approach is an augmentation of the best prediction with matrix. A noticeable difference is that the volatility under-shoots its targets in the bottom of many curves compared to the matrix approach in both Figure~\ref{fig:bestVolatilityVsMatrixGraph} and~\ref{fig:bestVolatilityVsMatrixGraph350-525}. It moves more rapidly from top to bottom. Another thing worth mentioning from Figure~\ref{fig:bestVolatilityVsMatrixGraph350-525} is how the addition of historical volatility is capable of predicting all the way to the top in 415 and 480 compared to the standard matrix prediction indicated by the blue line. The under- and overshooting compared to the matrix only prediction is also verified in Figure~\ref{volatilityBest700-1000}.
+All combinations of smoothing factor and previous hours can be seen in Appendix~\ref{sec:historicalVolatiltiyResultsAppendix} --- only top 10 is shown here. The results in Table~\ref{table:historicalVoltalityHours} show that a smoothing factor of 0,70 calculated on the 6 previous hours is the best choice. The expectation was to get a low smoothing factor due to the fluctuations in the wind power production as described in Section~\ref{sec:ewmaVolatility}. The reason for the higher factor can be explained with the number of previous hours being too small to reflect the many changes, e.g. if the historical volatility was calculated over the entire dataset it would probably be smaller. We can see from the graph in Figure~\ref{fig:bestVolatilityVsMatrixGraph} that the curves are much similar to the curves without volatility which is expected since the volatility approach is an augmentation of the best prediction with matrix. 
 
 \begin{figure}[H]
 \centering
@@ -544,6 +548,8 @@ All combinations of smoothing factor and previous hours can be seen in Appendix~
 \caption{Wind production prediction for hours 0-175 in 2012 with historical volatility as input}
 \label{fig:bestVolatilityVsMatrixGraph}
 \end{figure} 
+
+A noticeable difference from the above graph is how the volatility approach under-shoots its targets in the bottom of many curves compared to the matrix approach in both Figure~\ref{fig:bestVolatilityVsMatrixGraph} and~\ref{fig:bestVolatilityVsMatrixGraph350-525}. It moves more rapidly from top to bottom. Another thing worth mentioning from Figure~\ref{fig:bestVolatilityVsMatrixGraph350-525} is how the addition of historical volatility is capable of predicting all the way to the top in 415 and 480 compared to the standard matrix prediction indicated by the blue line. The under- and overshooting compared to the matrix only prediction is also verified in Figure~\ref{volatilityBest700-1000}.
 
 \begin{figure}[H]
 \centering
@@ -559,7 +565,7 @@ All combinations of smoothing factor and previous hours can be seen in Appendix~
 \label{fig:volatilityBest700-1000}
 \end{figure} 
 
-\subsubsection{Prediction - Skewness}
+\subsubsection{Skewness}
 Skewness is a calculation of how much a distribution leans to one side of the mean which is described in more detail in Section~\ref{sec:skewness}. What is important to identify is again how many previous hours to include in the calculation of the skew in order to get the best picture of what side the curve is currently leaning towards. Table~\ref{table:skewnessHours} shows results where the best fit is found to be 16 hours. This will be basis for further testing when trying to use the methods in combination to see if any of them can augment each other. At first glance skewness does not seem to improve much but it will need testing when put together with the other calculations.
 
 \begin{center}
@@ -600,9 +606,9 @@ Figure~\ref{fig:bestSkewnessGraph} shows the first 175 hours when using skewness
 \label{fig:bestSkewnessGraph}
 \end{figure}    
 
-\subsubsection{Prediction - Slope calculation}
+\subsubsection{Slope calculation}
 \label{sec:windPowerSlopeCalc}
-The experiment covers basic slope calculation of the curve. The intention is to get a notion of how much the previous productions have been going upwards before a particular hour. It captures how the slopes in general relate to the wind power production --- does a very steep slope in general affect the production to go up or not? Table~\ref{table:curveAnalysisHours} shows that the slope calculation as input does not work as intended. Its impact on the first 175 hours can be seen in Figure~\ref{fig:basicCurveAnalysisGrapho}. The best result from Table~\ref{table:curveAnalysisHours} calculates the slope from the previous 20 hours and the hours from 48-70 illustrates in the graph that it has a hard time identifying when to stop moving up since it has been moving up for so long. The 24-ahead prediction starts at 48 just before the drop and since the slope calculation is based on the last 20 hours it does not identify the shift --- it has a steep slope and points the overall generalization upwards since steep slopes in most cases result in ascending curves except when at the very top of one. The opposite happens around hour 70-80 where it does not know when to stop. This is a difference from the matrix without calculated inputs which is indicated by the blue line --- the prediction only follows the meteorological factors and how they relate to the production. The 1-hour-ahead forecasting with curve has been performed and obtains a MAE of 56,6. The graph can be seen in Figure~\ref{fig:curveOneAheadvs24Ahead} where the curve fitting as expected is significantly better.
+The experiment covers basic slope calculation of the curve. The intention is to get a notion of how much the previous productions have been going upwards before a particular hour. It captures how the slopes in general relate to the wind power production --- does a very steep slope in general affect the production to go up or not? The calculation has been attempted on different hours to identify the best place to calculate the slope from. Table~\ref{table:curveAnalysisHours} shows that the slope calculation as input does not work as intended. All MAEs show worse results compared to the same predictions without it.
 
 \begin{center}
 \begin{longtable}{|c|c|c|c|c|}
@@ -633,12 +639,16 @@ The experiment covers basic slope calculation of the curve. The intention is to 
 \end{longtable}
 \end{center}
 
+The impact of slope is illustrated in the first 175 of 2012 and can be seen in Figure~\ref{fig:basicCurveAnalysisGrapho}. The best result from Table~\ref{table:curveAnalysisHours} calculates the slope from the previous 20 hours and pink overlay (48-70) illustrates that it has a hard time identifying when to stop moving up since it has been moving up for so long. The 24-ahead prediction starts at 48 just before the drop and since the slope calculation is based on the last 20 hours it does not identify the shift --- it has a steep slope and points the overall generalization upwards since steep slopes in most cases result in ascending curves except when at the very top of one. The opposite happens in the blue overlay (hours 70-80) where it does not know when to stop and undershoots. It stands in contrast to the prediction without curve indicated by the blue line.
+
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.99\linewidth]{billeder/curveAnalysisWindProduction.png}
 \caption{Wind production prediction for 175 hours in 2012 with slope as input}
 \label{fig:basicCurveAnalysisGrapho}
 \end{figure} 
+
+It was stated that the 24-ahead prediction was the contributing factor to the elevation of error of the curve approach. To verify this the 1-hour-ahead forecasting with slope has been performed which obtains a MAE of 56,6. The graph can be seen in Figure~\ref{fig:curveOneAheadvs24Ahead} where the curve fitting as expected is significantly better. It can be concluded that the use of slope helps elevate the error which is not a desirable feature. We will attempt to combine it with the other calculated approaches to investigate if any of them augment each others ability.
 
 \begin{figure}[H]
 \centering
@@ -649,18 +659,18 @@ The experiment covers basic slope calculation of the curve. The intention is to 
 
 \subsubsection{Combining the approaches}
 \label{sec:combiningTheApproachesWP}
-Experiments with combinations of the approaches have been performed to investigate whether or not any of them augment each other. Furthermore, adding historical productions as input has been tried as presented in Section~\ref{sec:scatterPaper} and discussed in Section~\ref{sec:scatterStrategy}. The approach adds 3 inputs for the production from one day ago, 3 inputs from the production one week ago, one input from the production two weeks ago, one input from the production three weeks ago and one last input from four weeks ago. The purpose is letting the network itself capture the price development over time instead of calculating it beforehand. Experiment results from each approach is in Table~\ref{table:comparisonStatistics} where the historical volatility with a smoothing factor of 0,70 and 6 previous hours outperforms the other approaches. 
+Experiments with combinations of the approaches have been performed to investigate whether or not any of them can possibly augment each other. Furthermore, adding historical productions as input has been tried as presented in Section~\ref{sec:scatterPaper} and discussed in Section~\ref{sec:scatterStrategy}. The approach adds 3 inputs for the wind power from one day ago, 3 inputs from the production one week ago, one input from the production two weeks ago, one input from the production three weeks ago and one last input from four weeks ago. The purpose is letting the network itself capture the price development over time instead of calculating it beforehand. Experiment results from each approach is in Table~\ref{table:comparisonStatistics} where the historical volatility with a smoothing factor of 0,70 and 6 previous hours outperforms the other approaches. 
 
 \begin{center}
 \begin{longtable}{|c|c|c|c|}
 \hline
-\textbf{Type} & & \textbf{MAPE} \textbf{MAE} & \textbf{\% Correct Direction} \\
+\textbf{Type} & \textbf{MAPE} & \textbf{MAE} & \textbf{\% CD} \\
 \hline
 \endfirsthead
 \multicolumn{4}{c}%
 {\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
 \hline
-\textbf{Type} & & \textbf{MAPE} \textbf{MAE} & \textbf{\% Correct Direction} \\
+\textbf{Type} & \textbf{MAPE} & \textbf{MAE} & \textbf{\% CD} \\
 \hline
 \endhead
 \hline \multicolumn{4}{r}{\textit{Continued on next page}} \\
@@ -688,13 +698,13 @@ Skewness and curve in combination with each other achieves the best result but d
 \begin{center}
 \begin{longtable}{|c|c|c|c|c|c|c|c|}
 \hline
-\textbf{Vola} & \textbf{Skew} & \textbf{Scat} & \textbf{Curve} & \textbf{MAPE} & \textbf{MAE} & \textbf{\% Rank} & \textbf{\% Correct Direction} \\
+\textbf{Vola} & \textbf{Skew} & \textbf{Scat} & \textbf{Curve} & \textbf{MAPE} & \textbf{MAE} & \textbf{\% Rank} & \textbf{\% CD} \\
 \hline
 \endfirsthead
 \multicolumn{8}{c}%
 {\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
 \hline
-\textbf{Vola} & \textbf{Skew} & \textbf{Scat} & \textbf{Curve} & \textbf{MAPE} & \textbf{MAE} & \textbf{\% Rank} & \textbf{\% Correct Direction} \\
+\textbf{Vola} & \textbf{Skew} & \textbf{Scat} & \textbf{Curve} & \textbf{MAPE} & \textbf{MAE} & \textbf{\% Rank} & \textbf{\% CD} \\
 \hline
 \endhead
 \hline \multicolumn{8}{r}{\textit{Continued on next page}} \\
@@ -717,18 +727,19 @@ Skewness and curve in combination with each other achieves the best result but d
 \end{longtable}
 \end{center}
 
+\subsubsection{Using Best Approach on Top-3}
 Table~\ref{table:topFromMatrixWithStatistics} shows volatility applied on the top 3 input combinations with matrix from Table~\ref{table:theWindProdInputParamsTop10WithMatrix}. It is first of all noticeable that the top 3 positions are the same as in all of the combination tests. Secondly, the results are in general improved. The best ranked from ~\ref{table:idealCombinationStatistic} is the same as the best ranked here. The results emphasize the best input combinations and the improvement by adding volatility as input.     
 
 \begin{center}
 \begin{longtable}{|c|c|c|c|c|c|c|c|c|c|c|c|}
 \hline
-\textbf{WS} & \textbf{AD} & \textbf{C} & \textbf{T} & \textbf{WD} & \textbf{L-P} & \textbf{ToD} & \textbf{MAE} & \textbf{\% from \#1} &  \textbf{H1} & \textbf{H2}  & \textbf{\% CD} \\
+\textbf{WS} & \textbf{AD} & \textbf{C} & \textbf{T} & \textbf{WD} & \textbf{L-P} & \textbf{ToD} & \textbf{MAE} & \textbf{\% Rank} &  \textbf{H1} & \textbf{H2} & \textbf{\% CD} \\
 \hline
 \endfirsthead
 \multicolumn{12}{c}%
 {\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
 \hline
-\textbf{WS} & \textbf{AD} & \textbf{C} & \textbf{T} & \textbf{WD} & \textbf{L-P} & \textbf{ToD} & \textbf{MAE} & \textbf{\% from \#1} &  \textbf{H1} & \textbf{H2} & \textbf{\% CD} \\
+\textbf{WS} & \textbf{AD} & \textbf{C} & \textbf{T} & \textbf{WD} & \textbf{L-P} & \textbf{ToD} & \textbf{MAE} & \textbf{\% Rank} &  \textbf{H1} & \textbf{H2} & \textbf{\% CD} \\
 \hline
 \endhead
 \hline \multicolumn{12}{r}{\textit{Continued on next page}} \\
@@ -744,7 +755,8 @@ Table~\ref{table:topFromMatrixWithStatistics} shows volatility applied on the to
 \end{center}
 
 \subsubsection{Best prediction graph}
-Section~\ref{sec:predictionHistVol} covers a more thorough analysis and the best prediction graphs can be seen in Figures~\ref{fig:bestVolatilityVsMatrixGraph} and~\ref{fig:bestVolatilityVsMatrixGraph350-525}. The curve prediction showed the problem when predicting 24-step-ahead. This is somewhat expected since every predicted hour uses the previous prediction as input and is therefore dependent on one another. It is not the same as the 24th hour is always the worst because the prediction can correct itself during the 24 hours which is also seen in Figure~\ref{fig:bestVolatility120to144} even though the volatility predicting under-shoots in the beginning. The figure also shows that the addition of volatility moves faster from top to bottom and is more accurate in high numbers than low. This is also seen in Figure~\ref{fig:bestVolatility408to432}. Since MAE is the error measure better accuracy in the high numbers will contribute to a better average MAE even though the low numbers are worsened. It is a trade-off between the desire to predict low or high wind power productions but here we strive to lower the overall MAE of the predictions.
+Section~\ref{sec:predictionHistVol} covers a more thorough analysis and the best prediction graphs can be seen in Figures~\ref{fig:bestVolatilityVsMatrixGraph} and~\ref{fig:bestVolatilityVsMatrixGraph350-525}. The slope prediction clarified the problem with predicting 24-step-ahead and the elevated error. It was more obvious for curve than for the other predictions but it is applicable for all predictions since every predicted hour uses the previous prediction as input. It is not the same as the 24th hour is always the worst because the prediction can correct itself during the 24 hours which is also seen in Figure~\ref{fig:bestVolatility120to144} even though the volatility predicting under-shoots in the beginning. The figure shows that the addition of volatility moves faster from top to bottom and is more accurate in high numbers than low.
+This is also seen in Figure~\ref{fig:bestVolatility408to432}. Since MAE is the error measure better accuracy in the high numbers will contribute to a better average MAE even though the low numbers are worsened. It is a trade-off between the desire to predict low or high wind power productions but here we strive to lower the overall MAE of the predictions. The trade-off is much controlled of use scenarios which will not be covered here.
 
 \begin{figure}[H]
 \centering
@@ -885,7 +897,9 @@ Done by pruning. Is it necessary to say something about the network size or can 
 
 \subsubsection{Prediction Graphs}
 \label{sec:windPowerBestPredictionGraphs}
-The best prediction obtains a MAE of 121 with 300 epochs. Due to the random initialization of weights in the Artificial Neural Network the prediction will vary from time to time. Table~\ref{table:bestPredictionDatasetSizeTest} show how the best prediction changed to 122,65 but still fairly close to 121,02. The experimental results are not 100\% definitive but they have shown tendencies in what works and what does not. A whole year (as used here) contains the different seasonal impacts but at the same time many similar days so that the same situations are predicted more than once. The figures~\ref{fig:bestWPPredictWinter}, ~\ref{fig:bestWPPredictSpring}, ~\ref{fig:bestPredictWPSummer} and ~\ref{fig:bestPredictWPFall} show examples of the behaviour in different seasons and how the prediction is able to handle them. One thing that is noticeable is during fall during the falling curve in 7150-7250 but this is expected due to the high volatility (as mentioned in Section~\ref{sec:bestInputCombiGraph} significant volatility makes it harder to predict). The graphs also shows the need for predicting a whole year due to the obvious differences in the wind power behaviour but at the same time illustrate the predictions ability to follow the development of the ideal wind power. We consider it satisfactory according the the purpose of being able to approach the wind power and at the same time identifying wind power influential factors in the Danish electricity market. Furthermore, an improvement in accuracy has been seen throughout the experiments.
+The best prediction obtains a MAE of 121 with 300 epochs. Due to the random initialization of weights in the Artificial Neural Network the prediction will vary from time to time. Table~\ref{table:bestPredictionDatasetSizeTest} show how the best prediction changed to 122,65 but still fairly close to 121,02 --- this must be taken into consideration and the subject will be addressed in the discussion of results. The experimental results are not 100\% definitive but they have shown clear tendencies in what works and what does not. 
+
+A whole year (as used here) contains the different seasonal impacts but at the same time many similar days so that the same situations are predicted more than once --- the point is of course to cover as different cases as possible but at the same time to reduce randomness by predicting the same (here, similar) more than once. The figures~\ref{fig:bestWPPredictWinter}, ~\ref{fig:bestWPPredictSpring}, ~\ref{fig:bestPredictWPSummer} and ~\ref{fig:bestPredictWPFall} show examples of the behaviour in different seasons and how the prediction is able to handle them. One thing that is noticeable is during fall in the falling curve from 7150-7250 --- it shows what have been stated before, namely that the prediction has trouble when undertaking high volatility (as mentioned in Section~\ref{sec:bestInputCombiGraph} significant volatility makes it harder to predict). The graphs also show the need for predicting a whole year due to the obvious differences in the wind power behaviour but at the same time illustrate the predictions ability to follow the development of the ideal wind power in different seasons. The results comply well with the purpose of being able to approach the wind power and its trends whilst at the same time identifying wind power influential factors in the Danish electricity market. Furthermore, an improvement in accuracy has been seen throughout the experiments.
 
 \begin{figure}[H]
 \centering
@@ -924,6 +938,8 @@ Different training set sizes and epochs have been tested and used for prediction
 \item The predictions graphs presented for the best prediction clearly showed the ability of following the behaviour of the ideal wind power and an improvement in mae in relation to the first experiment. 
 \end{enumerate}
 
+\newpage
+
 \subsection{Experiment Five - Step-ahead forecasting}
 \label{sec:windPowerExperimentFive}
 The purpose is to identify the error in different step-ahead forecasts from 1 hour to 24 hour. In step-ahead forecasting every step is dependent on the prediction from the step just before it but for wind power production that does not necessarily mean that many steps will be the worst since it follows wind speed significantly which will make it possible to correct during the prediction.
@@ -931,8 +947,8 @@ The purpose is to identify the error in different step-ahead forecasts from 1 ho
 \subsubsection{Hypothesis}
 It is expected to see an improved error when very few steps is included in the step-ahead forecasting. When the number of steps reach a certain point the results is expected to become more random.
 
-\subsubsection{Prediction}
-Table~\ref{table:stepAheadForecastingWindProduction} shows the results from the step-ahead testing. It is clear that low numbers until 9 is significantly better than the rest. The expectation was to see a more random distribution when reaching a certain point but there is a clear tendency in the high numbers in the button and low numbers in the top. The obvious problem with the results is that they are all predicting the same year and therefore predicting from different places in relation to the number of steps. It will results in the results being incomparable since the prediction starting point is not the same which heavily affects the predictions as discussed in Section~\ref{sec:combiningTheApproachesWP}. This problem becomes more clear when looking at Figure~\ref{fig:best22vsbest24Ahead} where it is obvious that 22-step-ahead starts much differently than 24-step-ahead in Figure~\ref{best24AheadPredictionWithLines}. It has huge effect on the prediction which would also apply in a real life setting. It could again be a discussion about reconfigurability of the ann when used in a decision making setting. The experience of the user comes into place in these predictions because it greatly influences the result where to start from. This is further backed up by Table~\ref{table:stepAheadForecastingWindProduction}.
+\subsubsection{Step-ahead forecasting}
+Table~\ref{table:stepAheadForecastingWindProduction} shows the results from the step-ahead forecasting. It is clear that low numbers until 9 is significantly better than the rest. The expectation was to see a more random distribution when reaching a certain point but there is a tendency in the high numbers in the button and low numbers in the top. The obvious problem with the results is that they are all predicting the same year but as they progress they predict from different starting points which heavily affects the predictions as discussed in Section~\ref{sec:combiningTheApproachesWP}. It makes the results somewhat incomparable since but it still shows that few steps will always be closer to the target until a certain point.
 
 \begin{center}
 \begin{longtable}{|c|c|c|c|c|}
@@ -979,7 +995,24 @@ Table~\ref{table:stepAheadForecastingWindProduction} shows the results from the 
 \end{longtable}
 \end{center}
 
-All starting positions have been tried in Table~\ref{table:stepAheadForecastingWindProductionStartingPositions} and it supports what was concluded from Table~\ref{table:stepAheadForecastingWindProduction}. The position that has always been used is marked with an x. It is obvious here that the exact same prediction applied at various starting points differs much in accuracy. 
+This problem becomes more clear when looking at Figure~\ref{fig:best22vsbest24Ahead} where it is obvious that 22-step-ahead starts much differently than 24-step-ahead in Figure~\ref{best24AheadPredictionWithLines}. It has huge effect on the prediction which would also apply in a real life setting. It clearly shows a challenge in relation to decision making with ANN in a real setting and how the experience of the user comes into place in these predictions since it greatly influences the result where to start from. Modelling and fine-tuning the ANN is one thing but including it in practice is equally complex --- we will relate our findings to this subject in the discussion. This is further backed up by Table~\ref{table:stepAheadForecastingWindProduction}.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.99\linewidth]{billeder/best22vsbest24Ahead.png}
+\caption{22-step-ahead forecast}
+\label{fig:best22vsbest24Ahead}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.99\linewidth]{billeder/best24AheadPredictionWithLines.png}
+\caption{24-step-ahead forecast}
+\label{fig:best24AheadPredictionWithLines}
+\end{figure} 
+
+\subsubsection{Offsets}
+Due to the discussion regarding the different starting points (or offsets) we have performed experiments of them all to get an overview of the consequences to the error. All offsets have been tried in Table~\ref{table:stepAheadForecastingWindProductionStartingPositions} and it supports what was concluded from Table~\ref{table:stepAheadForecastingWindProduction}, e.g. that the offset greatly influence the result which must be considered by anyone using it. One thing that can possibly explain why offset 1 (which we have been using all along) achieves good results is the 24-hour cycle and how certain patterns apply from 00-24 every day of the year (the patterns are illustrated in Section~\ref{sec:greenTOD} and~\ref{sec:Price}). The position that has always been used is marked with an x. It is obvious here that the exact same prediction applied at various starting points differs much in accuracy. 
 
 \begin{center}
 \begin{longtable}{|c|c|c|c|c|}
@@ -998,7 +1031,7 @@ All starting positions have been tried in Table~\ref{table:stepAheadForecastingW
 \endlastfoot
 \arrayrulecolor{light-gray}
 16 & 18,26\% & 121,73 & 0,0\% & 73\%  \\ \hline
-1 (x) & 18,49\% & 123,25 & 1,25\% & 73\%  \\ \hline
+1 (x) & 18,49\% & 122,84 & 0,9\% & 73\%  \\ \hline
 8 & 18,61\% & 124,06 & 1,91\% & 72\%  \\ \hline
 7 & 18,68\% & 124,52 & 2,29\% & 70\%  \\ \hline
 14 & 18,92 & 126,12 & 3,67\% & 70\%  \\ \hline
@@ -1026,19 +1059,9 @@ All starting positions have been tried in Table~\ref{table:stepAheadForecastingW
 \end{longtable}
 \end{center}
 
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.99\linewidth]{billeder/best22vsbest24Ahead.png}
-\caption{22-step-ahead forecast}
-\label{fig:best22vsbest24Ahead}
-\end{figure}
 
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.99\linewidth]{billeder/best24AheadPredictionWithLines.png}
-\caption{24-step-ahead forecast}
-\label{fig:best24AheadPredictionWithLines}
-\end{figure} 
+
+
 
 \todo{one step ahead vs. 24 ahead to show that is the same in the beginning on 24 timer}
 
