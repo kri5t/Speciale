@@ -1,32 +1,30 @@
 This section described the statistical measures that will be used to determine accuracy of the predictions so that the outputs can be evaluated.
 
 \subsubsection{MPE - Mean Percentage Error}
-The \fnurl{Mean Percentage Error}{http://en.wikipedia.org/wiki/Mean_percentage_error} is the mean of the percentage-wise error when comparing the predicted value to the actual value. This value gives us the error in percent relative to the actual value. This is a standard value that a lot of people understand by just looking at it and it gives a nice indication of how big the mean error over the whole set of predictions is. The problem with this value is that it is relative to the actual value so the same error seen as a number (e.g. 20DKK) will give a big difference if it is close to the minimum values predicted and a small value if it is close to the maximum values predicted; but in both cases the guess with an error of 20 DKK is equally good. As a mathematical example:
-
-
-\begin{subequations}
-High values:
-\begin{align}
- \text{Value} = 1200 \\
- \text{Predicted value} = 1180\\
- \text{Difference} = 20\\
- \text{Error} = (20/1200)*100 = 1.67\%
-\end{align}
-\end{subequations}
-
-\begin{subequations}
-Low values:
-\begin{align}
- \text{Value} = 60 \\
- \text{Predicted value} = 80\\
- \text{Difference} = 20\\
- \text{Error} = (20/60) = 33.33\%
-\end{align}
-\end{subequations}
-
-
+The \fnurl{Mean Percentage Error}{http://en.wikipedia.org/wiki/Mean_percentage_error} is the mean of the percentage-wise error when comparing the predicted value to the actual value. This value gives us the error in percent relative to the actual value. This is a standard value that a lot of people understand by just looking at it. The problem with this value is that it is relative to the actual value so the same error seen as a number (e.g. 20DKK) will give a big difference if it is close to the minimum values predicted and a small value if it is close to the maximum values predicted; but in both cases the guess with an error of 20 DKK is equally good. As a mathematical example:
+\\[0.5cm]
+\noindent Percentage error:
+\begin{center}
+$\text{\% error} = (\text{estimate} - \text{actual}) / \text{actual} * 100$
+\end{center}
+\begin{minipage}{\textwidth}
+\noindent High values:
+\begin{center}
+$\text{\% error} = ((1200-1180)/1200)*100 = 1.67\%$
+\end{center}
+\noindent where $\text{actual} = 1200$ and $\text{estimate} = 1180$
+\end{minipage}
+\\[0.5cm]
+\begin{minipage}{\textwidth}
+\noindent Low values: 
+\begin{center}
+$\text{\% error} = ((60-40)/60) = 33.33\%$
+\end{center}
+\noindent where $\text{actual} = 60$ and $\text{estimate} = 80$
+\\[0.5cm]
+\end{minipage}
 \noindent If we were to just look at the values they are fine; but when we have to compare them they are very different now (even though we just argued they were both equal guesses). This is why we have not included it but instead will be using MAPE.
-It is calculated by the following:
+The MPE is calculated by the following:
 \begin{center}
 $ MPE = \frac{100\%}{n}\sum_{i=1}^{n}\frac{p_i - a_i}{a_i} $
 \end{center}

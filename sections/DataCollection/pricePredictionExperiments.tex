@@ -1,6 +1,6 @@
 This section contains experimental results from the experiment conducted to find the best possible price predicting solution. The experiments are based on the data which we analyzed in section \ref{sec:ElectricityPriceAnalysis}. The experiments are done to validate whether the assumptions about the input parameters are true when used in an artificial neural network. We also examine the best combinations to find the most optimal solution for price prediction. The results are divided into 5 experiments. The first experiment finds the best combination of input parameters for the network. These input parameters count meteorological, social and seasonal factors - which we identified in the analysis section~\ref{sec:Price}. The next experiment identifies the need for trimming and reasons to why it is needed in this particular dataset. The third experiment tests how different calculated inputs can include the immediate historical curve behavior in the dataset. This includes scatter, slope calculation, skewness analysis and historical EWMA(Exponentially-Weighted Moving Average). The fourth experiment takes care of the Artificial Neural Network parameters called black-box optimization. The last experiment shows the influence of offsets for the prediction and the effect of limiting the hours-ahead used in the predictions.
 
-The purpose of these tests are to identify the best parameters, data manipulation, calculated inputs and black box optimizations. This is done through a series of tests that either validates or rejects the hypothesis set up in each experiment. We want to approach the target price but the main focus is to test what works and what does not work regarding the electricity price predictions. \todo{Kig lige paa det her i morgen.}
+The purpose of these tests are to identify the best parameters, data manipulation, calculated inputs and black box optimizations. This is done through a series of tests that either validates or rejects the hypothesis set up in each experiment. We want to approach the target price but the main focus is to test what works and what does not work regarding the electricity price predictions.
 
 \todo{Read it and add comments about the Correct Direction \%}
 \todo{Add MAPE}
@@ -41,11 +41,11 @@ The table~\ref{table:Top20Prices} contains the following information as well:
 \end{enumerate}
 
 \subsubsection{Hypothesis}
-This is the first and most comprehensive of the tests conducted for price prediction. In this experiment we want to test all the different combinations of the parameters. We expect to see a better curve-fit as we include more variables and more complex variables. In regard to the dataset analysis in section~\ref{sec:ElectricityPriceAnalysis} we see the connection between the aforementioned variables and the price (that we are trying to predict). We have the following expectations based on the dataset analysis:
+This is the first and most comprehensive of the tests conducted for price prediction. In this experiment we want to test all the different combinations of the parameters. We expect to see a better curve-fit as we include more variables and more complex variables. In regard to the dataset analysis in section~\ref{sec:ElectricityPriceAnalysis} we see the connection between the aforementioned variables and the price. We have the following expectations based on the dataset analysis:
 \begin{enumerate}
 	\item The Wind Speed will show a positive impact on the price because of the correlation between the two. Also the wind speed impacts the production of green energy which impacts the overall price of energy. Since the wind power production accounts for about 25\%(see data analysis in section ~\ref{sec:Price}) of the complete power production in western Denmark we also expect to see that this parameter will increase accuracy.
-	\item The Temperature might have a small impact on the price but there is nearly no correlation between the price and the temperature. If it should have an impact it is probably because of the correlation between the temperature and the demand thus indirect influencing the price.
-	\item The Hourly Time of Day is going to have an effect on the hourly predicted price. The reason being the correlation between the price and what time of day it is and because we are predicting the hourly price; which logically indicates that this parameter is important for such a prediction. 
+	\item The Temperature might have a small impact on the price but there is nearly no correlation between the price and the temperature. If it should have an impact it is probably because of the correlation between the temperature and the demand thus indirectly influencing the price.
+	\item The Hourly Time of Day is going to have an effect on the hourly predicted price. The reason being the correlation between the price and the time of day and because we are predicting the hourly price; which logically indicates that this parameter is important for such a prediction. 
 	\item The Day of the Week, The Month of the Year and The Seasons of the Year is expected to have a positive impact on the prediction. The impact are expected to get smaller as the inputs become more general e.g season of year; since our training dataset is based on 1/4 of a year. 
 	\item Matrix representation will be better than single node representation of the seasonality. This is due to the fact that matrix is a more granulated input format than single node. This has also been discussed in section~\ref{sec:Matrix}.
 \end{enumerate}
@@ -88,7 +88,7 @@ We present the results from this experiment in table~\ref{table:Top20Prices}. Th
 \end{table}
 
 \subsubsection{Wind speed}
-If we take a look at the top 20 best input combinations (shown in table~\ref{table:Top20Prices}) we see some clear trends. We will start analyzing the data from left to right. The price and demand are static as mentioned earlier since they are fundamental market forces and thus not a changing factor in this analysis. The next input parameter is the Wind Speed. We see that every input combination in the top 20 includes the wind production and it is therefore a must for the prediction of the energy prices. The 72 first inputs(the 50\% best results) contains only two combinations that does not have wind speed in them. Also we saw in section~\ref{sec:windPowerAnalysis}(table~\ref{table:pearsonCoeficientWindProduction}) that the Wind Speed heavily influences the green energy production and thus influencing the energy prices. If we remove wind speed from the \#1 combination it ends up at place \#70 which are 37.55\% worse than the best result. In figure~\ref{fig:Windspeed_no_windspeed} we see that the prediction without wind speed has a tendency to overshoot more than the one with wind speed does(the dark over lays shows where it overshoots). Over a whole year this sums up to a significant difference.
+If we take a look at the top 20 best input combinations (shown in table~\ref{table:Top20Prices}) we see some clear trends. We will start by analyzing the data from left to right. The price and demand are static as mentioned earlier since they are fundamental market forces and thus not a changing factor in this analysis. The next input parameter is the Wind Speed. We see that every input combination in the top 20 includes the wind production and it is therefore a must for the prediction of the energy prices. Actually the 72 first inputs(the 50\% best results) contains only two combinations that does not have wind speed in them. Also we saw in section~\ref{sec:windPowerAnalysis}(table~\ref{table:pearsonCoeficientWindProduction}) that the Wind Speed heavily influences the green energy production and thus influencing the energy prices. If we remove wind speed from the \#1 combination it ends up at place \#70 which are 37.55\% worse than the best result. In figure~\ref{fig:Windspeed_no_windspeed} we see that the prediction without wind speed has a tendency to overshoot more than the one with wind speed does(the dark overlays shows where it overshoots). Over a whole year this sums up to a significant difference.
 
 \begin{figure}[H]
 \centering
@@ -98,7 +98,7 @@ If we take a look at the top 20 best input combinations (shown in table~\ref{tab
 \end{figure}
 
 \subsubsection{Temperature}
-The temperature is a less obvious candidate for the prediction of price since the Pearson's correlation between the two only are 0.17. Nevertheless it is showing up in 8/10 top combinations in table~\ref{table:Top20Prices} and this might be because of the correlation between temperature/demand which is -0.59. The temperature is scattered all over the 144 combinations and thus it is hard to say something concrete about this input variable. The best result without temperature is at place 4 in table~\ref{table:Top20Prices} and the same one with temperature is at place 13 with a difference between the two of 10.66\%. Graph~\ref{fig:temperature_comparison} shows that there is no significant difference between the two combinations. In both of them the ANN is overshooting the targetat different spots.
+The temperature is a less obvious candidate for the prediction of price since the Pearson's correlation between the two only are 0.17. Nevertheless it is showing up in 8/10 top combinations in table~\ref{table:Top20Prices} and this might be because of the correlation between temperature/demand which is -0.59. The temperature is scattered all over the 144 combinations and thus it is hard to say something concrete about this input variable. The best result without temperature is at place 4 in table~\ref{table:Top20Prices} and the same one with temperature is at place 13 with a difference between the two of 10.66\%. Graph~\ref{fig:temperature_comparison} shows that there is no significant difference between the two combinations. In both of them the ANN is overshooting the target at different spots.
 
 \begin{figure}[H]
 \centering
@@ -121,13 +121,14 @@ The Hourly Time of Day (ToD) is included in every single combination in the top 
 Next we have the Day of the Week (DoW) parameter. This parameter are present in 75\% of the 20 best results (8/10 and in 15/20 best combinations). We have to believe that it plays a significant role in the prediction of price. If we look at the analysis of the average price over weekdays in section~\ref{sec:seasonality}(figure~\ref{fig:price_over_weekdays}) we see that there is a significant difference in price on the different days. This is especially present in the weekdays compared to the weekend. This parameter is mixed between matrix input and standard input. This might be due to the fact that the biggest difference between days are weekend and weekday thus minimizing the effect of a matrix representation.
 
 \subsubsection{The Season of Year features}
-The last two parameters - Month of Year(MoY) and Season of Year (SoY) - are codependent and will be covered together. As mentioned before they cover the same information and we therefore only need one of them at any time. The values are present in 9/10 of the best combinations in ~\ref{table:Top20Prices}. This is an indicator that the seasonality in the form of MoY and SoY plays a role in predicting the electricity price. Also we saw in the analysis in section~\ref{sec:seasonality}(figure~\ref{fig:monthlyAveragePrice} and ~\ref{fig:seasons}) that the price changes with seasonality and that it especially was more expensive in the winther than the rest of the year.
+The last two parameters - Month of Year(MoY) and Season of Year (SoY) - are codependent and will be covered together. As mentioned before they cover the same information and we therefore only need one of them at any time. The values are present in 9/10 of the best combinations in ~\ref{table:Top20Prices}. This is an indicator that the seasonality in the form of MoY and SoY plays a role in predicting the electricity price. Also we saw in the analysis in section~\ref{sec:seasonality}(figure~\ref{fig:monthlyAveragePrice} and ~\ref{fig:seasons}) that the price changes with seasonality and that it especially was more expensive in the winter than the rest of the year.
 
 \subsubsection{Matrix}
 The matrix representation in the top 20 is the most common representation of the seasonal inputs (ToD, DoW, MoY and SoY) - with only 3/20 containing no matrix at all. The matrix format was expected to give a better result based on what we discussed in the matrix section~\ref{sec:Matrix}. The 3 combinations that does not contain a matrix representation are already present in the top 20 as pure matrix form. This can be the combination of inputs variables that are good since both the matrix form and the non-matrix form are represented in the top 20 best combinations.
 
 In the Wind Production Experiments section~\ref{sec:windProductionExperiments} we conducted a separate experiment for the matrix analysis. We did a combined experiment in this section because we had 4 different parameters that can be represented as a matrix thus giving us a lot of different combinations. We also wanted to test all of the different combinations of matrix and non-matrix inputs because a mixed combination might render a better solution e.g. the season of year shifts so rarely it might be a better representation (together with the other parameters) on non-matrix form. Also there might be combinations with the rest of the inputs that work better with the matrix-format than others.
 
+\subsubsection{The 10 worst results}
 \subsubsection{Bottom 10 predictions}
 \begin{table}[H]
 \centering  % used for centering table
@@ -154,7 +155,7 @@ In the Wind Production Experiments section~\ref{sec:windProductionExperiments} w
 \label{table:Bottom10Prices} % is used to refer this table in the text
 \end{table}
 
-If we take a look at the bottom 10 input combinations in terms of MAE we see some tendencies as well. We see that Wind Speed only appears in one of the combinations and so does the Time of Day(And not in the same combination). This further strengthens that these two variables are very important for the price prediction. We talked about matrix form earlier and its impact on the combinations. In the bottom 20 table we see that there is a lot of the combinations that contains variables on matrix form. This is because the Wind Speed and the Time of Day are the most influential parameters thus sending the combinations with these absent to the bottom of the chart. As these combinations also include matrix forms they will occur in the bottom top 20 thus not indicating that matrix form has no effect on the dataset.
+If we take a look at the bottom 10 input combinations in terms of MAE we see some tendencies as well. We see that Wind Speed only appears in one of the combinations and so does the Time of Day(And not in the same combination). This further strengthens that these two variables are very important for the price prediction. We talked about matrix form earlier and its impact on the combinations. In the bottom 20 table we see that there is a lot of the combinations that contains variables on matrix form. This is because the Wind Speed and the Time of Day are some of the most influential parameters thus sending the combinations with these absent to the bottom of the chart. As these combinations also include matrix forms they will occur in the bottom top 20 thus not indicating that matrix form has no effect on the dataset. In the bottom 10 we also see a substantial drop in percentage correct direction(\% CD) which tells us that the trend analysis of the curves also suffers from the worse combinations of inputs. Also this might indicate that wind speed and especially the time of day says something about the price movement.
 
 \subsubsection{Month and season analysis}
 \begin{table}[H]
@@ -193,11 +194,8 @@ If we take a look at the bottom 10 input combinations in terms of MAE we see som
 \end{table}
 
 As we saw in the wind production experiments(WPE) section~\ref{sec:windPowerAnalysis} there was a problem regarding the way we conducted tests for the seasonality; specifically for the MoY and the SoY. We only use the last 3 months to train the network and that sort of eliminates the obvious purpose of the MoY and SoY. As we saw in the results for the first experiment in WPE if we include the same month as we are in from last year and reintroduce the purpose of the SoY and MoY it gave us a worse result than leaving it out. To make sure the same thing applies on the price prediction experiments we conducted to runs of all the combinations of inputs. First we ran it with the last 3 months including the same month that we are in from last year and after that we ran the experiment with only the last 3 months.
-\todo{Er det blevet skrevet?}
 
-Table~\ref{table:top20comparedTo4months} shows us the top 20 MAE from the experiment with a training set containing the last 3 months(3 Months). We have compared this to the experiment with a training set containing the last 3 months and the same month from last year(4 Months). As we see in table~\ref{table:top20comparedTo4months} the difference between the two datasets are not that big. This also shows in the appendix~\ref{sec:priceResultAppendix} where the distribution of the MAE over the two datasets are quite similar. From this we can conclude that the effect of using last years month in our dataset does not make a significant difference and can be left out. This raises the question if the MoY and the SoY can be left out as well, since the obvious use for it is eliminated by never having a full month or a full season in the training set - that is equal to the one we predict. Even though it might be questionable what the impact really is it seems to be enhancing the performance of the ANN since these parameters are apparent in most of the best results. This can be due to the fact that it actually works as a slope analysis tool instead of the original seasonality indicator. Now it might work to differentiate the past months/seasons from the month we are predicting thus not directly affecting it but indirectly by allowing the ANN to give the past months some weight which are not applied to the current. Also it gives us some knowledge of the current month if we are in the middle of it which can be translated into slope behavior.
-
-First we conducted an experiment containing a training set with a full year (to test the effect of seasonality on a full year) we included the rest of the parameters equal to rank \#1 in table~\ref{table:Top20Prices} and shifted the seasonality. The results can be seen in table~\ref{table:1YearTrain} where we can see the full effect of seasonality over a year. The table clearly shows that the MoY combination is the best of the three. If we compare the results to the results from table~\ref{table:Top20Prices} it shows us that with monthly seasonality the neural network will be able to do the same predictions as the predictions that only have a training set of 3 months. With the possibility of over training in too large datasets(see paper~\cite{1}) and that the neural network takes longer time training on a larger dataset. We can conclude that the smaller dataset of 3 months are better to use than the full year (We will elaborate on this in experiment four. Further more we have to test if seasonality being an input parameter makes sense when our dataset is only 3 months big.
+Table~\ref{table:top20comparedTo4months} shows us the top 20 MAE from the experiment with a training set containing the last 3 months(3 Months). We have compared this to the experiment with a training set containing the last 3 months and the same month from last year(4 Months). As we see in table~\ref{table:top20comparedTo4months} the difference between the two datasets are not that big. This also shows in the appendix~\ref{sec:priceResultAppendix} where the distribution of the MAE over the two datasets are quite similar. From this we can conclude that the effect of using last years month in our dataset does not make a significant difference and can be left out. This raises the question if the MoY and the SoY can be left out as well, since the obvious use for it is eliminated by never having a full month or a full season in the training set - that is equal to the one we predict. Even though it might be questionable what the impact really is it seems to be enhancing the performance of the ANN since these parameters are apparent in most of the best results. This can be due to the fact that it actually works as a slope analysis tool instead of the original seasonality indicator. Now it might work to differentiate the past months/seasons from the month we are predicting thus not directly affecting it but indirectly by allowing the ANN to give the past months their own weight which are not applied to the current. Also it gives us some knowledge of the current month if we are in the middle of it which can be translated into slope behavior.
 
 \begin{table}[H]
 \centering  % used for centering table
@@ -213,8 +211,10 @@ P & D & WS & T & ToD & DoW & MoY & SoY & MAE & \% ranking\\ [0.5ex] % inserts ta
 \label{table:1YearTrain} % is used to refer this table in the text
 \end{table}
 
+We conducted an experiment containing a training set with a full year (to test the effect of seasonality on a full year) we included the rest of the parameters equal to rank \#1 in table~\ref{table:Top20Prices} and shifted the seasonality. The results can be seen in table~\ref{table:1YearTrain} where we can see the full effect of seasonality over a year. The table clearly shows that the MoY combination is the best of the three. If we compare the results to the results from table~\ref{table:Top20Prices} it shows us that with monthly seasonality the artificial neural network will be able to do the same predictions as the ones that only have a training set of 3 months. With the possibility of over training in too large datasets(see paper~\cite{1}) and that the neural network takes longer time training on a larger dataset. We can conclude that the smaller dataset of 3 months are better to use than the full year (We will elaborate on this in experiment four). Further more we have to test if seasonality being an input parameter makes sense when our dataset is only 3 months big.
+
 \subsubsection{Own set vs Unseen set}
-Here we present the difference between predicting something that is included in the dataset and something that is new to the dataset. We want to make it clear that we always have to use unseen data when benchmarking the artificial neural network because this simulates how and if it was used on live data. If we used it on data that was already included in the dataset we also made the assumption that we would know what the price was the next day; which we of course do not. In table \ref{table:unseenAndSeen} we see that it performs very well on its own training set compare to how it performs on unseen data. This is because when predicting on data that is already included in the dataset the ANN made the changes to fit the weights for this data as well.
+Here we present the difference between predicting something that is included in the dataset and something that is new to the dataset. We want to make it clear that we always have to use unseen data when benchmarking the artificial neural network because this simulates how it behaves when used on live data. If we used it on data that was already included in the dataset we also made the assumption that we would know what the price was the next day; which we of course do not. In table \ref{table:unseenAndSeen} we see that it performs very well on its own training set compared to how it performs on unseen data. This is because when predicting on data that is already included in the dataset the ANN included the changes to fit the weights for this data as well.
 
 \begin{table}[H]
 \centering  % used for centering table
@@ -254,7 +254,7 @@ Here we present the difference between predicting something that is included in 
 In this experiment we saw the following:
 \begin{itemize}
 	\item The wind speed clearly was a factor that influenced how well we were able to predict the price. The wind speed was in the best 70/72 combinations which are the best half of the experiments. We also saw that the wind speed helped the ANN to make less predictions that was higher than the ideal price. The wind speed showed a greater impact on the price prediction than we first thought. With an improvement of 37.55\% it deemed very important for our algorithm to make good predictions.
-	\item The temperature showed no real improvement but neither did it deteriorate the result. This was expected since there was nearly no correlation between the two section~\ref{sec:ElectricityPriceAnalysis}.
+	\item The temperature showed no real improvement but neither did it deteriorate the result. This was expected since there was nearly no correlation between the price and temperature see section~\ref{sec:ElectricityPriceAnalysis}.
 	\item The Hourly Time of Day shows an improvement on the predictions. In the best half of the results we had 55/72 that included ToD. This result directly reflects what we anticipated. We also saw that the ToD allowed the ANN to make a better curve fit and helped the predictions to follow the curves all the way up and down instead of following an average between the top and bottom of the curve.
 	\item The Day of the Week seemed to have a positive effect on the predictions. Here it was not clear whether the matrix form was the best choice or the standard single input was the best. This stems from the fact that the biggest price difference in weekdays are between the regular weekdays and the weekend.
 	\item The Month of the Year and The Seasons of the Year seems to either have no effect or a small effect on the predictions. We discussed how the main purpose of these two input parameters was defeated because of the size of our dataset. They do nevertheless show up in most of the top 20 values. This shows us that they have a positive effect or at worst no effect at all. The only downside to this is the time consumption introduced; if they actually do not have any effect on the predictions.
@@ -351,7 +351,7 @@ In this experiment we had 4 variables that we tested:
 
 The setup of the different strategies have been tested on the best result from experiment one. The scatter strategy is included to let the neural network train and find these connections by itself. The rest of the calculated inputs are preprocessed beforehand and directly says something about the graph behavior.
 
-\subsubsection{EWMA}
+\subsubsection{EWMA - Historical Volatility}
 The EWMA is used to calculate the volatility of the curve. The electricity price is highly volatile and therefore we anticipate that knowledge about the historical volatility will help the predictions. In the EWMA we have a smoothing factor which indicates how sensitive the strategy will be towards fluctuations in the curve. A lower smoothing factor will allow for more rapid changes and vice versa. In table ~\ref{table:SmoothingFactorTest} we see that the best result is a smoothing factor of 0.9 and a stack size of 16. The stack size denotes how many historical prices should be included in the calculations of the historical volatility.
 
 \begin{table}[H]
@@ -361,16 +361,16 @@ The EWMA is used to calculate the volatility of the curve. The electricity price
 	\hline
 	\# & Stack size & Smoothing factor & \% CD & MAPE & MAE & \% ranking \\ [0.5ex] % inserts table 
 	\hline                   % inserts single horizontal line
-	1  & 16 & 0,9 67,1\% & 17,56\% & 45,96 & - \\ \hline
-	2  & 12 & 0,1 66,7\% & 17,63\% & 46,13 & 0,38\% \\ \hline
-	3  & 20 & 0,9 66,9\% & 17,76\% & 46,47 & 1,11\% \\ \hline
-	4  & 8 & 0,9 67,1\% & 17,79\% & 46,55 & 1,28\% \\ \hline
-	5  & 20 & 0,5 66,7\% & 17,79\% & 46,56 & 1,31\% \\ \hline
-	6  & 24 & 0,4 67,3\% & 17,80\% & 46,58 & 1,36\% \\ \hline
-	7  & 20 & 0,7 66,4\% & 17,80\% & 46,59 & 1,37\% \\ \hline
-	8  & 12 & 0,9 67,9\% & 17,81\% & 46,61 & 1,41\% \\ \hline
-	9  & 24 & 0,8 67,8\% & 17,88\% & 46,78 & 1,79\% \\ \hline
-	10 & 24 & 0,5 67,1\% & 17,91\% & 46,88 & 2,0\% \\ \hline
+	1  & 16 & 0,9 & 67,1\% & 17,56\% & 45,96 & - \\ \hline
+	2  & 12 & 0,1 & 66,7\% & 17,63\% & 46,13 & 0,38\% \\ \hline
+	3  & 20 & 0,9 & 66,9\% & 17,76\% & 46,47 & 1,11\% \\ \hline
+	4  & 8 & 0,9 & 67,1\% & 17,79\% & 46,55 & 1,28\% \\ \hline
+	5  & 20 & 0,5 & 66,7\% & 17,79\% & 46,56 & 1,31\% \\ \hline
+	6  & 24 & 0,4 & 67,3\% & 17,80\% & 46,58 & 1,36\% \\ \hline
+	7  & 20 & 0,7 & 66,4\% & 17,80\% & 46,59 & 1,37\% \\ \hline
+	8  & 12 & 0,9 & 67,9\% & 17,81\% & 46,61 & 1,41\% \\ \hline
+	9  & 24 & 0,8 & 67,8\% & 17,88\% & 46,78 & 1,79\% \\ \hline
+	10 & 24 & 0,5 & 67,1\% & 17,91\% & 46,88 & 2,0\% \\ \hline
 	\end{tabular}
 }
 \caption{Smoothing factor test} % title of Table
@@ -428,10 +428,10 @@ The slope calculation is conducted to tell us something about the gradient of th
 \subsubsection{Results}
 We ran 3 experiments reflecting the top 3 results from experiment one. Before the results of the experiments we list the input parameters that we use the strategies on. 
 
-Variables: Price, Consumption, Wind Speed, Temperature, Time of Day (Matrix), Day of Week (Matrix) and Season of Year (Matrix)
+\noindent Variables: Price, Consumption, Wind Speed, Temperature, Time of Day (Matrix), Day of Week (Matrix) and Season of Year (Matrix)
 \begin{table}[H]
 \centering  % used for centering table
-\resizebox{0.7\textwidth}{!}{
+\resizebox{0.8\textwidth}{!}{
 	\begin{tabular}{|c|c|c|c|c|c|c|c|c|} 
 	\hline
 	\# & Curve & Skew & EWMA & Scatter & \% CD & MAPE & MAE & \% ranking\\ [0.5ex] % inserts table 
@@ -515,10 +515,10 @@ The results in table~\ref{table:Statistical2} and ~\ref{table:Statistical3} are 
 %\end{minipage}
 %\end{figure}
 
-Variables: Price, Consumption, Wind Speed, Temperature, Time of Day (Matrix), Day of Week and Season of Year (Matrix)
+\noindent Variables: Price, Consumption, Wind Speed, Temperature, Time of Day (Matrix), Day of Week and Season of Year (Matrix)
 \begin{table}[H]
 \centering  % used for centering table
-\resizebox{0.7\textwidth}{!}{
+\resizebox{0.8\textwidth}{!}{
 	\begin{tabular}{|c|c|c|c|c|c|c|c|c|} 
 	\hline
 	\# & Curve & Skew & EWMA & Scatter & \% CD & MAPE & MAE & \% ranking\\ [0.5ex] % inserts table 
@@ -544,10 +544,10 @@ Variables: Price, Consumption, Wind Speed, Temperature, Time of Day (Matrix), Da
 \label{table:Statistical2} % is used to refer this table in the text
 \end{table}
 
-Variables: Price, Consumption, Wind Speed, Temperature, Time of Day (Matrix) and Month of Year (Matrix)
+\noindent Variables: Price, Consumption, Wind Speed, Temperature, Time of Day (Matrix) and Month of Year (Matrix)
 \begin{table}[H]
 \centering  % used for centering table
-\resizebox{0.7\textwidth}{!}{
+\resizebox{0.8\textwidth}{!}{
 	\begin{tabular}{|c|c|c|c|c|c|c|c|c|} 
 	\hline
 	\# & Curve & Skew & EWMA & Scatter & \% CD & MAPE & MAE & \% ranking\\ [0.5ex] % inserts table 
@@ -601,10 +601,10 @@ The most noteworthy are that the two are very similar and the one with trimming 
 \label{fig:X3_Price_Consump_Worst}
 \end{figure}
 
-Variables: Price, Demand and With no trimming
+\noindent Variables: Price, Demand and With no trimming
 \begin{table}[H]
 \centering  % used for centering table
-\resizebox{0.7\textwidth}{!}{
+\resizebox{0.8\textwidth}{!}{
 	\begin{tabular}{|c|c|c|c|c|c|c|c|c|} 
 	\hline
 	\# & Curve & Skew & EWMA & Scatter & \% CD & MAPE & MAE & \% ranking\\ [0.5ex] % inserts table 
@@ -630,10 +630,10 @@ Variables: Price, Demand and With no trimming
 \label{table:price_consumption_x3} % is used to refer this table in the text
 \end{table}
 
-Variables: Price, Demand and With 1\% trimming
+\noindent Variables: Price, Demand and With 1\% trimming
 \begin{table}[H]
 \centering  % used for centering table
-\resizebox{0.7\textwidth}{!}{
+\resizebox{0.8\textwidth}{!}{
 	\begin{tabular}{|c|c|c|c|c|c|c|c|c|} 
 	\hline
 	\# & Curve & Skew & EWMA & Scatter & \% CD & MAPE & MAE & \% ranking\\ [0.5ex] % inserts table 
@@ -664,10 +664,10 @@ The last iterations we did was a clone of the experiments conducted in~\cite{sin
 
 We have found it exceedingly difficult to compare our results to many of the papers in the field\cite{singhal2011electricity,yamin2004adaptive}. This is due to lack of information on their setup and a difference in how much data they base their results on. Therefore we have to reproduce their results. This will be further established in our discussion.
 
-Variables: Price, Demand, Change in demand, Time of Day, Day of Week and with no trimming
+\noindent Variables: Price, Demand, Change in demand, Time of Day, Day of Week and with no trimming
 \begin{table}[H]
 \centering  % used for centering table
-\resizebox{0.7\textwidth}{!}{
+\resizebox{0.8\textwidth}{!}{
 	\begin{tabular}{|c|c|c|c|c|c|c|c|c|} 
 	\hline
 	\# & Curve & Skew & EWMA & Scatter & \% CD & MAPE & MAE & \% ranking\\ [0.5ex] % inserts table 
@@ -686,10 +686,11 @@ Variables: Price, Demand, Change in demand, Time of Day, Day of Week and with no
 \label{table:scatter_text_no_trim} % is used to refer this table in the text
 \end{table}
 
-Variables: Price, Demand, Change in demand, Time of Day, Day of Week and with 1\% trimming
+
+\noindent Variables: Price, Demand, Change in demand, Time of Day, Day of Week and with 1\% trimming
 \begin{table}[H]
 \centering  % used for centering table
-\resizebox{0.7\textwidth}{!}{
+\resizebox{0.8\textwidth}{!}{
 	\begin{tabular}{|c|c|c|c|c|c|c|c|c|} 
 	\hline
 	\# & Curve & Skew & EWMA & Scatter & \% CD & MAPE & MAE & \% ranking\\ [0.5ex] % inserts table 
