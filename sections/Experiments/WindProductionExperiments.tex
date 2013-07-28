@@ -1,10 +1,10 @@
-This section describes the experiments that uncover the best combination of inputs and epochs as well as the different strategies. Based on the analysis of wind production from Section~\ref{sec:windPowerAnalysis} the network will try to uncover the best approach to predicting the wind power production. Furthermore, experiments are needed to investigate the influence of data manipulation and statistical inputs as presented in Section~\ref{sec:usingStatisticalInput}. All test results can be seen in Appendix~\ref{sec:windResultsAppendix} and have been carried out with normalization - relevant results will be shown here. The purpose is to approach the wind power target by attempting different strategies throughout every experiment. Each experiment will either validate or reject its hypotheses and identify what influence wind power production in the Danish electricity market. Preferably we see an improvement throughout the experiments.
+This section describes the experiments that uncover the best combination of inputs and epochs as well as the different strategies. Based on the analysis of wind production from Section~\ref{sec:windPowerAnalysis} the network will try to uncover the best approach to predicting the wind power production. Furthermore, experiments are needed to investigate the influence of data manipulation and statistical inputs as presented in Section~\ref{sec:usingStatisticalInput}. Selected test results and graphs can be seen in Appendix~\ref{sec:windResultsAppendix} - relevant results will be shown here. The purpose is to approach the wind power target by attempting different strategies throughout every experiment. Each experiment will either validate or reject its hypotheses and identify what influence wind power production in the Danish electricity market (DK-1). Preferably we see an improvement throughout the experiments.
 
 \todo{DRAWING OF NETWORK}
 
 \subsection{Experiment One - Selection of input parameters}
 \label{sec:windPowerExperimentOne}
-The first experiment is an attempt to find the best constitution of network input parameters based on the analysis in Section~\ref{sec:windPowerAnalysis}. Since the co-relation between wind production and wind speed is significant it will be included as a core input parameter in all test combinations.
+The first experiment is an attempt to find the best constitution of network input parameters based on the analysis in Section~\ref{sec:windPowerAnalysis}. Since the co-relation between wind power and wind speed is significant it will be included as a core input parameter in all test combinations.
 
 \subsubsection{Hypothesis}
 The analysis in Section~\ref{sec:windPowerAnalysis} uncovered the co-relation between the different parameters and the wind power production. The following is expected based on the analysis:
@@ -12,7 +12,7 @@ The analysis in Section~\ref{sec:windPowerAnalysis} uncovered the co-relation be
 \begin{enumerate}
 \item Wind speed is expected to be the most influential factor with consumption just behind it. Temperature is expected have the potential to substitute consumption but without achieving as good accuracy. 
 \item Air density, time of day, month of year and last known production is expected to be of some influence.
-\item Wind direction is expected to be of very little influence.
+\item Wind direction is expected to be of little influence.
 \end{enumerate}
 
 \subsubsection{Variables}
@@ -27,17 +27,19 @@ The variables used in this experiment series:
 \item Wind direction (WD)
 \item Last known production (L-P)
 \item Month (Mo)
+\item How many percentage of the predictions in the correct direction (\% CD)
+\item Neurons in hidden layer 1 (H1)
+\item Neurons in hidden layer 2 (H2)
+\item Percentage rank from the best prediction (\% Rank)
 \end{itemize}
 
-\subsubsection{Prediction - basic input parameters}
+\subsubsection{Basic Input Parameters}
 \label{sec:predictionBasicInputParams}
-All results from the first experiment can be seen in Appendix~\ref{sec:simpleInputTest}. The results vary from the best MAE at 127,86 to the worst being 199,22. Top and bottom 10 is shown sorted in Table~\ref{table:windProdInputParamsTop10}. The appendix shows that when wind speed is used as the only input parameter it achieves 149,72 in MAE. This illustrates the expected relationship between wind speed and wind production. The experiment further indicates that time of day, air density and last production are significant. This correspond well with the analysis in Section~\ref{sec:windPowerAnalysis} where the relationship between wind production and these parameters are established. Last hours wind power production is represented in all of top 10 which was also expected from the analysis concerning wind production development in Section~\ref{sec:windProductionDev}. The production does not differ much from one hour to the next which is reflected in the last known production input parameter --- more sophisticated attempts with statistic will be in experiments to come. The development is also represented in the bottom which will be addressed when discussing month as input. What comes as a surprise is the under-representation of consumption in top 10 because the analysis showed a good co-relation. A possible explanation can be the substitution with temperature which highly influences consumption as discussed in the analysis section. Temperature is the significant factor in calculating air density since pressure is close to constant as described in Section~\ref{sec:airDensity} which can explain why rank top-3 is without consumption and why air density can substitute consumption. Pressure being constant in the calculation can explain why the best prediction is without air density and only contains temperature.
+Experiments have been conducted for all possible input combinations. The idea is to discover any unforeseen connection found by the Artificial Neural Network. The results can be found in Appendix~\ref{sec:simpleInputTest} but relevant results will be emphasized here. The results vary in MAE from 127,86 to 199,22. Table~\ref{table:windProdInputParamsTop10} highlight the top and bottom 10 for further analysis. One thing that is not observable from the table is the use of wind speed as the only input for prediction which achieves 149,72 in MAE over the entire year which illustrate the expected relationship between wind speed and wind power. 
 
-The \% CD in Table~\ref{table:windProdInputParamsTop10} is an indication of how many predicted hours was in correct direction compared to the actual direction. The percentage is stable throughout the table with values around 60-70\%. The correct direction percentage is around the same for the bottom 10. It indicates what have been discussed before, namely wind power production follows the trends of the wind speed and it is included in all of the predictions. This will be discussed further when looking at the actual prediction graph.
+The contents of the table further indicates that time of day, air density and last wind power are significant. It correspond well to the analysis in Section~\ref{sec:windPowerAnalysis} where the relationship between wind power and these parameters are established to be of some significance. Last hours wind power is as expected represented in all of top 10 according to the analysis of wind power development in Section~\ref{sec:windProductionDev}. All of the bottom 10 also contains last known wind power but the reason must be found in the inclusion of month. The worst prediction just without month is placed as number three --- the explanation can reside in the size of the training set but this will be discussed later. The inclusion of previous hours will be attempted more sophistically in the experiment about calculated inputs. 
 
-Wind Direction is represented four times in top 10. What is noticeable is the same combinations without wind direction is also represented. This can suggest the indifference of wind direction, e.g. \#2-\#3 and \#6-\#7 is very similar to each other. This is further backed up by the analysis which only showed a low co-relation.
-
-The contributory cause to the bad accuracy in the bottom is month and how it in general does not help the prediction when using it together with a dataset containing only 3 months. Month represents the seasonal perspective of the input parameters and is suppose to find the relationship between months and the production in general. Since the historical data used for prediction is only 3 months, it does not capture how the same month last year influenced the production. In the case of wind power prediction it seems to be creating more noise and thereby affect the prediction badly. A possible solution to obtain the seasonality aspect is presented in\cite{pjmForecast} where the Neural Network is trained with 45 days from before the day to be predicted, and 45 days before and after in the previous year. By using this approach the month parameter will reflect the influence of the months around you from the last year. This will be validated in an prediction for itself in Section~\ref{sec:predictionWindProdSeasonalExperiment}.
+Consumption is only represented five times in top 10 which comes as a surprise due to the correlation established in the analysis of wind power. The consumption showed a close relationship with temperature and the explanation can be a substitution of the two. Air density represents temperature since it is the significant factor in its calculation because due to the pressure being close to constant in the dataset as described in Section~\ref{sec:airDensity}. This is the most plausible explanation of the top-3 being without consumption.
 
 \footnotesize
 \begin{center}
@@ -54,7 +56,6 @@ The contributory cause to the bad accuracy in the bottom is month and how it in 
 \endhead
 \hline \multicolumn{13}{r}{\textit{Continued on next page}} \\
 \endfoot
-\hline
 \endlastfoot
 \arrayrulecolor{light-gray}
  \x &  &  &  \x &  &  \x &  &  \x & 128,32 & 0,0\% & 24 & 1 & 73\% \\ \hline
@@ -67,9 +68,9 @@ The contributory cause to the bad accuracy in the bottom is month and how it in 
  \x &  \x &  \x &  &  &  \x &  &  & 136,33 & 6,24\% & 15 & 1 & 73\% \\ \hline
  \x &  \x &  &  &  &  \x &  \x &  \x & 136,65 & 6,49\% & 11 & 1 & 73\% \\ \hline
  \x &  &  &  &  &  \x &  &  & 137,33 & 7,02\% & 1 & 0 & 74\% \\ \hline
- . & . & . & . &  .  & . &  . & . & . & . \\ 
- . & . & . & . &  .  & . &  . & . & . & . \\ 
- . & . & . & . &  .  & . &  . & . & . & .\\ \hline
+ . & . & . & . &  .  & . &  . & . & . & . & . & . & . \\ \hline
+ . & . & . & . &  .  & . &  . & . & . & . & . & . & .\\ \hline
+ . & . & . & . &  .  & . &  . & . & . & .& . & . & .\\ \hline
  \x &  \x &  &  \x &  &  \x &  \x &  & 170,93 & 33,21\% & 21 & 1 & 71\% \\ \hline
  \x &  &  \x &  \x &  \x &  \x &  \x &  \x & 171,61 & 33,74\% & 23 & 1 & 71\% \\ \hline
  \x &  &  \x &  \x &  &  \x &  \x &  & 172,72 & 34,6\% & 21 & 1 & 71\% \\ \hline
@@ -86,24 +87,30 @@ The contributory cause to the bad accuracy in the bottom is month and how it in 
 \end{center}
 \normalsize
 
-Table~\ref{table:predictionMAEUnseenVsTrainingSet} emphasize the importance of predicting on data that has never seen before. The network must give accurate outputs for the unseen data \cite{1}. The MAE is the same in the bottom 10 as in top 10. The network must be able to predict on cases that are not seen before.
+\noindent The \% CD in Table~\ref{table:windProdInputParamsTop10} is an indication of how many predicted hours was in correct direction compared to the actual direction. The percentage is stable throughout the table with values around 60-70\%. The correct direction percentage is around the same for the bottom 10. It indicates what have been discussed before, namely wind power production follows the trends of the wind speed and it is included in all of the predictions. This will be discussed further when looking at the actual prediction graph.
+
+Wind Direction is represented four times in top 10. What is noticeable is the same combinations without wind direction is also represented. This can suggest the indifference of wind direction, e.g. \#2-\#3 and \#6-\#7 is very similar to each other. This is further backed up by the analysis which only showed a low co-relation.
+
+The contributory cause to the bad accuracy in the bottom is month and how it in general does not help the prediction when using it together with a dataset containing only 3 months. Month represents the seasonal perspective of the input parameters and is suppose to find the relationship between months and the production in general. Since the historical data used for prediction is only 3 months, it does not capture how the same month last year influenced the production. In the case of wind power prediction it seems to be creating more noise and thereby affect the prediction badly. A possible solution to obtain the seasonality aspect is presented in\cite{pjmForecast} where the Neural Network is trained with 45 days from before the day to be predicted, and 45 days before and after in the previous year. By using this approach the month parameter will reflect the influence of the months around you from the last year. This will be validated in an prediction for itself in Section~\ref{sec:predictionWindProdSeasonalExperiment}.
+
+\subsubsection{Importance of testing set}
+We describe in our testing procedure that we use a separate training set and a testing set. Table~\ref{table:predictionMAEUnseenVsTrainingSet} emphasize the importance of using a testing set containing only unseen data. The purpose is to generalize beyond the data in the training set and give accurate outputs for unseen data \cite{1} --- the prediction must simulate real use where the training set naturally can't contain known data. It is also noticeable that the MAE is similar from top to bottom. We will only consider the MAE coming from predicting the testing set.
 
 \footnotesize
 \begin{center}
 \begin{longtable}{|c|c|c|c|}
 \hline
-\textbf{MAPE (unseen data)} & \textbf{MAE (unseen data)} & \textbf{MAE (training set)} & \textbf{MAPE (training set)}  \\
+\textbf{MAPE (test set)} & \textbf{MAE (test set)} & \textbf{MAE (training set)} & \textbf{MAPE (training set)}  \\
 \hline
 \endfirsthead
 \multicolumn{4}{c}%
 {\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
 \hline
-\textbf{MAPE (unseen data)} & \textbf{MAE (unseen data)} & \textbf{MAE (training set)} & \textbf{MAPE (training set)}  \\
+\textbf{MAPE (test set)} & \textbf{MAE (test set)} & \textbf{MAE (training set)} & \textbf{MAPE (training set)}  \\
 \hline
 \endhead
 \hline \multicolumn{4}{r}{\textit{Continued on next page}} \\
 \endfoot
-\hline
 \endlastfoot
 \arrayrulecolor{light-gray}
 19,34\% & 128,32 & 60,02 & 9,05\%  \\ \hline
@@ -116,9 +123,9 @@ Table~\ref{table:predictionMAEUnseenVsTrainingSet} emphasize the importance of p
 20,45\% & 136,33 & 51,69 & 7,76\%  \\ \hline
 20,5\% & 136,65 & 53,99 & 8,1\%  \\ \hline
 19,76\% & 137,33 & 58,55 & 8,42\%  \\ \hline
- . & . \\ 
- . & . \\ 
- . & . \\ \hline
+ . & . &  . & . \\ \hline 
+ . & . &  . & . \\ \hline 
+ . & . &  . & . \\ \hline
 25,65\% & 170,93 & 51,67 & 7,75\%  \\ \hline
 25,75\% & 171,61 & 50,58 & 7,59\%  \\ \hline
 25,91\% & 172,72 & 54,5 & 8,18\%  \\ \hline
@@ -135,14 +142,16 @@ Table~\ref{table:predictionMAEUnseenVsTrainingSet} emphasize the importance of p
 \end{center}
 \normalsize
 
-\subsubsection{Prediction - Seasonal aspect}
+\subsubsection{Seasonal aspect}
 \label{sec:predictionWindProdSeasonalExperiment}
-This prediction based on the above discussion uncover and discuss the seasonal aspect when used as input parameter and how it relates to the size of the dataset. The experiment results can be seen in Appendix~\ref{sec:simpleInputTestSeason} and top-10 in Table~\ref{table:seasonalWindProdInputParamsTop10}. The results show a decrease in MAE compared to 3 month dataset which can be explained by the increased data size of the training set that makes it harder for the ANN to generalize. According to\cite{1} too large training sets should be avoided because it has a tendency to be overtrained --- this can be backed up by the close results in top-10 that only differs to a maximum of 1,12\%. The network generalizes on much more data and if some values only influence the wind production in smaller periods of the year it will be suffocated between the ones that are important over the entire year. Wind speed is significant over the entire year and by itself achieved a MAE of 149,72 as described in Section~\ref{sec:predictionBasicInputParams}. The network can over-train itself by dedicating to much responsibility to wind speed because it in general is the most important input. 
-Furthermore, the possible benefits from including the seasonal aspect when predicting wind production can not make up for the loss in accuracy by the increase in the size of training data. It is further seen that month is only represented once in top 10. To validate the decrease in accuracy the date has been predicted with a training set of an entire year and the result can be seen in Table~\ref{table:seasonWindProdInputParamsTop2WholeYear}. The MAE is around the same but instead it takes longer time to process when training on an entire year which makes the small dataset an even better choice --- processing time will be discussed in more details in experiments to come. The usage of only 3 months in the dataset can also be argued to contain the seasonal aspect for the hours to predict without having month as a input. The three months in the set will reflect the current season that you are in and therefore adding the month as input will only create more noise. When the month parameter is used as input on only three months it will only reflect how the impact of the past months but not the one that you are going into --- it won't be able to say anything about the beginning of a month because it has never seen such a month before. Furthermore, it is hard to generalize upon a few days (impossible the first day) in a month and therefore the input parameter will be highly influenced by the month before which can become problematic when seasons are shifting.
+The discussion above reveals the need for uncovering and discussing how to represent the seasonal aspect (if needed at all) in Artificial Neural Network --- it can be included as a explicit input parameter or implicitly in the dataset by using the right training set size. The training set will be explored with two different sizes in an attempt to express the seasonal aspect:
 
-It needs to be made clear that it is one input parameter of the entire network. The above discussion illustrates that the small dataset itself contains the seasonality aspect since the network trains and generalizes only upon the current season --- the month parameter will add only noise to this generalization in shifting seasons and therefore the parameter will be omitted in the prediction of wind production. It can be further backed up by Table~\ref{table:windProdInputParamsTop10} where only one with month as input is represented but all of bottom 10 is with. 
+\begin{enumerate}
+\item Basing it on \cite{pjmForecast} where the training set is constructed with 45 days from before the day to be predicted, 45 days before and after in the previous year.
+\item Using a year before the day to predict.
+\end{enumerate}
 
-In experiments concerning prediction of wind production the month input parameter will be left out.  
+The experimental results for (1) are all shown in Appendix~\ref{sec:simpleInputTestSeason} but we will only be focusing on top-10 here because they illustrate the problem. The results are decreased in all of the predictions in Table~\ref{table:seasonalWindProdInputParamsTop10} in comparison with the the results training on 3 months of data. The training set is increased and this might make it harder for the ANN to generalize because too large training sets should according to \cite{1} be avoided due to a tendency to over-train. It can be supported by the similar results only differentiated by 1,12\% from \#1-\#10 --- the network generalizes on much more data and if some values only influence the wind production in smaller periods of the year it will be suffocated between the ones that are important (as with wind speed) over the entire year. The network can over-train itself too much by dedicating to much responsibility to wind speed because it in general is the most important input or it can simply contain too much noise. The possible benefits from including the seasonal aspect when predicting wind power is not enough to make for the loss in accuracy by the increase of training set size, e.g. month is only included once in top-10. Before any final conclusions about the size of training set can be made we will have to conduct the experiment on an entire year.
 
 \footnotesize
 \begin{center}
@@ -159,7 +168,6 @@ In experiments concerning prediction of wind production the month input paramete
 \endhead
 \hline \multicolumn{13}{r}{\textit{Continued on next page}} \\
 \endfoot
-\hline
 \endlastfoot
 \arrayrulecolor{light-gray}
  \x &  \x &  \x &  &  \x &  \x &  &  \x & 142,88 & 0,0\% & 7 & 17 & 73\% \\ \hline
@@ -178,22 +186,23 @@ In experiments concerning prediction of wind production the month input paramete
 \end{center}
 \normalsize
 
+Table~\ref{table:predictionMAEUnseenVsTrainingSetSeasonality} is included to show MAPE and highlight what discussed regarding the use a testing set with unseen data.
+
 \footnotesize
 \begin{center}
 \begin{longtable}{|c|c|c|c|}
 \hline
-\textbf{MAPE (unseen data)} & \textbf{MAE (unseen data)} & \textbf{MAE (training set)} & \textbf{MAPE (training set)}  \\
+\textbf{MAPE (test set)} & \textbf{MAE (test set)} & \textbf{MAE (training set)} & \textbf{MAPE (training set)}  \\
 \hline
 \endfirsthead
 \multicolumn{4}{c}%
 {\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
 \hline
-\textbf{MAPE (unseen data)} & \textbf{MAE (unseen data)} & \textbf{MAE (training set)} & \textbf{MAPE (training set)}  \\
+\textbf{MAPE (test set)} & \textbf{MAE (test set)} & \textbf{MAE (training set)} & \textbf{MAPE (training set)}  \\
 \hline
 \endhead
 \hline \multicolumn{4}{r}{\textit{Continued on next page}} \\
 \endfoot
-\hline
 \endlastfoot
 \arrayrulecolor{light-gray}
 21,44\% & 142,88 & 51.17 & 7.68\% \\ \hline
@@ -211,6 +220,8 @@ In experiments concerning prediction of wind production the month input paramete
 \end{longtable}
 \end{center}
 \normalsize
+ 
+The second experiment where the prediction is based on an entire years training set can be seen in Table~\ref{table:seasonWindProdInputParamsTop2WholeYear}. The MAE is much similar to the first seasonal approach (1) but instead it takes longer time to process because it must train on a larget dataset --- the time aspect will be elaborated in another experiment. Leaving out the seasonal aspect is the obvious choice from the results shown here. Using a training set of 3 months can be argued to contain the seasonal aspect because the set will reflect how the input parameters in general influence the wind power in the current season. Including month or increasing the size of the training set will only add noise and make it harder for the ANN to generalize. The purpose of including month was to avoid problems when encountering a seasonal change due the different conditions from season to season (analysis confirms this). If the same conditions were seen last year then this could be incorporated in the generalization. The results show that the benefits from this approach cannot make up for the small dataset implicitly containing the seasonal aspect. The month parameter will be omitted in experiments to come.   			
 
 \footnotesize
 \begin{center}
@@ -227,7 +238,6 @@ In experiments concerning prediction of wind production the month input paramete
 \endhead
 \hline \multicolumn{13}{r}{\textit{Continued on next page}} \\
 \endfoot
-\hline
 \endlastfoot
 \arrayrulecolor{light-gray}
  \x &  \x &  \x &  \x &  &  \x &  \x &  & 147,98 & 22,12\% & 6 & 22 & 73\% \\ \hline
@@ -239,9 +249,7 @@ In experiments concerning prediction of wind production the month input paramete
 
 \subsubsection{Best prediction graph}
 \label{sec:bestInputCombiGraph}
-The first 175 hours of the best prediction from Table~\ref{table:windProdInputParamsTop10} can be seen in Figure~\ref{fig:bestInputParameterPrediction}. The hours have been pointed out because they illustrate situations and issues that are relevant for the analysis and general for the prediction - more graphs can be seen in Appendix~\ref{sec:bestCombiPredictionsGraphs}. It can be observed that the prediction follows the trend of the actual wind production which is also emphasized by the correct direction percentage of 73\%. The graph show how the challenge is the time it takes to identify shifting trends and how much the trend is increasing or decreasing at that particular time. From hour 24-48 and 120-160 (see zoomed Figure~\ref{fig:bestInputCombi120-148}) the prediction is behind the actual slope and continues to under-shoot because it did not identify it from the beginning. Hours between 90-110 (see zoomed in Figure~\ref{fig:bestInputCombi96-120}) illustrates how the prediction does not detect to which extend the wind production is decreasing at that time and how it results in a significant overshoot when detecting the coming rising trend. The problems arise due to 24-hour-ahead prediction marked by the vertical lines in Figure~\ref{fig:bestInputParameterPrediction} since every hour is based on the previous predicted hours. If one hour misses its target there is a possibility for the next to do as well because it uses that prediction as input. The graphs show that the prediction can correct itself so that the error is not escalated to the last hour. This is due to the input parameters which highly affect the wind production so that it is adjusted according to when the curve starts a new trend. The calculated approach described in Section~\ref{sec:usingStatisticalInput} can possible help in these cases by calculating trend or slope and use it as input to add further characteristics of the curve. Experiments will take up this approach for comparison. The graph in Figure~\ref{fig:bestInputParameterLowNumbers} shows the ability to predict low numbers and follow the trend back up again when the wind power is not as volatile within the sliding window to predict as opposed to the low productions marked in the graph from Figure~\ref{fig:bestInputCombi4500-4700}. The graph in Figure~\ref{fig:bestInputParameterPrediction} visualizes the error of the individual predictions. The error follows the prediction curve which is expected due to the fact that the error measure is MAE and measures the difference between the predicted and ideal value --- the higher the value the higher probability of shooting past it. MPE would have to opposite effect since it calculates the difference in percentage which would result in lower values having higher errors, e.g. if the ideal is 10 and the predicted value is 20, which is close in an interval from 0-2800, the MPE would be 100\%. The measure is described in Section~\ref{sec:maeStatistics}.
-
-The correct direction percentage for the best prediction is 73\%. When looking at the graph in Figure~\ref{fig:bestInputCombi4500} some of the obvious wrong directions can be observed in the two pink boxes. When the volatility of the productions are low or less significant then these trends are difficult to identify especially when numbers are smaller as seen Figure~\ref{fig:bestInputParameterLowNumbers} from hours 5000-5060.
+The first 175 hours of the best prediction from Table~\ref{table:windProdInputParamsTop10} can be seen in Figure~\ref{fig:bestInputParameterPrediction}. The hours have been pointed out because they illustrate situations and issues that are relevant for the analysis and general for the prediction - more graphs can be seen in Appendix~\ref{sec:bestCombiPredictionsGraphs}. It can be observed that the prediction follows the trend of the actual wind production which is also emphasized by the correct direction percentage of 73\%. The graph show how the challenge is the time it takes to identify shifting trends and how much the trend is increasing or decreasing at that particular time. The blue and purple overlay show situations where it is behind the actual trend whereas the yellow overlay illustrates how it is able to identify the rising trend immediate after prediction time (illustrated by the vertical lines) but too early and ends up overshooting. One last comment is in relation to the error visualization in the bottom of the graph and how it follows the curve of the actual wind power productions. MAE is our measure which calculates the difference between the predicted and ideal value and the bigger values will result in bigger MAEs (see section~\ref{sec:maeStatistics} for argumentation for the choice). It points out that we are able to approach small as well as big targets which is also seen from the prediction graph itself.  
 
 \begin{figure}[H]
 \centering
@@ -250,6 +258,8 @@ The correct direction percentage for the best prediction is 73\%. When looking a
 \label{fig:bestInputParameterPrediction}
 \end{figure} 
 
+The three overlay situations are emphasized because they show a general problem. Taking a closer look at the purple overlay (hours 120-148) in Figure~\ref{fig:bestInputCombi120-148} illustrates how the prediction is accurate in the beginning but has trouble identifying the significance of the rising trend and continues to under-shoot throughout the entire 24-hours forecast. Every step is based on the prediction from the previous step which is likely to result in a elevated error until a shift in trend.
+
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.99\linewidth]{billeder/bestInputCombi120-148.png}
@@ -257,12 +267,25 @@ The correct direction percentage for the best prediction is 73\%. When looking a
 \label{fig:bestInputCombi120-148}
 \end{figure} 
 
+The opposite situation with overshooting for the yellow overlay (96-120) is shown in Figure~\ref{fig:bestInputCombi96-120}. It is observable how the prediction again follows accurately in the first couple of hours but then identified the shift too early and overshoots. When the trend shifts again it is able to find its way back, e.g. the error is not elevated from start to end but only per trend. What is meant "per trend" is if the curve is shifting direction and the prediction does not identify it at once it will elevate the error until the trend shifts again. 
+
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.99\linewidth]{billeder/bestInputCombi96-120.png}
 \caption{Wind production prediction for 24 hours between 96 and 120}
 \label{fig:bestInputCombi96-120}
-\end{figure}   
+\end{figure} 
+
+What is noticeable from the examples is the problems that arise due to the 24-ahead prediction indicated by the vertical lines. Every hour is based on the previous prediction (except from the first of course) which makes it prone to error if one step fails whilst following a certain direction. It is also obvious that the error is not elevated all the way to the end but only until a new shift in trend is identified --- it can correct itself. The calculated approach described in Section~\ref{sec:usingStatisticalInput} can possible help in these cases by calculating trend or slope and use it as input to add further characteristics of the curve. Experiments will take up this approach for comparison.
+
+The graph in Figure~\ref{fig:bestInputParameterLowNumbers} has been highlighted to show how the best prediction in general performs on low numbers and how it is able to follow the trend all the way from the bottom and up when the wind power is not as volatile (as with the other examples) within the sliding window. High volatility is seen in Figure~\ref{fig:bestInputCombi4500-4700} and again highlights (this time pink) the difficulties in predicting something that is volatile within a short period of time.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.99\linewidth]{billeder/bestInputParameterLowNumbers.png}
+\caption{Wind production prediction for 5000-5175 hours in 2012 with the best combination}
+\label{fig:bestInputParameterLowNumbers}
+\end{figure} 
 
 \begin{figure}[H]
 \centering
@@ -271,12 +294,7 @@ The correct direction percentage for the best prediction is 73\%. When looking a
 \label{fig:bestInputCombi4500-4700}
 \end{figure} 
 
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.99\linewidth]{billeder/bestInputParameterLowNumbers.png}
-\caption{Wind production prediction for 5000-5175 hours in 2012 with the best combination}
-\label{fig:bestInputParameterLowNumbers}
-\end{figure}   
+The correct direction percentage for the best prediction is 73\%. When looking at the graph in Figure~\ref{fig:bestInputCombi4500} some of the obvious wrong directions can be observed in the two pink boxes. When the volatility of the productions are low or less significant then these trends are difficult to identify especially when numbers are smaller as seen Figure~\ref{fig:bestInputParameterLowNumbers} from hours 5000-5060.
 
 \subsubsection{Conclusion}
 All results of the first experiment can be seen in Appendix~\ref{sec:windResultsAppendix}. The best result can be seen in Table~\ref{table:windProdInputParamsTop10}. The following conclusions can be made: 
@@ -341,7 +359,6 @@ Wind speeds are represented by 41 different values in our data set which can exp
 \endhead
 \hline \multicolumn{12}{r}{\textit{Continued on next page}} \\
 \endfoot
-\hline
 \endlastfoot
 \arrayrulecolor{light-gray}
  \x &  &  &  \x &  &  \x &  \x (m) & 126,25 & 0,0\% & 18 & 17 & 71\% \\ \hline
@@ -372,7 +389,6 @@ Wind speeds are represented by 41 different values in our data set which can exp
 \endhead
 \hline \multicolumn{2}{r}{\textit{Continued on next page}} \\
 \endfoot
-\hline
 \endlastfoot
 \arrayrulecolor{light-gray}
 18,94\% & 126,25 \\ \hline
@@ -384,8 +400,8 @@ Wind speeds are represented by 41 different values in our data set which can exp
 22,38\% & 149,18\\ \hline
 22,38\% & 149,19 \\ \hline
 23,32\% & 155,46 \\ \hline
-\caption{Average prediction MAE/MAPE on unseen data vs. prediction MAE/MAPE on training set with matrix}
-\label{table:predictionMAEUnseenVsTrainingSetSeasonality}
+\caption{Graph showing MAE and MAPE for the matrix results}
+\label{table:maeAndMAPEForMatrix}
 \end{longtable}
 \end{center}
 
@@ -406,7 +422,6 @@ The need for trimming exists if irregularities exist or you want to narrow the n
 \endhead
 \hline \multicolumn{7}{r}{\textit{Continued on next page}} \\
 \endfoot
-\hline
 \endlastfoot
 \arrayrulecolor{light-gray}
 5\% & 19,21\% & 128,91 & 0,0\% & 40 & 2018 & 69\% \\ \hline  
@@ -504,7 +519,6 @@ Historical Volatility is presented in Section~\ref{sec:usingStatisticalInput}. T
 \endhead
 \hline \multicolumn{6}{r}{\textit{Continued on next page}} \\
 \endfoot
-\hline
 \endlastfoot
 \arrayrulecolor{light-gray}
 6 & 0,70 & 18,28\% & 121,81 & 0,0\% & 73\% \\ \hline
@@ -562,7 +576,6 @@ Skewness is a calculation of how much a distribution leans to one side of the me
 \endhead
 \hline \multicolumn{4}{r}{\textit{Continued on next page}} \\
 \endfoot
-\hline
 \endlastfoot
 \arrayrulecolor{light-gray}
 16 & 18,88\% & 125,85 & 69\% \\ \hline
@@ -605,7 +618,6 @@ The experiment covers basic slope calculation of the curve. The intention is to 
 \endhead
 \hline \multicolumn{4}{r}{\textit{Continued on next page}} \\
 \endfoot
-\hline
 \endlastfoot
 \arrayrulecolor{light-gray}
 20 & 20,0\% & 133,27 & 68\% \\ \hline
@@ -653,7 +665,6 @@ Experiments with combinations of the approaches have been performed to investiga
 \endhead
 \hline \multicolumn{4}{r}{\textit{Continued on next page}} \\
 \endfoot
-\hline
 \endlastfoot
 \arrayrulecolor{light-gray}
 Volatility, 0,70 as smoothing on 6 hours & 18,28\% & 121,81 & 73\% \\ \hline
@@ -688,7 +699,6 @@ Skewness and curve in combination with each other achieves the best result but d
 \endhead
 \hline \multicolumn{8}{r}{\textit{Continued on next page}} \\
 \endfoot
-\hline
 \endlastfoot
 \arrayrulecolor{light-gray}
  &  \x &  &  \x & 19,76\% & 131,69 & 0,0\% & 69\% \\ \hline
@@ -723,7 +733,6 @@ Table~\ref{table:topFromMatrixWithStatistics} shows volatility applied on the to
 \endhead
 \hline \multicolumn{12}{r}{\textit{Continued on next page}} \\
 \endfoot
-\hline
 \endlastfoot
 \arrayrulecolor{light-gray}
  \x &  &  &  \x &  &  \x &  \x (m) & 121,81 & 0,0\% & 16 & 13 & 73\& \\ \hline
@@ -808,7 +817,6 @@ The number of epochs influence the prediction significantly which is established
 \endhead
 \hline \multicolumn{6}{r}{\textit{Continued on next page}} \\
 \endfoot
-\hline
 \endlastfoot
 \arrayrulecolor{light-gray}
 300 & 18,16\% & 121,02 & 0,0\% & 813 & 73,0\% \\ \hline
@@ -860,7 +868,6 @@ The size of the dataset has already been discussed during the initial experiment
 \endhead
 \hline \multicolumn{6}{r}{\textit{Continued on next page}} \\
 \endfoot
-\hline
 \endlastfoot
 \arrayrulecolor{light-gray}
  2200 & 18,4\% & 122,65 & 0,0\% & 631 & 72\% \\ \hline
@@ -941,7 +948,6 @@ Table~\ref{table:stepAheadForecastingWindProduction} shows the results from the 
 \endhead
 \hline \multicolumn{5}{r}{\textit{Continued on next page}} \\
 \endfoot
-\hline
 \endlastfoot
 \arrayrulecolor{light-gray}
 1 & 7,7\% & 51,5 & 0,0\% & 74\%  \\ \hline
@@ -989,7 +995,6 @@ All starting positions have been tried in Table~\ref{table:stepAheadForecastingW
 \endhead
 \hline \multicolumn{5}{r}{\textit{Continued on next page}} \\
 \endfoot
-\hline
 \endlastfoot
 \arrayrulecolor{light-gray}
 16 & 18,26\% & 121,73 & 0,0\% & 73\%  \\ \hline
@@ -1066,7 +1071,6 @@ Experiments have been conducted to identify the best combination of inputs as we
 \endhead
 \hline \multicolumn{5}{r}{\textit{Continued on next page}} \\
 \endfoot
-\hline
 \endlastfoot
 \arrayrulecolor{light-gray}
 128,32 &  126,25 & 121,81 & 121,02 & 5,7\% \\ \hline
@@ -1091,7 +1095,6 @@ Experiments have been conducted to identify the best combination of inputs as we
 \endhead
 \hline \multicolumn{5}{r}{\textit{Continued on next page}} \\
 \endfoot
-\hline
 \endlastfoot
 \arrayrulecolor{light-gray}
 19,25\% &  18,94\% & 18,28\% & 18,16\% & 1,09\% \\ \hline

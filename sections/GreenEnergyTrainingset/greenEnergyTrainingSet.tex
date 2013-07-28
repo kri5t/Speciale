@@ -29,14 +29,14 @@ Wind speed is directly proportional to wind production as described in Section~\
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.99\linewidth,natwidth=898,natheight=587]{billeder/windSpeedWindProductionPlot.png}
+\includegraphics[width=0.99\linewidth]{billeder/windSpeedWindProductionPlot.png}
 \caption{Wind speed and wind production in diagram}
 \label{fig:windSpeedWindProductionPlot}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.99\linewidth,natwidth=898,natheight=587]{billeder/WindSpeedVsProduction.png}
+\includegraphics[width=0.95\linewidth]{billeder/WindSpeedVsProduction.png}
 \caption{Wind speed vs. wind production from 2012}
 \label{fig:windVsProd}
 \end{figure}
@@ -67,11 +67,12 @@ Air density depends directly on temperature and pressure which can be described 
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.99\linewidth,natwidth=898,natheight=587]{billeder/pressureTemperatureVariance.png}
+\includegraphics[width=0.95\linewidth]{billeder/pressureTemperatureVariance.png}
 \caption{Temperature and Pressure variance for 2012}
 \label{fig:pressureTemperatureVariance}
 \end{figure}
 
+\footnotesize
 \begin{table}[H]
 \centering  % used for centering table
 \begin{tabular}{|c|c|} % centered columns (3 columns)
@@ -114,9 +115,10 @@ Average: & 0,28 \\ % [1ex] adds vertical space
 \caption{Table showing Pearson correlation coefficient between the various wind speeds in the dataset and the air density.} % title of Table
 \label{table:pearsonCoeficientAirDensity} % is used to refer this table in the text
 \end{table}
+\normalsize
 
 \subsubsection{Wind Direction}
-Figure~\ref{fig:windDirVsProd} shows that the wind direction in general has a slight impact on the wind production which can also be seen in the correlation constant 0,21 from Table~\ref{table:pearsonCoeficientWindDirection}. The wind direction is expected to have a small influence based on Section~\ref{sec:windmillPlacement} where it is described how change in wind direction affect placement of windmills. The wind speed could be more powerful when coming from a specific direction which differs according to the physical location. It needs to be validated in experiments if the wind direction makes sense for western Denmark.
+Figure~\ref{fig:windDirVsProd} shows that the wind direction in general has a slight impact on the wind production (even though it is hard to see from the plot) which can also be seen in the correlation constant 0,21 from Table~\ref{table:pearsonCoeficientWindDirection}. The wind direction is expected to have a small influence based on Section~\ref{sec:windmillPlacement} where it is described how change in wind direction affect placement of windmills. The wind speed could be more powerful when coming from a specific direction which differs according to the physical location. It needs to be validated in experiments if the wind direction makes sense for western Denmark.
  
 \begin{table}[H]
 \centering  % used for centering table
@@ -135,7 +137,7 @@ Wind Speed & 0.20 \\ \hline % [1ex] adds vertical space
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.99\linewidth,natwidth=898,natheight=587]{billeder/productionVsWindDirection.png}
+\includegraphics[width=0.95\linewidth]{billeder/productionVsWindDirection.png}
 \caption{Wind Direction vs. wind production in 2012}
 \label{fig:windDirVsProd}
 \end{figure}
@@ -146,7 +148,7 @@ According to the correlation constant of 0.61 from Table~\ref{table:pearsonCoefi
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.99\linewidth,natwidth=898,natheight=587]{billeder/consumptionVsWindProduction.png}
+\includegraphics[width=0.95\linewidth]{billeder/consumptionVsWindProduction.png}
 \caption{Demand vs. Wind Production in 2012}
 \label{fig:demandVsWindProduction}
 \end{figure}
@@ -155,7 +157,7 @@ According to the correlation constant of 0.61 from Table~\ref{table:pearsonCoefi
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.8\textwidth ,natwidth=410,natheight=237]{billeder/energy_price_plots/consump_temp.png}
+\includegraphics[width=0.95\linewidth]{billeder/energy_price_plots/consump_temp.png}
 \caption{Demand and temperature plot.}
 \label{fig:consump_temp_green}
 \end{figure}
@@ -166,7 +168,7 @@ The dataset used for prediction consists of hourly observations for all calendar
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.99\linewidth,natwidth=898,natheight=587]{billeder/hourly_wind_production.png}
+\includegraphics[width=0.8\linewidth]{billeder/hourly_wind_production.png}
 \caption{Time of day vs. Wind Production in 2012}
 \label{fig:hourly_wind_production}
 \end{figure}
@@ -177,14 +179,14 @@ The wind speed follows seasonal changes. It is highly probable that the wind pow
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.99\linewidth,natwidth=898,natheight=587]{billeder/Seasons/windProductionMonths.png}
+\includegraphics[width=0.85\linewidth]{billeder/Seasons/windProductionMonths.png}
 \caption{Wind production in relation to months in 2012}
 \label{fig:windProductionMonths}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.99\linewidth,natwidth=898,natheight=587]{billeder/Seasons/windProdctionSeasons.png}
+\includegraphics[width=0.85\linewidth]{billeder/Seasons/windProdctionSeasons.png}
 \caption{Wind production in relation to the four seasons in 2012}
 \label{fig:windProductionSeasons}
 \end{figure}
@@ -197,7 +199,7 @@ Wind power is highly volatile. This statement is clear when observing the develo
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.99\linewidth,natwidth=898,natheight=587]{billeder/productionTendency400Hours.png}
+\includegraphics[width=0.99\linewidth]{billeder/productionTendency400Hours.png}
 \caption{Wind production development for 400 hours in 2011}
 \label{fig:windHourDevelopment400Hours}
 \end{figure}
@@ -207,9 +209,8 @@ Wind power is highly volatile. This statement is clear when observing the develo
 \begin{table}[H]
 \centering  % used for centering table
 \begin{tabular}{|c|c|c|c|} % centered columns (3 columns)
+\hline
  & \#1 Windspeed & \#2 Temperature (Celsius) & \#3 Demand \\ \hline % inserts table 
-%heading
-\hline                  % inserts single horizontal line
 High margin: & 16.5 & 3.3 & 2359.5  \\ \hline
 Low margin: & 13.5 & 2.7 & 1930.5 \\ \hline % [1ex] adds vertical space
 \hline %inserts single line
@@ -222,15 +223,15 @@ Low margin: & 13.5 & 2.7 & 1930.5 \\ \hline % [1ex] adds vertical space
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.99\linewidth,natwidth=898,natheight=587]{billeder/Equal_wind.png}
+\includegraphics[width=0.85\linewidth]{billeder/Equal_wind.png}
 \caption{Same input parameter to wind production output distribution}
 \label{fig:inputParameterDistribution}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.99\linewidth,natwidth=898,natheight=587]{billeder/windProductionVsLastWindProduction.png}
-\caption{Wind power production vs. last known wind power production}
+\includegraphics[width=0.95\linewidth]{billeder/windProductionVsLastWindProduction.png}
+\caption{Wind power vs. last known wind power}
 \label{fig:windProductionVsLastWindProduction}
 \end{figure}
 
@@ -241,7 +242,7 @@ Trimming is for removing irregularities that we are not able to predict. Intuiti
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.99\linewidth,natwidth=898,natheight=587]{billeder/windProductionTrimming.jpg}
+\includegraphics[width=0.99\linewidth]{billeder/windProductionTrimming.jpg}
 \caption{Wind power production trimming}
 \label{fig:windProductionTrimming}
 \end{figure}
@@ -250,7 +251,7 @@ The graph containing the trims for the entire year makes it hard to see what is 
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.99\linewidth,natwidth=898,natheight=587]{billeder/pointingOutPlaceWhereTrim.png}
+\includegraphics[width=0.99\linewidth]{billeder/pointingOutPlaceWhereTrim.png}
 \caption{Wind power production vs. last known wind power production}
 \label{fig:pointingOutPlaceWhereTrim}
 \end{figure}
