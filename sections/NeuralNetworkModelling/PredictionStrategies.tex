@@ -56,7 +56,7 @@ EWMA should be used for time series that do not have a clear trend direction\cit
 
 \subsection{Skewness}
 \label{sec:skewness}
-Skewness is a measure to determine if a variables falls to the left, in the middle or the right of the mean \cite[Chapter~1.1.2]{econometrics}. We do a skewness calculation on the last X hours which determines if the predicted value will fall to the left or the right of the median of the values used. It uses the distribution of the values to determine whether the next value will fall to the right or left of the median. This is then used to determine the tendency of the slope i.e. if the curve is rising or falling. Skewness is a more sophisticated version of the slope calculation because skewness denotes the probability of what side we are moving to compared to the slope calculation which just calculates a sum of all the gradients. 
+Skewness is a measure to determine if a variables falls to the left, in the middle or the right of the mean \cite[Chapter~1.1.2]{econometrics}. A skewness calculation on the last X hours uses the distribution of the variables to determine if the predicted value will fall to the left or the right of the median. This is then used to determine the tendency of the slope i.e. if the curve is rising or falling. Skewness is a more sophisticated version of the slope calculation because skewness denotes the probability of what side we are moving to compared to the slope calculation which just calculates a sum of all the gradients.
 
 %TEGNING MULTIPE STEP
 
