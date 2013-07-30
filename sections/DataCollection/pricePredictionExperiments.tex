@@ -2,11 +2,7 @@ This section contains experimental results from the experiment conducted to find
 
 The purpose of these tests are to identify the best parameters, data manipulation, calculated inputs and black box optimizations. This is done through a series of tests that either validates or rejects the hypothesis set up in each experiment. We want to approach the target price but the main focus is to test what works and what does not work regarding the electricity price predictions.
 
-\todo{Read it and add comments about the Correct Direction \%}
-\todo{Add MAPE}
-%\todo{yamin2004adaptive electricity price simulation}
-
-\subsection{Experiment one: Inputs}
+\subsection{Experiment One - Selection of input parameters}
 \label{sec:priceExperimentOne}
 This section is based on the input parameters that we identified in section~\ref{sec:Price}. We did a cross comparison of all the inputs and possible combinations. The last known price and the predicted demand are basic measures when you define a price in any markets and that is why we include them in every prediction. We did not make a cross comparison of the Month of Year and the Seasons of Year since they denote the same but with different granularity. We did a cross comparison both with and without matrix inputs and with a mix of non-matrix and matrix inputs. This is done to determine whether an input makes better sense on matrix form or just as a simple normalized value. 
 
@@ -263,7 +259,7 @@ We also learned that the month of year input variable will have a positive effec
 \end{itemize}
 
 \newpage
-\subsection{Experiment two: Trimming}
+\subsection{Experiment Two - Data Manipulation}
 \label{sec:priceExperimentTwo}
 As described in section~\ref{sec:Trimming} trimming is a solution to extreme outliers and a way to streamline your data; thus making it easier for neural networks to predict. The art is to get a good balance between the how much of the dataset you remove and how much of an accuracy boost your predictions will get. If you trim parts of the dataset that is actually common data it will get impossible to predict a very high price since the neural network never sees those values.
 
@@ -340,7 +336,7 @@ In figure \ref{fig:AllTrims200Hours} We have shown all of the trims on 200 hours
 In this experiment we saw how trimming can positively affect the predictions. We also discussed the trade offs in the trimming procedure as we lowered the possible outcomes of our predictions. This is a balance between improvement and the amount of prices we will not be able to predict. The 1\% trim showed us an improvement of 20.48\% and removed some extreme failed predictions where the ANN would overshoot the target by 800+. We also learned that higher trimming rates did not really improve the results very much thus making it easy for us to decide on a trimming rate of 1\%.
 
 \newpage
-\subsection{Experiment three: Calculated inputs}
+\subsection{Experiment Three - Calculated inputs}
 \label{sec:priceExperimentThree}
 This experiment was conducted to test the different calculated inputs that we described in section~\ref{sec:usingStatisticalInput}. This includes slope calculation, skewness, EWMA - Historical Volatility and scatter. We took the three best results from experiment one and ran every combination of the calculated inputs on the best results. The experiment was conducted on the 1\% trimmed version of the 3 best results from experiment one - due to the improvements seen in experiment two. Also we did a test on the most basic dataset we had available: Price and Consumption with no trimming. This was done to validate the impact of the different strategies before applying any other factors to the prediction. We also reconstructed the experiment in \cite{singhal2011electricity} to test their setup because we got the scatter price scheme from them.
 
@@ -713,7 +709,7 @@ The results from the simple dataset (last known price and consumption) showed us
 The last part was a comparison with the paper~\cite{singhal2011electricity} where they have a setup which we copied in this experiment. Their setup did a good job of predicting the price but our setup gave a better result. We cannot compare the results directly due to a lack of information on how they conducted their trials. We did try on both a dataset with and without trimming applied. In this case the trimmed dataset gave a better result.
 
 \newpage
-\subsection{Experiment four: Black box optimization}
+\subsection{Experiment Four - Black Box Optimization}
 \label{sec:priceExperimentFour}
 We here show the impacts of epochs used to train the network and the size of the training dataset. We also show how the time dimension of doing these tests are affected by these parameters. Black box optimization also covers the number of hidden layers and the neuron count in these. We chose not to do the neuron count experiments since we used a pruning algorithm to find the most optimal combination of neurons and layers for each input combination as described in section~\ref{sec:testProcedure} and in section~\ref{sec:pruning}.
 
@@ -855,7 +851,7 @@ The epochs used to train the network shows that values in the hundreds (100-900)
 Of course these are not final and if something is changed in the input set then we have to retest what the best setup will be. The point being that we cannot say something about this in general just for the best of our combinations.
 
 \newpage
-\subsection{Experiment five: Step-ahead forecasting}
+\subsection{Experiment Five - Step-ahead forecasting}
 \label{sec:priceExperimentFive}
 This test shows how the predictions behave when we increase the hours to use in step-ahead predictions. We did a 1-hour ahead prediction and kept increasing the number until we hit 24 hours. We also conducted a test to see what the effects of changing the starting offset are.
 
@@ -997,7 +993,7 @@ In the hours ahead prediction we saw that the error margin was rising up until 1
 The offsets showed us a difference of 15,04\% from the best to the worst starting point. This difference in MAE is present because of how good a starting point the prediction will hit in general. The starting point is where the errors will start originating from; so if we can make the first prediction better the rest will in general also be better since we use the history of the curve to predict the next hourly price.
 
 \newpage
-\subsection{Concluding remarks}
+\subsection{Concluding Remarks}
 We conducted a series of experiments where we tested the parameters we identified in the electricity price analysis section ~\ref{sec:ElectricityPriceAnalysis}. We have shown the results from five aspects of the price predicting artificial neural network we created. We presented how the different parameters and setups changes the output and accuracy of the ANN. In table~\ref{table:OverallImprovement} the best results from the experiments are presented and the overall improvement have been calculated to be 26.62\% from the initial tests to the best result in exp 3.
 
 \begin{table}[H]
