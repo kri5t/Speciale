@@ -1,0 +1,32 @@
+RPROP - Resilient Backpropagation
+BPNN - Backpropagation Neural Network
+ARIMA - Autoregressive Integrated Moving Average
+RMSE - Root Mean Square Error
+SVM - Support Vector Machine
+DSS - Decision Support Systems
+AI - Artificial Intelligence
+CDD - Cooling Degree Days
+HDD - Heating Degree Days
+MPE - Mean Percentage Error
+MAPE - Mean Absolute Percentage Error
+MAE - Mean Average Error
+PCC - Pearson Correlation Coefficient
+
+-----------------
+
+WS - Wind Speed
+AD - Air Density
+ToD - Time of Day
+D - Demand
+T - Temperature
+WD - Wind direction
+L-P - Last known production
+Mo - Month
+% CD - How many percentage of the predictions in the correct direction  
+H1 - Neurons in hidden layer 1
+H2 - Neurons in hidden layer 2
+% Rank - Percentage rank from the best prediction
+Scatter/Sc - Historical productions as input
+S - Skewness
+V - Historical volatility
+C - Simple slope calculation
