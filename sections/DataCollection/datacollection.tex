@@ -26,3 +26,19 @@ The weather data is collected from available weather stations in DK1 from NOAA a
 
 
 We will remove data that is obscure and is related to conditions we cannot predict. (See trimming~\ref{sec:Trimming})
+
+\section{Pearson Correlation Coefficient}
+\label{sec:Pearsons}
+The \fnurl{Pearson Correlation Coefficient}{http://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient}(PCC) is used to determine if there is a linear correlation between two datasets. The values derived from calculating the PCC will always return values between -1 and 1. If the value is either -1 or 1 this means we have a direct linear correlation between the two datasets. A negative value denotes that the correlation between the datasets are negative, e.g. if one of the datasets rises the other drops. If the value is positive there is a normal correlation between the two e.g. if one rises the other rises as well. The PCC has to be interpreted when comparing two datasets e.g. in social sciences they often interpret lower values as good correlations whereas exact sciences in most cases needs a high PCC value to establish the correlation. It all comes down to perspective. We will use the PCC as a measure to establish connections between input parameters and output parameters in our dataset analysis. It can be calculated by the following formula:
+
+\begin{center}
+$ r = \frac{1}{n-1}\sum_{i=1}^{n}(\frac{X_i-\overline{X}}{s_X})(\frac{Y_i-\overline{Y}}{s_Y})$
+\end{center}
+
+\noindent where 
+
+\begin{center}
+$ \frac{X_i-\overline{X}}{s_X}$,   $\overline{X} = \frac{1}{n}\sum_{i=1}^{n}X_i$,   and $s_X = \sqrt{\frac{1}{n-1}\sum_{i=1}^{n}(X_i-\overline{X})^2}$
+\end{center}
+
+\noindent are the standard score, sample mean, and sample standard deviation, respectively.
