@@ -1,13 +1,13 @@
-This section contains experimental results from the experiment conducted to find the best possible price predicting solution. The experiments are based on the data which we analyzed in section \ref{sec:ElectricityPriceAnalysis}. The experiments are done to validate whether the assumptions about the input parameters are true when used in an artificial neural network. We also examine the best combinations to find the most optimal solution for price prediction. The results are divided into 5 experiments. The first experiment finds the best combination of input parameters for the network. These input parameters count meteorological, social and seasonal factors - which we identified in the analysis section~\ref{sec:Price}. The next experiment identifies the need for trimming and reasons to why it is needed in this particular dataset. The third experiment tests how different calculated inputs can include the immediate historical curve behavior in the dataset. This includes scatter, slope calculation, skewness analysis and historical EWMA(Exponentially-Weighted Moving Average). The fourth experiment takes care of the Artificial Neural Network parameters called black-box optimization. The last experiment shows the influence of offsets for the prediction and the effect of limiting the hours-ahead used in the predictions.
+This section contains experimental results from the experiments conducted to find the best possible price predicting solution. The experiments are based on the data which we have analysed in section \ref{sec:ElectricityPriceAnalysis}. The experiments are done to validate whether the assumptions about the input parameters are true when used in an Artificial Neural Network. We also examine the best combinations to find the most optimal solution for price prediction. The results are divided into 5 experiments. The first experiment finds the best combination of input parameters for the network. These input parameters count meteorological, social and seasonal factors - which we identified in the analysis section~\ref{sec:Price}. The next experiment identifies the need for trimming and reasons to why it is needed in this particular dataset. The third experiment tests how different calculated inputs can include the immediate historical curve behavior in the dataset. This includes scatter, slope calculation, skewness analysis and historical EWMA (Exponentially-Weighted Moving Average). The fourth experiment takes care of the Artificial Neural Network parameters called black-box optimization. The last experiment shows the influence of offsets for the prediction and the effect of limiting the hours-ahead used in the predictions.
 
-The purpose of these tests are to identify the best parameters, data manipulation, calculated inputs and black box optimizations. This is done through a series of tests that either validates or rejects the hypothesis set up in each experiment. We want to approach the target price but the main focus is to test what works and what does not work regarding the electricity price predictions.
+The purpose of these experiments are to identify the best parameters, data manipulation, calculated inputs and black box optimizations. This is done through a series of experiments that either validates or rejects the hypothesis set up in each experiment. We want to approach the target price but the main focus is to test what works and what does not work regarding the electricity price predictions.
 
 \subsection{Experiment One - Selection of input parameters}
 \label{sec:priceExperimentOne}
-This section is based on the input parameters that we identified in section~\ref{sec:Price}. We did a cross comparison of all the inputs and possible combinations. The last known price and the predicted demand are basic measures when you define a price in any markets and that is why we include them in every prediction. We did not make a cross comparison of the Month of Year and the Seasons of Year since they denote the same but with different granularity. We did a cross comparison both with and without matrix inputs and with a mix of non-matrix and matrix inputs. This is done to determine whether an input makes better sense on matrix form or just as a simple normalized value. 
+This section is based on the input parameters that we identified in section~\ref{sec:Price}. We have done a cross comparison of all the inputs and possible combinations. The last known price and the predicted demand are basic measures when you define a price in any market and that is why we include them in every prediction. We have not made a cross comparison of the Month of Year and the Seasons of Year since they denote the same but with different granularity. We have done a cross comparison both with and without matrix inputs and with a mix of non-matrix and matrix inputs. This is done to determine whether an input makes better sense on matrix form or just as a simple normalized value. This is a difference from wind power experiments (that first identified inputs and applied matrix afterwards) but it is done here because the amount of possible matrices is higher. 
 
 \subsubsection{Variables}
-Experiment one is based on a dataset consisting of the last 3 months averaging to 2189 hours. We use 200 epochs for each training iteration.
+Experiment one is based on a dataset consisting of the last three months averaging to 2189 hours. We use 200 epochs for each training iteration.
 
 The parameters being examined in this test are the following:
 \begin{enumerate}
@@ -37,17 +37,17 @@ The table~\ref{table:Top20Prices} contains the following information as well:
 \end{enumerate}
 
 \subsubsection{Hypothesis}
-This is the first and most comprehensive of the tests conducted for price prediction. In this experiment we want to test all the different combinations of the parameters. We expect to see a better curve-fit as we include more variables and more complex variables. In regard to the dataset analysis in section~\ref{sec:ElectricityPriceAnalysis} we see the connection between the aforementioned variables and the price. We have the following expectations based on the dataset analysis:
+This is the first and most comprehensive of the tests conducted for price prediction. In this experiment we want to test all of the different input parameter combinations. We expect to see a better curve-fit as we include more variables and more complex variables. In regards to the dataset analysis in section~\ref{sec:ElectricityPriceAnalysis} we see the connection between the aforementioned variables and the price. We have the following expectations based on the dataset analysis:
 \begin{enumerate}
-	\item The Wind Speed will show a positive impact on the price because of the correlation between the two. Also the wind speed impacts the production of green energy which impacts the overall price of energy. Since the wind power production accounts for about 25\%(see data analysis in section ~\ref{sec:Price}) of the complete power production in western Denmark we also expect to see that this parameter will increase accuracy.
-	\item The Temperature might have a small impact on the price but there is nearly no correlation between the price and the temperature. If it should have an impact it is probably because of the correlation between the temperature and the demand thus indirectly influencing the price.
-	\item The Hourly Time of Day is going to have an effect on the hourly predicted price. The reason being the correlation between the price and the time of day and because we are predicting the hourly price; which logically indicates that this parameter is important for such a prediction. 
+	\item The Wind Speed will show a positive impact on the price because of the correlation between the two. Also the wind speed impacts the production of green energy which impacts the overall price of energy. Since the wind power production accounts for about 25\% (see data analysis in section ~\ref{sec:Price}) of the complete power production in western Denmark we also expect to see that this parameter will increase accuracy.
+	\item The Temperature might have a small impact on the price but there is nearly no correlation between the price and the temperature. If it should have an impact it is because of the correlation between the temperature and the demand thus indirectly influencing the price.
+	\item The Hourly Time of Day is expected to have an effect on the hourly predicted price. The reason being the correlation between the price and the time of day and because we are predicting the hourly price; which logically indicates that this parameter is important for such a prediction. 
 	\item The Day of the Week, The Month of the Year and The Seasons of the Year is expected to have a positive impact on the prediction. The impact are expected to get smaller as the inputs become more general e.g season of year; since our training dataset is based on 1/4 of a year. 
 	\item Matrix representation will be better than single node representation of the seasonality. This is due to the fact that matrix is a more granulated input format than single node. This has also been discussed in section~\ref{sec:Matrix}.
 \end{enumerate}
 
 \subsubsection{Results}
-We present the results from this experiment in table~\ref{table:Top20Prices}. The input parameters will be analyzed one by one in the next subsections. After that we will talk about some of the problems with some of these input parameters.
+We present the results from this experiment in table~\ref{table:Top20Prices}. The input parameters will be analysed one by one in the next subsections. After that we will discuss some of the problems with selected input parameters.
 
 \begin{table}[H]
 \centering  % used for centering table
@@ -84,7 +84,7 @@ We present the results from this experiment in table~\ref{table:Top20Prices}. Th
 \end{table}
 
 \subsubsection{Wind speed}
-If we take a look at the top 20 best input combinations (shown in table~\ref{table:Top20Prices}) we see some clear trends. We will start by analyzing the data from left to right. The price and demand are static as mentioned earlier since they are fundamental market forces and thus not a changing factor in this analysis. The next input parameter is the Wind Speed. We see that every input combination in the top 20 includes the wind production and it is therefore a must for the prediction of the energy prices. Actually the 72 first inputs(the 50\% best results) contains only two combinations that does not have wind speed in them. Also we saw in section~\ref{sec:windPowerAnalysis}(table~\ref{table:pearsonCoeficientWindProduction}) that the Wind Speed heavily influences the green energy production and thus influencing the energy prices. If we remove wind speed from the \#1 combination it ends up at place \#70 which are 37.55\% worse than the best result. In figure~\ref{fig:Windspeed_no_windspeed} we see that the prediction without wind speed has a tendency to overshoot more than the one with wind speed does(the dark overlays shows where it overshoots). Over a whole year this sums up to a significant difference.
+If we take a look at the top 20 best input combinations (shown in Table~\ref{table:Top20Prices}) we can observe clear trends. We will start by analysing the data from left to right. The price and demand are as mentioned earlier static since they are fundamental market forces and thus not a changing factor in this analysis. The next input parameter is the Wind Speed. We see that every input combination in the top 20 includes the wind power and it is therefore a must for the prediction of the energy prices. Actually the 72 first inputs (the 50\% best results) contains only two combinations that does not have wind speed in them. Also we saw in section~\ref{sec:windPowerAnalysis}(table~\ref{table:pearsonCoeficientWindProduction}) that the Wind Speed heavily influences the wind power and thus influencing the energy prices. If we remove wind speed from the \#1 combination it ends up at place \#70 which are 37.55\% worse than the best result. In Figure~\ref{fig:Windspeed_no_windspeed} we see that the prediction without wind speed has a tendency to overshoot more than the one with wind speed does (the dark overlays shows where it overshoots). Over a whole year this sums up to a significant difference.
 
 \begin{figure}[H]
 \centering
@@ -94,7 +94,7 @@ If we take a look at the top 20 best input combinations (shown in table~\ref{tab
 \end{figure}
 
 \subsubsection{Temperature}
-The temperature is a less obvious candidate for the prediction of price since the Pearson's correlation between the two only are 0.17. Nevertheless it is showing up in 8/10 top combinations in table~\ref{table:Top20Prices} and this might be because of the correlation between temperature/demand which is -0.59. The temperature is scattered all over the 144 combinations and thus it is hard to say something concrete about this input variable. The best result without temperature is at place 4 in table~\ref{table:Top20Prices} and the same one with temperature is at place 13 with a difference between the two of 10.66\%. Graph~\ref{fig:temperature_comparison} shows that there is no significant difference between the two combinations. In both of them the ANN is overshooting the target at different spots.
+The temperature is a less obvious candidate for the prediction of price since the Pearson's correlation between the two only are 0.17. Nevertheless it is showing up in 8/10 top combinations in Table~\ref{table:Top20Prices} and this might be because of the correlation between temperature/demand which is -0.59. The temperature is scattered all over the 144 combinations and thus it is hard to say something concrete about this input variable. The best result without temperature is at place 4 in Table~\ref{table:Top20Prices} and the same one with temperature is at place 13 with a difference between the two of 10.66\%. Graph~\ref{fig:temperature_comparison} shows that there is no significant difference between the two combinations. In both of them the ANN is overshooting the target at different spots.
 
 \begin{figure}[H]
 \centering
@@ -104,7 +104,7 @@ The temperature is a less obvious candidate for the prediction of price since th
 \end{figure}
 
 \subsubsection{The Hourly Time of the Day}
-The Hourly Time of Day (ToD) is included in every single combination in the top 20. This clearly shows that this input parameter is important for the prediction of the price. This is kind of obvious since what we are predicting is the hourly price. In section~\ref{sec:seasonality}(figure~\ref{fig:price_per_hour}) we saw that the price varied from 190 to 335 which strengthens the importance of the relationship between time of day and the price. Also the top 7 all have the ToD on matrix form which indicates that this is the best way of representing the ToD. The comparison between \#1 prediction with Time of Day and the one without \#55 we see a difference of 31.85\% and we did a graph comparison of the two shown in figure~\ref{fig:dowComparison}. Here we see that the one with ToD (\#1) are better at following the curve compared to the prediction without Time of Day. The prediction without Time of Day seems to follow an average between the high and low spikes instead of following the curve up and down. This makes sense since the ToD interprets into what hours have high prices and which that have low prices.
+The Hourly Time of Day (ToD) is included in every single combination in the top 20. This clearly shows that this input parameter is important for the prediction of the price. This is kind of obvious since what we are predicting is the hourly price. In section~\ref{sec:seasonality}(Figure~\ref{fig:price_per_hour}) we saw that the price varied from 190 to 335 which strengthens the importance of the relationship between time of day and the price. Also the top 7 all have the ToD on matrix form which indicates that this is the best way of representing the ToD. The comparison between \#1 prediction with Time of Day and the one without \#55 we see a difference of 31.85\% and we have done a graph comparison of the two shown in Figure~\ref{fig:dowComparison}. Here we see that the one with ToD (\#1) are better at following the curve compared to the prediction without Time of Day. The prediction without Time of Day seems to follow an average between the high and low spikes instead of following the curve up and down. This makes sense since the ToD is interpreted into what hours have high prices and which have low prices.
 
 \begin{figure}[H]
 \centering
@@ -114,15 +114,15 @@ The Hourly Time of Day (ToD) is included in every single combination in the top 
 \end{figure}
 
 \subsubsection{The Day of the Week}
-Next we have the Day of the Week (DoW) parameter. This parameter are present in 75\% of the 20 best results (8/10 and in 15/20 best combinations). We have to believe that it plays a significant role in the prediction of price. If we look at the analysis of the average price over weekdays in section~\ref{sec:seasonality}(figure~\ref{fig:price_over_weekdays}) we see that there is a significant difference in price on the different days. This is especially present in the weekdays compared to the weekend. This parameter is mixed between matrix input and standard input. This might be due to the fact that the biggest difference between days are weekend and weekday thus minimizing the effect of a matrix representation.
+Next we have the Day of the Week (DoW) parameter. This parameter is present in 75\% of the 20 best results (8/10 and in 15/20 best combinations). We have to believe that it plays a significant role in the prediction of price. If we look at the analysis of the average price over weekdays in Section~\ref{sec:seasonality} (Figure~\ref{fig:price_over_weekdays}) we see that there is a significant difference in price on the different days. This is especially present in the weekdays compared to the weekend. This parameter is mixed between matrix input and standard input. This might be due to the fact that the biggest difference between days are weekend and weekday thus minimizing the effect of a matrix representation.
 
 \subsubsection{The Season of Year features}
-The last two parameters - Month of Year(MoY) and Season of Year (SoY) - are codependent and will be covered together. As mentioned before they cover the same information and we therefore only need one of them at any time. The values are present in 9/10 of the best combinations in ~\ref{table:Top20Prices}. This is an indicator that the seasonality in the form of MoY and SoY plays a role in predicting the electricity price. Also we saw in the analysis in section~\ref{sec:seasonality}(figure~\ref{fig:monthlyAveragePrice} and ~\ref{fig:seasons}) that the price changes with seasonality and that it especially was more expensive in the winter than the rest of the year.
+The last two parameters - Month of Year(MoY) and Season of Year (SoY) - are codependent and will be covered together. As mentioned before they cover the same information and we therefore only need one of them at any time. The values are present in 9/10 of the best combinations in Table~\ref{table:Top20Prices}. This is an indicator that the seasonality in the form of MoY and SoY plays a role in predicting the electricity price. Also we saw in the analysis in Section~\ref{sec:seasonality} (Figure~\ref{fig:monthlyAveragePrice} and Section~\ref{fig:seasons}) that the price changes with seasonality and that it especially was more expensive in the winter than the rest of the year.
 
 \subsubsection{Matrix}
-The matrix representation in the top 20 is the most common representation of the seasonal inputs (ToD, DoW, MoY and SoY) - with only 3/20 containing no matrix at all. The matrix format was expected to give a better result based on what we discussed in the matrix section~\ref{sec:Matrix}. The 3 combinations that does not contain a matrix representation are already present in the top 20 as pure matrix form. This can be the combination of inputs variables that are good since both the matrix form and the non-matrix form are represented in the top 20 best combinations.
+The matrix representation in the top 20 is the most common representation of the seasonal inputs (ToD, DoW, MoY and SoY) - with only 3/20 containing no matrix at all. The matrix format was expected to give a better result based on what we discussed in the matrix Section~\ref{sec:Matrix}. The three combinations that does not contain a matrix representation are already present in the top 20 as pure matrix form. This can be the combination of inputs variables that are good since both the matrix form and the non-matrix form are represented in the top 20 best combinations.
 
-In the Wind Production Experiments section~\ref{sec:windProductionExperiments} we conducted a separate experiment for the matrix analysis. We did a combined experiment in this section because we had 4 different parameters that can be represented as a matrix thus giving us a lot of different combinations. We also wanted to test all of the different combinations of matrix and non-matrix inputs because a mixed combination might render a better solution e.g. the season of year shifts so rarely it might be a better representation (together with the other parameters) on non-matrix form. Also there might be combinations with the rest of the inputs that work better with the matrix-format than others.
+In the wind power Experiments section~\ref{sec:windProductionExperiments} we conducted a separate experiment for the matrix analysis. We have done a combined experiment in this section because we had 4 different parameters that can be represented as a matrix thus giving us a lot of different combinations. We also wanted to test all of the different combinations of matrix and non-matrix inputs because a mixed combination might render a better solution e.g. the season of year shifts so rarely it might be a better representation (together with the other parameters) on non-matrix form. Also there might be combinations with the rest of the inputs that work better with the matrix-format than others. 
 
 \subsubsection{Bottom 10 predictions}
 \begin{table}[H]
@@ -150,9 +150,11 @@ In the Wind Production Experiments section~\ref{sec:windProductionExperiments} w
 \label{table:Bottom10Prices} % is used to refer this table in the text
 \end{table}
 
-If we take a look at the bottom 10 input combinations in terms of MAE we see some tendencies as well. We see that Wind Speed only appears in one of the combinations and so does the Time of Day(And not in the same combination). This further strengthens that these two variables are very important for the price prediction. We talked about matrix form earlier and its impact on the combinations. In the bottom 20 table we see that there is a lot of the combinations that contains variables on matrix form. This is because the Wind Speed and the Time of Day are some of the most influential parameters thus sending the combinations with these absent to the bottom of the chart. As these combinations also include matrix forms they will occur in the bottom top 20 thus not indicating that matrix form has no effect on the dataset. In the bottom 10 we also see a substantial drop in percentage correct direction(\% CD) which tells us that the trend analysis of the curves also suffers from the worse combinations of inputs. Also this might indicate that wind speed and especially the time of day says something about the price movement.
+If we take a look at the bottom 10 input combinations in terms of MAE we see some tendencies as well. We see that wind speed only appears in one of the combinations and so does the Time of Day(And not in the same combination). This further strengthens that these two variables are very important for the price prediction. We talked about matrix form earlier and its impact on the combinations. In the bottom 20 table we see that there is a lot of the combinations that contains variables on matrix form. This is because the wind speed and ToD are some of the most influential parameters thus sending the combinations with these absent to the bottom of the chart. As these combinations also include matrix forms they will occur in the bottom top 20 thus not indicating that matrix form has no effect on the dataset. In the bottom 10 we also see a substantial drop in percentage correct direction(\% CD) which tells us that the trend analysis of the curves also suffers from the worse combinations of inputs. Also this might indicate that wind speed and especially the time of day says something about the price movement.
 
 \subsubsection{Month and season analysis}
+The seasonal aspect will be elaborated here based on experiences from the the first experiment for wind power in Section~\ref{sec:windPowerAnalysis}. The experiment showed problems with the seasonal aspect due to a small dataset and the month parameter not reflecting months from the previous year. Even though the same problem is not obvious from the results in the context of electricity pricing we will investigate the benefits from including the seasonal aspect where it identifies the influence of same months from the previous year. We will compared the three months approach with two other training set sizes; 1) include 45 days before the day-ahead prediction and 45 days before and after the day from last year; 2) including a whole year from the prediction day. The first approach has been run for all combinations so that it can be directly compared to the one used in the previous prediction with only three months of data (denoted 3 Months). The results is compared to the results from Table~\ref{table:Top20Prices} and can be seen in Table~\ref{table:top20comparedTo4months}. 
+
 \begin{table}[H]
 \centering  % used for centering table
 \resizebox{0.4\textwidth}{!}{
@@ -188,9 +190,7 @@ If we take a look at the bottom 10 input combinations in terms of MAE we see som
 \label{table:top20comparedTo4months} % is used to refer this table in the text
 \end{table}
 
-As we saw in the wind production experiments(WPE) section~\ref{sec:windPowerAnalysis} there was a problem regarding the way we conducted tests for the seasonality; specifically for the MoY and the SoY. We only use the last 3 months to train the network and that sort of eliminates the obvious purpose of the MoY and SoY. As we saw in the results for the first experiment in WPE if we include the same month as we are in from last year and reintroduce the purpose of the SoY and MoY it gave us a worse result than leaving it out. To make sure the same thing applies on the price prediction experiments we conducted to runs of all the combinations of inputs. First we ran it with the last 3 months including the same month that we are in from last year and after that we ran the experiment with only the last 3 months.
-
-Table~\ref{table:top20comparedTo4months} shows us the top 20 MAE from the experiment with a training set containing the last 3 months(3 Months). We have compared this to the experiment with a training set containing the last 3 months and the same month from last year(4 Months). As we see in table~\ref{table:top20comparedTo4months} the difference between the two datasets are not that big. This also shows in the appendix~\ref{sec:priceResultAppendix} where the distribution of the MAE over the two datasets are quite similar. From this we can conclude that the effect of using last years month in our dataset does not make a significant difference and can be left out. This raises the question if the MoY and the SoY can be left out as well, since the obvious use for it is eliminated by never having a full month or a full season in the training set - that is equal to the one we predict. Even though it might be questionable what the impact really is it seems to be enhancing the performance of the ANN since these parameters are apparent in most of the best results. This can be due to the fact that it actually works as a slope analysis tool instead of the original seasonality indicator. Now it might work to differentiate the past months/seasons from the month we are predicting thus not directly affecting it but indirectly by allowing the ANN to give the past months their own weight which are not applied to the current. Also it gives us some knowledge of the current month if we are in the middle of it which can be translated into slope behavior.
+We can see in Table~\ref{table:top20comparedTo4months} that the difference between the two datasets are not significant. This also shows in the Appendix~\ref{sec:priceResultAppendix} where the distribution of the MAE over the two datasets are similar. We can conclude that the effect of using last years month in our dataset does not make a significant difference and can be left out. What can be concluded is that the seasonal aspect for electricity price predicting works unexpectedly since t is represented in most of the best results. The seasonal inputs can work unexpectedly to our advantage by gathering information of the past three months so that it in itself contains the seasonal aspect of the small training set. The knowledge of the last three months in the seasonal input can give an advantage when predicting the day-ahead. This is speculation and due to the black box nature the knowledge is hard to extract and therefore we must rely on our intuition and the knowledge from the dataset analysis. To further validate the use of a small dataset we have attempted a test for the best prediction from Table~\ref{table:Top20Prices} and used it with a whole years training set. Table~\ref{table:1YearTrain} shows a significant drop in accuracy due to the increase in dataset. It emphasizes what was concluded for wind power, namely that there is possibility of over-training in too large datasets\cite{1} and that the network takes longer time training on a larger dataset. We can conclude that the smaller dataset of three months are better to use than the full year for electricity prices and wind power (We will elaborate on this in experiment four).  
 
 \begin{table}[H]
 \centering  % used for centering table
@@ -198,18 +198,14 @@ Table~\ref{table:top20comparedTo4months} shows us the top 20 MAE from the experi
 \hline
 P & D & WS & T & ToD & DoW & MoY & SoY & MAE & \% ranking\\ [0.5ex] % inserts table 
 \hline
-\x    & \x    & \x    & \x    & \x\m  & \x\m  & \x\m  &       & 63.74 & \#1 \\ \hline
-\x    & \x    & \x    & \x    & \x\m  & \x\m  &       &       & 90.79 & \#2 \\ \hline
-\x    & \x    & \x    & \x    & \x\m  & \x\m  &       & \x\m  & 94.75 & \#3 \\ \hline
+\x    & \x    & \x    & \x    & \x\m  & \x\m  &   & \x\m  & 94.75 & \\ \hline
 \end{tabular}
 \caption{The top 20 results on training set 3 last months} % title of Table
 \label{table:1YearTrain} % is used to refer this table in the text
 \end{table}
 
-We conducted an experiment containing a training set with a full year (to test the effect of seasonality on a full year) we included the rest of the parameters equal to rank \#1 in table~\ref{table:Top20Prices} and shifted the seasonality. The results can be seen in table~\ref{table:1YearTrain} where we can see the full effect of seasonality over a year. The table clearly shows that the MoY combination is the best of the three. If we compare the results to the results from table~\ref{table:Top20Prices} it shows us that with monthly seasonality the artificial neural network will be able to do the same predictions as the ones that only have a training set of 3 months. With the possibility of over training in too large datasets(see paper~\cite{1}) and that the neural network takes longer time training on a larger dataset. We can conclude that the smaller dataset of 3 months are better to use than the full year (We will elaborate on this in experiment four). Further more we have to test if seasonality being an input parameter makes sense when our dataset is only 3 months big.
-
 \subsubsection{Own set vs Unseen set}
-Here we present the difference between predicting something that is included in the dataset and something that is new to the dataset. We want to make it clear that we always have to use unseen data when benchmarking the artificial neural network because this simulates how it behaves when used on live data. If we used it on data that was already included in the dataset we also made the assumption that we would know what the price was the next day; which we of course do not. In table \ref{table:unseenAndSeen} we see that it performs very well on its own training set compared to how it performs on unseen data. This is because when predicting on data that is already included in the dataset the ANN included the changes to fit the weights for this data as well.
+Here we present the difference between predicting something that is included in the dataset and something that is new to the dataset. We want to highlight that we always have to use unseen data when benchmarking the Feedforward Neural Network since it simulates the behaviour of the use in practice. In table \ref{table:unseenAndSeen} we see that it performs well on its own training set compared to how it performs on unseen data. The purpose is to generalize beyond the training set because we wish to predict the prices of tomorrow. Predicting on the data that it has based the generalization function upon will make the data fit that generalization better than situations never seen before. In practice we do not encounter the exact same situations again and therefore we must use a testing set that is different from the training set and attempt to predict it. 
 
 \begin{table}[H]
 \centering  % used for centering table
@@ -248,32 +244,29 @@ Here we present the difference between predicting something that is included in 
 \subsubsection{Conclusion}
 In this experiment we saw the following:
 \begin{itemize}
-	\item The wind speed clearly was a factor that influenced how well we were able to predict the price. The wind speed was in the best 70/72 combinations which are the best half of the experiments. We also saw that the wind speed helped the ANN to make less predictions that was higher than the ideal price. The wind speed showed a greater impact on the price prediction than we first thought. With an improvement of 37.55\% it deemed very important for our algorithm to make good predictions.
-	\item The temperature showed no real improvement but neither did it deteriorate the result. This was expected since there was nearly no correlation between the price and temperature see section~\ref{sec:ElectricityPriceAnalysis}.
-	\item The Hourly Time of Day shows an improvement on the predictions. In the best half of the results we had 55/72 that included ToD. This result directly reflects what we anticipated. We also saw that the ToD allowed the ANN to make a better curve fit and helped the predictions to follow the curves all the way up and down instead of following an average between the top and bottom of the curve.
+	\item The wind speed clearly was a factor that influenced how well we were able to predict the price. The wind speed was in the best 70/144 combinations. We also saw that the wind speed helped the ANN to overshoot fewer times. The wind speed showed a greater impact on the price prediction than we first thought. With an improvement of 37.55\% it is concluded to be very important for our algorithm to make good predictions.
+	\item The temperature showed no real improvement but neither did it deteriorate the result. This was expected since there was nearly no correlation between the price and temperature see section~\ref{sec:ElectricityPriceAnalysis}. It could neither substitute demand as it was seen for wind power.
+	\item The Hourly Time of Day shows an improvement on the predictions. In the best half of the results we had 55 that included ToD. This result directly reflects what we anticipated. We also saw that the ToD allowed the ANN to make a better curve fit and helped the predictions to follow the curves all the way up and down instead of following an average between the top and bottom of the curve.
 	\item The Day of the Week seemed to have a positive effect on the predictions. Here it was not clear whether the matrix form was the best choice or the standard single input was the best. This stems from the fact that the biggest price difference in weekdays are between the regular weekdays and the weekend.
-	\item The Month of the Year and The Seasons of the Year seems to either have no effect or a small effect on the predictions. We discussed how the main purpose of these two input parameters was defeated because of the size of our dataset. They do nevertheless show up in most of the top 20 values. This shows us that they have a positive effect or at worst no effect at all. The only downside to this is the time consumption introduced; if they actually do not have any effect on the predictions.
+	\item The Month of the Year and the Seasons of the Year seems to either have no effect or a small effect on the predictions. We discussed how the main purpose of these two input parameters was defeated because of the size of our dataset. They do nevertheless show up in most of the top 20 values. This shows us that they have a positive effect or at worst no effect at all.
 	\item Matrix representation seems to be the best choice in almost all the cases. The matrix format is not by default an improvement but has to be evaluated with the rest of the input parameters to see if matrix is better. One of the cases where it might be better without it is the weekdays; because of the aforementioned price distribution over weekdays.
-
-We also learned that the month of year input variable will have a positive effect on full year datasets as it balanced the error margin between a full year dataset and a quarter year dataset. Even though we saw no improvement from using a full year to train on.
 \end{itemize}
 
 \newpage
 \subsection{Experiment Two - Data Manipulation}
 \label{sec:priceExperimentTwo}
-As described in section~\ref{sec:Trimming} trimming is a solution to extreme outliers and a way to streamline your data; thus making it easier for neural networks to predict. The art is to get a good balance between the how much of the dataset you remove and how much of an accuracy boost your predictions will get. If you trim parts of the dataset that is actually common data it will get impossible to predict a very high price since the neural network never sees those values.
+As described in section~\ref{sec:Trimming} trimming is a solution to extreme outliers and a way to streamline your data; thus making it easier for neural networks to predict. The art is to get a good balance between how much of the dataset you remove and how much of an accuracy boost your predictions will get. If you trim parts of the dataset that is actually common data it will get impossible to predict a very high price since the network never sees those values.
 
 \subsubsection{Variables}
-Experiment two is based on a dataset consisting of the last 3 months averaging to 2189 hours. We use 200 epochs for each training iteration.
+Experiment two is based on a dataset consisting of the last three months averaging to 2189 hours. We use 200 epochs for each training iteration.
 
-In this experiment our variables are the grade of trimming we conduct on the training set. We trim from 1\% to 5\% in the lowest and highest part of the dataset thus totaling to 2\% to 10\% of dataset has been removed.
+In this experiment our variables are the grade of trimming we conduct on the training set. We trim from 1\% to 5\% in the lowest and highest part of the dataset thus totalling to 2\% to 10\% of dataset has been removed.
 
 \subsubsection{Hypothesis}
 This experiment is conducted to show the effect of trimming on a dataset. By removing the most extreme outliers we expect the predictions to stabilize since the randomness of the extreme outliers have been removed. This should result in a better overall MAE and a better curve fit.
 
 \subsubsection{Results}
-
-As we can see in figure~\ref{fig:NoTrim} (where no trimming was applied) the predicted values some times goes way out of line and hits the very maximum(about 1500) also when the actual value is nothing near that. This is due to the seldom occurrence of these high prices that the neural network is never able to get a full connection between these prices and the input parameters. Another reason for this to happen is that it is extremely hard to predict such sudden and very high fluctuations in price; thus removing these will not give us a performance hit, since we would not be able to predict them anyways and they just add the possibility of errors in the rest of the predictions.
+As we can see in Figure~\ref{fig:NoTrim} (where no trimming was applied) the predicted values some times goes way out of line and hits the very maximum (about 1500) also when the actual value is nothing near that. This is due to the seldom occurrence of these high prices that the network is never able to get a full connection between these prices and the input parameters. Another reason for this to happen is that it is extremely hard to predict sudden and very high fluctuations in price; thus removing these will not give us a performance hit, since we would not be able to predict them and they would just add the possibility of errors in the rest of the predictions.
 
 \begin{figure}[H]
 \centering
@@ -282,7 +275,7 @@ As we can see in figure~\ref{fig:NoTrim} (where no trimming was applied) the pre
 \label{fig:NoTrim}
 \end{figure}
 
-If we take a look at the same dataset but this time with a 1\% high and low trim (2\% in total) in figure~\ref{fig:1PTrim}; we clearly see that the actual prices in the beginning are not spiking as heavily as they did in figure~\ref{fig:NoTrim}. This of course prevents us from predicting these high spikes but if we take a look at the rest of the set we see that the 5 faulty spikes are gone as well. This shows the trade off between being able to predict the outliers and the errors they introduce.
+If we take a look at the same dataset but this time with a 1\% high and low trim (2\% in total) in Figure~\ref{fig:1PTrim}; we clearly see that the actual prices in the beginning are not spiking as heavily as they did in Figure~\ref{fig:NoTrim}. This of course prevents us from predicting these high spikes but if we take a look at the rest of the set we see that the 5 faulty spikes are gone as well. This shows the trade-off between being able to predict the outliers and the errors they introduce.
 
 \begin{figure}[H]
 \centering
@@ -291,7 +284,7 @@ If we take a look at the same dataset but this time with a 1\% high and low trim
 \label{fig:1PTrim}
 \end{figure}
 
-In figure~\ref{fig:AllTrims} we see the dataset from figure~\ref{fig:1PTrim} with 1\% trim. The lines shows how much would be cut of if we applied 2\%(Purple), 3\%(Red), 4\%(Black) and 5\%(Blue) trimming. Here we clearly see that it is removing data - that is part of the norm - from the set. With every percent we go up we remove 363 entries so at 5\% trim (top and bottom) we will be removing 1815 entries from our dataset. This will result in us never being able to predict values higher or lower than the bars. We are of course not interested in that as most of the values we trim from 2\% and up are part of a more normalized dataset. Also the improvements we see from 1\% trim to 5\% trim is 12.97\% which is pretty insignificant compared to the 1815 cases that we will be unable to predict.
+In Figure~\ref{fig:AllTrims} we see the dataset from figure~\ref{fig:1PTrim} with 1\% trim. The lines shows how much would be cut of if we applied 2\%(Purple), 3\%(Red), 4\%(Black) and 5\%(Blue) trimming. Here we clearly see that it is removing data - that is part of the norm - from the set. With every percent we go up we remove 363 entries so at 5\% trim (top and bottom) we will be removing 1815 entries from our dataset. This will result in us never being able to predict values higher or lower than the bars. We are of course not interested in that as most of the values we trim from 2\% and up are part of a more normalized dataset. The improvements we see from 1\% trim to 5\% trim is 12.97\% but if it implies that the network cannot predict 1815 hours of a year then it not worth using when simulating a whole year prediction.
 
 \begin{figure}[H]
 \centering
@@ -300,7 +293,7 @@ In figure~\ref{fig:AllTrims} we see the dataset from figure~\ref{fig:1PTrim} wit
 \label{fig:AllTrims}
 \end{figure}
 
-In figure \ref{fig:AllTrims200Hours} We have shown all of the trims on 200 hours. Here we can see that many of the spikes are limited to few hours. We can also see that the green box represents how much of the price interval the top 1\% of the dataset represents.
+In Figure \ref{fig:AllTrims200Hours} we have shown all of the trims on 200 hours. Here we can see that many of the spikes are limited to few hours. We can also see that the green box represents how much of the price interval the top 1\% of the dataset represents.
 
 \begin{figure}[H]
 \centering
@@ -308,7 +301,6 @@ In figure \ref{fig:AllTrims200Hours} We have shown all of the trims on 200 hours
 \caption{The \#1 forecast from experiment one with 1\%(Green), 2\%(Purple), 3\%(Red), 4\%(Black) and 5\%(Blue) trimming in both ends of the dataset. This is a segment of 200 hours.}
 \label{fig:AllTrims200Hours}
 \end{figure}
-
 
 \begin{table}[H]
 \centering  % used for centering table
@@ -328,22 +320,18 @@ In figure \ref{fig:AllTrims200Hours} We have shown all of the trims on 200 hours
 \label{table:Top10Trimming} % is used to refer this table in the text
 \end{table}
 
-\todo{Tjek resultat for trimming. Er det det rigtige?}
-
-\todo{Show how the same days play out with/without trimming}
-
 \subsubsection{Conclusion}
-In this experiment we saw how trimming can positively affect the predictions. We also discussed the trade offs in the trimming procedure as we lowered the possible outcomes of our predictions. This is a balance between improvement and the amount of prices we will not be able to predict. The 1\% trim showed us an improvement of 20.48\% and removed some extreme failed predictions where the ANN would overshoot the target by 800+. We also learned that higher trimming rates did not really improve the results very much thus making it easy for us to decide on a trimming rate of 1\%.
+In this experiment we saw how trimming can positively affect the predictions. We also discussed the trade-offs in the trimming procedure as we lowered the possible outcomes of our predictions. This is a balance between improvement and the amount of prices we will not be able to predict. The 1\% trim showed us an improvement of 20.48\% and removed some extreme failed predictions where the ANN would overshoot the target by 800+. We also learned that higher trimming rates did not really improve the results very much thus making it easy for us to decide on a trimming rate of 1\%.
 
 \newpage
 \subsection{Experiment Three - Calculated inputs}
 \label{sec:priceExperimentThree}
-This experiment was conducted to test the different calculated inputs that we described in section~\ref{sec:usingStatisticalInput}. This includes slope calculation, skewness, EWMA - Historical Volatility and scatter. We took the three best results from experiment one and ran every combination of the calculated inputs on the best results. The experiment was conducted on the 1\% trimmed version of the 3 best results from experiment one - due to the improvements seen in experiment two. Also we did a test on the most basic dataset we had available: Price and Consumption with no trimming. This was done to validate the impact of the different strategies before applying any other factors to the prediction. We also reconstructed the experiment in \cite{singhal2011electricity} to test their setup because we got the scatter price scheme from them.
+This experiment has been conducted to test the different calculated inputs that we described in Section~\ref{sec:usingStatisticalInput}. This includes slope calculation, skewness, historical volatility and scatter. We took the three best results from experiment one and ran every combination of the calculated inputs on the best results. The experiment was conducted on the 1\% trimmed version of the 3 best results from experiment one - due to the improvements seen in experiment two where the benefits of trimming was established. Also we have done a test on the most basic dataset we had available: Price and demand with no trimming. This was done to validate the impact of the different strategies before applying any other factors to the prediction. The interesting part is to see how much the strategies can make up for the missing meteorological factors that have shown to be of importance to the prediction. It will give an indication of the calculated inputs potential. We also reconstructed the experiment in \cite{singhal2011electricity} to test their setup which is what is referring to as scatter.
 
 \subsubsection{Hypothesis}
-In this experiment we applied different calculated inputs to the neural network. This was done to elaborate on the prior trend when trying to predict the next 24 hours. This experiment is expected to show an improvement in the curve fitting thus giving us a better MAE.
+In this experiment we applied different calculated inputs to the Feedforward Neural Network. This was done to elaborate on the prior trend when trying to predict the next 24 hours. This experiment is expected to show an improvement in the curve fitting thus giving us a better MAE.
 
-We conducted an experiment to test the effect of these strategies on a vanilla dataset(Consumption and last know price with/without trim) and we expect these predictions to improve a good deal with strategies applied thus making up for some of the other factors not included e.g. Wind Speed, Temperature, Time of Day etc.
+We conducted an experiment to test the effect of these strategies on a dataset containing demand and last know price with and without trim where we expect these predictions to improve a great deal with strategies applied.
 
 \subsubsection{Variables}
 In this experiment we had 4 variables that we tested:
@@ -354,10 +342,10 @@ In this experiment we had 4 variables that we tested:
 	\item Scatter (Scatter)
 \end{itemize}
 
-The setup of the different strategies have been tested on the best result from experiment one. The scatter strategy is included to let the neural network train and find these connections by itself. The rest of the calculated inputs are preprocessed beforehand and directly says something about the graph behavior.
+The setup of the different strategies have been tested on the best result from experiment one. The scatter strategy is included to let the Feedforward Neural Network train and find these connections by itself. The rest of the calculated inputs are preprocessed beforehand and directly says something about the graph behavior.
 
 \subsubsection{EWMA - Historical Volatility}
-The EWMA is used to calculate the volatility of the curve. The electricity price is highly volatile and therefore we anticipate that knowledge about the historical volatility will help the predictions. In the EWMA we have a smoothing factor which indicates how sensitive the strategy will be towards fluctuations in the curve. A lower smoothing factor will allow for more rapid changes and vice versa. In table ~\ref{table:SmoothingFactorTest} we see that the best result is a smoothing factor of 0.9 and a stack size of 16. The stack size denotes how many historical prices should be included in the calculations of the historical volatility.
+The EWMA is used to calculate the volatility of the curve. The electricity price is highly volatile and therefore we anticipate that knowledge about the historical volatility will help the predictions. In the EWMA we have a smoothing factor which indicates how sensitive the strategy will be towards fluctuations in the curve. A lower smoothing factor will allow for more rapid changes and vice versa. In table~\ref{table:SmoothingFactorTest} we see that the best result is a smoothing factor of 0.9 and a stack size of 16. The stack size denotes how many historical prices should be included in the calculations of the historical volatility.
 
 \begin{table}[H]
 \centering  % used for centering table
@@ -383,7 +371,7 @@ The EWMA is used to calculate the volatility of the curve. The electricity price
 \end{table}
 
 \subsubsection{Skewness}
-The skewness denotes whether an observation falls to the left or the right of the median as described in section~\ref{sec:skewness}. This is used to determine in what direction the graph is currently moving thus giving us information about the trend. We experimented with how many historical prices we had to include in the calculation of the skewness and ended up with 2 being the best even though they are very close.
+The skewness denotes whether an observation falls to the left or the right of the median as described in Section~\ref{sec:skewness}. This is used to determine in what direction the graph is currently moving thus giving us information about the trend. We experimented with how many historical prices we had to include in the calculation of the skewness and ended up with 2 being the best even though they are very close.
 
 \begin{table}[H]
 \centering  % used for centering table
@@ -407,7 +395,7 @@ The skewness denotes whether an observation falls to the left or the right of th
 \end{table}
 
 \subsubsection{Slope calculation}
-The slope calculation is conducted to tell us something about the gradient of the current curve as described in section~\ref{sec:curveAnalysis}. We examine here how many historical prices should be included in the curve gradient analysis to say something about what direction (up, down or steady) the curve is heading. The test shows us that a stack size of 12 prices is the best but again they are not differing much.
+The slope calculation is conducted to tell us something about the gradient of the current curve as described in Section~\ref{sec:curveAnalysis}. We examine here how many historical prices should be included in the curve gradient analysis to say something about what direction (up, down or steady) the curve is heading. The test shows us that a stack size of 12 prices is the best but again they are not differing much.
 
 \begin{table}[H]
 \centering  % used for centering table
@@ -431,9 +419,9 @@ The slope calculation is conducted to tell us something about the gradient of th
 \end{table}
 
 \subsubsection{Results}
-We ran 3 experiments reflecting the top 3 results from experiment one. Before the results of the experiments we list the input variable combination that we use the strategies on. 
+We ran three experiments reflecting the top 3 results from experiment one. Before the results of the experiments we list the input variable combination that we use the strategies on. 
 
-\noindent Variables: Price, Consumption, Wind Speed, Temperature, Time of Day (Matrix), Day of Week (Matrix) and Season of Year (Matrix)
+\noindent Variables: Price, Demand, Wind Speed, Temperature, Time of Day (Matrix), Day of Week (Matrix) and Season of Year (Matrix)
 \begin{table}[H]
 \centering  % used for centering table
 \resizebox{0.8\textwidth}{!}{
@@ -462,7 +450,7 @@ We ran 3 experiments reflecting the top 3 results from experiment one. Before th
 \label{table:Statistical1} % is used to refer this table in the text
 \end{table}
 
-The first run shown in table~\ref{table:Statistical1} shows a difference of 6,83\% between the calculated inputs and the best result shows an improvement compared to the results from experiment two - this combination gave us 47,21 in MAE. Compared to the best result from table~\ref{table:Statistical1} that is an improvement of 4.54\%.
+The first run shown in Table~\ref{table:Statistical1} shows a difference from of 6,83\% between the best prediction to the worst. The best of the results show an improvement of 4,54\% compared to the results from experiment two where the obtained MAE was 47,21.
 
 \begin{figure}[H]
 \centering
@@ -471,7 +459,7 @@ The first run shown in table~\ref{table:Statistical1} shows a difference of 6,83
 \label{fig:X3_Best_With_MAE}
 \end{figure}
 
-In figure~\ref{fig:X2_X3_3800_4000} we see how the ANN has trouble predicting the unusual low values. This is the same for the experiment two prediction as it is for the experiment three prediction. The case we see in figure~\ref{fig:X2_X3_3800_4000} is what we hoped the calculated inputs would help the ANN to be better at predicting; since it has gained some knowledge about the immediate past. Experiment three also introduces more jagged curves where it fluctuates up and down a lot compared to the prediction from experiment two - which has smoother curves. This is because of the calculated inputs that add values that are interpreted into either a rising or a falling curve. Compared to the prediction from experiment two it does not have this knowledge and only relies on the interaction between the quantifiable parameters from experiment one.
+In figure~\ref{fig:X2_X3_3800_4000} we see how the ANN has trouble predicting the unusual low values. This is the same for the experiment two prediction as it is for the experiment three prediction. The case we see in figure~\ref{fig:X2_X3_3800_4000} is what we hoped the calculated inputs would help the ANN to be better at predicting; since it has gained some knowledge about the immediate past. Experiment three also introduces more uneven curves where it fluctuates up and down compared to the prediction from experiment two which has smoother curves. This is because of the calculated inputs that add values that are interpreted into either a rising or a falling curve. Compared to the prediction from experiment two it does not have this knowledge and only relies on the interaction between the quantifiable parameters from experiment one.
 
 \begin{figure}[H]
 \centering
@@ -480,7 +468,7 @@ In figure~\ref{fig:X2_X3_3800_4000} we see how the ANN has trouble predicting th
 \label{fig:X2_X3_3800_4000}
 \end{figure}
 
-If we apply all of the calculated inputs to the prediction we get figure~\ref{fig:X2_X3_AllParameters_3800_4000}. In this figure we can see that it actually is able to drop to the lowest values in the dataset. On the other hand it has trouble rising from the low values which reintroduces the error but in the top of the dataset.
+If we apply all of the calculated inputs to the prediction we get Figure~\ref{fig:X2_X3_AllParameters_3800_4000}. In this figure we can see that it actually is able to drop to the lowest values in the dataset. On the other hand it has trouble rising from the low values which reintroduces the error but in the top of the dataset.
 
 \begin{figure}[H]
 \centering
@@ -489,9 +477,9 @@ If we apply all of the calculated inputs to the prediction we get figure~\ref{fi
 \label{fig:X2_X3_AllParameters_3800_4000}
 \end{figure}
 
-Another problem with the calculated inputs are that making predictions with an ANN is about generalizing the inputs to reflect a mathematical function. If the ANN does not see enough examples of the calculated inputs throughout the training dataset it will not be able to make this generalization and thus not be able to use it efficiently in the predictions of the next 24 hours. If the first prediction in the next 24 hours is wrong (compared to the ideal prices) the calculated inputs can help elevate/decrease the error since the last known price is added to the calculation of these features(This can be seen in figure~\ref{fig:X2_X3_3816_3840} and in ~\ref{fig:X3_Price_Consump_Worst}). Also the calculated inputs are more or less unique throughout the whole year since the price does not follow a specific pattern that makes it harder to generalize the calculated inputs in the price prediction. 
+Another problem with the calculated inputs are that making predictions with an ANN is about generalizing the inputs to reflect a mathematical function. If the ANN does not see enough examples of the calculated inputs throughout the training dataset it will not be able to make this generalization and thus not be able to use it efficiently in the predictions of the next 24 hours. If the first prediction in the next 24 hours is wrong (compared to the ideal prices) the calculated inputs can help elevate/decrease the error since the last known price is added to the calculation of these features (This can be seen in Figure~\ref{fig:X2_X3_3816_3840} and in Figure~\ref{fig:X3_Price_Consump_Worst}). Also the calculated inputs are more or less unique throughout the whole year since the price does not follow a specific pattern that makes it harder to generalize the calculated inputs in the price prediction. The same was seen in experiment three for wind power in Section~\ref{sec:experimentThreeCalcInputs}.
 
-The results in table~\ref{table:Statistical2} and ~\ref{table:Statistical3} are control groups to show that other combinations of inputs has the same benefit from the calculated inputs.
+The results in Table~\ref{table:Statistical2} and ~\ref{table:Statistical3} are control groups to show that other combinations of inputs has the same benefit from the calculated inputs.
 
 \begin{figure}[H]
 \centering
@@ -507,7 +495,7 @@ The results in table~\ref{table:Statistical2} and ~\ref{table:Statistical3} are 
 \label{fig:X2_X3_3816_3840_1hourahead}
 \end{figure}
 
-\noindent Variables: Price, Consumption, Wind Speed, Temperature, Time of Day (Matrix), Day of Week and Season of Year (Matrix)
+\noindent Variables: Price, Demand, Wind Speed, Temperature, Time of Day (Matrix), Day of Week and Season of Year (Matrix)
 \begin{table}[H]
 \centering  % used for centering table
 \resizebox{0.8\textwidth}{!}{
@@ -536,7 +524,7 @@ The results in table~\ref{table:Statistical2} and ~\ref{table:Statistical3} are 
 \label{table:Statistical2} % is used to refer this table in the text
 \end{table}
 
-\noindent Variables: Price, Consumption, Wind Speed, Temperature, Time of Day (Matrix) and Month of Year (Matrix)
+\noindent Variables: Price, Demand, Wind Speed, Temperature, Time of Day (Matrix) and Month of Year (Matrix)
 \begin{table}[H]
 \centering  % used for centering table
 \resizebox{0.8\textwidth}{!}{
@@ -566,34 +554,10 @@ The results in table~\ref{table:Statistical2} and ~\ref{table:Statistical3} are 
 \end{table}
 
 \subsubsection{Calculated inputs effect on a simple dataset}
-To test the benefit of the calculated inputs on a vanilla dataset (that only contains the price and consumption) we conducted two more experiments - one with trimming(1\%) and one without trimming. We also did a simulation of the strategy described in paper \cite{singhal2011electricity} since this is where we got the selection of scatter prices from.
+To test the benefit of the calculated inputs on a dataset that only contains the price and demand we conducted two more experiments - one with trimming(1\%) and one without trimming. The different approaches to calculated inputs are again historical volatility, skewness, slope calculation and the scatter approach from \cite{singhal2011electricity}. 
 
-Test \#1 shown in table~\ref{table:price_consumption_x3} shows the calculated inputs applied on a dataset without trimming. The original test from experiment one can be seen in the price results appendix ~\ref{sec:priceResultAppendix} \#106 and gave us an MAE of 89. If we compare it to this test we see and improvement of 21.24\%. The most notable trend in the results in table~\ref{table:price_consumption_x3} is that nearly all of the scatter prices are the top results. That is also the case for the results in table~\ref{table:price_consumption_x3_1pTrim} (Same experiment with 1\% trim).
+Test \#1 shown in Table~\ref{table:price_consumption_x3} shows the calculated inputs applied on a dataset without trimming. The original test from experiment one can be seen in the price results in Appendix~\ref{sec:priceResultAppendix} \#106 and it gave us an MAE of 89 for the dataset only consisting of price and demand. If we compare it to this test we see and improvement of 21.24\%. The most notable trend in the results in Table~\ref{table:price_consumption_x3} is that nearly all of the scatter prices are the top results. 
 
-The most noteworthy are that the two are very similar and the one with trimming is actually worse when the EWMA strategy is applied. When we moved from experiment one to experiment two we saw that the ANN became more accurate when we trimmed away the largest spikes; this does not seem to be the case here. From this we can conclude that trimming has no effect on the dataset if all the other input variables are not included. In figure~\ref{fig:X3_Price_Consump_NoTrim} and ~\ref{fig:X3_Price_Consump_1pTrim} we see the similarities between the 1\% trim and the no-trim predictions. In figure ~\ref{fig:X3_Price_Consump_Worst} we see the same segment of the prediction as the other two but this one is with Curve, Skew, EWMA and 1\% trim. In the table ~\ref{table:price_consumption_x3} clearly see that it is inferior. This is because the strategies applied accounts for to many of the inputs and it confuses more than it helps.
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=\linewidth]{billeder/PriceExperimentalAnalysis/X3_Price_Consump_1pTrim.png}
-\caption{Price and consumption with scatter and 1\% trim.)}
-\label{fig:X3_Price_Consump_1pTrim}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=\linewidth]{billeder/PriceExperimentalAnalysis/X3_Price_Consump_NoTrim.png}
-\caption{Price and consumption with scatter and no trim.}
-\label{fig:X3_Price_Consump_NoTrim}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=\linewidth]{billeder/PriceExperimentalAnalysis/X3_Price_Consump_Worst.png}
-\caption{Price and consumption with Curve, Skew, EWMA and 1\% trim.}
-\label{fig:X3_Price_Consump_Worst}
-\end{figure}
-
-\noindent Variables: Price, Demand and With no trimming
 \begin{table}[H]
 \centering  % used for centering table
 \resizebox{0.8\textwidth}{!}{
@@ -618,11 +582,12 @@ The most noteworthy are that the two are very similar and the one with trimming 
 	15 &  \x    & \x    &       &       & 53,0\% &  36,60\% & 96,24 & 31,07\% \\ \hline
 	\end{tabular}
 }
-\caption{calculated inputs on Price \& Consumption with no trim.} % title of Table
+\caption{Calculated inputs on Price \& demand with no trim.} % title of Table
 \label{table:price_consumption_x3} % is used to refer this table in the text
 \end{table}
 
-\noindent Variables: Price, Demand and With 1\% trimming
+The best results for the same experiment but with 1\% trim can be seen in Table~\ref{table:price_consumption_x3_1pTrim}. The results are improved but the trimming did not help as significantly as we saw in experiment two. The scatter price approach again takes the best positions which indicates that the network itself can calculate the connection to previous prices when no meteorological factors are included. It can also be seen that from 1-7 the 1\% trim outperforms the prediction without trimming but thereafter trimming becomes the worst of the two.
+
 \begin{table}[H]
 \centering  % used for centering table
 \resizebox{0.8\textwidth}{!}{
@@ -647,14 +612,30 @@ The most noteworthy are that the two are very similar and the one with trimming 
 	15 &  \x    & \x    & \x    &       & 49,9\% &  45,40\% & 118,82 & 74,03\% \\ \hline
 	\end{tabular}
 }
-\caption{calculated inputs on Price \& Consumption with 1\% trim.} % title of Table
+\caption{Calculated inputs on Price \& demand with 1\% trim.} % title of Table
 \label{table:price_consumption_x3_1pTrim} % is used to refer this table in the text
 \end{table}
 
-\subsubsection{Clone scatter experiment from literature}
-The last iterations we did was a clone of the experiments conducted in~\cite{singhal2011electricity}. This setup includes price, consumption, time of day, day of week and scatter. We did the prediction both with 1\% and no trim as they did in the text (no spikes, small spikes and large spikes). The results can be seen in table ~\ref{table:scatter_text_no_trim} and ~\ref{table:scatter_text_1p_trim}. The results with trimming and the best strategies gives us a result of 52.04 MAE which is 14.75\% worse than the best result from table~\ref{table:Statistical1} and the results without trimming is 71.51 MAE which is 25.19\% worse than the best result from table~\ref{table:Top20Prices} in experiment one. We cannot compare the results directly to the ones they present in the paper because they only present a prediction of 48 hours and they do not tell us whether this is on unseen data or it is on the same dataset as they trained on. Neither do we know whether they simulate the full 48 hour prediction or they do it 1-hour at a time.
+The most noteworthy is that the two results (with and without trimming) are very similar; the one with trimming is actually worse when the historical volatility strategy is applied but the top results show better results with trimming which was expected due to the findings in experiment two of electricity prices. We can conclude that trimming has less effect on the dataset than we saw in our experiment from earlier and it is even worse on the results from \#7-\#15. In Figure~\ref{fig:X3_Price_Consump_NoTrim} and ~\ref{fig:X3_Price_Consump_1pTrim} show the comparison between the best prediction for with and without trimming. The trimming having less effect is expressed in the comparison in the similarities between the two. 
 
-We have found it exceedingly difficult to compare our results to many of the papers in the field\cite{singhal2011electricity,yamin2004adaptive}. This is due to lack of information on their setup and a difference in how much data they base their results on. Therefore we have to reproduce their results. This will be further established in our discussion.
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{billeder/PriceExperimentalAnalysis/X3_Price_Consump_1pTrim.png}
+\caption{Price and demand with scatter and 1\% trim.)}
+\label{fig:X3_Price_Consump_1pTrim}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{billeder/PriceExperimentalAnalysis/X3_Price_Consump_NoTrim.png}
+\caption{Price and demand with scatter and no trim.}
+\label{fig:X3_Price_Consump_NoTrim}
+\end{figure}
+
+\subsubsection{Clone scatter experiment from literature}
+The network has the ability of calculating the influence of previous hours itself. This is described in~\cite{singhal2011electricity} and for comparison of our own calculated input approach we have attempted to use their approach (which we have denoted as scatter). The setup includes price, demand, time of day, day of week and scatter. We have done the prediction both with 1\% and no trim as they did in the text (can be transferred to small spikes and large spikes). The results can be seen in Table~\ref{table:scatter_text_no_trim} and ~\ref{table:scatter_text_1p_trim}. The results with trimming and the best strategies gives us a result of 52,04 MAE which is 14,75\% worse than the best result from Table~\ref{table:Statistical1}. The results without trimming is 71,51 MAE which is 25.19\% worse than the best result from Table~\ref{table:Top20Prices} in experiment one. We cannot compare the results directly to the paper since they only present a prediction of 48 hours and they do not describe whether this is on unseen data or it is on the same dataset as they trained on. Neither do we know whether they simulate the full 48 hour prediction or they perform it 1-hour at a time.
+
+Comparing results is difficult due to lack of information on experimental environments and influential factors for that specific market. We will in the discussion of our results elaborate on our experience with this. 
 
 \noindent Variables: Price, Demand, Change in demand, Time of Day, Day of Week and with no trimming
 \begin{table}[H]
@@ -702,22 +683,22 @@ We have found it exceedingly difficult to compare our results to many of the pap
 \end{table}
 
 \subsubsection{Conclusion}
-The calculated inputs that we applied in this experiment did help the curve analysis but only slightly. The best improvement gave a result that was 4.54\% better than the same combination in experiment two. The results also show that the calculated inputs will at worst just be the same as before. So if we apply them and they do not work then the result and MAE will not suffer from this.
+The calculated inputs slightly helped the curve analysis by adding extra characteristics. The best improvement gave a result that was 4.54\% better than the same combination in experiment two. The results indicate an improvement by using the calculated inputs for further analysis of the dataset and at worst the prediction does not suffer any decrease in accuracy from using it.
 
-The results from the simple dataset (last known price and consumption) showed us that if we apply calculated inputs to this dataset it will improve quite a bit. The improvement makes it as good as the best combination from experiment one. The downside to this is that we are not able to improve it further. So it gets stuck with that error margin. We conducted the same trial with a 1 \% trimmed dataset and here we saw no improvement. It shows that our calculated inputs can improve simple datasets better than complex ones.
+The results from the simple dataset (last known price and demand) showed us that if we apply calculated inputs to this dataset it will improve significantly which emphasizes that the calculated inputs do bring extra information to the ANN so that it can approach the target better. The improvement makes it as good as the best combination from experiment one. The downside to this is that we are not able to improve it further. So it gets stuck with that error margin. We conducted the same trial with a 1\% trimmed dataset and here we saw no improvement. It shows that our calculated inputs can improve simple datasets better than complex ones.
 
-The last part was a comparison with the paper~\cite{singhal2011electricity} where they have a setup which we copied in this experiment. Their setup did a good job of predicting the price but our setup gave a better result. We cannot compare the results directly due to a lack of information on how they conducted their trials. We did try on both a dataset with and without trimming applied. In this case the trimmed dataset gave a better result.
+The last part was a comparison with the paper~\cite{singhal2011electricity} where they have a setup which we copied in this experiment. Their setup did a good job of predicting the price but our setup gave a better result. We cannot compare the results directly due to a lack of information on how they conducted their trials. We have done on a dataset with and without trimming applied. In this case the trimmed dataset gave a better result.
 
 \newpage
 \subsection{Experiment Four - Black Box Optimization}
 \label{sec:priceExperimentFour}
-We here show the impacts of epochs used to train the network and the size of the training dataset. We also show how the time dimension of doing these tests are affected by these parameters. Black box optimization also covers the number of hidden layers and the neuron count in these. We chose not to do the neuron count experiments since we used a pruning algorithm to find the most optimal combination of neurons and layers for each input combination as described in section~\ref{sec:testProcedure} and in section~\ref{sec:pruning}.
+We here show the impacts of epochs used to train the network and the size of the training dataset. We also show how the time dimension of doing these tests are affected by these parameters. Black box optimization also covers the number of hidden layers and the neuron count in these. We assume that the number of layers and neurons are optimized best possible through a pruning algorithm as described in Section~\ref{sec:testProcedure} and in Section~\ref{sec:pruning}. Therefore we will not be covering it here but the numbers have been added in the previous experiments and will be here as well. 
 
 \subsubsection{Variables}
 All of these tests were conducted using the best combination seen in table ~\ref{table:Statistical1}. Giving us the following combination:
 \begin{itemize}
 	\item Price
-	\item Consumption
+	\item Demand
 	\item Wind Speed
 	\item Temperature
 	\item Time of Day (Matrix)
@@ -735,10 +716,10 @@ The following parameters were tested:
 \end{itemize}
 
 \subsubsection{Hypothesis}
-We expect the results from these tests to show that the time used to make a years prediction will increase with the numbers of epochs and it will increase with the size of the dataset. We expect the best epochs to be in the lower end of the scale presented above. The best results from the dataset test is expected to be 1/4 year or 1/2 year sizes. These assumptions are based on what we described in the Forecasting Model chapter~\ref{ch:forecastingModel}.
+We expect the results from these tests to show that the time used to make a years prediction will increase with the number of epochs and it will increase with the size of the dataset. We expect too few number and too many number of epochs to significantly worsen the result. The best results from the dataset test is expected to be 1/4 year or 1/2 year sizes. These assumptions are based on what we described in the Forecasting Model chapter~\ref{ch:forecastingModel}.
 
 \subsubsection{Results}
-The results from table~\ref{table:Dataset_size} shows the impact of increasing the size of the training dataset. The influence of increasing the size shows a deviation of 7,19\%. It shows that the best result are the size equivalent to half a year. The second best are the one year prediction which might be because we included the seasonal parameters as we showed in experiment one; where the addition of the Month of Year(MoY) parameter increased the performance of a one year training set. The one we have used throughout the preceding results are the third best and gave a result that was 6,46\% worse than the best thus we might be able to increase some of the scores from earlier experiments if we use a dataset consisting of data from half a year. Another interesting fact here is how the time to a prediction increases linearly with the amount of entries in the dataset - from 232 seconds(3.9 minutes) to 844 seconds(14.1 minutes).
+The results from Table~\ref{table:Dataset_size} shows the impact of increasing the size of the training dataset. The influence of increasing the size shows a deviation of 7,19\%. It shows that the best result are the size equivalent to half a year. The second best are the one year prediction which might be because we included the seasonal parameters as we showed in experiment one; where the addition of the Month of Year(MoY) parameter increased the performance of a one year training set. The one we have used throughout the preceding results are the third best and gave a result that was 6,46\% worse than the best thus we might be able to increase some of the scores from earlier experiments if we use a dataset consisting of data from half a year. Another interesting fact here is how the time to a prediction increases linearly with the amount of entries in the dataset - from 232 seconds (3.9 minutes) to 844 seconds (14.1 minutes).
 
 \begin{table}[H]
 \centering  % used for centering table
@@ -757,7 +738,7 @@ The results from table~\ref{table:Dataset_size} shows the impact of increasing t
 \label{table:Dataset_size} % is used to refer this table in the text
 \end{table}
 
-In table~\ref{table:Epochs} we see the effects of epochs used when training the network. We see a tendency that values between 100 and 1000 are the best number of epochs to use in this network. 40 epochs also perform very well which are a bit surprising since the number of epochs used to train the network reflects how many iterations the network undergoes to find the best match between the weights. The under fitting of the weights can be seen in 1 epoch training(\#27 in ~\ref{table:Epochs}) where the network gets one attempt to correct the weights and find a generalization of the parameters (which would be a lucky guess if that happened). The 1 epoch run can be seen in figure~\ref{fig:1epoch}. We also see over fitting of the dataset when running more than 1800 epochs the performance drops at least 10.26\% and gets worse with more epochs. Another thing to notice here are the time used to run the pruning algorithm and predict the next years data. We can see how the time rises when the number of epochs rises. Also the number of neurons in each layer have an influence on the time used to do the predictions (more neurons equals more time used). Of course the time element is reduced when we are going to use it in a live setting where the goal is to predict only one hour ahead. Even though we have included to show the time consumed because it says something about the inner workings of the system.
+In Table~\ref{table:Epochs} we see the effects of epochs used when training the network. We see a tendency that values between 100 and 1000 are the best number of epochs to use in this network. 40 epochs also perform very well which are a bit surprising since the number of epochs used to train the network reflects how many iterations the network undergoes to find the best match between the weights. The under fitting of the weights can be seen in 1 epoch training(\#27 in ~\ref{table:Epochs}) where the network gets one attempt to correct the weights and find a generalization of the parameters (which would be a lucky guess if that happened). The 1 epoch run can be seen in figure~\ref{fig:1epoch}. We also see over fitting of the dataset when running more than 1800 epochs where the performance drops at least 10.26\% and gets worse with more epochs. Another thing to notice here is the time used to run the pruning algorithm and predict the next years data. We can see how the time rises when the number of epochs rises. Also the number of neurons in each layer have an influence on the time used to do the predictions (more neurons are equal to more time spent). Of course the time element is reduced when live data will be used real setting where the goal is to predict only one hour ahead. Even though we have included to show the time consumed because it says something about the inner workings of the system.
 
 \begin{figure}[H]
 \centering
@@ -806,7 +787,7 @@ In table~\ref{table:Epochs} we see the effects of epochs used when training the 
 \label{table:Epochs} % is used to refer this table in the text
 \end{table}
 
-The following figures \ref{fig:Winter}, \ref{fig:Spring}, \ref{fig:Summer} and \ref{fig:Fall} shows 200 hours taken from the four seasons. These have been included to show how well our predictions follow the real values.
+The following Figures \ref{fig:Winter}, \ref{fig:Spring}, \ref{fig:Summer} and \ref{fig:Fall} shows 200 hours taken from the four seasons. These have been included to show how well our predictions follow the real values.
 \begin{figure}[H]
 \centering
 \includegraphics[width=\linewidth]{billeder/PriceExperimentalAnalysis/winter.jpg}
@@ -841,25 +822,25 @@ Figure \ref{fig:Summer} shows the summertime. This graph is also very volatile a
 \label{fig:Fall}
 \end{figure}
 
-In the last figure \ref{fig:Fall} we see a segment from fall. It shows a more steady curve but also shows the difficulty that going from a flat curve to a volatile curve.
+In the last Figure \ref{fig:Fall} we see a segment from fall. It shows a more steady curve but also shows the difficulty that going from a flat curve to a volatile curve.
 
 \subsubsection{Conclusion}
 From this experiment we see that the optimal (for this input combination) training dataset size is half a year of data. We see an improvement of 6,46\% compared to the dataset size we have used in the prior experiments thus a better result from those experiments are expected if we use half a year of data instead of just a quarter of a year. The time consumed with this increase in the dataset would have doubled the time we used to conduct the trials. The time used to predict a full year are very close to a 1-to-1 correlation with the size of the dataset. 
 
-The epochs used to train the network shows that values in the hundreds (100-900) dominate the top 10 results in~\ref{table:Epochs}. The best result is 500 epochs and shows an improvement over 200 epochs of 6.09\% which we used in prior experiments. These results also show how the time increases when the number of epochs increases. This increase is not as apparent as it is in the dataset size experiments - this is because of the different neuron counts in the hidden layers which also influences the time it takes to conduct one experimental iteration. We still see a tendency where higher number of epochs results in more time consumed doing the experiment.
+The epochs used to train the network shows that values in the hundreds (100-900) dominate the top 10 results in Table~\ref{table:Epochs}. The best result is 500 epochs and shows an improvement over 200 epochs of 6.09\% which we used in prior experiments. These results also show how the time increases when the number of epochs increases. We still see a tendency where higher number of epochs results in more time consumed doing the experiment.
 
-Of course these are not final and if something is changed in the input set then we have to retest what the best setup will be. The point being that we cannot say something about this in general just for the best of our combinations.
+Of course these are not final and if something is changed in the input set then we have to retest what the best setup will be. The results reflect the best black optimization for our specific input combination and experimental setup. The dataset size and epochs are not necessarily (most likely not) transferable to other markets with other input parameters. 
 
 \newpage
-\subsection{Experiment Five - Step-ahead forecasting}
+\subsection{Experiment Five - Step-Ahead Forecasting}
 \label{sec:priceExperimentFive}
-This test shows how the predictions behave when we increase the hours to use in step-ahead predictions. We did a 1-hour ahead prediction and kept increasing the number until we hit 24 hours. We also conducted a test to see what the effects of changing the starting offset are.
+This experiment shows how the predictions behave when we increase the hours to use in step-ahead predictions. We have done a 1-hour ahead prediction and kept increasing the number until we hit 24 hours. We also conducted a test to see what the effects of changing the starting offset are.
 
 \subsubsection{Variables}
-This test were conducted using the best combination seen in table ~\ref{table:Statistical1}. Giving us the following combination:
+This test were conducted using the best combination seen in Table ~\ref{table:Statistical1}. Giving us the following combination:
 \begin{itemize}
 	\item Price
-	\item Consumption
+	\item Demand
 	\item Wind Speed
 	\item Temperature
 	\item Time of Day (Matrix)
@@ -877,12 +858,12 @@ The following parameters were tested:
 \end{itemize}
 
 \subsubsection{Hypothesis}
-In this experiment we anticipate a decrease in MAE as we increase the number of hours the ANN has to predict. The reason for this is the elevation of error when we add more hours to predict ahead. The elevation comes from the last known price which will be the last predicted price (from hour 2 and onwards) thus elevating the error. The prediction of price relies in a great extend on the last-known price (see \ref{sec:Price}) and therefore it will have a significant effect on the price. We use the last-predicted price to simulate a real life setting where we have no idea what the next hours price will be thus forcing us to rely on the last prediction when doing the next hour.
+In this experiment we anticipate a decrease in MAE as we increase the number of hours the ANN has to predict. The reason for this is the elevation of error when we add more hours to predict ahead. The elevation comes from the last known price which will be the last predicted price (from hour 2 and onwards) thus elevating the error. The prediction of price relies in a great extend on the last-known price (see \ref{sec:Price}) and therefore it will have a significant effect on the price. We use the last-predicted price to simulate a real life setting where we have no idea what the next hours price will be and thus forcing us to rely on the last prediction when predicting the next hour.
 
 We also expect to see that the MAE will change when we shift the offsets. The offsets decide where the first and (in most cases) best prediction will start. If these first predictions hit a good spot where the error margin will not rise as fast as other spots around it, then we will see a lower MAE.
 
 \subsubsection{Results}
-In table \ref{table:XHoursAhead} we see the results from the hours ahead experiment. The MAE is linear with the number of hours ahead during the first 10 predictions. From there and on it is random what setup gives the worst result. From around 10 hours ahead the increase in MAE seems to be slowing down. This is because it is not only the last known price that dictates what the new prediction will be. The other input parameters (wind speed, time of day etc.) will also influence the price prediction. So when we hit a certain point in the prediction (which seems to be around 10 predictions ahead) the other input parameters will prevent the elevation of errors further. This can be seen in figure~\ref{fig:24HoursAhead_elevationOfError} where the black lines denotes 24 hours forecasts. We see in the 24 hours prediction (with the black box overlay) how the error is rising but when the prices start to fall so does the prediction. If it had been the last known price that dictated the next prediction then the predictions would have kept rising and so would the MAE.
+In Table \ref{table:XHoursAhead} we see the results from the hours ahead experiment. The MAE is linear with the number of hours ahead during the first 10 predictions. From there and on it is random what setup gives the worst result. From around 10 hours ahead the increase in MAE seems to be slowing down. This is because it is not only the last known price that dictates what the new prediction will be. The other input parameters (wind speed, time of day etc.) will also influence the price prediction. So when we hit a certain point in the prediction (which seems to be around 10 predictions ahead) the other input parameters will prevent the elevation of errors further. This can be seen in Figure~\ref{fig:24HoursAhead_elevationOfError} where the black lines denote 24 hours forecasts. We see in the 24 hours prediction (with the black box overlay) how the error is rising but when the prices start to fall so does the prediction. If it had been the last known price that dictated the next prediction then the predictions would have kept rising and so would the MAE.
 
 \begin{figure}[H]
 \centering
@@ -891,7 +872,7 @@ In table \ref{table:XHoursAhead} we see the results from the hours ahead experim
 \label{fig:24HoursAhead_elevationOfError}
 \end{figure}
 
-In the 2 hours ahead prediction seen in figure~\ref{fig:2HoursAhead} we see how well the predictions are when we only predict 2 hours ahead. This is due to the limitation of the elevation of error which happens when we only have 1 hour dependent on an earlier prediction.
+In the 2 hours ahead prediction seen in Figure~\ref{fig:2HoursAhead} we see how well the predictions are when we only predict 2 hours ahead. This is due to the limitation of the elevation of error which happens when we only have 1 hour dependent on an earlier prediction.
 
 \begin{figure}[H]
 \centering
@@ -900,7 +881,7 @@ In the 2 hours ahead prediction seen in figure~\ref{fig:2HoursAhead} we see how 
 \label{fig:2HoursAhead}
 \end{figure}
 
-In the 10 hours ahead predict seen in figure~\ref{fig:10HoursAhead} we again see how the elevation happens. The black lines in the figure shows when we shift from one prediction cycle of 10 hours to the next. It is very clear in the figure how the predictions are corrected to fit the curve better every time we reset the prediction. From the beginning of every prediction cycle the next result will be based on correct data thus not relying on a potentially faulty prediction done earlier in the cycle.
+In the 10 hours ahead predict seen in Figure~\ref{fig:10HoursAhead} we again see how the elevation happens. The black lines in the figure shows when we shift from one prediction cycle of 10 hours to the next. It is very clear in the figure how the predictions are corrected to fit the curve better every time we reset the prediction. From the beginning of every prediction cycle the next result will be based on correct data thus not relying on a potentially faulty prediction done earlier in the cycle.
 
 \begin{figure}[H]
 \centering
@@ -948,7 +929,7 @@ It is a bit surprising that the 1 hour ahead prediction shows a worse \% correct
 \label{table:XHoursAhead} % is used to refer this table in the text
 \end{table}
 
-In table~\ref{table:Offsets} we see the results from the sliding window test. The entry with offset 0 is the same setup as prior experiments. The rest shows the difference in MAE when we shift where the 24 hours ahead predictions begin. We cover all possible offsets by doing 0-23 thus covering every offset from the first 24 hour prediction and onwards. From this experiment we show how much the right offset means for the total MAE in a years prediction. The biggest difference are between offset 4 and offset 7 with a difference of 15,04\%. These differences are connected to the elevation of error we talked about in the last result. If we hit the right spots where the elevation of error are not going to have a big impact this will lower the overall MAE thus giving us a better result.
+In Table~\ref{table:Offsets} we see the results from the sliding window test. The entry with offset 0 is the same setup as prior experiments. The rest shows the difference in MAE when we shift where the 24 hours ahead predictions begin. We cover all possible offsets by doing 0-23 thus covering every offset from the first 24 hour prediction and onwards. From this experiment we show how much the right offset means for the total MAE in a years prediction. The biggest difference are between offset 4 and offset 7 with a difference of 15,04\%. These differences are connected to the elevation of error we talked about in the last result. If we hit the right spots where the elevation of error are not going to have a big impact this will lower the overall MAE thus giving us a better result.
 
 \begin{table}[H]
 \centering  % used for centering table
@@ -994,7 +975,7 @@ The offsets showed us a difference of 15,04\% from the best to the worst startin
 
 \newpage
 \subsection{Concluding Remarks}
-We conducted a series of experiments where we tested the parameters we identified in the electricity price analysis section ~\ref{sec:ElectricityPriceAnalysis}. We have shown the results from five aspects of the price predicting artificial neural network we created. We presented how the different parameters and setups changes the output and accuracy of the ANN. In table~\ref{table:OverallImprovement} the best results from the experiments are presented and the overall improvement have been calculated to be 26.62\% from the initial tests to the best result in exp 3.
+We conducted a series of experiments where we tested the parameters we identified in the electricity price analysis in Section~\ref{sec:ElectricityPriceAnalysis}. We have shown the results from five aspects of our modelled Feedforward Neural Network used for price predicting. We presented how the different parameters and setups change the output and accuracy of the ANN. In table~\ref{table:OverallImprovement} the best results from the experiments are presented and the overall improvement have been calculated to be 26.62\% from the initial tests to the best result in exp 3.
 
 \begin{table}[H]
 \centering  % used for centering table
@@ -1010,12 +991,12 @@ We conducted a series of experiments where we tested the parameters we identifie
 \label{table:OverallImprovement} % is used to refer this table in the text
 \end{table}
 
-The best result missed the target in average by 45,11(MAE) in an interval of 571.0 (lowest value 61.0 and highest 632.0) giving us a hit percentage of 7.90\%.
+The best result missed the target in average by a MAE of 45,11 DKK in an interval of 571.0 (lowest value 61.0 and highest 632.0) giving us a hit percentage of 7.90\%.
 
 \begin{enumerate}
-	\item Experiment one: This experiment showed how the different input parameters influenced the accuracy of the ANN and how important it is to select the right inputs. We also experimented with the format of the inputs; which we either represented as a matrix or a single input node. The best combination from this test is what we based the rest of the tests on. The best test result gave us the combination of last known price, consumption, wind speed, temperature, the time of the day, the day of the week and the season of the year.
+	\item Experiment one: This experiment showed how the different input parameters influenced the accuracy of the ANN and how important it is to select the right inputs. We also experimented with the format of the inputs; which we either represented as a matrix or a single input node. The best combination from this test is what we based the rest of the tests on. The best test result gave us the combination of last known price, demand, wind speed, temperature, the time of the day, the day of the week and the season of the year.
 	\item Experiment two: We experimented with trimming and showed the benefits from trimming the dataset and the possible loss of accuracy on the upper and lower bound of the dataset. It only makes sense to trim the top and bottom of the dataset if extreme outliers are apparent in the dataset. We saw in the wind production experiment two~\ref{sec:windProdExperimentTwo} how trimming the dataset can have a negative effect on the outcome if the dataset does not contain extreme outliers. Trimming improved the price prediction by 20.99\% compared to the results from experiment one.
-	\item Experiment three: This experiment shows the effect of adding calculated inputs to the ANN and how it improves the predictions. The calculated inputs improved the prediction of the results by 4.54\% and contained the EWMA and the skewness inputs. We also tested scattered prices where the ANN on its own makes the connections between the historical prices and the output these were only effective on the simplest of the datasets (price and consumption) but did not have any effect on the best combination from experiment one.
-	\item Experiment four: Here we tested different black box optimizations such as number of epochs used to train the network and size of the dataset. The best result here gave us 45,17 which were 0.13\% worse than experiment three but this is probably because of the randomness factor that will always have and influence when working with predictions.
-	\item Experiment five: Shows how the ANN is affected by changing the number of hours ahead it has to predict. The error margin increases quite a lot when we add more hours ahead to predict. This is because of the dependency on the last hours price; which for each hour predicted might add more error to the calculations. We also showed the influence of what offset we start the predictions from. This shows that a good starting position can improve the results by 15.04\% from the worst to the best starting offset.
+	\item Experiment three: This experiment shows the effect of adding calculated inputs to the ANN and how it improves the predictions. The calculated inputs improved the prediction of the results by 4.54\% and contained the historical volatility and the skewness inputs. We also tested scattered prices where the ANN on its own makes the connections between the historical prices and the output. These were only effective on the simplest of the datasets (price and demand) but did not have any effect on the best combination from experiment one.
+	\item Experiment four: Here we tested different black box optimizations such as number of epochs used to train the network and size of the dataset. The best result here gave us 45,17 which were 0.13\% worse than experiment three but this is probably because of the randomness factor that will always have an influence when working with predictions.
+	\item Experiment five: Shows how the ANN is affected by changing the number of hours ahead it has to predict. The error margin increases quite a lot when we add more hours ahead to predict. This is because of the dependency on the last hours price; which for each hour predicted might add more error to the calculations. We also showed the influence of what offset we start the predictions from. It shows how a good starting position can improve the results by 15.04\% from the worst to the best starting offset.
 \end{enumerate}

@@ -1,4 +1,4 @@
-This section describes the experiments that uncover the best combination of inputs and epochs as well as the different strategies. Based on the analysis of wind power from Section~\ref{sec:windPowerAnalysis} the network will try to uncover the best approach to predicting the wind power. Furthermore, experiments are needed to investigate the influence of data manipulation and statistical inputs as presented in Section~\ref{sec:usingStatisticalInput}. Additional test results and graphs can be seen in Appendix~\ref{sec:windResultsAppendix} - relevant results will be shown here. The purpose is to approach the wind power target by attempting different strategies throughout every experiment. Each experiment will either validate or reject its hypotheses and identify what influence wind power in Western Denmark (DK-1). We expect to see an improvement throughout the experiments. Figure~\ref{fig:WindPowerNetworkModel} shows a simplification of the wind power prediction model.
+This section describes the experiments that uncover the best combination of inputs and epochs as well as the different strategies. Based on the analysis of wind power from Section~\ref{sec:windPowerAnalysis} the network will try to uncover the best approach to predicting the wind power. Furthermore, experiments are needed to investigate the influence of data manipulation and statistical inputs as presented in Section~\ref{sec:usingStatisticalInput}. Additional test results and graphs can be seen in Appendix~\ref{sec:windResultsAppendix} - relevant results will be shown here. The purpose is to approach the wind power target by attempting different strategies throughout every experiment. Each experiment will either validate or reject its hypotheses and identify what influence wind power in Western Denmark (DK-1). We expect to see an improvement throughout the experiments. Figure~\ref{fig:WindPowerNetworkModel} shows a simplification of the wind power prediction model. The test procedure present the initial number of epochs as 200 and the training set size as three months --- it is based on simple trial and error.  
 
 \begin{figure}[H]
 \centering
@@ -15,9 +15,9 @@ The first experiment is an attempt to find the best constitution of network inpu
 The analysis in Section~\ref{sec:windPowerAnalysis} uncovered the correlation between the different parameters and the wind power. The following is expected based on the analysis:
 
 \begin{enumerate}
-\item Wind speed and last known wind power are expected to be the most influential factors with demand right after. Temperature is expected to have the potential to substitute demand but without achieving as good accuracy. 
-\item Air density, time of day and month of year is expected to be of some influence.
-\item Wind direction is expected to be of little influence.
+\item Wind speed and last known wind power are expected to be the most influential factors due to their obvious correlations to wind power. Demand showed a correlation of 0,61 and is thereby expected to influence the wind power significantly. Temperature is expected to have the potential to substitute demand but without achieving as good accuracy. 
+\item Air density, time of day and month of year is expected to be of some influence. Air density is a factor in the actual formula for wind power. Time of day is connected to the demand and how it influences the wind power during the day. Month of year is relation seasonality and the weather changes during the year that will affect the wind power. 
+\item Wind direction is expected to be of some influence based on how it is used in the area of windmill placement as presented in Section~\ref{sec:windmillPlacement}.
 \end{enumerate}
 
 \subsubsection{Variables}
@@ -32,19 +32,20 @@ The variables used in this experiment series:
 \item Wind direction (WD)
 \item Last known production (L-P)
 \item Month (Mo)
+\end{itemize}
+
+The different tables contain following abbreviations:
+
+\begin{itemize}
 \item How many percentage of the predictions in the correct direction (\% CD)
 \item Neurons in hidden layer 1 (H1)
 \item Neurons in hidden layer 2 (H2)
 \item Percentage rank from the best prediction (\% Rank)
 \end{itemize}
 
-\subsubsection{Basic Input Parameters}
+\subsubsection{Results}
 \label{sec:predictionBasicInputParams}
-Experiments have been conducted for all possible input combinations. The idea is to discover any unforeseen connections found by the Feedforward Neural Network. The results can be found in Appendix~\ref{sec:simpleInputTest} but relevant results will be emphasized here. The results vary in MAE from 127,86 to 199,22. Table~\ref{table:windProdInputParamsTop10} highlight the top and bottom 10 for further analysis. One thing that is not observable from the table is the use of wind speed as the only input for prediction which achieves 149,72 in MAE over the entire year which illustrate the expected relationship between wind speed and wind power. 
-
-The contents of the table further indicates that time of day, air density and last known wind power are significant. It corresponds well with the analysis in Section~\ref{sec:windPowerAnalysis} where the relationship between wind power and these parameters are established to be of significance. Last known wind power is as expected represented in all of top 10 according to the analysis of wind power development in Section~\ref{sec:windProductionDev}. All of the bottom 10 also contains last known wind power but the reason can be found in the inclusion of month. The worst prediction just without month is placed as number three --- the explanation can reside in the size of the training set but this will be discussed later. The inclusion of previous hours will be attempted more sophistically in the experiment about calculated inputs. 
-
-Demand is only represented five times in top 10 which comes as a surprise due to the correlation established in the analysis of wind power. The demand showed a close relationship with temperature and the explanation can be a substitution of the two. Air density represents temperature since it is the significant factor in its calculation due to the pressure being close to constant in the dataset as described in Section~\ref{sec:airDensity}. This is the most plausible explanation of the top-3 being without demand.
+Experiments have been conducted for all possible input combinations. The idea is to discover any unforeseen connections found by the Feedforward Neural Network. The results can be found in Appendix~\ref{sec:simpleInputTest} but relevant results will be emphasized here. The results vary in MAE from 127,86 to 199,22. Table~\ref{table:windProdInputParamsTop10} highlight the top and bottom 10 for further analysis. One thing that is not observable from the table is the use of wind speed as the only input for prediction which achieves 149,72 in MAE over the entire year which illustrate the expected relationship between wind speed and wind power. The \% CD in the table is an indication of how many predicted hours was in correct direction compared to the actual direction. The percentage is stable throughout the table with values around 60-70\%. The correct direction percentage is around the same for the bottom 10. It indicates what have been discussed before, namely wind power follows the trends of the wind speed and it is included in all of the predictions. This will be discussed further when looking at the actual prediction graph.
 
 \footnotesize
 \begin{center}
@@ -92,11 +93,19 @@ Demand is only represented five times in top 10 which comes as a surprise due to
 \end{center}
 \normalsize
 
-\noindent The \% CD in Table~\ref{table:windProdInputParamsTop10} is an indication of how many predicted hours was in correct direction compared to the actual direction. The percentage is stable throughout the table with values around 60-70\%. The correct direction percentage is around the same for the bottom 10. It indicates what have been discussed before, namely wind power follows the trends of the wind speed and it is included in all of the predictions. This will be discussed further when looking at the actual prediction graph.
+\subsubsection{Meteorological Factors}
+The contents of the Table~\ref{table:windProdInputParamsTop10} indicates that air density is significant. It corresponds well with the analysis in Section~\ref{sec:windPowerAnalysis} where the relationship between wind power and these air density established to be of significance. Furthermore, it is established in Section~\ref{sec:windmillPlacement} that air density is included in the actual formula for calculating wind power.
 
 Wind Direction is represented four times in top 10. What is noticeable is the same combinations without wind direction is also represented. This can suggest the indifference of wind direction, e.g. \#2-\#3 and \#6-\#7 is very similar. This is further backed up by the analysis which only showed a low correlation.
 
-The contributory cause to the bad accuracy in the bottom is month and how it in general does not help the prediction when used together with a dataset containing only three months. Month represents the seasonal perspective of the input parameters and is suppose to find the relationship between months and the wind power in general. Since the historical data used for prediction is only three months, it does not capture how the same month last year influenced the production. In the case of wind power prediction it seems to be creating more noise and thereby affect the prediction badly. A possible solution to obtain the seasonality aspect is presented in\cite{pjmForecast} where the Neural Network is trained with 45 days from before the day to be predicted, and 45 days before and after it in the previous year. By using this approach the month parameter will reflect the influence of the months around you from the last year. This will be validated in a prediction later in experiment one.
+\subsubsection{Demand}
+Demand is only represented five times in top 10 which comes as a surprise due to the correlation of 0,61 established in the analysis of wind power. The demand showed a close relationship with temperature and the explanation can be a substitution of the two. Air density represents temperature since it is the significant factor in its calculation due to the pressure being close to constant in the dataset as described in Section~\ref{sec:airDensity}. This is the most plausible explanation of the top-3 being without demand.
+
+\subsection{Last Known Wind Power}
+Last known wind power is as expected represented in all of top 10 according to the analysis of wind power development in Section~\ref{sec:windProductionDev}. It complies well with the how previous hours was established to have an impact on the movements of the curve. All of the bottom 10 also contains last known wind power but the reason can be found in the inclusion of month. The worst prediction just without month is placed as number three --- the explanation can reside in the size of the training set but this will be discussed later. The inclusion of previous hours will be attempted more sophistically in the experiment about calculated inputs but.
+
+\subsubsection{Seasonality as Month}
+Month was expected to have an influence on wind power since the the difference between wind power during summer and winter months showed to be significant (from 500 in average during August to above an average of 1000 during December and January). Therefore it comes as a surprise that the contributory cause to the bad accuracy in the bottom is month. It does in general not help the prediction when used together with a dataset containing only three months. Month represents the seasonal perspective of the input parameters and is suppose to find the relationship between months and the wind power in general. Since the historical data used for prediction is only three months, it does not capture how the same month last year influenced the production. In the case of wind power prediction it seems to be creating more noise and thereby affect the prediction badly. A possible solution to obtain the seasonality aspect is presented in\cite{pjmForecast} where the Neural Network is trained with 45 days from before the day to be predicted, and 45 days before and after it in the previous year. By using this approach the month parameter will reflect the influence of the months around you from the last year. This will be validated in a prediction later in experiment one.
 
 \subsubsection{Importance of testing set}
 We describe in our testing procedure that we use a separate training set and a testing set. Table~\ref{table:predictionMAEUnseenVsTrainingSet} emphasize the importance of using a testing set containing only unseen data. The purpose is to generalize beyond the data in the training set and give accurate outputs for unseen data \cite{1} --- the prediction must simulate real use where the training set naturally cannot contain known data. It is also noticeable that the MAE is similar from top to bottom. We will only consider the MAE coming from predictions of the testing set.
@@ -152,10 +161,11 @@ We describe in our testing procedure that we use a separate training set and a t
 The discussion above revealed the need for uncovering and discussing how to represent the seasonal aspect (if needed at all) in Feedforward Neural Network --- it can be included as a explicit input parameter or implicitly in the dataset by using the right training set size. The training set will be explored with two different sizes in an attempt to express the seasonal aspect with month as input:
 
 \begin{enumerate}
-\item Basing it on \cite{pjmForecast} where the training set is constructed with 45 days from before the day to be predicted, 45 days before and after in the previous year.
-\item Using a year before the day to predict.
+\item Basing it on \cite{pjmForecast} where the training set is constructed with 45 days from before the day to be predicted, 45 days before and after in the previous year. Here called 135 Days Approach.
+\item Using a year before the day to predict. We reference to it as Whole Year Approach.
 \end{enumerate}
 
+\subsubsection{135 Days Approach}
 The experimental results for (1) are all shown in Appendix~\ref{sec:simpleInputTestSeason} but we will only be focusing on top-10 here because they illustrate the problem. The results are decreased in all of the predictions in Table~\ref{table:seasonalWindProdInputParamsTop10} in comparison with the the results training on 3 months of data. The training set is increased and this might make it harder for the ANN to generalize because too large training sets should according to \cite{1} be avoided due to a tendency to over-train. It can be supported by the similar results only differentiated by 1,12\% from \#1-\#10 --- the network generalizes on much more data and if some values only influence the wind power in smaller periods of the year it will be suffocated between the ones that are important (as with the importance of wind speed) over the entire year. The network can over-train itself by dedicating to much responsibility to wind speed because it in general is the most important input or the dataset can simply contain too much noise. The possible benefits from including the seasonal aspect when predicting wind power is not enough to make up for the loss in accuracy by the increase of training set size, e.g. month is only included once in top-10. Before any final conclusions about the size of training set can be made we will have to conduct the experiment on an entire year.
 
 \footnotesize
@@ -225,7 +235,8 @@ Table~\ref{table:predictionMAEUnseenVsTrainingSetSeasonality} is included to sho
 \end{longtable}
 \end{center}
 \normalsize
- 
+
+\subsubsection{Whole Year Approach} 
 The second experiment where the prediction is based on an entire years training set can be seen in Table~\ref{table:seasonWindProdInputParamsTop2WholeYear}. The MAE is much similar to the first seasonal approach from Table~\ref{table:seasonalWindProdInputParamsTop10} but instead it takes longer time to process because it must train on a larger dataset --- the time aspect will be elaborated in another experiment. Leaving out the seasonal aspect is the obvious choice from the results shown here. Using a training set of 3 months can be argued to contain the seasonal aspect because the set will reflect how the input parameters in general influence the wind power in the current season. Including month or increasing the size of the training set will only add noise and make it harder for the ANN to generalize. The purpose of including month was to avoid problems when encountering a seasonal change due the different conditions from season to season (analysis confirms this). If the same conditions were seen last year then this could be incorporated in the generalization. The results show that the benefits from this approach cannot make up for the small dataset implicitly containing the seasonal aspect. The month parameter will be omitted in experiments to come.   			
 
 \footnotesize
@@ -322,7 +333,7 @@ The experiments to come will be based on input combinations from the top 3 from 
 \newpage
 \subsection{Experiment Two - Data Manipulation}
 \label{sec:windProdExperimentTwo}
-Experiment two tries to discover the best way to represent the input data. The need for manipulating the data can arise if irregularities exist that cannot be predicted or simply to adjust the data to better fit the inner workings of the Feedforward Neural Network. The 3 approaches to data manipulation tested in the thesis is normalization, trimming and using a matrix as input. The necessity is described in more detail in Section~\ref{sec:DataManipulation}. Normalization is necessary for all input and is used in all experiments because the sigmoid function is used as activation function. Trimming is used to trim away irregularities if such exist but it does not apply for predicting wind power (see Section~\ref{sec:windProductionDev}). It does not leave out the possibility of scenarios where trimming makes sense when used in the hand of an expert, e.g. if experience can eliminate certain high values in the next 24 hours then they could be trimmed. We will investigate whether or not trimming makes the predicted values more accurate. Tests have been conducted to show the possible benefits from using trimming on wind power. The purpose of experiment two is to turn inputs into a matrix whenever it makes sense and see the possible benefit of trimming. As described in Section~\ref{sec:Matrix} wind speed is split into one input parameter for all of its possible values. Each value then has a weight that is adjusted according to the error as illustrated in Section~\ref{sec:annSection}. This is only an option if all values are known in advance and of a manageable size. When considering wind power forecasting this is valid for hours of the day, month and wind speed. Only wind speed and time of day will be tested here due to the omitting of the month parameter in experiment one. 
+Experiment two tries to discover the best way to represent the input data. The need for manipulating the data can arise if irregularities exist that cannot be predicted or simply to adjust the data to better fit the inner workings of the Feedforward Neural Network. The 3 approaches to data manipulation tested in the thesis is normalization, trimming and using a matrix as input. The necessity is described in more detail in Section~\ref{sec:DataManipulation}. Normalization is necessary for all input and is used in all experiments because the sigmoid function is used as activation function. Trimming is used to trim away irregularities if such exist but it does not apply for predicting wind power (see Section~\ref{sec:windProductionDev}). It does not leave out the possibility of scenarios where trimming makes sense when used in the hand of an expert, e.g. if experience can eliminate certain high values in the next 24 hours then they could be trimmed. We will investigate whether or not trimming makes the predicted values more accurate. Tests have been conducted to show the possible benefits from using trimming on wind power. The purpose of experiment two is to turn inputs into a matrix whenever it makes sense and see the possible benefit of trimming. The matrix representation can be used as an augmentation of the best input parameters already discovered since it helps express the existing input better. As described in Section~\ref{sec:Matrix} wind speed is split into one input parameter for all of its possible values. Each value then has a weight that is adjusted according to the error as illustrated in Section~\ref{sec:annSection}. This is only an option if all values are known in advance and of a manageable size. When considering wind power forecasting this is valid for hours of the day, month and wind speed. Only wind speed and time of day will be tested here due to the omitting of the month parameter in experiment one. 
 
 \subsubsection{Hypothesis} 
 The matrix manipulation can be applied when values are of a manageable size as discussed in Section~\ref{sec:Matrix}. Based on those discussions the following is expected: 
@@ -344,6 +355,15 @@ The variables used in this experiment series:
 \item Temperature (T).
 \item Wind direction (WD).
 \item Last known production (L-P).
+\end{itemize}
+
+The different tables contain following abbreviations:
+
+\begin{itemize}
+\item How many percentage of the predictions in the correct direction (\% CD)
+\item Neurons in hidden layer 1 (H1)
+\item Neurons in hidden layer 2 (H2)
+\item Percentage rank from the best prediction (\% Rank)
 \end{itemize}
 
 \subsubsection{Applying matrix}
@@ -482,6 +502,7 @@ The improvement by applying matrix to time of day is considered enough for next 
 \newpage
 
 \subsection{Experiment Three - Calculated Inputs}
+\label{sec:experimentThreeCalcInputs}
 The experiments here will be focusing on the concepts described in Section~\ref{sec:usingStatisticalInput}. The importance of the current wind power development is described in Section~\ref{sec:windProductionDev} and it describes how the wind power has high volatility and follow certain tendencies. The purpose is to add inputs that in some way analyse productions from immediate past hours to help the existing generalization approach its target more accurately in a specific hour. We therefore see it as independent from the input analysis since it will help the best of the input combinations to perform better. All of the approaches take outset in previous hours so the first step is to find the best number of previous hours to calculate upon. Secondly, they must be tested in combination with each other to find the best combination. The different approaches are historical volatility, skewness, simple, slope calculation and inclusion of previous productions as input. 
 
 \subsubsection{Hypothesis} 
@@ -507,6 +528,15 @@ The variables used in this experiment series:
 \item Skewness (S).
 \item Simple slope calculation (SC).
 \item Previous productions as input (Scatter/Sc)
+\end{itemize}
+
+Some tables contain following abbreviations:
+
+\begin{itemize}
+\item How many percentage of the predictions in the correct direction (\% CD)
+\item Neurons in hidden layer 1 (H1)
+\item Neurons in hidden layer 2 (H2)
+\item Percentage rank from the best prediction (\% Rank)
 \end{itemize}
 
 \subsubsection{Historical Volatility}
