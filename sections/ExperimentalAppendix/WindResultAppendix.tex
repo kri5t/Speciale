@@ -16,19 +16,20 @@ M = Time of Day as matrix
 CD = Correct Direction
 H1 = Neurons in Hidden Layer 1
 H2 = Neurons in Hidden Layer 2
+\% rank = percentage rank from the best prediction
 
 \footnotesize
 \begin{center}
 \begin{longtable}{|c|c|c|c|c|c|c|c|c|c|c|c|c|}
 \caption{Wind Production Input Parameter Test}\\
 \hline
-\textbf{WS} & \textbf{AD} & \textbf{D} & \textbf{T} & \textbf{WD} & \textbf{L-P} & \textbf{D}& \textbf{ToD} & \textbf{MAE} & \textbf{\% from \#1} & \textbf{H1} & \textbf{H2} & \textbf{CD} \\
+\textbf{WS} & \textbf{AD} & \textbf{D} & \textbf{T} & \textbf{WD} & \textbf{L-P} & \textbf{D}& \textbf{ToD} & \textbf{MAE} & \textbf{\% rank} & \textbf{H1} & \textbf{H2} & \textbf{CD} \\
 \hline
 \endfirsthead
 \multicolumn{13}{c}%
 {\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
 \hline
-\textbf{WS} & \textbf{AD} & \textbf{D} & \textbf{T} & \textbf{WD} & \textbf{L-P} & \textbf{D}& \textbf{ToD} & \textbf{MAE} & \textbf{\% from \#1} & \textbf{H1} & \textbf{H2} & \textbf{CD}  \\
+\textbf{WS} & \textbf{AD} & \textbf{D} & \textbf{T} & \textbf{WD} & \textbf{L-P} & \textbf{D}& \textbf{ToD} & \textbf{MAE} & \textbf{\% rank} & \textbf{H1} & \textbf{H2} & \textbf{CD}  \\
 \hline
 \endhead
 \hline \multicolumn{13}{r}{\textit{Continued on next page}} \\
@@ -320,7 +321,7 @@ H2 = Neurons in Hidden Layer 2
 \end{longtable}
 \end{center}
 \normalsize
-\newpage
+
 \subsubsection{Best Input Combination Prediction Graphs}
 \label{sec:bestCombiPredictionsGraphs}
 Here 1000 hours of the best prediction is shown in Figure~\ref{fig:experimentOneInput}. The rest of the hours can be seen in the digitalized version on the DVD in the directory "Experiment One Graphs".
@@ -332,7 +333,6 @@ Here 1000 hours of the best prediction is shown in Figure~\ref{fig:experimentOne
 \label{fig:experimentOneInput}
 \end{sidewaysfigure} 
 
-\newpage
 \subsubsection{Simple input test with seasonality}
 \label{sec:simpleInputTestSeason}
 The simple input test based on 3 months before the prediction day and the same month in the previous year. All with 200 epochs.
@@ -349,19 +349,20 @@ M = Time of Day as matrix
 CD = Correct direction in \%
 H1 = Neurons in Hidden Layer 1
 H2 = Neurons in Hidden Layer 2
+\% rank = percentage rank from the best prediction
 
 \footnotesize
 \begin{center}
 \begin{longtable}{|c|c|c|c|c|c|c|c|c|c|c|c|c|}
 \caption{Wind Production Input Parameter Test}\\
 \hline
-\textbf{WS} & \textbf{AD} & \textbf{D} & \textbf{T} & \textbf{WD} & \textbf{L-P} & \textbf{D}& \textbf{ToD} & \textbf{MAE} & \textbf{\% from \#1} & \textbf{H1} & \textbf{H2} & \textbf{H2} \\
+\textbf{WS} & \textbf{AD} & \textbf{D} & \textbf{T} & \textbf{WD} & \textbf{L-P} & \textbf{D}& \textbf{ToD} & \textbf{MAE} & \textbf{\% rank} & \textbf{H1} & \textbf{H2} & \textbf{H2} \\
 \hline
 \endfirsthead
 \multicolumn{13}{c}%
 {\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
 \hline
-\textbf{WS} & \textbf{AD} & \textbf{D} & \textbf{T} & \textbf{WD} & \textbf{L-P} & \textbf{D}& \textbf{ToD} & \textbf{MAE} & \textbf{\% from \#1} & \textbf{H1} & \textbf{H2} & \textbf{CD} \\
+\textbf{WS} & \textbf{AD} & \textbf{D} & \textbf{T} & \textbf{WD} & \textbf{L-P} & \textbf{D}& \textbf{ToD} & \textbf{MAE} & \textbf{\% rank} & \textbf{H1} & \textbf{H2} & \textbf{CD} \\
 \hline
 \endhead
 \hline \multicolumn{13}{r}{\textit{Continued on next page}} \\
@@ -654,7 +655,6 @@ H2 = Neurons in Hidden Layer 2
 \end{center}
 \normalsize
 
-\newpage
 \subsection{Experiment Two - Data Manipulation}
 
 \subsubsection{Best Prediction Graph}
@@ -666,7 +666,6 @@ Here 1000 hours of the best prediction is shown in Figure~\ref{fig:experimentTwo
 \caption{Best wind Power prediction for 0-1000 hours in 2012 for experiment two}
 \label{fig:experimentTwoInput}
 \end{sidewaysfigure} 
-\newpage
 \subsection{Experiment Three - Calculated Inputs}
 
 \subsubsection{Best Prediction Graph}
@@ -678,7 +677,6 @@ Here 1000 hours of the best prediction is shown in Figure~\ref{fig:experimentThr
 \caption{Best wind Power prediction for 0-1000 hours in 2012 for experiment three}
 \label{fig:experimentThreeInput}
 \end{sidewaysfigure} 
-\newpage
 
 \subsubsection{Historical volatility results}
 \label{sec:historicalVolatiltiyResultsAppendix}
@@ -771,7 +769,6 @@ Historical volatility results with all combinations of previous hours between 4-
 \end{center}
 \normalsize
 
-\newpage
 \subsection{Experiment Four - Black Box Optimization}
 
 \subsubsection{Best Prediction Graph}
@@ -784,7 +781,6 @@ Here 1000 hours of the best prediction is shown in Figure~\ref{fig:experimentFou
 \label{fig:experimentFourInput}
 \end{sidewaysfigure} 
 
-\newpage
 \subsection{Experiment Five - Step-Ahead Forecasting}
 
 \subsubsection{Best Prediction Graph}

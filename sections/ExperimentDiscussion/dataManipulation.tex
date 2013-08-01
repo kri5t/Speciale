@@ -1,4 +1,4 @@
-Dataset manipulation and trimming of the dataset are two important techniques that can improve the predictions of an artificial neural network.
+Dataset manipulation and trimming of the dataset are two important techniques that can improve the predictions of an Feedforward Neural Network.
 \subsection{Matrix}
 We used a matrix representation (described in Section~\ref{sec:Matrix}) for the input parameters that were applicable for such a representation. The input (applicable for matrix) has to have a finite and limited set of values and a significant difference in how much the influence on the output differs between the input values. The inspiration for the matrix representation came from the way pictures are represented in ANNs. In \cite{knerr1992handwritten} they take every pixel (which has 16 different shades of grey) in a 16 pixel big image and map the pixels out as a matrix. This gives them 256 input variables for the ANN to represent this image. We do the same thing for the matrix applicable input parameters but instead of pixels we map out the different values e.g. the time of day where we can map every hour to a placeholder in the matrix.
 
