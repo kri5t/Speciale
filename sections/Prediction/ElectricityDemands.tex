@@ -1,13 +1,8 @@
-Weather conditions have a huge impact on the electricity industry in terms of network infrastructure and electricity consumption. In \cite{19} they describe a multiple regression model that accurately predicts the monthly electricity demand based on weather and sociocultural conditions. The monthly electricity demand from this model shows a clear cyclic pattern which reflects the temperature changes during the year \cite{19}. Besides weather conditions, social and economic factors also affect the monthly demand, e.g. the demand was decreased in Denmark during the \fnurl{financial crisis in 2009}{http://www.business.dk/investor/finanskrisen-saetter-elforbrug-i-bakgear}.
+Weather conditions have a impact on the electricity industry in terms of network infrastructure and electricity consumption. In \cite{19} they describe a multiple regression model that accurately predicts the monthly electricity demand based on weather and sociocultural conditions. The monthly electricity demand from this model shows a clear cyclic pattern which reflects the temperature changes during the year \cite{19}. Besides from weather conditions, social and economic factors also affect the monthly demand, e.g. the demand was decreased in Denmark during the \fnurl{financial crisis in 2009}{http://www.business.dk/investor/finanskrisen-saetter-elforbrug-i-bakgear}.
 
 \subsubsection{Parametric multiple regression}
-Parametric multiple regression is preferred in \cite{19} as opposed to an Artificial Neural Network used in this thesis. From a statistical error indices point of view the Artificial Neural Network (ANN) is a valid choice for prediction (see figure ~\ref{fig:anncomparison}) in relation to the error. The argument for multiple regression is the simplicity in adjusting input values for each analysis of electricity demand in the prediction model and in the end they show similar results to ANN. 
-\begin{figure}[h!]
-\centering
-\includegraphics[width=0.8\linewidth,natwidth=898,natheight=587]{billeder/StatisticalErrorOfNeuralNetworksAndRegression.png}
-\caption{Shows ANN compared to B\&J and SE \cite{19} }
-\label{fig:anncomparison}
-\end{figure}
+Parametric multiple regression is preferred in \cite{19} as opposed to an Artificial Neural Network used in this thesis. From a statistical error indices point of view they describe that the Artificial Neural Network (ANN) is a valid choice for prediction. The argument for multiple regression is the simplicity in adjusting input values for each analysis of electricity demand in the prediction model. 
+
 To make a demand prediction based on weather conditions they have established a relationship between the two. To get an understanding of this relationship they have made a plot of the average monthly demand as a function of Central England Temperature (CET) \cite{19}. The plot (see figure ~\ref{fig:CET}) shows an inverse relationship where it can be seen that a lower temperature in general results in an increased load consumption. Winter gives rise to lighting and heating load which is consistent with lower temperatures, and conversely in the summer with temperatures above 18 degrees the consumption tends to increase again due to the need for cooling and air-condition \cite{19}.
 \begin{figure}[h!]
 \centering
@@ -29,14 +24,14 @@ $HDD=\sum\limits_{d=1}^{N_{d}}(1-\gamma_{d})(T_{base_{H}}-T_{dm})$
 
 where $T_{base_{h}} = 15.5^{\circ}$ is the base temp and again $T_{dm}$ is the mean daily temperature. $\gamma_{d} = 1$ if $T_{base_{h}}-T_{dm} < 0$ and $\gamma_{d} = 0$ if $T_{base_{h}}-T_{dm} > 0$. This means that on a day with temperatures below 15.5 degrees there is a need for heating. In both cases where $\gamma_{d} != 0$ a big difference has a greater impact on the demand.
 
-Temperature is the most influential factor but other weather conditions can also be used when calculating the electricity demand, e.g. wind speed and rainfall can impact heating and lighting demand whereas direct sunshine can decrease the need for heating \cite{19}. The model can be expressed by the relation between all factors by adding them together, e.g. the HDD value automatically increase the total electricity demand if it is not zero and this apply to all other factors in the model seen below.
+Temperature is the most influential factor but other weather conditions can also be used when predicting the electricity demand, e.g. wind speed and rainfall can impact heating and lighting demand whereas direct sunshine can decrease the need for heating \cite{19}. The model can be expressed by the relation between all factors by adding them together, e.g. the HDD value automatically increase the total electricity demand if it is not zero and this apply to all other factors in the model seen below.
 
 \begin{center} \^E$_{A}=\alpha_{0}+\alpha_{1}CDD+\alpha_{2}HDD+\alpha_{3}ELD
 +\alpha_{4}V_{w}+\alpha_{5}M_{s}+\alpha_{6}M_{r}$ 
 \end{center} 
  
 Where $\alpha_{n}$ are constants, ELD is humidity, $V_{w}$ is wind speed, $M_{s}$ sunshine and $M_{r}$ rainfall.
-The calculation model can also include socio-economic factors. Specifically the population growth has a natural impact on the electricity demand over time. The more people the higher the demand gets. This would give rise to an additional factor in the model considering the growth. The prediction model from \cite{19} comes within 3 percentage of the actual demand when it is run on data from 1996-2003 which is pretty close (~\ref{fig:predicteddemand}).
+The calculation model can also include socio-economic factors. Specifically the population growth has a natural impact on the electricity demand over time. The more people the higher the demand gets. This would give rise to an additional factor in the model considering the growth. The prediction model from \cite{19} comes within 3 percentage of the actual demand when it is run on data from 1996-2003 which they consider to be close (~\ref{fig:predicteddemand}).
 \newline
 \begin{figure}[h!]
 \centering

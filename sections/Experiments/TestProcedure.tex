@@ -1,24 +1,25 @@
-The following high level test procedure describes the test process and environment for the experiments of both wind production and electricity prices. 
+The following test procedure describes the test process and environment for the experiments of both wind power and electricity prices. 
 \\[0.5cm]
-The construction of the neural network topology is done by incremental pruning as described in Section~\ref{sec:pruning}. The tool helps to decide the structure of the hidden layers and neurons in the network based on the pre-defined number of inputs and the output. The returned configuration is considered to the optimal structuring. Every time the input combination change pruning will be applied to discover the best possible configuration. All predictions will be based on a simulation over an entire year where 8000 hours is predicted 24 hours at a time. It is important to emphasize that the experiments are done in such a way to simulate a real-life use --- this is importance because we want the results to realistically reflect practical use. In the following experiments we consider this number of hours to be satisfying. For testing purposes and simplicity the top-3 of a experiment will be used as basis for the next. 
+The construction of the Feedforward Neural Network topology is done by incremental pruning as described in Section~\ref{sec:pruning}. The tool helps to decide the structure of the hidden layers and neurons in the network based on the pre-defined number of inputs and the output. The returned configuration is considered to be the optimal structuring. Every time the input combination change pruning will be applied to discover the best possible configuration. All predictions will be based on a simulation over an entire year where 8600 hours is predicted 24 hours at a time. It is important to emphasize that the experiments have been conducted on year to simulate a real-life use --- this is important because we want the results to realistically reflect practical use. In the following experiments we consider those numbers of hours to be satisfying. For testing purposes and simplicity the top-3 of an experiment will be used as basis for the next. 
 
-A more accurate prediction will always be preferred but trade-offs will be discussed and analysed. The starting number of epochs and size of dataset has been selected through simple trial and error but will be tested more thoroughly as testing progress to validate it. It is not possible or realistic to show all prediction graphs in full extend and therefore all experiments will point out only parts of the prediction graphs to highlight explanatory situations or problems relevant to the discussion or analysis at hand.
+A more accurate prediction will always be preferred but trade-offs will be discussed and analysed. The starting number of epochs and size of the dataset has been selected through simple trial and error but will be tested more thoroughly as testing proceeds to validate it. It is not possible or realistic to show all prediction graphs in full extend and therefore all experiments will point out only parts of the prediction graphs to highlight explanatory situations or problems relevant to the discussion or analysis at hand. Additional 1000 hours of the highlighted predictions will be shown in the appendix where a link to a digitalized version of all hours can be found. 
 
-We are using two datasets when predicting with the Artificial Neural Network. The training set is what the network is trained with. The testing set is unseen data that NOT contained in the training set that the network must be able to predict. The need for generalize beyond the training set is described in Section~\ref{sec:machineLearning} about Machine Learning and and makes sense in a prediction context --- the necessity for doing "out-of-sample"-forecasting is also stated in Section~\ref{sec:svmPrediction} about Support Vector Machines. The data collection from Section~\ref{sec:dataCollection} describes how our testing set does not contain weather forecasts but actual values from 2012 but also that 24 hours weather forecasts showed an accuracy of 97\% in 2012. It must of course be taken into consideration when discussing our results.
+We are using two datasets when predicting with the Artificial Neural Network. The training set is what the network is trained with. The testing set is unseen data that is NOT contained in the training set that the network must be able to predict. The need to generalize beyond the training set is described in Section~\ref{sec:machineLearning} about Machine Learning and and makes sense in a prediction context --- the necessity for doing "out-of-sample"-forecasting is also stated in Section~\ref{sec:svmPrediction} about Support Vector Machines. The data collection from Section~\ref{sec:dataCollection} describes how our testing set does not contain weather forecasts but actual values from 2012 but also that 24 hours weather forecasts showed an accuracy of 97\% in 2012. It must of course be taken into consideration when discussing our results.
 \\[0.5cm]
 The procedure for every experiment:
 \begin{itemize}
-\item Describe purpose.
+\item Describe the purpose.
 \item Describe the expected outcome (Hypothesis).
-\item Find variables to be used.
-\item For all predictions in the experiment do:.
+\item Identify variables to be used.
+\item For all predictions in the experiment do:
 \begin{itemize}
-	\item Prune network based on input parameters.
-	\item Simulate the prediction of 8000 hours 24 hours at a time.
+	\item Prune the network based on input parameters.
+	\item Simulate the prediction of 8600 hours 24 hours at a time.
 	\item Show results.
 	\item Analyse results.
 	\item Point out indicative parts of the prediction graphs.
 \end{itemize}
 \item Conclusion
-
 \end{itemize}
+\noindent In short, the experiments will be conducted in five steps for both wind power and electricity price; 1) Selection of Input Parameter; 2) Data Manipulation; 3) Calculated Inputs; 4) Black Box Optimization; 5) Step-Ahead Forecasting.
+\newpage

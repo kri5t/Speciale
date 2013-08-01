@@ -29,4 +29,5 @@ H2 - Neurons in hidden layer 2
 Scatter/Sc - Historical productions as input
 S - Skewness
 V - Historical volatility
-C - Simple slope calculation
+SC - Simple slope calculation
+m - Matrix

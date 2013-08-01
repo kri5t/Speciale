@@ -1,17 +1,17 @@
-This section describes what needs to consider when building and modeling the network in terms of actual design and data set manipulation.
+This section describes what needs to be considered when building and modeling the network in terms of actual design and dataset manipulation.
 
 \section{Neural Network Optimization}
 \label{sec:neuralNetworkOptimization}
-The forecasting models are implemented using an Artificial Neural Network with back propagation as the training algorithm. The network analyzes a time series and in return outputs the predicted value. The success of the network is much dependent on the number of layers, neurons and epochs and the answer is never unambiguous. It is necessary to experiment with different types of numbers in order to find the best match for the problem at hand.
+The forecasting models are implemented using an Artificial Neural Network with back propagation as the training algorithm. The network analyses a time series and in return outputs the predicted value. The success of the network is much dependent on the number of layers, neurons and epochs and the answer is never unambiguous. It is necessary to experiment with different types of numbers in order to find the best match for the problem at hand.
 
 \subsection{Layers and Neurons}
 \label{sec:layersAndNeurons}
-We are using a feedforward ANN which is often organized in one input layer, one or more hidden layers and an output layer where each layer has a number of neurons attached\cite{1} --- also see Figure~\ref{fig:ANN}. The number of input neurons is equal to the input parameters. The output layer contains neurons equal to the number of outputs. 
+We are using a Feedforward ANN which is often organized in one input layer, one or more hidden layers and an output layer where each layer has a number of neurons attached\cite{1} --- also see Figure~\ref{fig:ANN}. The number of input neurons is equal to the input parameters. The output layer contains neurons equal to the number of outputs. 
 The complexity arises in the input and hidden layers because a lot of neuron/layer combinations exist. The number of hidden layers and its affiliated neurons is typically chosen by trial and error and then running simulations to find the best fit\cite{1}. The trial and error approach is because choosing the right number of neurons for the hidden layers is no exact science and we cannot calculate the numbers from a mathematical formula.
 
 \subsection{Epochs}
 \label{sec:epochs}
-The network trains itself in a number of iterations also known as epochs. In every epoch the network is adjusting its weights based on an error measurement that indicates the difference between the desired output and the predicted output of the particular epoch\cite{1}. The goal is of course to adjust the weights in enough iterations so that this error measurement becomes as small as possible. This is not necessarily the same as training infinitely will result in the perfect error margin because the ANN can become overfitted as introduced in section~\ref{sec:annSection}. The purpose of the ANN is to make a generalization and not make perfect match for the training set. This ensures that it will be accurate on unseen data\cite{1} as well. The performance of the ANN is therefore to be measured by applying it to a new testing set that the network has never seen before.
+The network trains itself in a number of iterations also known as epochs. In every epoch the network is adjusting its weights based on an error measurement that indicates the difference between the desired output and the predicted output of the particular epoch\cite{1}. The goal is of course to adjust the weights in enough iterations so that this error measurement becomes as small as possible. This is not necessarily the same as training infinitely will result in the perfect error margin because the ANN will become overfitted as introduced in section~\ref{sec:annSection}. The purpose of the ANN is to make a generalization and not make the perfect match for the training set. This ensures that it will be accurate on unseen data\cite{1} as well. The performance of the ANN is therefore to be measured by applying it to a new testing set that the network has never seen before.
 
 \subsection{Pruning}
 \label{sec:pruning}
