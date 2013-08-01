@@ -1,6 +1,6 @@
 Section~\ref{sec:predictionSection} describes the concepts of prediction within the area of wind production and electricity prices. What is important to emphasize here is the type of input data used for the prediction of both price and production. Meteorological factors are important in both cases and can therefore be extracted from the same source. The second type of data is the electricity prices and the wind power. Artificial Neural Networks calculates a generalized function by looking at historical data and comparing with the actual values (Section~\ref{sec:annSection}), e.g. comparing the weather factors at time \emph{t} with the actual production at time \emph{t}. For this reason it is necessary to collect historical meteorological, price and production data in order to do the prediction. A simple drawing of the input and output can be seen in Figure~\ref{fig:verySimpleANN}
 
-\begin{figure}[H]
+\begin{figure}[ht!]
 \centering
 \includegraphics[width=0.85\linewidth]{billeder/simpleANN.png}
 \caption{Simple ANN}
@@ -17,9 +17,9 @@ For the sake of simplicity we will be focusing on West Denmark and Funen which i
 
 The weather data is collected from available weather stations in DK1 from NOAA and can be seen in Figure~\ref{fig:stations4average} and more specific details is in Appendix~\ref{sec:weatherStations} - stations have been omitted due to missing data but they are not listed. The collected data will be averaged and used as basis for creating training sets to be used as input parameters for the Artificial Neural Networks. It is necessary to average the weather data to get a representative picture for all regions included in DK-1 because only one electricity price and wind power exist for all of DK-1. It must be made clear that historical weather forecasts have not been possible to obtain and is therefore not included in any of our datasets but data will look the same and have the same format. Daily weather forecasts are accurate (97\% accuracy in 2012\footnote{DMI - http://www.dmi.dk/nyheder/arkiv/nyheder-2013/97-af-vejrudsigterne-ramte-plet/} and we consider the actual data values to be sufficient for our purpose but of course it must be taken into consideration when evaluating our results.
 
-\begin{figure}[H]
+\begin{figure}[ht!]
 \centering
-\includegraphics[width=0.85\linewidth]{billeder/stations4average.png}
+\includegraphics[width=0.75\linewidth]{billeder/stations4average.png}
 \caption{Selected weather stations from DK-1}
 \label{fig:stations4average}
 \end{figure}
@@ -27,6 +27,7 @@ The weather data is collected from available weather stations in DK1 from NOAA a
 
 We will remove data that is obscure and is related to conditions we cannot predict. (See trimming~\ref{sec:Trimming})
 
+\newpage
 \section{Pearson Correlation Coefficient}
 \label{sec:Pearsons}
 The \fnurl{Pearson Correlation Coefficient}{http://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient}(PCC) is used to determine if there is a linear correlation between two datasets. The values derived from calculating the PCC will always return values between -1 and 1. If the value is either -1 or 1 this means we have a direct linear correlation between the two datasets. A negative value denotes that the correlation between the datasets are negative, e.g. if one of the datasets rises the other drops. If the value is positive there is a normal correlation between the two e.g. if one rises the other rises as well. The PCC has to be interpreted when comparing two datasets e.g. in social sciences they often interpret lower values as good correlations whereas exact sciences in most cases needs a high PCC value to establish the correlation. It all comes down to perspective. We will use the PCC as a measure to establish connections between input parameters and output parameters in our dataset analysis. It can be calculated by the following formula:

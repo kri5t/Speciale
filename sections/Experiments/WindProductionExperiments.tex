@@ -30,7 +30,7 @@ The variables used in this experiment series:
 \item Time of day (ToD)
 \item Temperature (T)
 \item Wind direction (WD)
-\item Last known production (L-P)
+\item Last known wind power (L-P)
 \item Month (Mo)
 \end{itemize}
 
@@ -101,7 +101,7 @@ Wind Direction is represented four times in top 10. What is noticeable is the sa
 \subsubsection{Demand}
 Demand is only represented five times in top 10 which comes as a surprise due to the correlation of 0,61 established in the analysis of wind power. The demand showed a close relationship with temperature and the explanation can be a substitution of the two. Air density represents temperature since it is the significant factor in its calculation due to the pressure being close to constant in the dataset as described in Section~\ref{sec:airDensity}. This is the most plausible explanation of the top-3 being without demand.
 
-\subsection{Last Known Wind Power}
+\subsubsection{Last Known Wind Power}
 Last known wind power is as expected represented in all of top 10 according to the analysis of wind power development in Section~\ref{sec:windProductionDev}. It complies well with the how previous hours was established to have an impact on the movements of the curve. All of the bottom 10 also contains last known wind power but the reason can be found in the inclusion of month. The worst prediction just without month is placed as number three --- the explanation can reside in the size of the training set but this will be discussed later. The inclusion of previous hours will be attempted more sophistically in the experiment about calculated inputs but.
 
 \subsubsection{Seasonality as Month}
@@ -267,7 +267,7 @@ The second experiment where the prediction is based on an entire years training 
 \label{sec:bestInputCombiGraph}
 The first 175 hours of the best prediction from Table~\ref{table:windProdInputParamsTop10} can be seen in Figure~\ref{fig:bestInputParameterPrediction}. The hours have been pointed out because they illustrate situations and issues that are relevant for the analysis and general for the prediction - more graphs can be seen in Appendix~\ref{sec:bestCombiPredictionsGraphs}. It can be observed that the prediction follows the trend of the actual wind power which is also emphasized by the correct direction percentage of 73\%. The graph shows how the challenge is the number of steps it takes to identify shifting trends and how much the trend is increasing or decreasing at that particular time. The green and purple overlay show situations where it is behind the actual trend whereas the yellow overlay illustrates how it is able to identify the rising trend shortly after prediction time (illustrated by the vertical lines) but too early and ends up overshooting. One last comment is in relation to the error visualization in the bottom of the graph and how it follows the curve of the actual wind power productions.  
 
-\begin{figure}[H]
+\begin{figure}[ht!]
 \centering
 \includegraphics[width=0.99\textwidth]{billeder/bestInputParameterPrediction.png}
 \caption{Wind power prediction for 0-175 hours in 2012 with the best combination}
@@ -317,7 +317,7 @@ All results of the first experiment can be seen in Appendix~\ref{sec:windResults
 
 \begin{enumerate}
 \item Wind speed showed as expected to have very high significance when predicting the wind power. Demand was not represented in top-3 even though it showed very good correlation in the analysis. The good relationship between temperature and demand is described in Section~\ref{sec:demandWindProduction} which can explain why demand in top-3 is omitted and substituted with either air density or temperature. The analysis in Section~\ref{sec:airDensity} describes how air density is calculated with temperature as the most significant factor since pressure is close to constant in the dataset.   
-\item Last known wind power is highly represented in both top-10 and bottom-10. It is important when put together with the right combination but whenever in combination with month of year it worsens. Month did not help the prediction even though the dataset was increased to better incorporate the seasonality aspect. Air density and time of day both showed to be highly represented in top-10 together with wind speed and last known production.
+\item Last known wind power is highly represented in both top-10 and bottom-10. It is important when put together with the right combination but whenever in combination with month of year it worsens. Month did not help the prediction even though the dataset was increased to better incorporate the seasonality aspect. Air density and time of day both showed to be highly represented in top-10 together with wind speed and last known wind power.
 \item Wind direction was expected to have some influence but showed itself four times in top-10. It is assumed that direction is of some importance but not much based on the exact same constitution of input parameters just without wind direction achieved close to same result.
 \end{enumerate}
 
@@ -327,7 +327,7 @@ The experiments to come will be based on input combinations from the top 3 from 
 \item Air density;
 \item Wind Direction;
 \item Temperature;
-\item Last known production;
+\item Last known wind power;
 \item Time of day;
 \end{itemize}
 \newpage
@@ -354,7 +354,7 @@ The variables used in this experiment series:
 \item Time of day as matrix indicated by (m).
 \item Temperature (T).
 \item Wind direction (WD).
-\item Last known production (L-P).
+\item Last known wind power (L-P).
 \end{itemize}
 
 The different tables contain following abbreviations:
@@ -523,7 +523,7 @@ The variables used in this experiment series:
 \item Time of day as matrix (ToD).
 \item Temperature (T).
 \item Wind direction (WD).
-\item Last known production (L-P).
+\item Last known wind power (L-P).
 \item Historical volatility (V).
 \item Skewness (S).
 \item Simple slope calculation (SC).
@@ -578,7 +578,7 @@ Historical Volatility is presented in Section~\ref{sec:usingStatisticalInput}. T
 
 All combinations of smoothing factor and previous hours can be seen in Appendix~\ref{sec:historicalVolatiltiyResultsAppendix} --- only top 10 is shown here. The results in Table~\ref{table:historicalVoltalityHours} show that a smoothing factor of 0,70 calculated on the 6 previous hours is the best choice with a MAE of 121,81 MWh. The expectation was to get a low smoothing factor due to the fluctuations in the wind power as described in Section~\ref{sec:ewmaVolatility}. The reason for the higher factor can be explained by the number of previous hours being too small to reflect the many changes, e.g. if the historical volatility was calculated over the entire dataset it would most likely be smaller. We can see from the graph in Figure~\ref{fig:bestVolatilityVsMatrixGraph} that the prediction curves are much similar to the curves without volatility which is expected since the volatility approach is an augmentation of the best prediction with matrix. 
 
-\begin{figure}[H]
+\begin{figure}[ht!]
 \centering
 \includegraphics[width=0.99\textwidth]{billeder/bestVolatilityVsMatrixGraph.png}
 \caption{Wind power prediction for hours 0-175 in 2012 with historical volatility as input}
@@ -837,7 +837,7 @@ The best combination of variables has been concluded from previous experiments a
 \item Wind speed (WS).
 \item Time of day as matrix (ToD).
 \item Temperature (T).
-\item Last known production (L-P).
+\item Last known wind power (L-P).
 \item Historical volatility with 0,70 on 6 previous hours (V).
 \end{itemize}
 
@@ -1033,14 +1033,14 @@ Table~\ref{table:stepAheadForecastingWindProduction} shows the results from the 
 
 This problem becomes more clear when looking at Figure~\ref{fig:best22vsbest24Ahead} where it is obvious that 22-step-ahead starts much differently than 24-step-ahead in Figure~\ref{fig:best24AheadPredictionWithLines}. It has effect on the prediction which would also apply in a real life setting. It clearly shows a challenge in relation to decision making with ANN in a real setting and how the experience of the user comes into place in these predictions since it greatly influences the result where to start from. Modelling and fine-tuning the ANN is one thing but including it in practice is equally complex --- we will relate our findings to this subject in the discussion. This is further backed up by Table~\ref{table:stepAheadForecastingWindProduction} and the difference in the MAEs throughout the table.
 
-\begin{figure}[H]
+\begin{figure}[h!]
 \centering
 \includegraphics[width=0.99\textwidth]{billeder/best22vsbest24Ahead.png}
 \caption{22-step-ahead forecast}
 \label{fig:best22vsbest24Ahead}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[h!]
 \centering
 \includegraphics[width=0.99\textwidth]{billeder/best24AheadPredictionWithLines.png}
 \caption{24-step-ahead forecast}
@@ -1103,7 +1103,7 @@ The expectation was to see an improvement in MAE when predicting fewer hours whi
 Experiments have been conducted to identify the best combination of inputs as well as the impact of data manipulation, calculated inputs and black box optimization. Each experiment concludes on its findings in relation to experiments before it and expectations from the wind power analysis. Table~\ref{table:comparisonOfResultsWindProduction} shows the overall improvement of 5,35\% from the first experiment to the last (Table~\ref{comparisonOfResultsWindProductionMAPE} show the results in MAPE). Experiment five is left out in this table because it cannot be compared with the other since it predicts different number of hours and had the purpose of identifying its influence on wind power. What have been observed throughout all experiments is the stable percentage of around 70\% in predicting the correct direction. It has also been discussed that the stability here lies in the correlation to wind speed which is included as input in all experiments. The best result missed its target (in average) by 121 out of the interval from 0 to 2753 corresponding to 4,4\% of the 2753 potential values. We consider this to be satisfactory since it gives a clear indication of the wind power movements which was the purpose of the wind power prediction according to Section~\ref{sec:windPowerAnalysis}. It shows that the network is able to follow trends and approach its target in all of the presented examples (graphs and tables).
 
 \begin{enumerate}
-\item First experiment showed the importance of the correct input parameters used in the Feedforward Neural Network. Temperature, last known production, wind speed and time of day was the best combination. Air density and wind direction also showed themselves in top-3. Furthermore, too large datasets decreased the accuracy due to over-training of the network.
+\item First experiment showed the importance of the correct input parameters used in the Feedforward Neural Network. Temperature, last known wind power, wind speed and time of day was the best combination. Air density and wind direction also showed themselves in top-3. Furthermore, too large datasets decreased the accuracy due to over-training of the network.
 \item Experiment two showed a slight increase (1,9\% in average improve for top-3 of experiment one) in accuracy when applying matrix on time of day. Trimming makes less sense in a prediction simulation for wind power since no completely irregular values exist in the wind power training set. The predictions with trimming showed a decrease in accuracy compared to the ones without trimming because trimming ended up creating irregularities instead of removing them.
 \item Third experiment tried different approaches to calculated inputs in relation to letting the network itself calculate statistics by adding various previous wind power productions --- the approaches are slope calculation, skewness and volatility. The best of the approaches were volatility which obtained an increase of 3,52\% in relation to the prediction just without it.
 \item The purpose of the fourth experiment was to identify the correct number of epochs and validate the correct size of the training set. The best size was 3 month of data and with 2-300 epochs. The experiment also illustrated how the network can easily be under- or overfitted with too many or few epochs, or be under- or overtrained  according to the size of the training set. The best prediction is considered to be in agreement with our purpose, namely to approach the wind power by applying different strategies and identifying what works and what does not. It showed the ability to follow the correct direction (73\% of the time) and approaching the wind power in the examples pointed out by graphs and by the shown MAEs.	
