@@ -1,0 +1,127 @@
+\select@language {american}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {1.1}{\ignorespaces Actual day-ahead forecast from Saturday, May 13, 2006 \cite {pjmForecast}\relax }}{4}{figure.caption.6}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {2.1}{\ignorespaces The three components of learning algorithms \cite {18}\relax }}{10}{figure.caption.7}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Example of bias and variance in a dart throw \cite {18}\relax }}{10}{figure.caption.8}
+\contentsline {figure}{\numberline {2.3}{\ignorespaces A simple neural network with 3 layers. \cite {stockForecasting}\relax }}{12}{figure.caption.9}
+\contentsline {figure}{\numberline {2.4}{\ignorespaces How the weight is calculated from one layer to the next. \cite [P. 251]{buckland2002ai}\relax }}{13}{figure.caption.10}
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Activation functions with different weights\relax }}{16}{figure.caption.12}
+\contentsline {figure}{\numberline {2.6}{\ignorespaces \relax }}{16}{figure.caption.13}
+\contentsline {figure}{\numberline {2.7}{\ignorespaces The first figure shows a global minimum whereas the second shows a local minimum \cite [P. 318]{buckland2002ai}\relax }}{17}{figure.caption.14}
+\contentsline {figure}{\numberline {2.8}{\ignorespaces A. The plot graph of the input B. The generalized function C. An over-fit function \cite [P. 319]{buckland2002ai}\relax }}{17}{figure.caption.15}
+\contentsline {figure}{\numberline {2.9}{\ignorespaces Function of monthly CET as a function from 1970 to 1995 \cite {19}\relax }}{20}{figure.caption.17}
+\contentsline {figure}{\numberline {2.10}{\ignorespaces The actual values and the predicted demand in a comparison \cite {19}\relax }}{21}{figure.caption.19}
+\contentsline {figure}{\numberline {2.11}{\ignorespaces The influence of wind speed on the wind power \cite {WindPowerGenerationUsingANN}\relax }}{22}{figure.caption.21}
+\contentsline {figure}{\numberline {2.12}{\ignorespaces The influence of generation hours on energy production \cite {WindPowerGenerationUsingANN}\relax }}{23}{figure.caption.23}
+\contentsline {figure}{\numberline {2.13}{\ignorespaces Artificial Neural Network architecture from \cite {WindPowerGenerationUsingANN}\relax }}{23}{figure.caption.24}
+\contentsline {figure}{\numberline {2.14}{\ignorespaces Comparison between Neural Network and ARIMA in terms of error \cite {1}\relax }}{26}{figure.caption.29}
+\contentsline {figure}{\numberline {2.15}{\ignorespaces The steps taken to create a Support Vector Machine\relax }}{27}{figure.caption.31}
+\contentsline {figure}{\numberline {2.16}{\ignorespaces Types of uncertainty from \cite {UncertainInformation}\relax }}{31}{figure.caption.33}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Simple ANN\relax }}{36}{figure.caption.34}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Selected weather stations from DK-1\relax }}{37}{figure.caption.35}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Wind speed and wind production in diagram\relax }}{40}{figure.caption.38}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Wind speed vs. wind production from 2012\relax }}{40}{figure.caption.39}
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Temperature and Pressure variance for 2012\relax }}{43}{figure.caption.41}
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Wind Direction vs. wind production in 2012\relax }}{43}{figure.caption.44}
+\contentsline {figure}{\numberline {3.7}{\ignorespaces Demand vs. Wind Production in 2012\relax }}{44}{figure.caption.45}
+\contentsline {figure}{\numberline {3.8}{\ignorespaces Demand and temperature plot.\relax }}{45}{figure.caption.46}
+\contentsline {figure}{\numberline {3.9}{\ignorespaces Time of day vs. Wind Production in 2012\relax }}{45}{figure.caption.48}
+\contentsline {figure}{\numberline {3.10}{\ignorespaces Wind production in relation to months in 2012\relax }}{46}{figure.caption.49}
+\contentsline {figure}{\numberline {3.11}{\ignorespaces Wind production in relation to the four seasons in 2012\relax }}{46}{figure.caption.50}
+\contentsline {figure}{\numberline {3.12}{\ignorespaces Wind production development for 400 hours in 2011\relax }}{47}{figure.caption.51}
+\contentsline {figure}{\numberline {3.13}{\ignorespaces Same input parameter to wind production output distribution\relax }}{48}{figure.caption.53}
+\contentsline {figure}{\numberline {3.14}{\ignorespaces Wind power vs. last known wind power\relax }}{49}{figure.caption.54}
+\contentsline {figure}{\numberline {3.15}{\ignorespaces Wind power production trimming\relax }}{49}{figure.caption.56}
+\contentsline {figure}{\numberline {3.16}{\ignorespaces Wind power production vs. last known wind power production\relax }}{50}{figure.caption.57}
+\contentsline {figure}{\numberline {3.17}{\ignorespaces Price and last known price\relax }}{52}{figure.caption.59}
+\contentsline {figure}{\numberline {3.18}{\ignorespaces The price movement in the first 400 hours of 2012.\relax }}{52}{figure.caption.60}
+\contentsline {figure}{\numberline {3.19}{\ignorespaces Price and temperature plot.\relax }}{53}{figure.caption.62}
+\contentsline {figure}{\numberline {3.20}{\ignorespaces Price and wind speed plot.\relax }}{53}{figure.caption.63}
+\contentsline {figure}{\numberline {3.21}{\ignorespaces Daily price dispersion\relax }}{54}{figure.caption.64}
+\contentsline {figure}{\numberline {3.22}{\ignorespaces Hourly price dispersion\relax }}{55}{figure.caption.65}
+\contentsline {figure}{\numberline {3.23}{\ignorespaces Seasonal price dispersion\relax }}{55}{figure.caption.66}
+\contentsline {figure}{\numberline {3.24}{\ignorespaces Monthly price dispersion\relax }}{56}{figure.caption.67}
+\contentsline {figure}{\numberline {3.25}{\ignorespaces Price ditribution over equal hours\relax }}{57}{figure.caption.68}
+\contentsline {figure}{\numberline {3.26}{\ignorespaces A plot graph of the price development over the first 1500 hours in 2012\relax }}{58}{figure.caption.70}
+\contentsline {figure}{\numberline {3.27}{\ignorespaces Demand and price plot.\relax }}{59}{figure.caption.71}
+\contentsline {figure}{\numberline {3.28}{\ignorespaces Demand and price plot.\relax }}{59}{figure.caption.72}
+\contentsline {figure}{\numberline {3.29}{\ignorespaces Demand and temperature plot.\relax }}{60}{figure.caption.73}
+\contentsline {figure}{\numberline {3.30}{\ignorespaces Demand and wind speed plot.\relax }}{61}{figure.caption.75}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces A simple neural network with 3 layers. \cite {stockForecasting}\relax }}{64}{figure.caption.76}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Activation functions\relax }}{66}{figure.caption.77}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces This shows how trimming affects the prices of 2012. The blue lines show the upper and lower bounds of a 1\% trim.\relax }}{68}{figure.caption.79}
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Wind production development for 400 hours in 2011\relax }}{70}{figure.caption.80}
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Price development for 400 hours in 2012\relax }}{70}{figure.caption.81}
+\contentsline {figure}{\numberline {4.6}{\ignorespaces A) Shows the generalized function. B) The approaching of output values\relax }}{71}{figure.caption.82}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Simple drawing of the Feedforward Neural Network model\relax }}{79}{figure.caption.86}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Wind power prediction for 0-175 hours in 2012 with the best combination\relax }}{86}{figure.caption.99}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Wind power prediction for 24 hours between 120 and 148\relax }}{86}{figure.caption.100}
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Wind power prediction for 24 hours between 96 and 120\relax }}{87}{figure.caption.101}
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Wind power prediction for 5000-5175 hours in 2012 with the best combination\relax }}{88}{figure.caption.102}
+\contentsline {figure}{\numberline {5.6}{\ignorespaces Wind power prediction for 4500-4700 hours in 2012 with the best combination\relax }}{88}{figure.caption.103}
+\contentsline {figure}{\numberline {5.7}{\ignorespaces Wind power prediction for hours 0-400 with 5\% trim\relax }}{93}{figure.caption.109}
+\contentsline {figure}{\numberline {5.8}{\ignorespaces Wind power prediction for hours 0-400 with best input combination\relax }}{94}{figure.caption.110}
+\contentsline {figure}{\numberline {5.9}{\ignorespaces Wind power prediction for 175 hours in 2012 for the best matrix experiment\relax }}{94}{figure.caption.112}
+\contentsline {figure}{\numberline {5.10}{\ignorespaces Wind power prediction for hours 0-175 in 2012 with historical volatility as input\relax }}{98}{figure.caption.117}
+\contentsline {figure}{\numberline {5.13}{\ignorespaces Wind power prediction for 175 hours in 2012 with skewness as input\relax }}{99}{figure.caption.121}
+\contentsline {figure}{\numberline {5.11}{\ignorespaces Wind power prediction for hours 350-525 hours in 2012 with historical volatility as input\relax }}{100}{figure.caption.118}
+\contentsline {figure}{\numberline {5.12}{\ignorespaces Wind power prediction for hours 700-1000 hours in 2012 with historical volatility as input\relax }}{100}{figure.caption.119}
+\contentsline {figure}{\numberline {5.14}{\ignorespaces Wind power prediction for 175 hours in 2012 with slope as input\relax }}{101}{figure.caption.123}
+\contentsline {figure}{\numberline {5.15}{\ignorespaces 1-step vs. 24-step ahead wind power predictions with curve\relax }}{102}{figure.caption.124}
+\contentsline {figure}{\numberline {5.16}{\ignorespaces Wind power prediction for hours 120-144 in 2012 with historical volatility\relax }}{103}{figure.caption.126}
+\contentsline {figure}{\numberline {5.17}{\ignorespaces Wind power prediction for hours 120-144 in 2012 with historical volatility\relax }}{105}{figure.caption.129}
+\contentsline {figure}{\numberline {5.18}{\ignorespaces Wind power prediction for hours 408-432 in 2012 with historical volatility\relax }}{105}{figure.caption.130}
+\contentsline {figure}{\numberline {5.19}{\ignorespaces Best prediction for 300 hours of January (Winter)\relax }}{110}{figure.caption.137}
+\contentsline {figure}{\numberline {5.20}{\ignorespaces Best prediction for 300 hours of April (Spring)\relax }}{110}{figure.caption.138}
+\contentsline {figure}{\numberline {5.21}{\ignorespaces Best prediction for 300 hours of July (Summer)\relax }}{111}{figure.caption.139}
+\contentsline {figure}{\numberline {5.22}{\ignorespaces Best prediction for 300 hours for Oct-Nov (Fall)\relax }}{111}{figure.caption.140}
+\contentsline {figure}{\numberline {5.23}{\ignorespaces 22-step-ahead forecast\relax }}{114}{figure.caption.144}
+\contentsline {figure}{\numberline {5.24}{\ignorespaces 24-step-ahead forecast\relax }}{115}{figure.caption.145}
+\contentsline {figure}{\numberline {5.25}{\ignorespaces \#1 forecast from table~\ref {table:Top20Prices} with and without wind speed\relax }}{122}{figure.caption.153}
+\contentsline {figure}{\numberline {5.26}{\ignorespaces \#4 forecast from table~\ref {table:Top20Prices} with and without temperature\relax }}{123}{figure.caption.155}
+\contentsline {figure}{\numberline {5.27}{\ignorespaces \#1 forecast from table~\ref {table:Top20Prices} with and without Time of Day\relax }}{123}{figure.caption.157}
+\contentsline {figure}{\numberline {5.28}{\ignorespaces The \#1 forecast from experiment one with no trimming of the dataset\relax }}{129}{figure.caption.171}
+\contentsline {figure}{\numberline {5.29}{\ignorespaces The \#1 forecast from experiment one with 1\% trimming in both ends of the dataset\relax }}{130}{figure.caption.173}
+\contentsline {figure}{\numberline {5.30}{\ignorespaces The \#1 forecast from experiment one with 2\%(Purple), 3\%(Red), 4\%(Black) and 5\%(Blue) trimming in both ends of the dataset\relax }}{131}{figure.caption.174}
+\contentsline {figure}{\numberline {5.31}{\ignorespaces The \#1 forecast from experiment one with 1\%(Green), 2\%(Purple), 3\%(Red), 4\%(Black) and 5\%(Blue) trimming in both ends of the dataset. This is a segment of 200 hours.\relax }}{131}{figure.caption.175}
+\contentsline {figure}{\numberline {5.32}{\ignorespaces \#1 forecast from experiment three. Shows how well it follows the curve. The black curve in the bottom is the error for each prediction.\relax }}{136}{figure.caption.188}
+\contentsline {figure}{\numberline {5.33}{\ignorespaces A comparison of \#1 forecast from experiment two and three. This segment is from the middle of the year. (Skew, EWMA)\relax }}{136}{figure.caption.189}
+\contentsline {figure}{\numberline {5.34}{\ignorespaces A comparison of \#1 forecast from experiment two and three. This segment is from the middle of the year. All features applied(Skew, Curve, EWMA, Scatter).\relax }}{137}{figure.caption.190}
+\contentsline {figure}{\numberline {5.35}{\ignorespaces \#1 from experiment two and three. 1 day-ahead prediction.\relax }}{137}{figure.caption.191}
+\contentsline {figure}{\numberline {5.36}{\ignorespaces \#1 from experiment three. 1 hour-ahead prediction.\relax }}{138}{figure.caption.192}
+\contentsline {figure}{\numberline {5.37}{\ignorespaces Price and demand with scatter and 1\% trim.)\relax }}{140}{figure.caption.198}
+\contentsline {figure}{\numberline {5.38}{\ignorespaces Price and demand with scatter and no trim.\relax }}{141}{figure.caption.199}
+\contentsline {figure}{\numberline {5.39}{\ignorespaces Shows how the predictions are done when the network is trained for 1 epoch before every prediction\relax }}{144}{figure.caption.208}
+\contentsline {figure}{\numberline {5.40}{\ignorespaces 200 hours from winter\relax }}{145}{figure.caption.210}
+\contentsline {figure}{\numberline {5.41}{\ignorespaces 200 hours from spring\relax }}{146}{figure.caption.211}
+\contentsline {figure}{\numberline {5.42}{\ignorespaces 200 hours from summer\relax }}{146}{figure.caption.212}
+\contentsline {figure}{\numberline {5.43}{\ignorespaces 200 hours from fall\relax }}{147}{figure.caption.213}
+\contentsline {figure}{\numberline {5.44}{\ignorespaces Prediction of 24 hours ahead.\relax }}{149}{figure.caption.218}
+\contentsline {figure}{\numberline {5.45}{\ignorespaces Prediction of 2 hours ahead\relax }}{150}{figure.caption.219}
+\contentsline {figure}{\numberline {5.46}{\ignorespaces Prediction of 10 hours ahead\relax }}{150}{figure.caption.220}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Trimming of the wind power production.\relax }}{161}{figure.caption.225}
+\contentsline {figure}{\numberline {6.2}{\ignorespaces Electricity price forecast without trimming. The blue lines denote what would be removed by a 1\% top and bottom trim.\relax }}{162}{figure.caption.226}
+\contentsline {figure}{\numberline {6.3}{\ignorespaces Wind production prediction for 175 hours in 2012 with slope as input\relax }}{166}{figure.caption.228}
+\contentsline {figure}{\numberline {6.4}{\ignorespaces The electricity price 1 hour-ahead forecast\relax }}{170}{figure.caption.229}
+\contentsline {figure}{\numberline {6.5}{\ignorespaces The electricity price 24 hours-ahead forecast\relax }}{171}{figure.caption.230}
+\contentsline {figure}{\numberline {6.6}{\ignorespaces Best prediction for 300 hours for Oct-Nov (Fall)\relax }}{179}{figure.caption.232}
+\contentsline {figure}{\numberline {6.7}{\ignorespaces Best prediction for 300 hours of April (Spring)\relax }}{180}{figure.caption.233}
+\contentsline {figure}{\numberline {6.8}{\ignorespaces Wind Power best prediction for 300 hours of January (Winter)\relax }}{182}{figure.caption.234}
+\contentsline {figure}{\numberline {6.9}{\ignorespaces Electricity price on 200 hours from summer\relax }}{183}{figure.caption.235}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {8.1}{\ignorespaces First 1000 hours of the best prediction in experiment 1\relax }}{221}{figure.caption.241}
+\contentsline {figure}{\numberline {8.2}{\ignorespaces First 1000 hours of the best prediction in experiment two\relax }}{222}{figure.caption.242}
+\contentsline {figure}{\numberline {8.3}{\ignorespaces First 1000 hours of the best prediction in experiment 3\relax }}{223}{figure.caption.243}
+\contentsline {figure}{\numberline {8.4}{\ignorespaces First 1000 hours of the best prediction in experiment four\relax }}{224}{figure.caption.244}
+\contentsline {figure}{\numberline {8.5}{\ignorespaces First 1000 hours of the best prediction in experiment five\relax }}{225}{figure.caption.245}
+\contentsline {figure}{\numberline {8.6}{\ignorespaces Wind Power prediction for 0-1000 hours in 2012 with the best combination\relax }}{226}{figure.caption.248}
+\contentsline {figure}{\numberline {8.7}{\ignorespaces Best wind Power prediction for 0-1000 hours in 2012 for experiment two\relax }}{227}{figure.caption.251}
+\contentsline {figure}{\numberline {8.8}{\ignorespaces Best wind Power prediction for 0-1000 hours in 2012 for experiment three\relax }}{228}{figure.caption.253}
+\contentsline {figure}{\numberline {8.9}{\ignorespaces Best wind Power prediction for 0-1000 hours in 2012 for experiment four\relax }}{229}{figure.caption.256}
+\contentsline {figure}{\numberline {8.10}{\ignorespaces Best wind Power prediction for 0-1000 hours in 2012 for experiment five\relax }}{230}{figure.caption.258}
